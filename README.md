@@ -27,6 +27,8 @@ DB_PASSWORD=password
 #### To get api links try running 
 `php artisan route:list`
 
+Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
+
 | Method    | URI                     | Action                               |
 |:---------:|:-----------------------:|:-----------------------------------: |
 |  GET      | api/products            |  give all products in json format    |
