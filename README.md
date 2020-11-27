@@ -26,3 +26,11 @@ DB_PASSWORD=password
 
 #### To get api links try running 
 `php artisan route:list`
+
+| Method    | URI                     | Action                               |
+|:---------:|:-----------------------:|:-----------------------------------: |
+|  GET      | api/products            |  give all products in json format    |
+| POST      | api/products            |  add a new product to database       |
+|  GET      | api/products/{product}  |  get a product from db whose         |
+| PUT\|PATCH| api/products/{product}  |  update the values of product in db  |
+|  DELETE   | api/products/{product}  |  to delete a product                 |
