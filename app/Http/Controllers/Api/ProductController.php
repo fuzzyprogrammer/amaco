@@ -5,14 +5,22 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
+
 
 class ProductController extends Controller
 {
 
     public function index()
     {
-        $products = Product::all();
-        return ($products);
+        // $products = Product::all();
+        // return ($products);
+        $products = DB::table('products')
+            ->join('categories','categories.id','=','products.category_id')
+            ->join('divisions','divisions.id','=','products.division_id')
+            ->select('products.*', 'categories.name as category_name', 'divisions.name as division_name')
+            ->get();
+        return $products;
     }
 //
     public function store(Request $request)
@@ -24,20 +32,22 @@ class ProductController extends Controller
             'description' => 'required|max:500',
             'unit_of_measure' => 'required',
             'unit_price' => 'required',
-            'mrp' => 'required',
-            'real_price' => 'required',
+            'type' => 'required',
+            'hsn_code' => 'required',
+            'initial_quantity' => 'required',
+            'minimum_quantity' => 'required',
         ];
-        
+
         $validatedData = $request->validate($rules);
 
-        if($validatedData->fails()){
-            $returnData = array(
-                'status'=>'error',
-                'message'=>'Please review fields',
-                'error'=>$validatedData->errors()->all()
-            );
-            return response()->json($returnData, 500);
-        }
+        // if($validatedData->fails()){
+        //     $returnData = array(
+        //         'status'=>'error',
+        //         'message'=>'Please review fields',
+        //         'error'=>$validatedData->errors()->all()
+        //     );
+        //     return response()->json($returnData, 500);
+        // }
 
         $product = new Product;
         $product->category_id = $request->category_id;
@@ -46,8 +56,10 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->unit_of_measure = $request->unit_of_measure;
         $product->unit_price = $request->unit_price;
-        $product->mrp = $request->mrp;
-        $product->real_price = $request->real_price;
+        $product->type = $request->type;
+        $product->hsn_code = $request->hsn_code;
+        $product->initial_quantity = $request->initial_quantity;
+        $product->minimum_quantity = $request->minimum_quantity;
         $product->save();
         return($product);
 //
@@ -63,13 +75,14 @@ class ProductController extends Controller
                 'id'=>$product->id,
                 'name'=>$product->name,
                 'description'=>$product->description,
-                'mrp'=>$product->mrp,
-                'real_price'=>$product->real_price,
+                'type'=>$product->type,
+                'initial_quantity'=>$product->initial_quantity,
+                'minimum_quantity'=>$product->minimum_quantity,
                 'unit_price'=>$product->unit_price,
                 'unit_of_measure'=>$product->unit_of_measure,
-                'category_id'=>$product->category_id,
-                'division_id'=>$product->division_id,
-                'division name'=>$product->division->name,
+                'category_name'=>$product->category->name,
+                'division_name'=>$product->division->name,
+                'hsn_code'=>$product->hsn_code,
             ]
         );
     }
