@@ -117,7 +117,13 @@ class CategoryController extends Controller
         $grouped = $products->groupBy('category_id');
         $data =array();
         foreach($grouped as $group){
-            array_push($data, [ $group[0]->category->name => ['id' => $group[0]->category->id,'count' =>count($group)]]);
+            array_push($data,[
+                $group[0]->category->id => [
+                    'name' => $group[0]->category->name,
+                    'description' => $group[0]->category->description,
+                    'products' =>count($group)
+                ]
+            ]);
         }
         return response()->json($data);
     }
