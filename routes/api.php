@@ -28,5 +28,6 @@ Route::get('users', [UserController::class, 'index']);
 Route::apiResource('products',ProductController::class);
 Route::apiResource('parties',PartyController::class);
 Route::apiResource('categories',CategoryController::class);
+Route::get('products-in-category',[CategoryController::class, 'products_in_category'])->name('products.in.category');
 Route::apiResource('rfq',RFQController::class);
 Route::apiResource('rfq-details',RFQDetailsController::class);

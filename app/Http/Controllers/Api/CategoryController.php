@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -108,5 +109,16 @@ class CategoryController extends Controller
         if ($res) {
             return (['msg' => 'category'.' ' . $category->id . ' is successfully deleted']);
         }
+    }
+
+    public function products_in_category()
+    {
+        $products = Product::all();
+        $grouped = $products->groupBy('category_id');
+        $data =array();
+        foreach($grouped as $group){
+            array_push($data, [$group[0]->category->name => count($group)]);
+        }
+        return response()->json($data);
     }
 }
