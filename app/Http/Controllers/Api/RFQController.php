@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\RFQ;
+use App\Models\RFQDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -61,8 +62,11 @@ class RFQController extends Controller
      */
     public function show(RFQ $rfq)
     {
-
-        return response()->json($rfq, 200);
+        $rfq_details = RFQDetails::where('rfq_id',$rfq->id)->get();
+        return response()->json([
+            'rfq' => $rfq,
+            'rfq_details' => $rfq_details
+    ], 200);
     }
 
     /**
