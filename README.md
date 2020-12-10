@@ -39,7 +39,6 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 
 
 
-|--------|-----------|------------------------------|---------------------|-------------------------------------------------------|
 | Domain | Method    | URI                          | Name                | Action                                                | 
 |--------|-----------|------------------------------|---------------------|-------------------------------------------------------|
 |        | GET|HEAD  | /                            |                     | Closure                                               | 
@@ -69,6 +68,4 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 |        | PUT|PATCH | api/rfq/{rfq}                | rfq.update          | App\Http\Controllers\Api\RFQController@update         | 
 |        | DELETE    | api/rfq/{rfq}                | rfq.destroy         | App\Http\Controllers\Api\RFQController@destroy        | 
 |        | GET|HEAD  | api/user                     |                     | Closure                                               | 
-|        |           |                              |                     |                                                       | 
 |        | GET|HEAD  | api/users                    |                     | App\Http\Controllers\Api\UserController@index         | 
-|--------|-----------|------------------------------|---------------------|-------------------------------------------------------|
