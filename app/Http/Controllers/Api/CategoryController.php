@@ -119,6 +119,7 @@ class CategoryController extends Controller
         foreach($grouped as $group){
             array_push($data,[
                 $group[0]->category->id => [
+                    'id' => $group[0]->category->id,
                     'name' => $group[0]->category->name,
                     'description' => $group[0]->category->description,
                     'products' =>count($group)
