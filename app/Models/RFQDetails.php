@@ -10,4 +10,9 @@ class RFQDetails extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function rfq()
+    {
+        return $this->belongsTo('App\Models\RFQ');
+    }
 }

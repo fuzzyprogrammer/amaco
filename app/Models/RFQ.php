@@ -10,4 +10,9 @@ class RFQ extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function rfq_details()
+    {
+        return $this->hasMany('App\Models\RFQDetails', 'rfq_id');
+    }
 }
