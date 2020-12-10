@@ -64,28 +64,30 @@ class PartyController extends Controller
         // if($validator->fails()){
             // return ("somethin went wrong");
 
-        $party = new Party;
+        // $party = new Party;
 
-        $party->firm_name = $request->firm_name;
-        $party->registration_no = $request->registration_no;
-        $party->vat_no = $request->vat_no;
-        $party->post_box_no = $request->post_box_no;
-        $party->street = $request->street;
-        $party->city = $request->city;
-        $party->proviance = $request->proviance;
-        $party->country = $request->country;
-        $party->zip_code = $request->zip_code;
-        $party->party_type = $request->party_type;
-        $party->fname = $request->fname;
-        $party->lname = $request->lname;
-        $party->suffix = $request->suffix;
-        $party->contact1 = $request->contact1;
-        $party->contact2 = $request->contact2;
-        $party->fax = $request->fax;
-        $party->email = $request->email;
-        $party->opening_balance = $request->opening_balance;
-        $party->website = $request->website;
-        $party->save();
+        // $party->firm_name = $request->firm_name;
+        // $party->registration_no = $request->registration_no;
+        // $party->vat_no = $request->vat_no;
+        // $party->post_box_no = $request->post_box_no;
+        // $party->street = $request->street;
+        // $party->city = $request->city;
+        // $party->proviance = $request->proviance;
+        // $party->country = $request->country;
+        // $party->zip_code = $request->zip_code;
+        // $party->party_type = $request->party_type;
+        // $party->fname = $request->fname;
+        // $party->lname = $request->lname;
+        // $party->suffix = $request->suffix;
+        // $party->contact1 = $request->contact1;
+        // $party->contact2 = $request->contact2;
+        // $party->fax = $request->fax;
+        // $party->email = $request->email;
+        // $party->opening_balance = $request->opening_balance;
+        // $party->website = $request->website;
+        // $party->save();
+
+        $party = Party::create($request->all());
 
         return response()->json($party, 200);
     }
@@ -98,30 +100,30 @@ class PartyController extends Controller
      */
     public function show(Party $party)
     {
-        $data = [
-                'id' => $party->id,
-                'firm_name' => $party->firm_name,
-                'registration_no' => $party->registration_no,
-                'vat_no' => $party->vat_no,
-                'post_box_no' => $party->post_box_no,
-                'street' => $party->street,
-                'city' => $party->city,
-                'proviance' => $party->proviance,
-                'country' => $party->country,
-                'zip_code' => $party->zip_code,
-                'party_type' => $party->party_type,
-                'fname' => $party->fname,
-                'lname' => $party->lname,
-                'contact1' => $party->contact1,
-                'contact2' => $party->contact2,
-                'fax' => $party->fax,
-                'email' => $party->email,
-                'opening_balance' => $party->opening_balance,
-                'website' => $party->website,
-                'updated_at' => $party->updated_at,
-                'created_at' => $party->created_at,
-            ];
-            return response()->json($data, 200);
+        // $data = [
+        //         'id' => $party->id,
+        //         'firm_name' => $party->firm_name,
+        //         'registration_no' => $party->registration_no,
+        //         'vat_no' => $party->vat_no,
+        //         'post_box_no' => $party->post_box_no,
+        //         'street' => $party->street,
+        //         'city' => $party->city,
+        //         'proviance' => $party->proviance,
+        //         'country' => $party->country,
+        //         'zip_code' => $party->zip_code,
+        //         'party_type' => $party->party_type,
+        //         'fname' => $party->fname,
+        //         'lname' => $party->lname,
+        //         'contact1' => $party->contact1,
+        //         'contact2' => $party->contact2,
+        //         'fax' => $party->fax,
+        //         'email' => $party->email,
+        //         'opening_balance' => $party->opening_balance,
+        //         'website' => $party->website,
+        //         'updated_at' => $party->updated_at,
+        //         'created_at' => $party->created_at,
+        //     ];
+            return response()->json($party, 200);
     }
 
     /**
