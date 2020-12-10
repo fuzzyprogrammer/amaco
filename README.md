@@ -29,16 +29,6 @@ DB_PASSWORD=password
 
 Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 
-| Method    | URI                     | Action                               |
-|:---------:|:-----------------------:|:-----------------------------------: |
-|  GET      | api/products            |  give all products in json format    |
-| POST      | api/products            |  add a new product to database       |
-|  GET      | api/products/{product}  |  get a product from db whose         |
-| PUT\|PATCH| api/products/{product}  |  update the values of product in db  |
-|  DELETE   | api/products/{product}  |  to delete a product                 |
-
-
-
 | Domain | Method    | URI                          | Name                | Action                                                | 
 |--------|-----------|------------------------------|---------------------|-------------------------------------------------------|
 |        | GET|HEAD  | /                            |                     | Closure                                               | 
