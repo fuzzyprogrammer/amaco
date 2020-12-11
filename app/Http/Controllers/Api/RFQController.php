@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\RFQ;
 use App\Models\RFQDetails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class RFQController extends Controller
@@ -62,11 +63,16 @@ class RFQController extends Controller
      */
     public function show(RFQ $rfq)
     {
-        $rfq_details = RFQDetails::where('rfq_id',$rfq->id)->get();
-        return response()->json([
-            'rfq' => $rfq,
-            'rfq_details' => $rfq_details
-    ], 200);
+    //     $rfq_details = RFQDetails::where('rfq_id',$rfq->id)->get();
+    //     return response()->json([
+    //         'rfq' => $rfq,
+    //         'rfq_details' => $rfq_details
+    // ], 200);
+        $rfq_detail = DB::table('r_f_q_s')
+        ->join('r_f_q_details', 'r_f_q_s.id','=', 'r_f_q_details.rfq_id')
+        ->where(['r_f_q_details.rfq_id' => $rfq])
+        ->get();
+        dd($rfq_detail);
     }
 
     /**

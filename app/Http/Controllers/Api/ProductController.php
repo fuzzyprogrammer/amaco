@@ -16,9 +16,9 @@ class ProductController extends Controller
         // $products = Product::all();
         // return ($products);
         $products = DB::table('products')
-            ->join('categories','categories.id','=','products.category_id')
-            ->join('divisions','divisions.id','=','products.division_id')
-            ->select('products.*', 'categories.name as category_name', 'divisions.name as division_name')
+            ->leftJoin('categories','categories.id','=','products.category_id')
+            ->leftJoin('divisions','divisions.id','=','products.division_id')
+            ->select('products.*','categories.name as category_name', 'divisions.name as division_name')
             ->get();
         return $products;
     }
@@ -67,24 +67,16 @@ class ProductController extends Controller
     }
 
 //
-    public function show($id)
+    public function show($product)
     {
-        $product = Product::findOrfail($id);
-        return(
-            [
-                'id'=>$product->id,
-                'name'=>$product->name,
-                'description'=>$product->description,
-                'type'=>$product->type,
-                'initial_quantity'=>$product->initial_quantity,
-                'minimum_quantity'=>$product->minimum_quantity,
-                'unit_price'=>$product->unit_price,
-                'unit_of_measure'=>$product->unit_of_measure,
-                'category_name'=>$product->category->name,
-                'division_name'=>$product->division->name,
-                'hsn_code'=>$product->hsn_code,
-            ]
-        );
+        $product = DB::table('products')
+            ->leftJoin('categories', 'categories.id', '=', 'products.category_id')
+            ->leftJoin('divisions', 'divisions.id', '=', 'products.division_id')
+            ->select('products.*', 'categories.name as category_name', 'divisions.name as division_name')
+            ->where('products.id','=',$product)
+            ->get();
+        return response()->json($product);
+
     }
 
 //
