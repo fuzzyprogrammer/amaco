@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -113,18 +114,26 @@ class CategoryController extends Controller
 
     public function products_in_category()
     {
-        $products = Product::all();
-        $grouped = $products->groupBy('category_id');
+        $cat = DB::table('categories')
+        ->leftJoin('products', 'categories.id',
+            '=',
+            'products.category_id'
+        )
+        ->get();
+        $grouped = $cat->groupBy('category_id');
         $data =array();
         foreach($grouped as $group){
             array_push($data,[
-                    'id' => $group[0]->category->id,
-                    'name' => $group[0]->category->name,
-                    'description' => $group[0]->category->description,
-                    'products' =>count($group)
+                'id' => $group[0]->id,
+                'name' => $group[0]->name,
+                'description' => $group[0]->description,
+                'products' =>count($group),
                 ]
             );
         }
+
         return response()->json($data);
     }
+
+
 }
