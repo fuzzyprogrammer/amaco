@@ -124,13 +124,31 @@ class CategoryController extends Controller
         $grouped = $cat->groupBy('category_id');
         $data =array();
         foreach($grouped as $group){
-            array_push($data,[
-                'id' => $group[0]->id,
-                'name' => $group[0]->name,
-                'description' => $group[0]->description,
-                'products' =>count($group),
-                ]
-            );
+            // dd($group);
+            // array_push($data,[
+            //     'id' => $group[0]->id,
+            //     'name' => $group[0]->name,
+            //     'description' => $group[0]->description,
+            //     'products' =>count($group),
+            //     ]
+            // );
+            if($group[0]->category_id == null){
+                foreach($group as $item){
+                    array_push($data,[
+                        'id' => $item->id,
+                        'name' => $item->name,
+                        'description' => $item->description,
+                        'products' =>0,
+                    ]);
+                }
+            }else{
+                array_push($data, [
+                    'id' => $group[0]->id,
+                    'name' => $group[0]->name,
+                    'description' => $group[0]->description,
+                    'products' => count($group),
+                ]);
+            };
         }
 
         return response()->json($data);
