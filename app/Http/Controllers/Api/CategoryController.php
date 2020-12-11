@@ -119,6 +119,7 @@ class CategoryController extends Controller
             '=',
             'products.category_id'
         )
+        ->select(['categories.*','products.category_id'])
         ->get();
         $grouped = $cat->groupBy('category_id');
         $data =array();
