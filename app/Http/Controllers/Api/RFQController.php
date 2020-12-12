@@ -61,18 +61,30 @@ class RFQController extends Controller
      * @param  \App\Models\RFQ  $rfq
      * @return \Illuminate\Http\Response
      */
-    public function show(RFQ $rfq)
+    public function show($rfq)
     {
-    //     $rfq_details = RFQDetails::where('rfq_id',$rfq->id)->get();
-    //     return response()->json([
-    //         'rfq' => $rfq,
-    //         'rfq_details' => $rfq_details
-    // ], 200);
+        $_rfq = RFQ::findOrFail($rfq);
+
         $rfq_detail = DB::table('r_f_q_s')
-        ->join('r_f_q_details', 'r_f_q_s.id','=', 'r_f_q_details.rfq_id')
-        ->where(['r_f_q_details.rfq_id' => $rfq])
+        ->leftJoin('r_f_q_details', 'r_f_q_s.id','=', 'r_f_q_details.rfq_id')
+        ->where('r_f_q_s.id',$rfq)
         ->get();
-        dd($rfq_detail);
+
+        $data = [
+            'id' => $_rfq->id,
+            'requested_date' => $_rfq->requested_date,
+            'require_date' => $_rfq->require_date,
+            'party_id' => $_rfq->party_id,
+            'user_id' => $_rfq->user_id,
+            'created_at' => $_rfq->created_at,
+            'updated_at' => $_rfq->updated_at,
+            'rfq_details' => $rfq_detail,
+        ];
+        // dd($data);
+        return response()->json([
+            // $rfq_,
+            $data
+        ]);
     }
 
     /**
