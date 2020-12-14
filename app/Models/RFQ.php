@@ -15,4 +15,9 @@ class RFQ extends Model
     {
         return $this->hasMany('App\Models\RFQDetails', 'rfq_id');
     }
+
+    public function party()
+    {
+        return $this->hasMany('App\Models\Party','party_id');
+    }
 }

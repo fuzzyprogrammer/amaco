@@ -29,7 +29,6 @@ DB_PASSWORD=password
 
 Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`] 
 
-
 | Method    | URI                            | Name                 |
 |-----------|--------------------------------|----------------------|
 | GET|HEAD  |` /                            `|                      |
@@ -59,5 +58,3 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | GET|HEAD  |` api/rfq/{rfq}                `| rfq.show             |
 | PUT|PATCH |` api/rfq/{rfq}                `| rfq.update           |
 | DELETE    |` api/rfq/{rfq}                `| rfq.destroy          |
-| GET|HEAD  |` api/user                     `|                      |
-| GET|HEAD  |` api/users                    `|                      |

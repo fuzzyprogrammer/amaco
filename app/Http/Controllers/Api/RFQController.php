@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Party;
 use App\Models\RFQ;
 use App\Models\RFQDetails;
 use Illuminate\Http\Request;
@@ -19,7 +20,27 @@ class RFQController extends Controller
     public function index()
     {
         $rfqs = RFQ::all();
-        return response()->json($rfqs, 200);
+        $data =[
+            $rfqs->map(
+                function($rfq){
+                    // $party = Party::find($rfq->party_id);
+                    return [
+                        'id' => $rfq->id,
+                        'requested_date' => $rfq->requested_date,
+                        'require_date' => $rfq->require_date,
+                        'party_id' => $rfq->party_id,
+                        'party_name' => $rfq->party->fname,
+                        // 'party_fname' => $party ? $party->fname : $party,
+                        // 'party_lname' => $party ? $party->lname : $party,
+                        'user_id' => $rfq->user_id,
+                        'created_at' => $rfq->created_at,
+                        'updated_at' => $rfq->updated_at,
+
+                    ];
+                }
+            ),
+        ];
+        return response()->json($data, 200);
     }
 
     /**
