@@ -75,18 +75,18 @@ class RFQController extends Controller
 
         $rfq_insert_data = [
             'requested_date'=>$request->requested_date,
-            'required_date'=>$request->reqiuired_date,
+            'require_date'=>$request->require_date,
             'party_id'=>$request->party_id,
         ];
 
         $rfq = RFQ::create($rfq_insert_data);
 
-        foreach ($request->rfq_details as $rfq_detail ) {
+        foreach($request->rfq_details as $rfq_detail){
             $rfq_detail_insert_data =[
                 'product_id'=> $rfq_detail->id,
                 'rfq_id' => $rfq->id,
                 'description'=> $rfq_detail->descriptionss,
-                'quantity_required'=> $rfq_detail->quantity,
+                'quantity_required'=> $rfq_detail->quantity
             ];
             RFQDetails::create($rfq_detail_insert_data);
         }
