@@ -86,7 +86,7 @@ class RFQController extends Controller
                 'product_id'=> $rfq_detail->id,
                 'rfq_id' => $rfq->id,
                 'description'=> $rfq_detail->descriptionss,
-                'quantity_required'=> $rfq_detail->quantity_required,
+                'quantity_required'=> $rfq_detail->quantity,
             ];
             RFQDetails::create($rfq_detail_insert_data);
         }
