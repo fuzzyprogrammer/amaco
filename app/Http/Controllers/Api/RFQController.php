@@ -39,7 +39,7 @@ class RFQController extends Controller
                 }
             ),
         ];
-        return response()->json($data, 200);
+        return response()->json($data[0], 200);
     }
 
     /**
