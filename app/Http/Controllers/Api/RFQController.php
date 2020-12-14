@@ -23,15 +23,15 @@ class RFQController extends Controller
         $data =[
             $rfqs->map(
                 function($rfq){
-                    // $party = Party::find($rfq->party_id);
+                    $party = Party::find($rfq->party_id);
                     return [
                         'id' => $rfq->id,
                         'requested_date' => $rfq->requested_date,
                         'require_date' => $rfq->require_date,
                         'party_id' => $rfq->party_id,
-                        'party_name' => $rfq->party->fname,
-                        // 'party_fname' => $party ? $party->fname : $party,
-                        // 'party_lname' => $party ? $party->lname : $party,
+                        // 'party_name' => $rfq->party->fname,
+                        'party_fname' => $party ? $party->fname : $party,
+                        'party_lname' => $party ? $party->lname : $party,
                         'user_id' => $rfq->user_id,
                         'created_at' => $rfq->created_at,
                         'updated_at' => $rfq->updated_at,
