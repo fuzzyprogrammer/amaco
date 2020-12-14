@@ -50,27 +50,48 @@ class RFQController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'requested_date' => 'required',
-            'require_date' => 'required',
-            'party_id' => 'required',
-            'user_id' => 'required',
+        // $rules = [
+        //     'requested_date' => 'required',
+        //     'require_date' => 'required',
+        //     'party_id' => 'required',
+        //     'user_id' => 'required',
+        // ];
+
+
+        // $messages = [
+        //     'required' => 'The :attribute field is required.',
+        // ];
+
+        // $validator = Validator::make($request->all() , $rules, $messages);
+        // $errors = $validator->errors();
+        // return response()->json($errors);
+        // foreach ($errors as $error) {
+        //     echo $error;
+        // }
+
+        // $rfq = RFQ::create($request->all());
+
+        // return response()->json($rfq, 200);
+
+        $rfq_insert_data = [
+            'requested_date'=>$request->requested_date,
+            'required_date'=>$request->reqiuired_date,
+            'party_id'=>$request->party_id,
         ];
 
+        $rfq = RFQ::create($rfq_insert_data);
 
-        $messages = [
-            'required' => 'The :attribute field is required.',
-        ];
-
-        $validator = Validator::make($request->all() , $rules, $messages);
-        $errors = $validator->errors();
-        foreach ($errors as $error) {
-            echo $error;
+        foreach ($request->rfq_details as $rfq_detail ) {
+            $rfq_detail_insert_data =[
+                'product_id'=> $rfq_detail->id,
+                'rfq_id' => $rfq->id,
+                'description'=> $rfq_detail->descriptionss,
+                'quantity_required'=> $rfq_detail->quantity_required,
+            ];
+            RFQDetails::create($rfq_detail_insert_data);
         }
 
-        $rfq = RFQ::create($request->all());
-
-        return response()->json($rfq, 200);
+        return response()->json(['msg'=>'successfully added']);
 
 
     }
