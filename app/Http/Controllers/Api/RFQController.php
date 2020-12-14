@@ -29,7 +29,6 @@ class RFQController extends Controller
                         'requested_date' => $rfq->requested_date,
                         'require_date' => $rfq->require_date,
                         'party_id' => $rfq->party_id,
-                        // 'party_name' => $rfq->party->fname,
                         'party_fname' => $party ? $party->fname : $party,
                         'party_lname' => $party ? $party->lname : $party,
                         'user_id' => $rfq->user_id,
