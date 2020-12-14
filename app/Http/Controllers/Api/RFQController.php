@@ -72,6 +72,8 @@ class RFQController extends Controller
         // $rfq = RFQ::create($request->all());
 
         // return response()->json($rfq, 200);
+        $data = $request->getContent();
+        dd(gettype($data));
 
         $rfq_insert_data = [
             'requested_date'=>$request->requested_date,
@@ -80,7 +82,8 @@ class RFQController extends Controller
         ];
 
         $rfq = RFQ::create($rfq_insert_data);
-
+        // dd($request->json());
+        // dd($request['rfq_details']);
         foreach($request->rfq_details as $rfq_detail){
             $rfq_detail_insert_data =[
                 'product_id'=> $rfq_detail->id,
