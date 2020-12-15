@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Party;
 use App\Models\RFQ;
 use App\Models\RFQDetails;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -91,26 +92,31 @@ class RFQController extends Controller
         // return response()->json($data);
         // dd($data['rfq_details']);
 
-        $rfq_insert_data = [
-            'requested_date'=>$data['requested_date'],
-            'require_date'=>$data['require_date'],
-            'party_id'=>$data['party_id'],
-        ];
-
-        $rfq = RFQ::create($rfq_insert_data);
-        // dd($data->json());
-        // dd($data['rfq_details']);
-        foreach($data['rfq_details'] as $rfq_detail){
-            $rfq_detail_insert_data =[
-                'product_id'=> $rfq_detail->id,
-                'rfq_id' => $rfq->id,
-                'description'=> $rfq_detail->descriptionss,
-                'quantity_required'=> $rfq_detail->quantity
+        try{
+            $rfq_insert_data = [
+                'requested_date' => $data['requested_date'],
+                'require_date' => $data['require_date'],
+                'party_id' => $data['party_id'],
             ];
-            RFQDetails::create($rfq_detail_insert_data);
-        }
 
-        return response()->json(['msg'=>'successfully added']);
+            $rfq = RFQ::create($rfq_insert_data);
+            // dd($data->json());
+            // dd($data['rfq_details']);
+            foreach ($data['rfq_details'] as $rfq_detail) {
+                $rfq_detail_insert_data = [
+                    'product_id' => $rfq_detail->id,
+                    'rfq_id' => $rfq->id,
+                    'description' => $rfq_detail->descriptionss,
+                    'quantity_required' => $rfq_detail->quantity
+                ];
+                RFQDetails::create($rfq_detail_insert_data);
+            }
+
+            return response()->json(['msg' => 'successfully added']);
+            
+        }catch(Exception $e){
+            return $e;
+        }
 
 
     }
