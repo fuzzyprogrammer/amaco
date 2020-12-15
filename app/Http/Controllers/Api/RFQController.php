@@ -69,22 +69,38 @@ class RFQController extends Controller
         //     echo $error;
         // }
 
+        // [
+        //     "party_id":1,
+        //     "requested_date":"2018-12-21",
+        //     "required_date":"2018-12-21",
+        //     "rfq_details":
+        //     [
+                // {
+                //     "id": 1,
+                //     "quantity": 2,
+                //     "descriptionss": "dfdgddsafdsaf",
+                // }
+        //     ],
+        // ]
+
         // $rfq = RFQ::create($request->all());
 
         // return response()->json($rfq, 200);
-        $data = $request->getContent();
-        dd(gettype($data));
+        $data = $request->all();
+        // $jd = $data['rfq_details'];
+        dd($data['rfq_details']);
+        // dd($data['rfq_details']);
 
         $rfq_insert_data = [
-            'requested_date'=>$request->requested_date,
-            'require_date'=>$request->require_date,
-            'party_id'=>$request->party_id,
+            'requested_date'=>$data['requested_date'],
+            'require_date'=>$data['require_date'],
+            'party_id'=>$data['party_id'],
         ];
 
         $rfq = RFQ::create($rfq_insert_data);
-        // dd($request->json());
-        // dd($request['rfq_details']);
-        foreach($request->rfq_details as $rfq_detail){
+        // dd($data->json());
+        // dd($data['rfq_details']);
+        foreach($data['rfq_details'] as $rfq_detail){
             $rfq_detail_insert_data =[
                 'product_id'=> $rfq_detail->id,
                 'rfq_id' => $rfq->id,
