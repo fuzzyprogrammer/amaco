@@ -91,11 +91,11 @@ class RFQController extends Controller
         // return $data;
 
         try{
-            $rfq = new RFQ;
-            $rfq->requested_date = $data['requested_date'];
-            $rfq->require_date = $data['require_date'];
-            $rfq->party_id = $data['party_id'];
-            $_rfq = $rfq->save();
+            // $rfq = new RFQ;
+            // $rfq->requested_date = $data['requested_date'];
+            // $rfq->require_date = $data['require_date'];
+            // $rfq->party_id = $data['party_id'];
+            // $_rfq = $rfq->save();
 
             // $rfq_insert_data = [
             //     'requested_date' => $data['requested_date'],
@@ -107,13 +107,15 @@ class RFQController extends Controller
             // dd($data['rfq_details']);
             // return $data['rfq_details'];
             foreach ($data['rfq_details'] as $rfq_detail) {
-                $_rfq_detail = new RFQDetails;
-                $_rfq_detail->product_id = $rfq_detail['id'];
-                dd($rfq_detail);
-                $_rfq_detail->rfq_id = $_rfq['id'];
-                $_rfq_detail->description = $rfq_detail['descriptionss'];
-                $_rfq_detail->quantity_required = $rfq_detail['quantity'];
-                $saved_data = $_rfq_detail->save();
+                // $_rfq_detail = new RFQDetails;
+                // $_rfq_detail->product_id = $rfq_detail['id'];
+                return($rfq_detail);
+                // $_rfq_detail->rfq_id = $_rfq['id'];
+                // $_rfq_detail->description = $rfq_detail['descriptionss'];
+                // $_rfq_detail->quantity_required = $rfq_detail['quantity'];
+                // $saved_data = $_rfq_detail->save();
+
+
                 // $rfq_detail_insert_data = [
                 //     'product_id' => $rfq_detail->id,
                 //     'rfq_id' => $rfq->id,
