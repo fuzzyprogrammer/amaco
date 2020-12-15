@@ -51,44 +51,8 @@ class RFQController extends Controller
      */
     public function store(Request $request)
     {
-        // $rules = [
-        //     'requested_date' => 'required',
-        //     'require_date' => 'required',
-        //     'party_id' => 'required',
-        //     'user_id' => 'required',
-        // ];
 
-
-        // $messages = [
-        //     'required' => 'The :attribute field is required.',
-        // ];
-
-        // $validator = Validator::make($request->all() , $rules, $messages);
-        // $errors = $validator->errors();
-        // return response()->json($errors);
-        // foreach ($errors as $error) {
-        //     echo $error;
-        // }
-
-        // [
-        //     "party_id":1,
-        //     "requested_date":"2018-12-21",
-        //     "required_date":"2018-12-21",
-        //     "rfq_details":
-        //     [
-                // {
-                //     "id": 1,
-                //     "quantity": 2,
-                //     "descriptionss": "dfdgddsafdsaf",
-                // }
-        //     ],
-        // ]
-
-        // $rfq = RFQ::create($request->all());
-
-        // return response()->json($rfq, 200);
         $data = $request->json()->all();
-        // return $data;
 
         try{
 
@@ -141,7 +105,7 @@ class RFQController extends Controller
             'require_date' => $_rfq->require_date,
             'party_id' => $_rfq->party_id,
             "party" => $_rfq->party[0],
-            'user_id' => $_rfq->user_id,
+            'user_id' => $_rfq->user_id,    
             'created_at' => $_rfq->created_at,
             'updated_at' => $_rfq->updated_at,
             'rfq_details' => $rfq_details->map(function($rfq_detail){
@@ -173,27 +137,54 @@ class RFQController extends Controller
      */
     public function update(Request $request, RFQ $rfq)
     {
-        $rules = [
-            'requested_date' => 'required',
-            'require_date' => 'required',
-            'party_id' => 'required',
-            'user_id' => 'required',
-        ];
+        // $rules = [
+        //     'requested_date' => 'required',
+        //     'require_date' => 'required',
+        //     'party_id' => 'required',
+        //     'user_id' => 'required',
+        // ];
 
 
-        $messages = [
-            'required' => 'The :attribute field is required.',
-        ];
+        // $messages = [
+        //     'required' => 'The :attribute field is required.',
+        // ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
-        $errors = $validator->errors();
-        foreach ($errors as $error) {
-            echo $error;
+        // $validator = Validator::make($request->all(), $rules, $messages);
+        // $errors = $validator->errors();
+        // foreach ($errors as $error) {
+        //     echo $error;
+        // }
+
+        $data = $request->json()->all();
+
+        try {
+            $rfq->update([
+                'requested_date' => $data['requested_date'],
+                'require_date' => $data['require_date'],
+                'party_id' => $data['party_id'],
+            ]);
+
+
+            global $_rfq_id;
+            $_rfq_id = $rfq['id'];
+
+            foreach ($data['rfq_details'] as $rfq_detail) {
+                $rfq_update_data = RFQDetails::findOrFail($rfq_detail['id']);
+                $_rfq_detail = $rfq_update_data->update([
+                    'product_id' => $rfq_detail['id'],
+                    'description' => $rfq_detail['descriptionss'],
+                    'quantity_required' => $rfq_detail['quantity'],
+                    'rfq_id' => $_rfq_id,
+                ]);
+            }
+
+            return response()->json(['msg' => 'successfully updated']);
+        } catch (Exception $e) {
+            return $e;
         }
 
-        $rfq->update($request->all());
 
-        return response()->json($rfq, 200);
+        // return response()->json($rfq, 200);
 
     }
 
