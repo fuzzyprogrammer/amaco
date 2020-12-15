@@ -98,7 +98,7 @@ class RFQController extends Controller
             $_rfq = $rfq->save();
 
             $_rfq_id = $_rfq['id'];
-            return $_rfq_id;
+            return $_rfq;
             // $rfq_insert_data = [
             //     'requested_date' => $data['requested_date'],
             //     'require_date' => $data['require_date'],
