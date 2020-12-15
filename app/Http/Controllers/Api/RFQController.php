@@ -91,14 +91,19 @@ class RFQController extends Controller
         // return $data;
 
         try{
-            $rfq = new RFQ;
-            $rfq->requested_date = $data['requested_date'];
-            $rfq->require_date = $data['require_date'];
-            $rfq->party_id = $data['party_id'];
-            $_rfq = $rfq->save();
+            // $rfq = new RFQ;
+            // $rfq->requested_date = $data['requested_date'];
+            // $rfq->require_date = $data['require_date'];
+            // $rfq->party_id = $data['party_id'];
+            // $_rfq = $rfq->save();
+            $rfq = RFQ::create([
+                'requested_date' => $data['requested_date'],
+                'require_date' => $data['require_date'],
+                'party_id' => $data['party_id'],
+            ]);
 
-            $_rfq_id = $_rfq['id'];
-            return $_rfq;
+            $_rfq_id = $rfq['id'];
+            return $rfq;
             // $rfq_insert_data = [
             //     'requested_date' => $data['requested_date'],
             //     'require_date' => $data['require_date'],
