@@ -14,4 +14,8 @@ class Party extends Model
     {
         return $this->belongsTo('App\Models\RFQ');
     }
+    public function rfq_detail()
+    {
+        return $this->belongsTo('App\Models\RFQDetails');
+    }
 }

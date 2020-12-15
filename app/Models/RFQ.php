@@ -13,11 +13,15 @@ class RFQ extends Model
 
     public function rfq_details()
     {
-        return $this->hasMany('App\Models\RFQDetails', 'rfq_id');
+        return $this->hasMany(RFQDetails::class, 'rfq_id');
     }
 
     public function party()
     {
-        return $this->hasMany('App\Models\Party','party_id');
+        return $this->hasMany(Party::class,'id');
+    }
+    public function product()
+    {
+        return $this->hasOne(Product::class,'id');
     }
 }

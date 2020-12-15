@@ -12,10 +12,14 @@ class Product extends Model
 
     public function division()
     {
-        return $this->belongsTo('App\Models\Division');
+        return $this->belongsTo(Division::class);
     }
     public function category()
     {
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo(Category::class);
+    }
+    public function rfq()
+    {
+        return $this->belongsTo(RFQDetails::class);
     }
 }

@@ -13,6 +13,6 @@ class RFQDetails extends Model
 
     public function rfq()
     {
-        return $this->belongsTo('App\Models\RFQ');
+        return $this->belongsTo(RFQ::class);
     }
 }

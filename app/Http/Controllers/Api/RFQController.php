@@ -130,7 +130,7 @@ class RFQController extends Controller
     {
         $_rfq = RFQ::findOrFail($rfq);
 
-        $rfq_detail = DB::table('r_f_q_s')
+        $rfq_details = DB::table('r_f_q_s')
         ->leftJoin('r_f_q_details', 'r_f_q_s.id','=', 'r_f_q_details.rfq_id')
         ->where('r_f_q_s.id',$rfq)
         ->get();
@@ -143,7 +143,24 @@ class RFQController extends Controller
             'user_id' => $_rfq->user_id,
             'created_at' => $_rfq->created_at,
             'updated_at' => $_rfq->updated_at,
-            'rfq_details' => $rfq_detail,
+            'rfq_details' => $rfq_details->map(function($rfq_detail){
+                $rfq_detail = RFQDetails::findOrFail($rfq_detail->id);
+                return [
+                    "id" => $rfq_detail->id,
+                    "requested_date"=> $rfq_detail->requested_date,
+                    "require_date"=> $rfq_detail->require_date,
+                    "party_id"=> $rfq_detail->party_id,
+                    "party" => $rfq_detail->rfq->party[0],
+                    "user_id"=> $rfq_detail->user_id,
+                    "created_at"=> $rfq_detail->created_at,
+                    "updated_at"=> $rfq_detail->updated_at,
+                    "rfq_id"=> $rfq_detail->rfq_id,
+                    "product_id"=> $rfq_detail->product_id,
+                    "product" => $rfq_detail->rfq->product,
+                    "description"=> $rfq_detail->description,
+                    "quantity_required"=> $rfq_detail->quantity_required,
+                ];
+            }),
         ];
         // dd($data);
         return response()->json([
