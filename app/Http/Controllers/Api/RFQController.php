@@ -88,7 +88,7 @@ class RFQController extends Controller
         // return response()->json($rfq, 200);
         $data = $request->all();
         // $jd = $data['rfq_details'];
-        return response()->json($data);
+        // return response()->json($data);
         // dd($data['rfq_details']);
 
         $rfq_insert_data = [
