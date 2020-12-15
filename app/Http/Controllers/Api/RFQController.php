@@ -98,10 +98,10 @@ class RFQController extends Controller
                 'party_id' => $data['party_id'],
             ]);
 
+            global $_rfq_id;
             $_rfq_id = $rfq['id'];
 
             foreach ($data['rfq_details'] as $rfq_detail) {
-                global $_rfq_id;
                 return $_rfq_id;
                 $_rfq_detail = RFQDetails::create([
                     'product_id' => $rfq_detail['id'],
