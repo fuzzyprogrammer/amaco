@@ -99,10 +99,10 @@ class RFQController extends Controller
                 'party_id' => $data['party_id'],
             ];
 
+            return $rfq_insert_data;
             $rfq = RFQ::create($rfq_insert_data);
-            // dd($data->json());
             // dd($data['rfq_details']);
-            return $data['rfq_details'];
+            // return $data['rfq_details'];
             foreach ($data['rfq_details'] as $rfq_detail) {
                 $rfq_detail_insert_data = [
                     'product_id' => $rfq_detail->id,
