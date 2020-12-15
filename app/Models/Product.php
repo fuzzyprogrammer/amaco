@@ -12,14 +12,18 @@ class Product extends Model
 
     public function division()
     {
-        return $this->belongsTo(Division::class);
+        return $this->belongsTo(Division::class, 'rfq_id');
     }
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'rfq_id');
     }
     public function rfq()
     {
-        return $this->belongsTo(RFQDetails::class);
+        return $this->belongsTo(RFQDetails::class, 'rfq_id');
+    }
+    public function rfq_detail()
+    {
+        return $this->belongsTo(RFQ::class);
     }
 }

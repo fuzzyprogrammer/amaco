@@ -140,23 +140,18 @@ class RFQController extends Controller
             'requested_date' => $_rfq->requested_date,
             'require_date' => $_rfq->require_date,
             'party_id' => $_rfq->party_id,
+            "party" => $_rfq->party[0],
             'user_id' => $_rfq->user_id,
             'created_at' => $_rfq->created_at,
             'updated_at' => $_rfq->updated_at,
             'rfq_details' => $rfq_details->map(function($rfq_detail){
-                $rfq_detail = RFQDetails::findOrFail($rfq_detail->id);
+                $rfq_detail = RFQDetails::where('id','=',$rfq_detail->id)->first();
                 return [
-                    "id" => $rfq_detail->id,
-                    "requested_date"=> $rfq_detail->requested_date,
-                    "require_date"=> $rfq_detail->require_date,
-                    "party_id"=> $rfq_detail->party_id,
-                    "party" => $rfq_detail->rfq->party[0],
-                    "user_id"=> $rfq_detail->user_id,
+                    "id" => $rfq_detail['id'],
                     "created_at"=> $rfq_detail->created_at,
                     "updated_at"=> $rfq_detail->updated_at,
-                    "rfq_id"=> $rfq_detail->rfq_id,
                     "product_id"=> $rfq_detail->product_id,
-                    "product" => $rfq_detail->rfq->product,
+                    "product" => $rfq_detail->product,
                     "description"=> $rfq_detail->description,
                     "quantity_required"=> $rfq_detail->quantity_required,
                 ];
