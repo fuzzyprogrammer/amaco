@@ -91,11 +91,7 @@ class RFQController extends Controller
         // return $data;
 
         try{
-            // $rfq = new RFQ;
-            // $rfq->requested_date = $data['requested_date'];
-            // $rfq->require_date = $data['require_date'];
-            // $rfq->party_id = $data['party_id'];
-            // $_rfq = $rfq->save();
+
             $rfq = RFQ::create([
                 'requested_date' => $data['requested_date'],
                 'require_date' => $data['require_date'],
@@ -103,32 +99,17 @@ class RFQController extends Controller
             ]);
 
             $_rfq_id = $rfq['id'];
-            return $rfq;
-            // $rfq_insert_data = [
-            //     'requested_date' => $data['requested_date'],
-            //     'require_date' => $data['require_date'],
-            //     'party_id' => $data['party_id'],
-            // ];
 
-            // $rfq = RFQ::create($rfq_insert_data);
-            // dd($data['rfq_details']);
-            // return $data['rfq_details'];
             foreach ($data['rfq_details'] as $rfq_detail) {
-                $_rfq_detail = new RFQDetails;
-                $_rfq_detail->product_id = $rfq_detail->id;
-                // $_rfq_detail->rfq_id = $_rfq['id'];
-                $_rfq_detail->description = $rfq_detail->descriptionss;
-                $_rfq_detail->quantity_required = $rfq_detail->quantity;
-                return($_rfq_detail->save());
 
+                $_rfq_detail = RFQDetails::create([
+                    'product_id' => $rfq_detail->id,
+                    'description' => $rfq_detail->descriptionss,
+                    'quantity_required' => $rfq_detail->quantity,
+                    'rfq_id' => $_rfq_id,
 
-                // $rfq_detail_insert_data = [
-                //     'product_id' => $rfq_detail->id,
-                //     'rfq_id' => $rfq->id,
-                //     'description' => $rfq_detail->descriptionss,
-                //     'quantity_required' => $rfq_detail->quantity
-                // ];
-                // RFQDetails::create($rfq_detail_insert_data);
+                ]);
+
             }
 
             return response()->json(['msg' => 'successfully added']);
