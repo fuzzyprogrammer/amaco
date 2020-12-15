@@ -99,6 +99,7 @@ class RFQController extends Controller
             ]);
 
             $_rfq_id = $rfq['id'];
+            return $_rfq_id;
 
             foreach ($data['rfq_details'] as $rfq_detail) {
                 $_rfq_detail = RFQDetails::create([
@@ -106,7 +107,6 @@ class RFQController extends Controller
                     'description' => $rfq_detail['descriptionss'],
                     'quantity_required' => $rfq_detail['quantity'],
                     'rfq_id' => $_rfq_id,
-
                 ]);
 
             }
