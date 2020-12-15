@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Mockery\Undefined;
 
 class RFQController extends Controller
 {
@@ -90,25 +91,26 @@ class RFQController extends Controller
      * @param  \App\Models\RFQ  $rfq
      * @return \Illuminate\Http\Response
      */
-    public function show($rfq)
+    public function show(RFQ $rfq)
     {
-        $_rfq = RFQ::findOrFail($rfq);
+        // $_rfq = RFQ::findOrFail($rfq);
 
-        $rfq_details = DB::table('r_f_q_s')
-        ->leftJoin('r_f_q_details', 'r_f_q_s.id','=', 'r_f_q_details.rfq_id')
-        ->where('r_f_q_s.id',$rfq)
-        ->get();
+        // $rfq_details = DB::table('r_f_q_s')
+        // ->leftJoin('r_f_q_details', 'r_f_q_s.id','=', 'r_f_q_details.rfq_id')
+        // ->where('r_f_q_s.id',$rfq)
+        // ->get();
 
+        // return $_rfq->rfq_details;
         $data = [
-            'id' => $_rfq->id,
-            'requested_date' => $_rfq->requested_date,
-            'require_date' => $_rfq->require_date,
-            'party_id' => $_rfq->party_id,
-            "party" => $_rfq->party[0],
-            'user_id' => $_rfq->user_id,    
-            'created_at' => $_rfq->created_at,
-            'updated_at' => $_rfq->updated_at,
-            'rfq_details' => $rfq_details->map(function($rfq_detail){
+            'id' => $rfq->id,
+            'requested_date' => $rfq->requested_date,
+            'require_date' => $rfq->require_date,
+            'party_id' => $rfq->party_id,
+            "party" => $rfq->party ,
+            'user_id' => $rfq->user_id,
+            'created_at' => $rfq->created_at,
+            'updated_at' => $rfq->updated_at,
+            'rfq_details' => $rfq->rfq_details->map(function($rfq_detail){
                 $rfq_detail = RFQDetails::where('id','=',$rfq_detail->id)->first();
                 return [
                     "id" => $rfq_detail['id'],

@@ -18,7 +18,7 @@ class RFQ extends Model
 
     public function party()
     {
-        return $this->hasMany(Party::class,'id');
+        return $this->hasMany(Party::class,'id','party_id');
     }
     public function product()
     {
