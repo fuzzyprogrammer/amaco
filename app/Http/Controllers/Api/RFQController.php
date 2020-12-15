@@ -102,6 +102,7 @@ class RFQController extends Controller
             $rfq = RFQ::create($rfq_insert_data);
             // dd($data->json());
             // dd($data['rfq_details']);
+            return $data['rfq_details'];
             foreach ($data['rfq_details'] as $rfq_detail) {
                 $rfq_detail_insert_data = [
                     'product_id' => $rfq_detail->id,
@@ -113,7 +114,7 @@ class RFQController extends Controller
             }
 
             return response()->json(['msg' => 'successfully added']);
-            
+
         }catch(Exception $e){
             return $e;
         }
