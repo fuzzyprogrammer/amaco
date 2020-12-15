@@ -107,6 +107,7 @@ class RFQController extends Controller
             // dd($data['rfq_details']);
             // return $data['rfq_details'];
             foreach ($data['rfq_details'] as $rfq_detail) {
+                return 'inside foreach';
                 $_rfq_detail = new RFQDetails;
                 $_rfq_detail->product_id = $rfq_detail['id'];
                 $_rfq_detail->rfq_id = $_rfq['id'];
