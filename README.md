@@ -29,40 +29,40 @@ DB_PASSWORD=password
 
 Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`] 
 
-| Method    | URI                          | Name                 |
-|-----------|------------------------------|----------------------|
-| GET|HEAD  | /                            |                      |
-| GET|HEAD  | api/analyse                  | analyse.index        |
-| POST      | api/analyse                  | analyse.store        |
-| DELETE    | api/analyse/{analyse}        | analyse.destroy      |
-| PUT|PATCH | api/analyse/{analyse}        | analyse.update       |
-| GET|HEAD  | api/analyse/{analyse}        | analyse.show         |
-| GET|HEAD  | api/categories               | categories.index     |
-| POST      | api/categories               | categories.store     |
-| GET|HEAD  | api/categories/{category}    | categories.show      |
-| PUT|PATCH | api/categories/{category}    | categories.update    |
-| DELETE    | api/categories/{category}    | categories.destroy   |
-| GET|HEAD  | api/parties                  | parties.index        |
-| POST      | api/parties                  | parties.store        |
-| PUT|PATCH | api/parties/{party}          | parties.update       |
-| DELETE    | api/parties/{party}          | parties.destroy      |
-| GET|HEAD  | api/parties/{party}          | parties.show         |
-| POST      | api/products                 | products.store       |
-| GET|HEAD  | api/products                 | products.index       |
-| GET|HEAD  | api/products-in-category     | products.in.category |
-| PUT|PATCH | api/products/{product}       | products.update      |
-| DELETE    | api/products/{product}       | products.destroy     |
-| GET|HEAD  | api/products/{product}       | products.show        |
-| POST      | api/rfq                      | rfq.store            |
-| GET|HEAD  | api/rfq                      | rfq.index            |
-| GET|HEAD  | api/rfq-details              | rfq-details.index    |
-| POST      | api/rfq-details              | rfq-details.store    |
-| GET|HEAD  | api/rfq-details/{rfq_detail} | rfq-details.show     |
-| PUT|PATCH | api/rfq-details/{rfq_detail} | rfq-details.update   |
-| DELETE    | api/rfq-details/{rfq_detail} | rfq-details.destroy  |
-| GET|HEAD  | api/rfq/{rfq}                | rfq.show             |
-| PUT|PATCH | api/rfq/{rfq}                | rfq.update           |
-| DELETE    | api/rfq/{rfq}                | rfq.destroy          |
-| GET|HEAD  | api/user                     |                      |
-|           |                              |                      |
-| GET|HEAD  | api/users                    |                      |
+| URI                          | Name                 |
+|------------------------------|----------------------|
+| /                            |                      |
+| api/analyse                  | analyse.index        |
+| api/analyse                  | analyse.store        |
+| api/analyse/{analyse}        | analyse.destroy      |
+| api/analyse/{analyse}        | analyse.update       |
+| api/analyse/{analyse}        | analyse.show         |
+| api/categories               | categories.index     |
+| api/categories               | categories.store     |
+| api/categories/{category}    | categories.show      |
+| api/categories/{category}    | categories.update    |
+| api/categories/{category}    | categories.destroy   |
+| api/parties                  | parties.index        |
+| api/parties                  | parties.store        |
+| api/parties/{party}          | parties.update       |
+| api/parties/{party}          | parties.destroy      |
+| api/parties/{party}          | parties.show         |
+| api/products                 | products.store       |
+| api/products                 | products.index       |
+| api/products-in-category     | products.in.category |
+| api/products/{product}       | products.update      |
+| api/products/{product}       | products.destroy     |
+| api/products/{product}       | products.show        |
+| api/rfq                      | rfq.store            |
+| api/rfq                      | rfq.index            |
+| api/rfq-details              | rfq-details.index    |
+| api/rfq-details              | rfq-details.store    |
+| api/rfq-details/{rfq_detail} | rfq-details.show     |
+| api/rfq-details/{rfq_detail} | rfq-details.update   |
+| api/rfq-details/{rfq_detail} | rfq-details.destroy  |
+| api/rfq/{rfq}                | rfq.show             |
+| api/rfq/{rfq}                | rfq.update           |
+| api/rfq/{rfq}                | rfq.destroy          |
+| api/user                     |                      |
+|                              |                      |
+| api/users                    |                      |

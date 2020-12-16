@@ -93,6 +93,6 @@ class AnalyseController extends Controller
     public function destroy(Analyse $analyse)
     {
         $analyse->delete();
-        return response()->json("$analyse has been successfully deleted.");
+        return response()->json("Analyse $analyse->id has been successfully deleted.");
     }
 }
