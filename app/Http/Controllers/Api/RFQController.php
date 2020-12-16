@@ -110,7 +110,7 @@ class RFQController extends Controller
             'user_id' => $rfq->user_id,
             'created_at' => $rfq->created_at,
             'updated_at' => $rfq->updated_at,
-            'rfq_details' => $rfq->rfq_details->map(function($rfq_detail){
+            'rfq_details' => array($rfq->rfq_details->map(function($rfq_detail){
                 $rfq_detail = RFQDetails::where('id','=',$rfq_detail->id)->first();
                 return [
                     "id" => $rfq_detail['id'],
@@ -121,7 +121,7 @@ class RFQController extends Controller
                     "description"=> $rfq_detail->description,
                     "quantity_required"=> $rfq_detail->quantity_required,
                 ];
-            }),
+            })),
         ];
         // dd($data);
         return response()->json([
