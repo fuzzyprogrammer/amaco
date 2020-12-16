@@ -114,7 +114,7 @@ class RFQController extends Controller
                 $rfq_detail = RFQDetails::where('id','=',$rfq_detail->id)->first();
                 return [
                     "id" => $rfq_detail['id'],
-                    "created_at"=> $rfq_detail->created_at,
+                    "created_at"=> $rfq_detail->created_at, 
                     "updated_at"=> $rfq_detail->updated_at,
                     "product_id"=> $rfq_detail->product_id,
                     "product" => array($rfq_detail->product),

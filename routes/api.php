@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\PartyController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\RFQController;
 use App\Http\Controllers\Api\RFQDetailsController;
+use App\Http\Controllers\Api\AnalyseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,4 @@ Route::apiResource('categories',CategoryController::class);
 Route::get('products-in-category',[CategoryController::class, 'products_in_category'])->name('products.in.category');
 Route::apiResource('rfq',RFQController::class);
 Route::apiResource('rfq-details',RFQDetailsController::class);
+Route::apiResource('analyse',AnalyseController::class);

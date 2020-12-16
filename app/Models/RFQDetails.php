@@ -19,4 +19,9 @@ class RFQDetails extends Model
     {
         return $this->hasOne(Product::class,'id','product_id');
     }
+
+    public function analyse()
+    {
+        return $this->belongsTo(analyse::class);
+    }
 }
