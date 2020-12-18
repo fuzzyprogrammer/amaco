@@ -64,5 +64,4 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | api/rfq/{rfq}                | rfq.update           |
 | api/rfq/{rfq}                | rfq.destroy          |
 | api/user                     |                      |
-|                              |                      |
 | api/users                    |                      |
