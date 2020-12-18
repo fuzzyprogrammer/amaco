@@ -26,6 +26,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('users', [UserController::class, 'index']);
+Route::get('users-chect', [UserController::class, 'check']);
 Route::apiResource('products',ProductController::class);
 Route::apiResource('parties',PartyController::class);
 Route::apiResource('categories',CategoryController::class);

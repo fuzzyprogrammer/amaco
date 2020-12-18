@@ -27,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -84,5 +84,15 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function check(Request $request)
+    {
+        $user = User::findOrFail($request)->first();
+        if ($user->password == bcrypt($request->password)){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
