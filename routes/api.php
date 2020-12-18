@@ -33,3 +33,4 @@ Route::get('products-in-category',[CategoryController::class, 'products_in_categ
 Route::apiResource('rfq',RFQController::class);
 Route::apiResource('rfq-details',RFQDetailsController::class);
 Route::apiResource('analyse',AnalyseController::class);
+Route::get('parties-vendor',[PartyController::class, 'vendor'])->name('parties.vendor');

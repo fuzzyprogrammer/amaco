@@ -187,4 +187,13 @@ class PartyController extends Controller
             return (['msg' => 'party' . ' ' . $party->id .' is successfully deleted']);
         }
     }
+
+    public function vendor()
+    {
+        $vendors = Party::where('party_type','=','vendor')
+        ->select('id','fname','lname')
+        ->get()
+        ->toArray();
+        return $vendors;
+    }
 }
