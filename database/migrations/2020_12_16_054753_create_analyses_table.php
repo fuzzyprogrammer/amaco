@@ -15,7 +15,7 @@ class CreateAnalysesTable extends Migration
     {
         Schema::create('analyses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('rfq_details_id')->nullable();
+            $table->unsignedBigInteger('product_id')->nullable();
             $table->string('description')->nullable();
             $table->unsignedBigInteger('party_id')->nullable(); //vendor
             $table->string('brand_name')->nullable();

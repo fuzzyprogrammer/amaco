@@ -20,7 +20,7 @@ class AnalyseController extends Controller
         $analyse_data = $analyse->map(function($a){
             return [
                 'id' => $a->id,
-                'rfq_details_id' => $a->rfq_details_id,
+                'product_id' => $a->product_id,
                 'rfq_detail' => $a->rfq_details,
                 'description' => $a->description,
                 'party_id' => $a->party_id,
@@ -58,7 +58,7 @@ class AnalyseController extends Controller
     {
             return response()->json([
                 'id' => $analyse->id,
-                'rfq_details_id' => $analyse->rfq_details_id,
+                'product_id' => $analyse->product_id,
                 'rfq_details' => $analyse->rfq_details,
                 'description' => $analyse->description,
                 'party_id' => $analyse->party_id,
