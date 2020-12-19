@@ -91,9 +91,9 @@ class UserController extends Controller
     {
         $user = User::where('email', '=', $request->email)->first();
         if ($user->password == bcrypt($request->password)) {
-            return true;
+            return 'true';
         } else {
-            return false;
+            return 'false';
         }
     }
 }
