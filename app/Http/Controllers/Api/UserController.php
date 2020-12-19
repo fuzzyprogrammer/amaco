@@ -95,9 +95,9 @@ class UserController extends Controller
     {
         User::where('email', '=', $request->email)->first();
         if (Hash::check('admin123',bcrypt($request->password))) {
-            return true;
+            return 'true';
         } else {
-            return false;
+            return 'false';
         }
     }
 }
