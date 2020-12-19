@@ -77,6 +77,5 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | PUT|PATCH | api/rfq/{rfq}                           | rfq.update               |
 | GET|HEAD  | api/rfq/{rfq}                           | rfq.show                 |
 | GET|HEAD  | api/user                                |                          |
-|           |                                         |                          |
 | GET|HEAD  | api/users                               |                          |
 ```
