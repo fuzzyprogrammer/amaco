@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\RFQController;
 use App\Http\Controllers\Api\RFQDetailsController;
 use App\Http\Controllers\Api\AnalyseController;
+use App\Http\Controllers\Api\QuotationController;
+use App\Http\Controllers\Api\QuotationDetailController;
 
 /*
 |--------------------------------------------------------------------------

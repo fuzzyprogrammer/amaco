@@ -9,9 +9,13 @@ class Quotation extends Model
 {
     use HasFactory;
 
-    public function quotataionDetail()
+    public function quotationDetail()
     {
-        return $this->hasMany(QuotationDeatail::class, 'id','quotation_id');
+        return $this->hasMany(QuotationDetail::class);
+    }
+    public function party()
+    {
+        return $this->hasOne(Party::class, 'id','party_id');
     }
 
 }

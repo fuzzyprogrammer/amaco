@@ -12,10 +12,14 @@ class Party extends Model
 
     public function rfq()
     {
-        return $this->belongsTo('App\Models\RFQ');
+        return $this->belongsTo(RFQ::class);
     }
     public function rfq_detail()
     {
-        return $this->belongsTo('App\Models\RFQDetails');
+        return $this->belongsTo(RFQDetails::class);
+    }
+    public function quotation()
+    {
+        return $this->belongsTo(Quotation::class);
     }
 }
