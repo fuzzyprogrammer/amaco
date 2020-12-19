@@ -26,13 +26,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('users', [UserController::class, 'index']);
-// Route::get('users-check', [UserController::class, 'check'])->name('user.check');
-Route::post('add-user', [UserController::class, 'add'])->name('add.user');
 Route::apiResource('products',ProductController::class);
 Route::apiResource('parties',PartyController::class);
 Route::apiResource('categories',CategoryController::class);
-Route::get('products-in-category',[CategoryController::class, 'products_in_category'])->name('products.in.category');
 Route::apiResource('rfq',RFQController::class);
 Route::apiResource('rfq-details',RFQDetailsController::class);
 Route::apiResource('analyse',AnalyseController::class);
+Route::apiResource('analyse',AnalyseController::class);
+Route::apiResource('quotation',QuotationController::class);
+Route::apiResource('quotation-detail',QuotationDetailController::class);
+
+Route::post('add-user', [UserController::class, 'add'])->name('add.user');
 Route::get('parties-vendor',[PartyController::class, 'vendor'])->name('parties.vendor');
+Route::get('products-in-category',[CategoryController::class, 'products_in_category'])->name('products.in.category');
