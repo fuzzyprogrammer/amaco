@@ -88,7 +88,7 @@ class UserController extends Controller
 
     public function check(Request $request)
     {
-        $user = User::findOrFail($request->email)->first();
+        $user = User::where('email','=',$request->email)->first();
         if ($user->password == bcrypt($request->password)){
             return true;
         }else{
