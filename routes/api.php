@@ -26,7 +26,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('users', [UserController::class, 'index']);
-Route::get('users-check', [UserController::class, 'check'])->name('user.check');
+// Route::get('users-check', [UserController::class, 'check'])->name('user.check');
 Route::post('add-user', [UserController::class, 'add'])->name('add.user');
 Route::apiResource('products',ProductController::class);
 Route::apiResource('parties',PartyController::class);

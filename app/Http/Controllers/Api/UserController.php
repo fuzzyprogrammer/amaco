@@ -86,26 +86,14 @@ class UserController extends Controller
         //
     }
 
-    public function check(Request $request)
-    {
-        $user = User::where('email','=',$request->email)->first();
-        if ($user->password == bcrypt($request->password)){
-            return true;
-        }else{
-            return false;
-        }
-    }
 
     public function add(Request $request)
     {
-        if($this->User::check($request)){
+        $user = User::where('email', '=', $request->email)->first();
+        if ($user->password == bcrypt($request->password)) {
             return true;
-        }else{
-        $user = User::create([
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
-        $this->User::check($user);
+        } else {
+            return false;
         }
     }
 }
