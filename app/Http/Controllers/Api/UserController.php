@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+// use App\Http\Controllers\Api\Hash;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -89,8 +93,8 @@ class UserController extends Controller
 
     public function add(Request $request)
     {
-        $user = User::where('email', '=', $request->email)->first();
-        if ($user->password == bcrypt($request->password)) {
+        User::where('email', '=', $request->email)->first();
+        if (Hash::check('admin123',bcrypt($request->password))) {
             return 'true';
         } else {
             return 'false';
