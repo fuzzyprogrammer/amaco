@@ -95,4 +95,17 @@ class UserController extends Controller
             return false;
         }
     }
+
+    public function add(Request $request)
+    {
+        if($this->User::check($request)){
+            return true;
+        }else{
+        $user = User::create([
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+        $this->User::check($user);
+        }
+    }
 }
