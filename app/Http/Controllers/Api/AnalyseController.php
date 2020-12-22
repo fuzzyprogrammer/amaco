@@ -24,7 +24,7 @@ class AnalyseController extends Controller
                 'rfq_detail' => $a->rfq_details,
                 'description' => $a->description,
                 'party_id' => $a->party_id,
-                'party' => $a->party->where('party_type','=','vendor')->first(),
+                // 'party' => $a->party->where('party_type','=','vendor')->first()->toArray(),
                 'brand_name' => $a->brand_name,
                 'unit_price' => $a->unit_price,
                 'user_id' => $a->user_id,
@@ -58,21 +58,25 @@ class AnalyseController extends Controller
     {
         $analyses =Analyse::where('product_id','=', $analyse->product_id)->get();
 
-        $data =$analyses->map(function ($analyse){
+        $data =[
+            'id' => $analyse->id,
+            'product_id' => $analyse->product_id,
+            'rfq_details' => $analyse->rfq_details,
+            'user_id' => $analyse->user_id,
+            'created_at' => $analyse->created_at,
+            'updated_at' => $analyse->updated_at,
+            'analyses_details' => $analyses->map(function ($analyse){
+            $part =  $analyse->party;
+            $party = array($part);
+
             return [
-                'id' => $analyse->id,
-                'product_id' => $analyse->product_id,
-                'rfq_details' => $analyse->rfq_details,
                 'description' => $analyse->description,
-                'party_id' => $analyse->party_id,
-                'party' => $analyse->party->where('party_type','=','vendor')->first(),
+                // 'party_id' => $analyse->party_id,
                 'brand_name' => $analyse->brand_name,
                 'unit_price' => $analyse->unit_price,
-                'user_id' => $analyse->user_id,
-                'created_at' => $analyse->created_at,
-                'updated_at' => $analyse->updated_at,
+                'party' => $party,
             ];
-        });
+        })];
         return response()->json($data);
     }
 
