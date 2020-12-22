@@ -20,4 +20,8 @@ class Analyse extends Model
     {
         return $this->hasOne(Party::class, 'id', 'party_id');
     }
+    public function product()
+    {
+        return $this->hasMany(Product::class, 'id', 'product_id');
+    }
 }

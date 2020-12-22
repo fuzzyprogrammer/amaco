@@ -56,18 +56,24 @@ class AnalyseController extends Controller
      */
     public function show(Analyse $analyse)
     {
-            return response()->json([
-                'id' => $analyse->id,
-                'product_id' => $analyse->product_id,
-                'rfq_details' => $analyse->rfq_details,
-                'description' => $analyse->description,
-                'party_id' => $analyse->party_id,
-                'party' => $analyse->party->where('party_type', '=', 'vendor')->get(),
-                'brand_name' => $analyse->brand_name,
-                'unit_price' => $analyse->unit_price,
-                'user_id' => $analyse->user_id,
-                'created_at' => $analyse->created_at,
-                'updated_at' => $analyse->updated_at,
+        $analyses =Analyse::where('product_id','=', $analyse->product_id)->get();
+        return response()->json([
+
+            $analyses->map(function ($analyse){
+                return [
+                    'id' => $analyse->id,
+                    'product_id' => $analyse->product_id,
+                    'rfq_details' => $analyse->rfq_details,
+                    'description' => $analyse->description,
+                    'party_id' => $analyse->party_id,
+                        'party' => Analyse::where(['party_id' => $analyse->party_id ])->first(),
+                        'brand_name' => $analyse->brand_name,
+                        'unit_price' => $analyse->unit_price,
+                        'user_id' => $analyse->user_id,
+                        'created_at' => $analyse->created_at,
+                        'updated_at' => $analyse->updated_at,
+                    ];
+                }),
             ]);
     }
 
