@@ -77,7 +77,7 @@ class AnalyseController extends Controller
                 'party' => $party,
             ];
         })];
-        return response()->json($data);
+        return response()->json(array($data));
     }
 
     /**
