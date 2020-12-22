@@ -15,4 +15,9 @@ class Analyse extends Model
     {
         return $this->hasMany(RFQDetails::class,'id','rfq_details_id');
     }
+
+    public function party()
+    {
+        return $this->hasOne(Party::class, 'id', 'party_id');
+    }
 }

@@ -26,4 +26,8 @@ class Product extends Model
     {
         return $this->belongsTo(RFQ::class);
     }
+    public function quotaionDetail()
+    {
+        return $this->belongsTo(QuotationDetail::class);
+    }
 }
