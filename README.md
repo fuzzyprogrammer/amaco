@@ -32,7 +32,6 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 ```
 | Method    | URI                                     | Name                     |
 |-----------|-----------------------------------------|--------------------------|
-| GET|HEAD  | /                                       |                          |
 | POST      | api/add-user                            | add.user                 |
 | POST      | api/analyse                             | analyse.store            |
 | GET|HEAD  | api/analyse                             | analyse.index            |
