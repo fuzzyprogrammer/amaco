@@ -71,9 +71,9 @@ class AnalyseController extends Controller
 
             return [
                 'description' => $analyse->description,
-                // 'party_id' => $analyse->party_id,
                 'brand_name' => $analyse->brand_name,
                 'unit_price' => $analyse->unit_price,
+                // 'party_id' => $analyse->party_id,
                 'party' => $party,
             ];
         })];
