@@ -98,7 +98,7 @@ class PartyController extends Controller
     public function show(Party $party)
     {
         $contacts = Contact::where('party_id','=',$party->id)->get();
-        return response()->json(
+        $data =
             [
                 'firm_name' => $party->firm_name,
                 'registration_no' => $party->registration_no,
@@ -117,8 +117,8 @@ class PartyController extends Controller
                 'contacts' => $contacts->map(function ($contact){
                     return $contact;
                 }),
-            ],200
-        );
+            ];
+            return response()->json(array($data));
     }
 
     /**
