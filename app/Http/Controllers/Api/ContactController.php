@@ -39,7 +39,7 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        return response()->json($contact);
+        return response()->json(array($contact));
     }
 
     /**
