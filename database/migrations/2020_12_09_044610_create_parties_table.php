@@ -25,14 +25,9 @@ class CreatePartiesTable extends Migration
             $table->string('country')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('party_type')->nullable();
-            $table->string('fname')->nullable();
-            $table->string('lname')->nullable();
-            $table->string('suffix')->nullable();
-            $table->string('contact1')->nullable();
-            $table->string('contact2')->nullable();
-            $table->string('fax')->nullable();
-            $table->string('email')->unique();
+            $table->string('contact')->nullable();
             $table->string('website')->nullable();
+            $table->string('fax')->nullable();
             $table->string('opening_balance')->nullable();
             $table->timestamps();
         });

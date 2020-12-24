@@ -11,6 +11,9 @@ use App\Http\Controllers\Api\RFQDetailsController;
 use App\Http\Controllers\Api\AnalyseController;
 use App\Http\Controllers\Api\QuotationController;
 use App\Http\Controllers\Api\QuotationDetailController;
+use App\Http\Controllers\Api\SaleController;
+use App\Http\Controllers\Api\SaleDetailController;
+use App\Http\Controllers\Api\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +40,8 @@ Route::apiResource('analyse',AnalyseController::class);
 Route::apiResource('analyse',AnalyseController::class);
 Route::apiResource('quotation',QuotationController::class);
 Route::apiResource('quotation-detail',QuotationDetailController::class);
+Route::apiResource('sale',SaleController::class);
+Route::apiResource('sale-detail',SaleDetailController::class);
 
 Route::post('add-user', [UserController::class, 'add'])->name('add.user');
 Route::get('parties-vendor',[PartyController::class, 'vendor'])->name('parties.vendor');
