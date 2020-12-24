@@ -60,7 +60,22 @@ class PartyController extends Controller
         // foreach ($errors as $error ) {
         //     echo $error;
         // }
-        $party = Party::create($request->all());
+        $party = Party::create([
+            'firm_name'=>$request->firm_name,
+            'registration_no'=>$request->registration_no,
+            'vat_no'=>$request->vat_no,
+            'post_box_no'=>$request->post_box_no,
+            'street'=>$request->street,
+            'city'=>$request->city,
+            'proviance'=>$request->proviance,
+            'country'=>$request->country,
+            'zip_code'=>$request->zip_code,
+            'party_type'=>$request->party_type,
+            'contact'=>$request->contact,
+            'website'=>$request->website,
+            'fax'=>$request->fax,
+            'opening_balance'=>$request->opening_balance,
+        ]);
         $contact = Contact::create([
             'party_id'=>$party->id,
             'fname'=>$request->fname,
