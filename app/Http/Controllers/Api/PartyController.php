@@ -97,8 +97,28 @@ class PartyController extends Controller
      */
     public function show(Party $party)
     {
-
-        return response()->json($party, 200);
+        $contacts = Contact::where('party_id','=',$party->id)->get();
+        return response()->json(
+            [
+                'firm_name' => $party->firm_name,
+                'registration_no' => $party->registration_no,
+                'vat_no' => $party->vat_no,
+                'post_box_no' => $party->post_box_no,
+                'street' => $party->street,
+                'city' => $party->city,
+                'proviance' => $party->proviance,
+                'country' => $party->country,
+                'zip_code' => $party->zip_code,
+                'party_type' => $party->party_type,
+                'contact' => $party->contact,
+                'website' => $party->website,
+                'fax' => $party->fax,
+                'opening_balance' => $party->opening_balance,
+                'contacts' => $contacts->map(function ($contact){
+                    return $contact;
+                }),
+            ],200
+        );
     }
 
     /**
