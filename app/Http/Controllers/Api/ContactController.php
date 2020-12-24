@@ -15,7 +15,8 @@ class ContactController extends Controller
      */
     public function index()
     {
-        
+        $contacts = Contact::all();
+        return response()->json($contacts, 200);
     }
 
     /**
@@ -26,7 +27,8 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $contact = Contact::create($request->all());
+        return $contact;
     }
 
     /**
@@ -37,7 +39,7 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        //
+        return response()->json($contact);
     }
 
     /**
@@ -49,7 +51,8 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
-        //
+        $contact->update($request->all());
+        return $contact;
     }
 
     /**
@@ -60,6 +63,7 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        //
+        $deleted = Contact::delete($contact);
+        return ($deleted.' '.'has been successfully deleted.');
     }
 }

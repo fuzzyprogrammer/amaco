@@ -42,6 +42,7 @@ Route::apiResource('quotation',QuotationController::class);
 Route::apiResource('quotation-detail',QuotationDetailController::class);
 Route::apiResource('sale',SaleController::class);
 Route::apiResource('sale-detail',SaleDetailController::class);
+Route::apiResource('contact',ContactController::class);
 
 Route::post('add-user', [UserController::class, 'add'])->name('add.user');
 Route::get('parties-vendor',[PartyController::class, 'vendor'])->name('parties.vendor');

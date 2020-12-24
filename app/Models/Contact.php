@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Contact extends Model
 {
     use HasFactory;
+
+    public function party()
+    {
+        return $this->belongsTo(Party::class);
+    }
 }
