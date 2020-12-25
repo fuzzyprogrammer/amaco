@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Stichoza\GoogleTranslate\GoogleTranslate;
+
 
 class ContactController extends Controller
 {
@@ -52,7 +54,7 @@ class ContactController extends Controller
     public function update(Request $request, Contact $contact)
     {
         $contact->update($request->all());
-        return $contact;
+        // return $contact;
     }
 
     /**
@@ -63,7 +65,7 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        $deleted = Contact::delete($contact);
+        $deleted = $contact->delete();
         return ($deleted.' '.'has been successfully deleted.');
     }
 }

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
-
+use Stichoza\GoogleTranslate\GoogleTranslate;
 
 class ProductController extends Controller
 {
@@ -48,11 +48,13 @@ class ProductController extends Controller
         //     );
         //     return response()->json($returnData, 500);
         // }
-
+            // dd($request->all());
         $product = new Product;
         $product->category_id = $request->category_id;
         $product->division_id = $request->division_id;
+        $product->party_id = $request->party_id;
         $product->name = $request->name;
+        // $product->name_in_ar = $request->name == null ? null : GoogleTranslate::trans($request->name, 'ar');
         $product->description = $request->description;
         $product->unit_of_measure = $request->unit_of_measure;
         $product->unit_price = $request->unit_price;
