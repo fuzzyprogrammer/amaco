@@ -75,7 +75,7 @@ class ProductController extends Controller
             ->leftJoin('categories', 'categories.id', '=', 'products.category_id')
             ->leftJoin('divisions', 'divisions.id', '=', 'products.division_id')
             ->leftJoin('parties', 'parties.id', '=', 'products.party_id')
-            ->select('products.*', 'categories.name as category_name', 'divisions.name as division_name', 'parties.firm_name')
+            ->select('products.*', 'categories.name as category_name', 'divisions.name as division_name', 'parties.*')
             ->where('products.id','=',$product)
             ->get();
         return response()->json($product);
