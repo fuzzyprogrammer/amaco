@@ -30,9 +30,9 @@ DB_PASSWORD=password
 Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`] 
 
 ```
++-----------+-----------------------------------------+--------------------------+
 | Method    | URI                                     | Name                     |
 +-----------+-----------------------------------------+--------------------------+
-| GET|HEAD  | /                                       |                          |
 | POST      | api/add-user                            | add.user                 |
 | GET|HEAD  | api/analyse                             | analyse.index            |
 | POST      | api/analyse                             | analyse.store            |
