@@ -74,7 +74,8 @@ class ProductController extends Controller
         $product = DB::table('products')
             ->leftJoin('categories', 'categories.id', '=', 'products.category_id')
             ->leftJoin('divisions', 'divisions.id', '=', 'products.division_id')
-            ->select('products.*', 'categories.name as category_name', 'divisions.name as division_name')
+            ->leftJoin('parties', 'parties.id', '=', 'products.party_id')
+            ->select('products.*', 'categories.name as category_name', 'divisions.name as division_name', 'parties.id')
             ->where('products.id','=',$product)
             ->get();
         return response()->json($product);
