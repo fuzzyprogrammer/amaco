@@ -166,7 +166,25 @@ class PartyController extends Controller
         // if($validator->fails()){
         // return ("somethin went wrong");
 
-        $party->update($request->all());
+        $party->update([
+            'firm_name'=> $request->firm_name == null ? $party->firm_name : $request->firm_name,
+            'firm_name_in_ar'=> $request->firm_name == null ? $party->firm_name_in_ar : GoogleTranslate::trans($request->firm_name,'ar'),
+            'registration_no'=>$request->registration_no,
+            'registration_no_in_ar'=> $request->registration_no == null ? $party->registration_no : GoogleTranslate::trans($request->registration_no,'ar'),
+            'vat_no'=>$request->vat_no,
+            'vat_no_in_ar'=> $request->registration_no == null ? $party->vat_no :   GoogleTranslate::trans($request->vat_no,'ar'),
+            'post_box_no'=>$request->post_box_no,
+            'street'=>$request->street,
+            'city'=>$request->city,
+            'proviance'=>$request->proviance,
+            'country'=>$request->country,
+            'zip_code'=>$request->zip_code,
+            'party_type'=>$request->party_type,
+            'contact'=>$request->contact,
+            'website'=>$request->website,
+            'fax'=>$request->fax,
+            'opening_balance'=>$request->opening_balance,
+        ]);
 
         return response()->json($party, 200);
     }
@@ -188,7 +206,7 @@ class PartyController extends Controller
     public function vendor()
     {
         $vendors = Party::where('party_type','=','vendor')
-        ->select('id','fname','lname')
+        ->select('id','firm_name','contact')
         ->get()
         ->toArray();
         return $vendors;
