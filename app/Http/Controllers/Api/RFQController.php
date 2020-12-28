@@ -79,6 +79,7 @@ class RFQController extends Controller
     {
 
         $data = $request->json()->all();
+        return $data;
 
         try{
             $rfq = RFQ::create([
@@ -108,7 +109,6 @@ class RFQController extends Controller
             // });
             // }
 
-            return $data;
 
             return response()->json(['msg' => 'successfully added']);
 
