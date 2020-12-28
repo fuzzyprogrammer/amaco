@@ -106,6 +106,7 @@ class RFQController extends Controller
             //     $fileUpload = FileUpload::create(['file_name' => $file->name ]);
             // });
             // }
+            
             return response()->json(['msg' => 'successfully added']);
 
         }catch(Exception $e){
