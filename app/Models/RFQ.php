@@ -24,4 +24,9 @@ class RFQ extends Model
     {
         return $this->hasOne(Product::class,'id');
     }
+
+    public function file()
+    {
+        return $this->hasMany(FileUpload::class, 'rfq_id');
+    }
 }

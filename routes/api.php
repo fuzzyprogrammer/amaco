@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\QuotationDetailController;
 use App\Http\Controllers\Api\SaleController;
 use App\Http\Controllers\Api\SaleDetailController;
 use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\FileUploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,7 @@ Route::apiResource('quotation-detail',QuotationDetailController::class);
 Route::apiResource('sale',SaleController::class);
 Route::apiResource('sale-detail',SaleDetailController::class);
 Route::apiResource('contact',ContactController::class);
+Route::apiResource('fileUpload',FileUploadController::class);
 
 Route::post('add-user', [UserController::class, 'add'])->name('add.user');
 Route::get('parties-vendor',[PartyController::class, 'vendor'])->name('parties.vendor');
