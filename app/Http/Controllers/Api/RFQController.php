@@ -108,9 +108,7 @@ class RFQController extends Controller
             // });
             // }
 
-            if($data['files']->count()>0){
-                return 'there is a file';
-            }
+            return $data['files'];
 
             return response()->json(['msg' => 'successfully added']);
 
