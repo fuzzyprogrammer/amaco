@@ -78,8 +78,8 @@ class RFQController extends Controller
     public function store(Request $request)
     {
 
+        return $request;
         $data = $request->json()->all();
-        return $data;
 
         try{
             $rfq = RFQ::create([
