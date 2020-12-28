@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\FileUpload;
 use App\Models\Party;
 use App\Models\RFQ;
 use App\Models\RFQDetails;
+use App\Models\FileUpload;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -99,13 +99,13 @@ class RFQController extends Controller
                 ]);
             }
 
-            if($data['files']->count()>0){
-                $res = $this->data->file('files')->store('rfqDocs/'.$this->rfq->id.'/');
-            $request['files']->map(function ($file)
-            {
-                $fileUpload = FileUpload::create(['file_name' => $file->name ]);
-            });
-            }
+            // if($data['files']->count()>0){
+            //     $res = $this->data->file('files')->store('rfqDocs/'.$this->rfq->id.'/');
+            // $request['files']->map(function ($file)
+            // {
+            //     $fileUpload = FileUpload::create(['file_name' => $file->name ]);
+            // });
+            // }
 
             return response()->json(['msg' => 'successfully added']);
 
