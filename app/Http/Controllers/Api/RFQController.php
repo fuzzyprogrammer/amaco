@@ -81,9 +81,8 @@ class RFQController extends Controller
         $data = $request->json()->all();
 
         try{
-
             $rfq = RFQ::create([
-                'requested_date' => $data->requested_date,
+                'requested_date' => $data['requested_date'],
                 'require_date' => $data['require_date'],
                 'party_id' => $data['party_id'],
             ]);
@@ -100,8 +99,8 @@ class RFQController extends Controller
                 ]);
             }
 
-            if($request['files']->count()>0){
-                $res = $this->request->file('files')->store('rfqDocs/'.$this->rfq->id.'/');
+            if($data['files']->count()>0){
+                $res = $this->data->file('files')->store('rfqDocs/'.$this->rfq->id.'/');
             $request['files']->map(function ($file)
             {
                 $fileUpload = FileUpload::create(['file_name' => $file->name ]);
