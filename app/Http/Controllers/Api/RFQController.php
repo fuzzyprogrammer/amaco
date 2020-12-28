@@ -83,7 +83,7 @@ class RFQController extends Controller
         try{
 
             $rfq = RFQ::create([
-                'requested_date' => $data['requested_date'],
+                'requested_date' => $data->requested_date,
                 'require_date' => $data['require_date'],
                 'party_id' => $data['party_id'],
             ]);
