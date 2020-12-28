@@ -85,7 +85,6 @@ class RFQController extends Controller
                 'requested_date' => $data['requested_date'],
                 'require_date' => $data['require_date'],
                 'party_id' => $data['party_id'],
-                
             ]);
 
             global $_rfq_id;
@@ -100,13 +99,13 @@ class RFQController extends Controller
                 ]);
             }
 
-            if($data['files']->count()>0){
-                $res = $this->data->file('files')->store('rfqDocs/'.$this->rfq->id.'/');
-            $request['files']->map(function ($file)
-            {
-                $fileUpload = FileUpload::create(['file_name' => $file->name ]);
-            });
-            }
+            // if($data['files']->count()>0){
+            //     $res = $this->data->file('files')->store('rfqDocs/'.$this->rfq->id.'/');
+            // $request['files']->map(function ($file)
+            // {
+            //     $fileUpload = FileUpload::create(['file_name' => $file->name ]);
+            // });
+            // }
             return response()->json(['msg' => 'successfully added']);
 
         }catch(Exception $e){
