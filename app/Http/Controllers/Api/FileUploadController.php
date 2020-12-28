@@ -29,8 +29,8 @@ class FileUploadController extends Controller
 
     public function store(Request $request)
     {
-    //     $res = $request->file('files')->store('rfqDocs');
-    //     return ['result'=>$res];
+        $res = $request->file('files')->store('rfqDocs');
+        return ['result'=>$res];
     }
 
 
