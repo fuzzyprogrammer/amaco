@@ -85,9 +85,9 @@ class RFQController extends Controller
                 // 'requested_date' => $data['requested_date'],
                 // 'require_date' => $data['require_date'],
                 // 'party_id' => $data['party_id'],
-                'requested_date' => $data[''],
-                'require_date' => $data[''],
-                'party_id' => $data[''],
+                'requested_date' => null,
+                'require_date' => null,
+                'party_id' => null,
             ]);
 
             global $_rfq_id;
