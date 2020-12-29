@@ -79,7 +79,8 @@ class RFQController extends Controller
     {
 
         // return [$request->all(), $request->file()->length()];
-        $data = $request->json()->all();
+        $data = $request->all();
+        // dd($data);
 
         try{
             $rfq = RFQ::create([
