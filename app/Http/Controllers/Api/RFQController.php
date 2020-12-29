@@ -101,22 +101,11 @@ class RFQController extends Controller
                 ]);
             }
 
-            // if($data['files']->count()>0){
-            //     $res = $this->data->file('files')->store('rfqDocs/'.$this->rfq->id.'/');
-            // $request['files']->map(function ($file)
-            // {
-            //     $fileUpload = FileUpload::create(['file_name' => $this->res.'/'.$file->name,
-            //     'rfq_id' => $this->rfq->id ]);
-            // });
-            // }
-
-
             $res = $request->file('files')->store('rfqDocs/' . $_rfq_id );
                 $fileUpload = FileUpload::create([
                     'rfq_id' => $_rfq_id,
                     'file_name' => $res,
                 ]);
-
 
                 return response()->json(['msg' => 'successfully added']);
             }
