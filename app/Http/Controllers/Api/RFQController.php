@@ -80,7 +80,7 @@ class RFQController extends Controller
 
         $data = $request->all();
 
-        // dd($data);
+        dd($request->file('files'));
 
         try{
             $rfq = RFQ::create([
