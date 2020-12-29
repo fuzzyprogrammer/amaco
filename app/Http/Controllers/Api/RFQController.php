@@ -103,7 +103,7 @@ class RFQController extends Controller
                 }
             }
 
-            return $request->file('files');
+            return $request->files;
 
             // if($request->hasFile('files')){
             //     foreach($request->files as $file){
