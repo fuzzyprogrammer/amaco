@@ -85,10 +85,10 @@ class RFQController extends Controller
 
         try{
             $rfq = RFQ::create([
-                'requested_date' => $request->has('requested_date') ? $request['requested_date'] : date('Y-m-d'),
-                'require_date' => $request->has('require_date') ? $request['require_date'] : date('Y-m-d'),
-                // 'require_date' => $request['require_date'],
-                'party_id' => $request['party_id'],
+                'requested_date' => $data->has('requested_date') ? $data['requested_date'] : date('Y-m-d'),
+                'require_date' => $data->has('require_date') ? $data['require_date'] : date('Y-m-d'),
+                // 'require_date' => $data['require_date'],
+                'party_id' => $data['party_id'],
             ]);
             global $_rfq_id;
             $_rfq_id = $rfq['id'];
