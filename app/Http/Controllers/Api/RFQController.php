@@ -82,6 +82,7 @@ class RFQController extends Controller
 
         // dd($request->file('files'));
 
+        return $data;
         try{
             $rfq = RFQ::create([
                 // 'requested_date' => $data->exists('requested_date') ? $data['requested_date'] : date('Y-m-d'),
@@ -92,7 +93,6 @@ class RFQController extends Controller
                 ]);
                 global $_rfq_id;
                 $_rfq_id = $rfq['id'];
-                return $rfq;
 
             // if ($data['rfq_details']!=null){
                 return $data->rfq_details;
