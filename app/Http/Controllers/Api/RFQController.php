@@ -92,14 +92,14 @@ class RFQController extends Controller
             global $_rfq_id;
             $_rfq_id = $rfq['id'];
 
-            // foreach ($data['rfq_details'] as $rfq_detail) {
-            //     $_rfq_detail = RFQDetails::create([
-            //         'product_id' => $rfq_detail['id'],
-            //         'description' => $rfq_detail['descriptionss'],
-            //         'quantity_required' => $rfq_detail['quantity'],
-            //         'rfq_id' => $_rfq_id,
-            //     ]);
-            // }
+            foreach ($data['rfq_details'] as $rfq_detail) {
+                $_rfq_detail = RFQDetails::create([
+                    'product_id' => $rfq_detail['id'],
+                    'description' => $rfq_detail['descriptionss'],
+                    'quantity_required' => $rfq_detail['quantity'],
+                    'rfq_id' => $_rfq_id,
+                ]);
+            }
 
             if($request->hasFile('files')){
                 $res = $request->file('files')->store('rfqDocs/' . $_rfq_id );
