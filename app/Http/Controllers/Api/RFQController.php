@@ -104,20 +104,20 @@ class RFQController extends Controller
             }
 
 
-            if($request->hasFile('files')){
-                foreach($request->files as $file){
-                    $name = $file->getClientOriginalName();
-                    print_r($name);
-                }
-                $res = $request->file('files')->storeAs('rfqDocs/' . $_rfq_id , $name);
-                $fileUpload = FileUpload::create([
-                    'rfq_id' => $_rfq_id,
-                    'file_name' => $res,
-                ]);
-            }else{
-                return 'No files has been added.';
-            }
+            // if($request->hasFile('files')){
+            //     foreach($request->files as $file){
+                //         print_r($name);
+                //     }
+                // }else{
+                    //     return 'No files has been added.';
+                    // }
 
+                    $name = $request->file('files')->getClientOriginalName();
+                    $res = $request->file('files')->storeAs('rfqDocs/' . $_rfq_id , $name);
+                    $fileUpload = FileUpload::create([
+                        'rfq_id' => $_rfq_id,
+                        'file_name' => $res,
+                    ]);
             // return response()->json(['msg' => 'successfully added']);
             return ([
                 'data' => $request->all(),
