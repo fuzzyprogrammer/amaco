@@ -92,7 +92,7 @@ class RFQController extends Controller
             global $_rfq_id;
             $_rfq_id = $rfq['id'];
 
-            if ($data['rfq_details']!=null){
+            // if ($data['rfq_details']!=null){
                 foreach ($data['rfq_details'] as $rfq_detail) {
                     $_rfq_detail = RFQDetails::create([
                         'product_id' => $rfq_detail['id'],
@@ -101,7 +101,7 @@ class RFQController extends Controller
                         'rfq_id' => $_rfq_id,
                     ]);
                 }
-            }
+            // }
 
 
             // if($request->hasFile('files')){
