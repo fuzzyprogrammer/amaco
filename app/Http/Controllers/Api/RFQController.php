@@ -80,7 +80,7 @@ class RFQController extends Controller
 
         // return [$request->all(), $request->file()->length()];
         $data = $request->all();
-        // dd($data);
+        // dd($request->rfq_details);
 
         try{
             $rfq = RFQ::create([
@@ -103,15 +103,22 @@ class RFQController extends Controller
                 }
             }
 
-            if($request->hasFile('files')){
-                $res = $request->file('files')->store('rfqDocs/' . $_rfq_id );
-                $fileUpload = FileUpload::create([
-                    'rfq_id' => $_rfq_id,
-                    'file_name' => $res,
-                ]);
-            }else{
-                return 'No files has been added.';
-            }
+            return $request->files;
+
+            // if($request->hasFile('files')){
+            //     foreach($request->files as $file){
+            //         $name = $file->getClientOriginalName();
+            //         print_r($name);
+            //     }
+
+            //     $res = $request->file('files')->storeAs('rfqDocs/' . $_rfq_id , $name);
+            //     $fileUpload = FileUpload::create([
+            //         'rfq_id' => $_rfq_id,
+            //         'file_name' => $res,
+            //     ]);
+            // }else{
+            //     return 'No files has been added.';
+            // }
 
                 return response()->json(['msg' => 'successfully added']);
             }
