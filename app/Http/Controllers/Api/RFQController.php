@@ -79,7 +79,11 @@ class RFQController extends Controller
     {
 
         $data = $request->all();
-        return ($request);
+        return ([
+            'data' => $request->all(),
+            'files' => $request->file('files')->getClientOriginalName(),
+        ]);
+        // return ($request->file('files')->getClientOriginalName());
 
         try{
             $rfq = RFQ::create([
