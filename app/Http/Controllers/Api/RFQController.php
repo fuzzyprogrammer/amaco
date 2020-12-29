@@ -79,6 +79,7 @@ class RFQController extends Controller
     {
 
         $data = $request->json()->all();
+        return $data;
 
         // dd($request->file('files'));
 
