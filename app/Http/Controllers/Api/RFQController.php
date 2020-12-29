@@ -78,7 +78,7 @@ class RFQController extends Controller
     public function store(Request $request)
     {
 
-        $data = $request->all();
+        $data = $request->json()->all();
 
         // dd($request->file('files'));
 
@@ -93,7 +93,7 @@ class RFQController extends Controller
             $_rfq_id = $rfq['id'];
 
             // if ($data['rfq_details']!=null){
-                foreach ($request['rfq_details'] as $rfq_detail) {
+                foreach ($data['rfq_details'] as $rfq_detail) {
                     $_rfq_detail = RFQDetails::create([
                         'product_id' => $rfq_detail['id'],
                         'description' => $rfq_detail['descriptionss'],
