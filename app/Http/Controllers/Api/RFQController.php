@@ -90,7 +90,7 @@ class RFQController extends Controller
                 // 'requested_date' => $data['requested_date'],
                 'party_id' => $data['party_id'],
                 ]);
-                return $rfq;
+                // return $rfq;
                 global $_rfq_id;
                 $_rfq_id = $rfq['id'];
 
