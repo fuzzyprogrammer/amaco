@@ -79,55 +79,54 @@ class RFQController extends Controller
     {
 
         $data = $request->all();
-        return ([
-            'data' => $request->all(),
-            'files' => $request->file('files')->getClientOriginalName(),
-        ]);
-        // return ($request->file('files')->getClientOriginalName());
 
-        try{
-            $rfq = RFQ::create([
-                'requested_date' => $request['requested_date'],
-                'require_date' => $request['require_date'],
-                'party_id' => $request['party_id'],
-            ]);
+        dd($data);
 
-            global $_rfq_id;
-            $_rfq_id = $rfq['id'];
+        // try{
+        //     $rfq = RFQ::create([
+        //         'requested_date' => $request['requested_date'],
+        //         'require_date' => $request['require_date'],
+        //         'party_id' => $request['party_id'],
+        //     ]);
+        //     global $_rfq_id;
+        //     $_rfq_id = $rfq['id'];
 
-            if ($request['rfq_details']!=null){
-                foreach ($request['rfq_details'] as $rfq_detail) {
-                    $_rfq_detail = RFQDetails::create([
-                        'product_id' => $rfq_detail['id'],
-                        'description' => $rfq_detail['descriptionss'],
-                        'quantity_required' => $rfq_detail['quantity'],
-                        'rfq_id' => $_rfq_id,
-                    ]);
-                }
-            }
+        //     if ($request['rfq_details']!=null){
+        //         foreach ($request['rfq_details'] as $rfq_detail) {
+        //             $_rfq_detail = RFQDetails::create([
+        //                 'product_id' => $rfq_detail['id'],
+        //                 'description' => $rfq_detail['descriptionss'],
+        //                 'quantity_required' => $rfq_detail['quantity'],
+        //                 'rfq_id' => $_rfq_id,
+        //             ]);
+        //         }
+        //     }
 
 
-            if($request->hasFile('files')){
-                foreach($request->files as $file){
-                    $name = $file->getClientOriginalName();
-                    print_r($name);
-                }
+        //     if($request->hasFile('files')){
+        //         foreach($request->files as $file){
+        //             $name = $file->getClientOriginalName();
+        //             print_r($name);
+        //         }
+        //         $res = $request->file('files')->storeAs('rfqDocs/' . $_rfq_id , $name);
+        //         $fileUpload = FileUpload::create([
+        //             'rfq_id' => $_rfq_id,
+        //             'file_name' => $res,
+        //         ]);
+        //     }else{
+        //         return 'No files has been added.';
+        //     }
 
-                $res = $request->file('files')->storeAs('rfqDocs/' . $_rfq_id , $name);
-                $fileUpload = FileUpload::create([
-                    'rfq_id' => $_rfq_id,
-                    'file_name' => $res,
-                ]);
-            }else{
-                return 'No files has been added.';
-            }
+        //     // return response()->json(['msg' => 'successfully added']);
+        //     return ([
+        //         'data' => $request->all(),
+        //         // 'files' => $request->file('files')->getClientOriginalName(),
+        //     ]);
+        //     }
 
-                return response()->json(['msg' => 'successfully added']);
-            }
-
-        catch(Exception $e){
-            return $e;
-        }
+        // catch(Exception $e){
+        //     return $e;
+        // }
 
 
     }
