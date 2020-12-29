@@ -104,10 +104,10 @@ class RFQController extends Controller
 
 
             if($request->hasFile('files')){
-                foreach($request->files as $file){
-                    $name = $file->getClientOriginalName();
-                    print_r($name);
-                }
+                // foreach($request->files as $file){
+                //     $name = $file->getClientOriginalName();
+                //     print_r($name);
+                // }
                 $res = $request->file('files')->storeAs('rfqDocs/' . $_rfq_id , $name);
                 $fileUpload = FileUpload::create([
                     'rfq_id' => $_rfq_id,
