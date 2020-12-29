@@ -78,8 +78,7 @@ class RFQController extends Controller
     public function store(Request $request)
     {
 
-        return $request;
-        $data = $request->json()->all();
+        $data = $request->all();
 
         try{
             $rfq = RFQ::create([
@@ -108,6 +107,14 @@ class RFQController extends Controller
             //     'rfq_id' => $this->rfq->id ]);
             // });
             // }
+
+            if($request->file('files')){
+                $res = $request->file('files')->store('rfqDocs/' . $_rfq_id );
+                $fileUpload = FileUpload::create([
+                    'rfq_id' => $_rfq_id,
+                    'file_name' => $res,
+                ]);
+            }
 
 
             return response()->json(['msg' => 'successfully added']);
