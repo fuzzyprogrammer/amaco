@@ -79,7 +79,7 @@ class RFQController extends Controller
     {
 
         $data = $request->all();
-        return response()->json([$request->files]);
+        return ( $request->file('files'));
 
         try{
             $rfq = RFQ::create([
