@@ -115,12 +115,12 @@ class RFQController extends Controller
                     'rfq_id' => $_rfq_id,
                     'file_name' => $res,
                 ]);
+
+
+                return response()->json(['msg' => 'successfully added']);
             }
 
-
-            return response()->json(['msg' => 'successfully added']);
-
-        }catch(Exception $e){
+        catch(Exception $e){
             return $e;
         }
 
