@@ -99,14 +99,26 @@ class RFQController extends Controller
 
                 // });
 
-                foreach($request->rfq_details as $rfq_detail) {
-                    $_rfq_detail = RFQDetails::create([
+                $rfq_details = $request->rfq_details->map(function ($rfq_detail, $_rfq_id){
+                    return[
+                    RFQDetails::create([
                         'product_id' => $rfq_detail['id'],
                         'description' => $rfq_detail['descriptionss'],
                         'quantity_required' => $rfq_detail['quantity'],
                         'rfq_id' => $_rfq_id,
-                    ]);
-                }
+                    ])
+                    ];
+                });
+
+
+                // foreach($request->rfq_details as $rfq_detail) {
+                //     $_rfq_detail = RFQDetails::create([
+                //         'product_id' => $rfq_detail['id'],
+                //         'description' => $rfq_detail['descriptionss'],
+                //         'quantity_required' => $rfq_detail['quantity'],
+                //         'rfq_id' => $_rfq_id,
+                //     ]);
+                // }
             // }
 
 
