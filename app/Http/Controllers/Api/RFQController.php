@@ -79,7 +79,8 @@ class RFQController extends Controller
     {
 
         $data = $request->all();
-
+        $data1 = $request->all();
+            // dd($data1);
         // dd($request->file('files'));
 
         try{
@@ -95,15 +96,19 @@ class RFQController extends Controller
                 $_rfq_id = $rfq['id'];
 
             // if ($data['rfq_details']!=null){
-                // return $data->rfq_details;
-                // foreach($data->rfq_details as $rfq_detail) {
-                //     $_rfq_detail = RFQDetails::create([
-                //         'product_id' => $rfq_detail['id'],
-                //         'description' => $rfq_detail['descriptionss'],
-                //         'quantity_required' => $rfq_detail['quantity'],
-                //         'rfq_id' => $_rfq_id,
-                //     ]);
-                // }
+                // // return $data->rfq_details;
+                // $rfq_details = $data->rfq_details->map(function ($rfq_detail){
+
+                // });
+
+                foreach($data['rfq_details'] as $rfq_detail) {
+                    $_rfq_detail = RFQDetails::create([
+                        'product_id' => $rfq_detail['id'],
+                        'description' => $rfq_detail['descriptionss'],
+                        'quantity_required' => $rfq_detail['quantity'],
+                        'rfq_id' => $_rfq_id,
+                    ]);
+                }
             // }
 
 
