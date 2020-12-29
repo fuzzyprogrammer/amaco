@@ -79,7 +79,6 @@ class RFQController extends Controller
     {
 
         $data = $request->json()->all();
-        return $data;
 
         // dd($request->file('files'));
 
@@ -89,9 +88,10 @@ class RFQController extends Controller
                 'require_date' => $data->has('require_date') ? $data['require_date'] : date('Y-m-d'),
                 // 'require_date' => $data['require_date'],
                 'party_id' => $data['party_id'],
-            ]);
-            global $_rfq_id;
-            $_rfq_id = $rfq['id'];
+                ]);
+                global $_rfq_id;
+                $_rfq_id = $rfq['id'];
+                return $rfq;
 
             // if ($data['rfq_details']!=null){
                 return $data->rfq_details;
