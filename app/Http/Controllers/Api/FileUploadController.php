@@ -45,7 +45,7 @@ class FileUploadController extends Controller
         //     }else{
         //         return 'No files has been added.';
         //     }
-        return $request->file('files')->getClientOriginalName();
+        return $request->file('files')->store('rfqDocs');
 
     }
 
