@@ -87,7 +87,7 @@ class RFQController extends Controller
                 'require_date' => $request->has('require_date') ? $data['require_date'] : date('Y-m-d'),
                 // 'require_date' => $data['require_date'],
                 // 'requested_date' => $data['requested_date'],
-                'party_id' => $request['party_id'],
+                'party_id' => $data['party_id'],
                 ]);
                 // return $rfq;
                 global $_rfq_id;
