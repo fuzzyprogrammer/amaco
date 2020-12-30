@@ -29,22 +29,23 @@ class FileUploadController extends Controller
 
     public function store(Request $request)
     {
-        $rfq = RFQ::create();
-        global $rfq_id ;
-        $rfq_id = $rfq->id;
-            if($request->hasFile('files')){
-                foreach($request->files as $file){
-                    $name = $request->file('files')->getClientOriginalName();
-                    print_r($name);
-                    $res = $request->file('files')->storeAs('rfqDocs/' . $rfq_id , $name);
-                    $fileUpload = FileUpload::create([
-                        'rfq_id' => $rfq_id,
-                        'file_name' => $res,
-                        ]);
-                }
-            }else{
-                return 'No files has been added.';
-            }
+        // $rfq = RFQ::create();
+        // global $rfq_id ;
+        // $rfq_id = $rfq->id;
+        //     if($request->hasFile('files')){
+        //         foreach($request->files as $file){
+        //             $name = $request->file('files')->getClientOriginalName();
+        //             print_r($name);
+        //             $res = $request->file('files')->storeAs('rfqDocs/' . $rfq_id , $name);
+        //             $fileUpload = FileUpload::create([
+        //                 'rfq_id' => $rfq_id,
+        //                 'file_name' => $res,
+        //                 ]);
+        //         }
+        //     }else{
+        //         return 'No files has been added.';
+        //     }
+        return $request->files;
 
     }
 
