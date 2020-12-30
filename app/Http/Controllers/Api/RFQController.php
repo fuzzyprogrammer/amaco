@@ -77,8 +77,8 @@ class RFQController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
-        $data = $request->json()->all();
+        $data = $request->all();
+        // return $data;
         // dd($request->file('files'));
 
         try{
