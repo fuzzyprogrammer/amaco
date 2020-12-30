@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Mockery\Undefined;
 
-class RFQController extends Controller
+class RFQImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,9 +23,9 @@ class RFQController extends Controller
     public function index()
     {
         $rfqs = RFQ::all();
-        $rfqs_data =[
+        $rfqs_data = [
             $rfqs->map(
-                function($rfq){
+                function ($rfq) {
                     // $party = Party::findOrFail($rfq->party_id);
                     // return [
                     //     'id' => $rfq->id,
@@ -77,75 +77,73 @@ class RFQController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
-        $data = $request->json()->all();
+
+        $data = $request->all();
         // dd($request->file('files'));
 
-        try{
+        try {
             $rfq = RFQ::create([
                 'requested_date' => $request->has('requested_date') ? $data['requested_date'] : date('Y-m-d'),
                 'require_date' => $request->has('require_date') ? $data['require_date'] : date('Y-m-d'),
                 // 'require_date' => $data['require_date'],
                 // 'requested_date' => $data['requested_date'],
                 'party_id' => $request['party_id'],
-                ]);
-                // return $rfq;
-                global $_rfq_id;
-                $_rfq_id = $rfq['id'];
+            ]);
+            // return $rfq;
+            global $_rfq_id;
+            $_rfq_id = $rfq['id'];
 
             // if ($data['rfq_details']!=null){
-            //     // return $data->rfq_details;
-            //     $rfq_details = $data->rfq_details->map(function ($rfq_detail){
+            // // return $data->rfq_details;
+            // $rfq_details = $data->rfq_details->map(function ($rfq_detail){
 
-            //     });
+            // });
 
-            //     $rfq_details = $request->rfq_details->map(function ($rfq_detail, $_rfq_id){
-            //         return[
-            //         RFQDetails::create([
-            //             'product_id' => $rfq_detail['id'],
-            //             'description' => $rfq_detail['descriptionss'],
-            //             'quantity_required' => $rfq_detail['quantity'],
-            //             'rfq_id' => $_rfq_id,
-            //         ])
-            //         ];
-            //     });
+            // $rfq_details = $request->rfq_details->map(function ($rfq_detail, $_rfq_id){
+            //     return[
+            //     RFQDetails::create([
+            //         'product_id' => $rfq_detail['id'],
+            //         'description' => $rfq_detail['descriptionss'],
+            //         'quantity_required' => $rfq_detail['quantity'],
+            //         'rfq_id' => $_rfq_id,
+            //     ])
+            //     ];
+            // });
 
-                foreach($data['rfq_details'] as $rfq_detail) {
-                    $_rfq_detail = RFQDetails::create([
-                        'product_id' => $rfq_detail['id'],
-                        'description' => $rfq_detail['descriptionss'],
-                        'quantity_required' => $rfq_detail['quantity'],
-                        'rfq_id' => $_rfq_id,
-                    ]);
-                }
+            foreach ($request->rfq_details as $rfq_detail) {
+                $_rfq_detail = RFQDetails::create([
+                    'product_id' => $rfq_detail['id'],
+                    'description' => $rfq_detail['descriptionss'],
+                    'quantity_required' => $rfq_detail['quantity'],
+                    'rfq_id' => $_rfq_id,
+                ]);
+            }
 
+            // }
 
 
             // if($request->hasFile('files')){
             //     foreach($request->files as $file){
-                //         print_r($name);
-                //     }
-                // }else{
-                    //     return 'No files has been added.';
-                    // }
+            //         print_r($name);
+            //     }
+            // }else{
+            //     return 'No files has been added.';
+            // }
 
-                    // $name = $request->file('files')->getClientOriginalName();
-                    // $res = $request->file('files')->storeAs('rfqDocs/' . $_rfq_id , $name);
-                    // $fileUpload = FileUpload::create([
-                    //     'rfq_id' => $_rfq_id,
-                    //     'file_name' => $res,
-                    // ]);
-            return response()->json(['msg' => 'successfully added']);
-            // return ([
-            //     'data' => $request->all(),
+            // $name = $request->file('files')->getClientOriginalName();
+            // $res = $request->file('files')->storeAs('rfqDocs/' . $_rfq_id , $name);
+            // $fileUpload = FileUpload::create([
+            //     'rfq_id' => $_rfq_id,
+            //     'file_name' => $res,
             // ]);
-            }
-
-        catch(Exception $e){
+            // return response()->json(['msg' => 'successfully added']);
+            return ([
+                'data' => $request->all(),
+                // 'files' => $request->file('files')->getClientOriginalName(),
+            ]);
+        } catch (Exception $e) {
             return $e;
         }
-
-
     }
 
     /**
@@ -169,20 +167,20 @@ class RFQController extends Controller
             'requested_date' => $rfq->requested_date,
             'require_date' => $rfq->require_date,
             'party_id' => $rfq->party_id,
-            "party" => $rfq->party ,
+            "party" => $rfq->party,
             'user_id' => $rfq->user_id,
             'created_at' => $rfq->created_at,
             'updated_at' => $rfq->updated_at,
-            'rfq_details' => $rfq->rfq_details->map(function($rfq_detail){
-                $rfq_detail = RFQDetails::where('id','=',$rfq_detail->id)->first();
+            'rfq_details' => $rfq->rfq_details->map(function ($rfq_detail) {
+                $rfq_detail = RFQDetails::where('id', '=', $rfq_detail->id)->first();
                 return [
                     "id" => $rfq_detail['id'],
-                    "created_at"=> $rfq_detail->created_at,
-                    "updated_at"=> $rfq_detail->updated_at,
-                    "product_id"=> $rfq_detail->product_id,
+                    "created_at" => $rfq_detail->created_at,
+                    "updated_at" => $rfq_detail->updated_at,
+                    "product_id" => $rfq_detail->product_id,
                     "product" => array($rfq_detail->product),
-                    "description"=> $rfq_detail->description,
-                    "quantity_required"=> $rfq_detail->quantity_required,
+                    "description" => $rfq_detail->description,
+                    "quantity_required" => $rfq_detail->quantity_required,
                 ];
             }),
         ];
@@ -202,23 +200,7 @@ class RFQController extends Controller
      */
     public function update(Request $request, RFQ $rfq)
     {
-        // $rules = [
-        //     'requested_date' => 'required',
-        //     'require_date' => 'required',
-        //     'party_id' => 'required',
-        //     'user_id' => 'required',
-        // ];
 
-
-        // $messages = [
-        //     'required' => 'The :attribute field is required.',
-        // ];
-
-        // $validator = Validator::make($request->all(), $rules, $messages);
-        // $errors = $validator->errors();
-        // foreach ($errors as $error) {
-        //     echo $error;
-        // }
 
         $data = $request->json()->all();
 
@@ -267,12 +249,3 @@ class RFQController extends Controller
         }
     }
 }
-
-//////////////
-//
-//
-//
-//
-//
-//
-//
