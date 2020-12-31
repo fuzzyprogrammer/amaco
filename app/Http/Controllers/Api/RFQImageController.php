@@ -99,16 +99,16 @@ class RFQImageController extends Controller
 
             // });
 
-            // $rfq_details = $request->rfq_details->map(function ($rfq_detail, $_rfq_id){
-            //     return[
-            //     RFQDetails::create([
-            //         'product_id' => $rfq_detail['id'],
-            //         'description' => $rfq_detail['descriptionss'],
-            //         'quantity_required' => $rfq_detail['quantity'],
-            //         'rfq_id' => $_rfq_id,
-            //     ])
-            //     ];
-            // });
+            $rfq_details = $request->rfq_details->map(function ($rfq_detail, $_rfq_id){
+                return[
+                RFQDetails::create([
+                    'product_id' => $rfq_detail['id'],
+                    'description' => $rfq_detail['descriptionss'],
+                    'quantity_required' => $rfq_detail['quantity'],
+                    'rfq_id' => $_rfq_id,
+                ])
+                ];
+            });
 
             foreach ($request->rfq_details as $rfq_detail) {
                 $_rfq_detail = RFQDetails::create([
@@ -130,16 +130,16 @@ class RFQImageController extends Controller
             //     return 'No files has been added.';
             // }
 
-            // $name = $request->file('files')->getClientOriginalName();
-            // $res = $request->file('files')->storeAs('rfqDocs/' . $_rfq_id , $name);
-            // $fileUpload = FileUpload::create([
-            //     'rfq_id' => $_rfq_id,
-            //     'file_name' => $res,
-            // ]);
+            $name = $request->file('files')->getClientOriginalName();
+            $res = $request->file('files')->storeAs('rfqDocs/' . $_rfq_id , $name);
+            $fileUpload = FileUpload::create([
+                'rfq_id' => $_rfq_id,
+                'file_name' => $res,
+            ]);
             // return response()->json(['msg' => 'successfully added']);
             return ([
                 'data' => $request->all(),
-                // 'files' => $request->file('files')->getClientOriginalName(),
+                'files' => $request->file('files')->getClientOriginalName(),
             ]);
         } catch (Exception $e) {
             return $e;
