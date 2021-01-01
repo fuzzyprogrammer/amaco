@@ -157,6 +157,19 @@ class CategoryController extends Controller
     public function categorized_products($id)
     {
         $products = Product::where('category_id','=',$id)->get();
-        return response()->json($products, 200);
+        $data = $products->map(function ($product){
+
+                $product_data = DB::table('products')
+                    ->leftJoin('categories', 'categories.id', '=', 'products.category_id')
+                    ->leftJoin('divisions', 'divisions.id', '=', 'products.division_id')
+                    ->select('products.*', 'categories.name as category_name', 'divisions.name as division_name')
+                    ->where('products.id','=',$product->id)
+                    ->first();
+            return ($product_data);
+        });
+
+        return response()->json($data, 200);
+
+
     }
 }
