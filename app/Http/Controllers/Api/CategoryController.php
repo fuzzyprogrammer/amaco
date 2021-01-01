@@ -156,7 +156,7 @@ class CategoryController extends Controller
 
     public function categorized_products($id)
     {
-        $products = Product::where('category_id','=',$id)->get()->toArray();
+        $products = Product::where('category_id','=',$id)->get();
         return response()->json($products, 200);
     }
 }
