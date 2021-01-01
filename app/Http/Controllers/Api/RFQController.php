@@ -169,10 +169,11 @@ class RFQController extends Controller
             'requested_date' => $rfq->requested_date,
             'require_date' => $rfq->require_date,
             'party_id' => $rfq->party_id,
-            "party" => $rfq->party ,
             'user_id' => $rfq->user_id,
             'created_at' => $rfq->created_at,
             'updated_at' => $rfq->updated_at,
+            'files' => $rfq->file,
+            "party" => $rfq->party ,
             'rfq_details' => $rfq->rfq_details->map(function($rfq_detail){
                 $rfq_detail = RFQDetails::where('id','=',$rfq_detail->id)->first();
                 return [

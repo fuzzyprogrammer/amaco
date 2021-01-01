@@ -17,7 +17,7 @@ class FileUploadController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -45,12 +45,12 @@ class FileUploadController extends Controller
         //     }else{
         //         return 'No files has been added.';
         //     }
-        return [
-            'data'=>$request->all(),
-            'file_path' => $request->file['files']->store('rfqDocs'),
-            'file'=> $request->files,
-        ];
-        // return $request->file('files')->store('rfqDocs');
+        // return [
+        //     'data'=>$request->all(),
+        //     'file_path' => $request->file['files']->store('rfqDocs'),
+        //     'file'=> $request->files,
+        // ];
+        // // return $request->file('files')->store('rfqDocs');
 
     }
 
