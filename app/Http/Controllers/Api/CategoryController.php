@@ -154,5 +154,9 @@ class CategoryController extends Controller
         return response()->json($data);
     }
 
-
+    public function categorized_products($id)
+    {
+        $products = Products::where('category_id','=',$id)->get()->toArray();
+        return response()->json($products, 200);
+    }
 }
