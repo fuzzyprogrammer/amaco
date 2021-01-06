@@ -45,6 +45,7 @@ class QuotationController extends Controller
                                 "total_amount" => $quotation_detail->total_amount,
                                 "analyse_id" => $quotation_detail->analyse_id,
                                 "unit_price" => $quotation_detail->unit_price,
+                                "margin" => $quotation_detail->margin,
                             ];
                         }),
                     ];
