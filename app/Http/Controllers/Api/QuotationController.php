@@ -63,6 +63,7 @@ class QuotationController extends Controller
      */
     public function store(Request $request)
     {
+        return $request;
         $data = $request->json()->all();
 
         try {
@@ -76,7 +77,7 @@ class QuotationController extends Controller
             'vat_in_value' => $request->vat_in_value,
             'discount_in_p' => $request->discount_in_p,
         ]);
-        
+
         global $quotation_id;
         $quotation_id = $quotation->id;
 
