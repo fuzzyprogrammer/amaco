@@ -44,8 +44,9 @@ class QuotationController extends Controller
                                 "quantity" => $quotation_detail->quantity,
                                 "total_amount" => $quotation_detail->total_amount,
                                 "analyse_id" => $quotation_detail->analyse_id,
-                                "unit_price" => $quotation_detail->unit_price,
-                                "margin" => $quotation_detail->margin
+                                "purchase_price" => $quotation_detail->purchase_price,
+                                "margin" => $quotation_detail->margin,
+                                "sell_price" => $quotation_detail->sell_price,
                             ];
                         }),
                     ];
@@ -89,6 +90,7 @@ class QuotationController extends Controller
             'product_id' => $quotation_detail['product_id'],
             'purchase_price' => $quotation_detail['purchase_price'],
             'description' => $quotation_detail['description'],
+
             'quantity' => $quotation_detail['quantity_required'],
             'margin' => $quotation_detail['margin'],
             'sell_price' => $quotation_detail['sell_price'],
@@ -114,26 +116,32 @@ class QuotationController extends Controller
     {
 
         $data = [
-            'id' => $quotation->id,
-            // 'requested_date' => $quotation->requested_date,
-            // 'require_date' => $quotation->require_date,
-            'party_id' => $quotation->party_id,
-            "party" => $quotation->party,
-            // 'user_id' => $quotation->user_id,
-            'created_at' => $quotation->created_at,
-            'updated_at' => $quotation->updated_at,
-            'quotation_details' => $quotation->quotationDetail->map(function ($quotation_detail) {
-                $quotation_detail = QuotationDetail::where('id', '=', $quotation_detail->id)->first();
-                return [
-                    "id" => $quotation_detail['id'],
-                    "created_at" => $quotation_detail->created_at,
-                    "updated_at" => $quotation_detail->updated_at,
-                    "product_id" => $quotation_detail->product_id,
-                    "product" => array($quotation_detail->product),
-                    "description" => $quotation_detail->description,
-                    "quantity" => $quotation_detail->quantity,
+            "id" => $quotation->id,
+            "party_id" => $quotation->party_id,
+            "rfq_id" => $quotation->rfq_id,
+            "status" => $quotation->status,
+            "total_value" => $quotation->total_value ,
+            "discount_in_p" => $quotation->discount_in_p ,
+            "vat_in_value" => $quotation->vat_in_value ,
+            "net_amount" => $quotation->net_amount ,
+            "created_at" => $quotation->net_amount,
+            "updated_at" => $quotation->updated_at,
+            "quotation_details" => $quotation->quotationDetail->map(function ($quotation_detail){
+                return[
+                "id"=> $quotation_detail->id,
+                "total_amount"=> $quotation_detail->total_amount,
+                "analyse_id"=> $quotation_detail->analyse_id,
+                "product_id"=> $quotation_detail->product_id,
+                "purchase_price"=> $quotation_detail->purchase_price,
+                "description"=> $quotation_detail->description,
+                "quantity"=> $quotation_detail->quantity,
+                "margin"=> $quotation_detail->margin,
+                "sell_price"=> $quotation_detail->sell_price,
+                "created_at"=> $quotation_detail->created_at,
+                "updated_at"=> $quotation_detail->updated_at
                 ];
-            }),
+            })
+
         ];
         return response()->json([
             $data
