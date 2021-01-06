@@ -9,6 +9,8 @@ class Quotation extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function quotationDetail()
     {
         return $this->hasMany(QuotationDetail::class);

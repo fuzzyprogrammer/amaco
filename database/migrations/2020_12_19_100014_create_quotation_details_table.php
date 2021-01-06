@@ -19,7 +19,7 @@ class CreateQuotationDetailsTable extends Migration
             $table->string('total_amount')->nullable();
             $table->string('analyse_id')->nullable();
             $table->string('product_id')->nullable();
-            $table->string('unit_price')->nullable();
+            $table->string('purchase_price')->nullable();
             $table->string('description')->nullable();
             $table->string('quantity')->nullable();
             $table->string('margin')->nullable();

@@ -63,25 +63,25 @@ class QuotationController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->json()->all();
-        // return $data;
+        $data = $request->all();
+        // return $request;
 
         try {
 
         $quotation = Quotation::create([
-            'party_id' => $request->party_id,
-            'rfq_id' => $request->rfq_id,
-            'status' => $request->status,
-            'total_value' => $request->total_value,
-            'net_amount' => $request->net_amount,
-            'vat_in_value' => $request->vat_in_value,
-            'discount_in_p' => $request->discount_in_p,
+            'party_id' => $data['party_id'],
+            'rfq_id' => $data['rfq_id'],
+            'status' => 'New',
+            'total_value' => $data['total_value'],
+            'net_amount' => $data['net_amount'],
+            'vat_in_value' => $data['vat_in_value'],
+            'discount_in_p' => $data['discount_in_p'],
         ]);
 
         global $quotation_id;
         $quotation_id = $quotation->id;
-
-        foreach($request['quotation_details'] as $quotation_detail){
+            // dd($request->quotation_details);
+        foreach($data['quotation_details'] as $quotation_detail){
             QuotationDetail::create([
             'quotation_id' => $quotation_id,
             'total_amount' => $quotation->total_amount,
