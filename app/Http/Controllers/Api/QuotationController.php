@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Quotation;
 use App\Models\QuotationDetail;
-use Exception;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Exception;
 
 class QuotationController extends Controller
 {
@@ -45,7 +45,7 @@ class QuotationController extends Controller
                                 "total_amount" => $quotation_detail->total_amount,
                                 "analyse_id" => $quotation_detail->analyse_id,
                                 "unit_price" => $quotation_detail->unit_price,
-                                "margin" => $quotation_detail->margin,
+                                "margin" => $quotation_detail->margin
                             ];
                         }),
                     ];
@@ -63,33 +63,44 @@ class QuotationController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->json()->all();
 
-    //     $data = $request->json()->all();
+        try {
 
-    //     try {
+        $quotation = Quotation::create([
+            'party_id' => $request->party_id,
+            'rfq_id' => $request->rfq_id,
+            'status' => $request->status,
+            'total_value' => $request->total_value,
+            'net_amount' => $request->net_amount,
+            'vat_in_value' => $request->vat_in_value,
+            'discount_in_p' => $request->discount_in_p,
+        ]);
+        
+        global $quotation_id;
+        $quotation_id = $quotation->id;
 
-    //         $quotation = Quotation::create([
-    //             // 'requested_date' => $data['requested_date'],
-    //             // 'require_date' => $data['require_date'],
-    //             'party_id' => $data['party_id'],
-    //         ]);
+        foreach($request['quotation_details'] as $quotation_detail){
+            QuotationDetail::create([
+            'quotation_id' => $quotation_id,
+            'total_amount' => $quotation->total_amount,
+            'analyse_id' => $quotation->analyse_id,
+            'product_id' => $quotation->product_id,
+            'purchase_price' => $quotation->purchase_price,
+            'description' => $quotation->description,
+            'quantity' => $quotation->quantity,
+            'margin' => $quotation->margin,
+            'sell_price' => $quotation->sell_price,
+            ]);
+        }
+        return response()->json(['msg' => 'successfully added']);
+        }
 
-    //         global $_quotation_id;
-    //         $_quotation_id = $quotation['id'];
+        catch(Exception $e){
+            return $e;
+        }
 
-    //         foreach ($data['quotation_details'] as $quotation_detail) {
-    //             $_quotation_detail = QuotationDetail::create([
-    //                 'product_id' => $quotation_detail['id'],
-    //                 'description' => $quotation_detail['descriptionss'],
-    //                 'quantity_required' => $quotation_detail['quantity'],
-    //                 'quotation_id' => $_quotation_id,
-    //             ]);
-    //         }
 
-    //         return response()->json(['msg' => 'successfully added']);
-    //     } catch (Exception $e) {
-    //         return $e;
-    //     }
     }
 
     /**
