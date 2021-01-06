@@ -64,7 +64,7 @@ class QuotationController extends Controller
     public function store(Request $request)
     {
         $data = $request->json()->all();
-        return $request;
+        return $data;
 
         try {
 
