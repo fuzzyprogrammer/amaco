@@ -85,11 +85,11 @@ class QuotationController extends Controller
             QuotationDetail::create([
             'quotation_id' => $quotation_id,
             'total_amount' => $quotation_detail['total_amount'],
-            'analyse_id' => $quotation_detail['analyse_id'],
+            'analyse_id' => null,
             'product_id' => $quotation_detail['product_id'],
             'purchase_price' => $quotation_detail['purchase_price'],
             'description' => $quotation_detail['description'],
-            'quantity' => $quotation_detail['quantity'],
+            'quantity' => $quotation_detail['quantity_required'],
             'margin' => $quotation_detail['margin'],
             'sell_price' => $quotation_detail['sell_price'],
             ]);
