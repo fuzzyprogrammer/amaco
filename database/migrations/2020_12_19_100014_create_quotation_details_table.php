@@ -23,6 +23,7 @@ class CreateQuotationDetailsTable extends Migration
             $table->string('description')->nullable();
             $table->string('quantity')->nullable();
             $table->string('margin')->nullable();
+            $table->string('sell_price')->nullable();
             $table->timestamps();
         });
     }
