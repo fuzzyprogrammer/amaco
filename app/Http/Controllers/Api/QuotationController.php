@@ -84,14 +84,14 @@ class QuotationController extends Controller
         foreach($data['quotation_details'] as $quotation_detail){
             QuotationDetail::create([
             'quotation_id' => $quotation_id,
-            'total_amount' => $quotation->total_amount,
-            'analyse_id' => $quotation->analyse_id,
-            'product_id' => $quotation->product_id,
-            'purchase_price' => $quotation->purchase_price,
-            'description' => $quotation->description,
-            'quantity' => $quotation->quantity,
-            'margin' => $quotation->margin,
-            'sell_price' => $quotation->sell_price,
+            'total_amount' => $quotation_detail->total_amount,
+            'analyse_id' => $quotation_detail->analyse_id,
+            'product_id' => $quotation_detail->product_id,
+            'purchase_price' => $quotation_detail->purchase_price,
+            'description' => $quotation_detail->description,
+            'quantity' => $quotation_detail->quantity,
+            'margin' => $quotation_detail->margin,
+            'sell_price' => $quotation_detail->sell_price,
             ]);
         }
         return response()->json(['msg' => 'successfully added']);
