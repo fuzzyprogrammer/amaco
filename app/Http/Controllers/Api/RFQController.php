@@ -22,7 +22,7 @@ class RFQController extends Controller
      */
     public function index()
     {
-        $rfqs = RFQ::all();
+        $rfqs = RFQ::orderBy('created_at', 'DESC')->get();
         $rfqs_data =[
             $rfqs->map(
                 function($rfq){
