@@ -170,55 +170,7 @@ class QuotationController extends Controller
      */
     public function update(Request $request, Quotation $quotation)
     {
-        // $rules = [
-        //     'requested_date' => 'required',
-        //     'require_date' => 'required',
-        //     'party_id' => 'required',
-        //     'user_id' => 'required',
-        // ];
-
-
-        // $messages = [
-        //     'required' => 'The :attribute field is required.',
-        // ];
-
-        // $validator = Validator::make($request->all(), $rules, $messages);
-        // $errors = $validator->errors();
-        // foreach ($errors as $error) {
-        //     echo $error;
-        // }
-
-        //                             //
-        // $data = $request->json()->all();
-
-        // try {
-        //     $quotation->update([
-        //         // 'requested_date' => $data['requested_date'],
-        //         // 'require_date' => $data['require_date'],
-        //         'party_id' => $data['party_id'],
-        //     ]);
-
-
-        //     global $_quotation_id;
-        //     $_quotation_id = $quotation['id'];
-
-        //     foreach ($data['quotation_details'] as $quotation_detail) {
-        //         $quotation_update_data = QuotationDetail::findOrFail($quotation_detail['id']);
-        //         $_quotation_detail = $quotation_update_data->update([
-        //             'product_id' => $quotation_detail['id'],
-        //             'description' => $quotation_detail['descriptionss'],
-        //             'quantity' => $quotation_detail['quantity'],
-        //             'quotation_id' => $_quotation_id,
-        //         ]);
-        //     }
-
-        //     return response()->json(['msg' => 'successfully updated']);
-        // } catch (Exception $e) {
-        //     return $e;
-        // }
-
-
-
+        $quotation->update($request->all());
     }
 
     /**
