@@ -14,9 +14,14 @@ class QuotationDetail extends Model
     {
         return $this->belongsTo(Quotation::class);
     }
-    // public function product()
-    // {
-    //     return $this->hasOne(Product::class);
-    // }
+    public function party()
+    {
+        return $this->hasOne(Party::class, 'id', 'party_id');
+    }
+
+    public function product()
+    {
+        return $this->hasOne(Product::class, 'id', 'product_id');
+    }
 
 }

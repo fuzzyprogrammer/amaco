@@ -20,4 +20,9 @@ class Quotation extends Model
         return $this->hasOne(Party::class, 'id','party_id');
     }
 
+    public function rfq()
+    {
+        return $this->hasOne(RFQ::class, 'id', 'rfq_id');
+    }
+
 }

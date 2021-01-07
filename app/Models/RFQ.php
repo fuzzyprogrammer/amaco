@@ -29,4 +29,9 @@ class RFQ extends Model
     {
         return $this->hasMany(FileUpload::class, 'rfq_id');
     }
+
+    public function quotation()
+    {
+        return $this->belongsTo(Quotation::class);
+    }
 }

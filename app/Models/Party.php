@@ -27,4 +27,9 @@ class Party extends Model
     {
         return $this->hasMany(Contact::class,'id','party_id');
     }
+
+    public function quotationDetail()
+    {
+        return $this->belongsTo(QuotationDetail::class);
+    }
 }

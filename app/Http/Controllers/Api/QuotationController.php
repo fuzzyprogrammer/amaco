@@ -118,7 +118,9 @@ class QuotationController extends Controller
         $data = [
             "id" => $quotation->id,
             "party_id" => $quotation->party_id,
+            "party"=> $quotation->party,
             "rfq_id" => $quotation->rfq_id,
+            "rfq" => $quotation->rfq,
             "status" => $quotation->status,
             "total_value" => $quotation->total_value ,
             "discount_in_p" => $quotation->discount_in_p ,
@@ -132,6 +134,7 @@ class QuotationController extends Controller
                 "total_amount"=> $quotation_detail->total_amount,
                 "analyse_id"=> $quotation_detail->analyse_id,
                 "product_id"=> $quotation_detail->product_id,
+                "product" => $quotation_detail->product,
                 "purchase_price"=> $quotation_detail->purchase_price,
                 "description"=> $quotation_detail->description,
                 "quantity"=> $quotation_detail->quantity,
