@@ -22,6 +22,11 @@ class CreateQuotationsTable extends Migration
             $table->string('discount_in_p')->nullable();
             $table->string('vat_in_value')->nullable();
             $table->string('net_amount')->nullable();
+            $table->string('validity')->nullable();
+            $table->string('payment_terms')->nullable();
+            $table->string('warranty')->nullable();
+            $table->string('delivery_time')->nullable();
+            $table->string('inco_terms')->nullable();
             $table->timestamps();
         });
     }

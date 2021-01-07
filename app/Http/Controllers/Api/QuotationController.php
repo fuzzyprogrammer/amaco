@@ -77,6 +77,11 @@ class QuotationController extends Controller
             'net_amount' => $data['net_amount'],
             'vat_in_value' => $data['vat_in_value'],
             'discount_in_p' => $data['discount_in_p'],
+            'validity' => $data['validity'],
+            'payment_terms' => $data['payment_terms'],
+            'warranty' => $data['warranty'],
+            'delivery_time' => $data['delivery_time'],
+            'inco_terms' => $data['inco_terms'],
         ]);
 
         global $quotation_id;
@@ -118,9 +123,7 @@ class QuotationController extends Controller
         $data = [
             "id" => $quotation->id,
             "party_id" => $quotation->party_id,
-            "party"=> $quotation->party,
             "rfq_id" => $quotation->rfq_id,
-            "rfq" => $quotation->rfq,
             "status" => $quotation->status,
             "total_value" => $quotation->total_value ,
             "discount_in_p" => $quotation->discount_in_p ,
@@ -128,6 +131,13 @@ class QuotationController extends Controller
             "net_amount" => $quotation->net_amount ,
             "created_at" => $quotation->net_amount,
             "updated_at" => $quotation->updated_at,
+            "validity" => $quotation->validity,
+            "payment_terms" => $quotation->payment_terms,
+            "warranty" => $quotation->warranty,
+            "delivery_time" => $quotation->delivery_time,
+            "inco_terms" => $quotation->inco_terms,
+            "party"=> $quotation->party,
+            "rfq" => $quotation->rfq,
             "quotation_details" => $quotation->quotationDetail->map(function ($quotation_detail){
                 return[
                 "id"=> $quotation_detail->id,
