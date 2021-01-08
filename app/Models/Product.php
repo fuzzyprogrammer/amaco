@@ -30,4 +30,9 @@ class Product extends Model
     {
         return $this->belongsTo(QuotationDetail::class);
     }
+
+    public function invoiceDetail()
+    {
+        return $this->belongsTo(InvoiceDetail::class);
+    }
 }

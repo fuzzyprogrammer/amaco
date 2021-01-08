@@ -16,8 +16,9 @@ use App\Http\Controllers\Api\SaleDetailController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\FileUploadController;
 use App\Http\Controllers\Api\RFQImageController;
-use App\Models\Category;
-use Monolog\Handler\RotatingFileHandler;
+use App\Http\Controllers\Api\InvoiceController;
+use App\Http\Controllers\Api\InvoiceDetailController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -48,9 +49,11 @@ Route::apiResource('sale',SaleController::class);
 Route::apiResource('sale-detail',SaleDetailController::class);
 Route::apiResource('contact',ContactController::class);
 Route::apiResource('fileUpload',FileUploadController::class);
+Route::apiResource('invoice',InvoiceController::class);
+Route::apiResource('invoice-detail',InvoiceDetailController::class);
 
 Route::get('categorized-products/{id}',[CategoryController::class, 'categorized_products'])->name('categorized.products');
-Route::get('invoice/',[QuotationController::class, 'invoice_list'])->name('invoice.list');
+Route::get('quotation-po/',[QuotationController::class, 'invoice_list'])->name('invoice.list');
 Route::post('add-user', [UserController::class, 'add'])->name('add.user');
 Route::post('upload-file', [RFQImageController::class, 'store'])->name('file.upload');
 Route::get('parties-vendor',[PartyController::class, 'vendor'])->name('parties.vendor');

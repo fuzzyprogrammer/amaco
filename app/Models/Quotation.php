@@ -25,4 +25,9 @@ class Quotation extends Model
         return $this->hasOne(RFQ::class, 'id', 'rfq_id');
     }
 
+    public function invoice()
+    {
+        return $this->hasOne(Invoice::class, 'quotation_id', 'id');
+    }
+
 }
