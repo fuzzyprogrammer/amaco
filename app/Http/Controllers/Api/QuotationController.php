@@ -17,7 +17,7 @@ class QuotationController extends Controller
      */
     public function index()
     {
-        $quotations = Quotation::wehre('status','=','New')->orderBy('created_at','DESC')->get();
+        $quotations = Quotation::where('status','=','New')->orderBy('created_at','DESC')->get();
         $quotations_data = [
             $quotations->map(
                 function ($quotation) {
