@@ -34,8 +34,9 @@ class QuotationController extends Controller
     public function getQuotationNo()
     {
         $latest_quotation_no = $this->getLastQuotationNo();
-        $last_year = substr($latest_quotation_no, 6, 2);
+        $last_year = substr($latest_quotation_no, 5, 2);
         $current_year = $this->getCurrentYear();
+        // dd([$last_year, $current_year]);
         if($current_year != $last_year){
             return ('AMCT-'.$current_year.'-'.sprintf("%04d",1));
         }else{
