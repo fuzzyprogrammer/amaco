@@ -27,7 +27,7 @@ class RFQController extends Controller
         $rfqs = RFQ::whereNotExists(function ($query) {
             $query->select(DB::raw(1))
                 ->from('quotations')
-                ->whereRaw('quotations.rfq_id = rfqs.id');
+                ->whereRaw('quotations.rfq_id = r_f_q_s.id');
         })->orderBy('created_at', 'DESC')
         ->get();
         //
