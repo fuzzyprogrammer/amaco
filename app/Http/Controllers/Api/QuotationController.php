@@ -170,7 +170,7 @@ class QuotationController extends Controller
      */
     public function update(Request $request, Quotation $quotation)
     {
-        $quotation->update($request->all());
+        $quotation->update($request->status);
         return response()->json($quotation);
     }
 
