@@ -22,25 +22,19 @@ class RFQController extends Controller
      */
     public function index()
     {
-        $rfqs = RFQ::orderBy('created_at', 'DESC')->get();
+
+        //
+        $rfqs = RFQ::whereNotExists(function ($query) {
+            $query->select(DB::raw(1))
+                ->from('quotations')
+                ->whereRaw('quotations.rfq_id = rfqs.id');
+        })->orderBy('created_at', 'DESC')
+        ->get();
+        //
+        // $rfqs = RFQ::orderBy('created_at', 'DESC')->get();
         $rfqs_data =[
             $rfqs->map(
                 function($rfq){
-                    // $party = Party::findOrFail($rfq->party_id);
-                    // return [
-                    //     'id' => $rfq->id,
-                    //     'requested_date' => $rfq->requested_date,
-                    //     'require_date' => $rfq->require_date,
-                    //     'party_id' => $rfq->party_id,
-                    //     'party_fname' => $party ? $party->fname : $party,
-                    //     'party_lname' => $party ? $party->lname : $party,
-                    //     'user_id' => $rfq->user_id,
-                    //     'created_at' => $rfq->created_at,
-                    //     'updated_at' => $rfq->updated_at,
-
-                    // ];
-                    //
-                    //
                     return [
                         'id' => $rfq->id,
                         'requested_date' => $rfq->requested_date,
