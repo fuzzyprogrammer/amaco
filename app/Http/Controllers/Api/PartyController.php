@@ -61,13 +61,13 @@ class PartyController extends Controller
         // }
         $party = Party::create([
             'firm_name'=>$request->firm_name,
-            'firm_name_in_ar'=>GoogleTranslate::trans($request->firm_name,'ar'),
+            // 'firm_name_in_ar'=>GoogleTranslate::trans($request->firm_name,'ar'),
             'registration_no'=>$request->registration_no,
-            'registration_no_in_ar'=> $request->registration_no == null ? null : GoogleTranslate::trans(
-                $request->registration_no,'ar'),
+            // 'registration_no_in_ar'=> $request->registration_no == null ? null : GoogleTranslate::trans(
+                // $request->registration_no,'ar'),
             'vat_no'=>$request->vat_no,
-            'vat_no_in_ar'=> $request->registration_no == null ? null :   GoogleTranslate::trans(
-                $request->vat_no,'ar'),
+            // 'vat_no_in_ar'=> $request->registration_no == null ? null :   GoogleTranslate::trans(
+                // $request->vat_no,'ar'),
             'post_box_no'=>$request->post_box_no,
             'street'=>$request->street,
             'city'=>$request->city,
@@ -105,11 +105,11 @@ class PartyController extends Controller
         $data =
             [
                 'firm_name' => $party->firm_name,
-                'firm_name_in_ar' => $party->firm_name_in_ar,
+                // 'firm_name_in_ar' => $party->firm_name_in_ar,
                 'registration_no' => $party->registration_no,
-                'registration_no_in_ar' => $party->registration_no_in_ar,
+                // 'registration_no_in_ar' => $party->registration_no_in_ar,
                 'vat_no' => $party->vat_no,
-                'vat_no_in_ar' => $party->vat_no_in_ar,
+                // 'vat_no_in_ar' => $party->vat_no_in_ar,
                 'post_box_no' => $party->post_box_no,
                 'street' => $party->street,
                 'city' => $party->city,
@@ -168,11 +168,11 @@ class PartyController extends Controller
 
         $party->update([
             'firm_name'=> $request->firm_name == null ? $party->firm_name : $request->firm_name,
-            'firm_name_in_ar'=> $request->firm_name == null ? $party->firm_name_in_ar : GoogleTranslate::trans($request->firm_name,'ar'),
+            // 'firm_name_in_ar'=> $request->firm_name == null ? $party->firm_name_in_ar : GoogleTranslate::trans($request->firm_name,'ar'),
             'registration_no'=>$request->registration_no,
-            'registration_no_in_ar'=> $request->registration_no == null ? $party->registration_no_in_ar : GoogleTranslate::trans($request->registration_no,'ar'),
+            // 'registration_no_in_ar'=> $request->registration_no == null ? $party->registration_no_in_ar : GoogleTranslate::trans($request->registration_no,'ar'),
             'vat_no'=>$request->vat_no,
-            'vat_no_in_ar'=> $request->registration_no == null ? $party->vat_no_in_ar :   GoogleTranslate::trans($request->vat_no,'ar'),
+            // 'vat_no_in_ar'=> $request->registration_no == null ? $party->vat_no_in_ar :   GoogleTranslate::trans($request->vat_no,'ar'),
             'post_box_no'=>$request->post_box_no,
             'street'=>$request->street,
             'city'=>$request->city,
