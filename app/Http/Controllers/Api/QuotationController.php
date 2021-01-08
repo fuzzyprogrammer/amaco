@@ -15,9 +15,23 @@ class QuotationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getLastQuotation()
+    public function getLastQuotationNo()
     {
-        
+        $quotation = Quotation::latest('created_at')->first();
+        $latest_quotation_no = $quotation->quotation_no;
+        return($latest_quotation_no);
+    }
+
+    public function getQuotationNo()
+    {
+        $latest_quotation_no = $this->getLastQuotationNo();
+        $last_year = substr($latest_quotation_no, 6, 2);
+        $current_year = substr(date('Y'), 2);
+        if($current_year != $last_year){
+            return ('AMCT-'.$current_year.'-'.sprintf("%04d",1));
+        }else{
+            return ('AMCT-' . $current_year . '-' . sprintf("%04d",((int)$this->getLastQuotationNo())+1));
+        }
     }
 
     public function index()
@@ -77,6 +91,7 @@ class QuotationController extends Controller
         $quotation = Quotation::create([
             'party_id' => $data['party_id'],
             'rfq_id' => $data['rfq_id'],
+            'quotation_no' => $this->getQuotationNo(),
             'status' => 'New',
             'total_value' => $data['total_value'],
             'net_amount' => $data['net_amount'],
