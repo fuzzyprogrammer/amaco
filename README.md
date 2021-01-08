@@ -32,7 +32,6 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 ```
 | Method    | URI                                     | Name                     |
 +-----------+-----------------------------------------+--------------------------+
-| GET|HEAD  | /                                       |                          |
 | POST      | api/add-user                            | add.user                 |
 | POST      | api/analyse                             | analyse.store            |
 | GET|HEAD  | api/analyse                             | analyse.index            |
@@ -41,32 +40,33 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | GET|HEAD  | api/analyse/{analyse}                   | analyse.show             |
 | GET|HEAD  | api/categories                          | categories.index         |
 | POST      | api/categories                          | categories.store         |
-| PUT|PATCH | api/categories/{category}               | categories.update        |
 | DELETE    | api/categories/{category}               | categories.destroy       |
+| PUT|PATCH | api/categories/{category}               | categories.update        |
 | GET|HEAD  | api/categories/{category}               | categories.show          |
-| POST      | api/categorized-products                | categorized.products     |
-| POST      | api/contact                             | contact.store            |
+| GET|HEAD  | api/categorized-products/{id}           | categorized.products     |
 | GET|HEAD  | api/contact                             | contact.index            |
+| POST      | api/contact                             | contact.store            |
 | DELETE    | api/contact/{contact}                   | contact.destroy          |
 | GET|HEAD  | api/contact/{contact}                   | contact.show             |
 | PUT|PATCH | api/contact/{contact}                   | contact.update           |
 | POST      | api/fileUpload                          | fileUpload.store         |
 | GET|HEAD  | api/fileUpload                          | fileUpload.index         |
-| GET|HEAD  | api/fileUpload/{fileUpload}             | fileUpload.show          |
 | DELETE    | api/fileUpload/{fileUpload}             | fileUpload.destroy       |
 | PUT|PATCH | api/fileUpload/{fileUpload}             | fileUpload.update        |
+| GET|HEAD  | api/fileUpload/{fileUpload}             | fileUpload.show          |
+| GET|HEAD  | api/invoice                             | invoice.list             |
 | POST      | api/parties                             | parties.store            |
 | GET|HEAD  | api/parties                             | parties.index            |
 | GET|HEAD  | api/parties-vendor                      | parties.vendor           |
 | DELETE    | api/parties/{party}                     | parties.destroy          |
-| PUT|PATCH | api/parties/{party}                     | parties.update           |
 | GET|HEAD  | api/parties/{party}                     | parties.show             |
+| PUT|PATCH | api/parties/{party}                     | parties.update           |
 | POST      | api/products                            | products.store           |
 | GET|HEAD  | api/products                            | products.index           |
 | GET|HEAD  | api/products-in-category                | products.in.category     |
+| GET|HEAD  | api/products/{product}                  | products.show            |
 | DELETE    | api/products/{product}                  | products.destroy         |
 | PUT|PATCH | api/products/{product}                  | products.update          |
-| GET|HEAD  | api/products/{product}                  | products.show            |
 | GET|HEAD  | api/quotation                           | quotation.index          |
 | POST      | api/quotation                           | quotation.store          |
 | GET|HEAD  | api/quotation-detail                    | quotation-detail.index   |
@@ -91,12 +91,12 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | GET|HEAD  | api/sale                                | sale.index               |
 | POST      | api/sale-detail                         | sale-detail.store        |
 | GET|HEAD  | api/sale-detail                         | sale-detail.index        |
+| GET|HEAD  | api/sale-detail/{sale_detail}           | sale-detail.show         |
 | DELETE    | api/sale-detail/{sale_detail}           | sale-detail.destroy      |
 | PUT|PATCH | api/sale-detail/{sale_detail}           | sale-detail.update       |
-| GET|HEAD  | api/sale-detail/{sale_detail}           | sale-detail.show         |
-| GET|HEAD  | api/sale/{sale}                         | sale.show                |
 | PUT|PATCH | api/sale/{sale}                         | sale.update              |
 | DELETE    | api/sale/{sale}                         | sale.destroy             |
+| GET|HEAD  | api/sale/{sale}                         | sale.show                |
 | POST      | api/upload-file                         | file.upload              |
 | GET|HEAD  | api/user                                |                          |
 | GET|HEAD  | api/users                               |                          |
