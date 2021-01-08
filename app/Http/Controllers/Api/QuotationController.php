@@ -17,7 +17,7 @@ class QuotationController extends Controller
      */
     public function index()
     {
-        $quotations = Quotation::orderBy('created_at','DESC')->get();
+        $quotations = Quotation::wehre('status','=','New')->orderBy('created_at','DESC')->get();
         $quotations_data = [
             $quotations->map(
                 function ($quotation) {
@@ -187,5 +187,46 @@ class QuotationController extends Controller
         if ($res) {
             return (['msg' => 'Quotation' . ' ' . $quotation->id . ' is successfully deleted']);
         }
+    }
+
+    public function invoice_list()
+    {
+        $quotations = Quotation::where('status','=','po')->orderBy('created_at', 'DESC')->get();
+        $quotations_data = [
+            $quotations->map(
+                function ($quotation) {
+                    return [
+                        'id' => $quotation->id,
+                        'created_at' => $quotation->created_at,
+                        'updated_at' => $quotation->updated_at,
+                        'status' => $quotation->status,
+                        'total_value' => $quotation->total_value,
+                        'party_id' => $quotation->party_id,
+                        "party" => $quotation->party,
+                        "vat_in_value" => $quotation->vat_in_value,
+                        "net_amount" => $quotation->net_amount,
+                        'discount_in_%' => $quotation['discount_in_%'],
+                        'quotation_details' => $quotation->quotationDetail->map(function ($quotation_detail) {
+                            $quotation_detail = QuotationDetail::where('id', '=', $quotation_detail->id)->first();
+                            return [
+                                "id" => $quotation_detail['id'],
+                                "created_at" => $quotation_detail->created_at,
+                                "updated_at" => $quotation_detail->updated_at,
+                                "product_id" => $quotation_detail->product_id,
+                                "product" => array($quotation_detail->product),
+                                "description" => $quotation_detail->description,
+                                "quantity" => $quotation_detail->quantity,
+                                "total_amount" => $quotation_detail->total_amount,
+                                "analyse_id" => $quotation_detail->analyse_id,
+                                "purchase_price" => $quotation_detail->purchase_price,
+                                "margin" => $quotation_detail->margin,
+                                "sell_price" => $quotation_detail->sell_price,
+                            ];
+                        }),
+                    ];
+                }
+            ),
+        ];
+        return response()->json($quotations_data[0], 200);
     }
 }
