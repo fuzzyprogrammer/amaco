@@ -49,8 +49,9 @@ Route::apiResource('sale-detail',SaleDetailController::class);
 Route::apiResource('contact',ContactController::class);
 Route::apiResource('fileUpload',FileUploadController::class);
 
+Route::get('categorized-products/{id}',[CategoryController::class, 'categorized_products'])->name('categorized.products');
+Route::get('invoice/',[QuotationController::class, 'invoice_list'])->name('invoice.list');
 Route::post('add-user', [UserController::class, 'add'])->name('add.user');
 Route::post('upload-file', [RFQImageController::class, 'store'])->name('file.upload');
 Route::get('parties-vendor',[PartyController::class, 'vendor'])->name('parties.vendor');
 Route::get('products-in-category',[CategoryController::class, 'products_in_category'])->name('products.in.category');
-Route::get('categorized-products/{id}',[CategoryController::class, 'categorized_products'])->name('categorized.products');
