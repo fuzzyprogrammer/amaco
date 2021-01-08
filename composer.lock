@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "265544ed6cdf4cfbb4426b027c415d7d",
+    "content-hash": "fac753ae2702317b354e7eb283f28cbc",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2215,55 +2215,6 @@
                 }
             ],
             "time": "2020-08-18T17:17:46+00:00"
-        },
-        {
-            "name": "stichoza/google-translate-php",
-            "version": "v4.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Stichoza/google-translate-php.git",
-                "reference": "28cc8bcf7e39069d2f41b3905dea9d8f04c30b82"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Stichoza/google-translate-php/zipball/28cc8bcf7e39069d2f41b3905dea9d8f04c30b82",
-                "reference": "28cc8bcf7e39069d2f41b3905dea9d8f04c30b82",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "ext-mbstring": "*",
-                "guzzlehttp/guzzle": "~6.0|~7.0",
-                "php": "^7.1|^8"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Stichoza\\GoogleTranslate\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Levan Velijanashvili",
-                    "email": "me@stichoza.com"
-                }
-            ],
-            "description": "Free Google Translate API PHP Package",
-            "homepage": "http://github.com/Stichoza/google-translate-php",
-            "keywords": [
-                "google",
-                "php",
-                "translate",
-                "translator"
-            ],
-            "time": "2020-12-19T17:53:52+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
