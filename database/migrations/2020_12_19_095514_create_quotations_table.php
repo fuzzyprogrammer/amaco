@@ -15,7 +15,7 @@ class CreateQuotationsTable extends Migration
     {
         Schema::create('quotations', function (Blueprint $table) {
             $table->id();
-            $table->string('quotation_no')->nullable();
+            $table->string('quotation_no')->nullable()->default(0);
             $table->unsignedBigInteger('party_id')->nullable();
             $table->unsignedBigInteger('rfq_id')->nullable();
             $table->string('status')->default('New');

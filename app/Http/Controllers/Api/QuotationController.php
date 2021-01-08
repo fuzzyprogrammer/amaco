@@ -18,8 +18,12 @@ class QuotationController extends Controller
     public function getLastQuotationNo()
     {
         $quotation = Quotation::latest('created_at')->first();
+        if($quotation){
         $latest_quotation_no = $quotation->quotation_no ? $quotation->quotation_no : 0;
         return($latest_quotation_no);
+        }else{
+            return('AMCT-' . substr(date('Y'), 2) . '-' . sprintf("%04d", 0));
+        }
     }
 
     public function getQuotationNo()
