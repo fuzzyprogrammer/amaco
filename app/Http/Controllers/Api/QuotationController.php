@@ -52,6 +52,7 @@ class QuotationController extends Controller
                 function ($quotation) {
                     return [
                         'id' => $quotation->id,
+                        'quotation_no' => $quotation->quotation_no,
                         'created_at' => $quotation->created_at,
                         'updated_at' => $quotation->updated_at,
                         'status' => $quotation->status,
@@ -152,6 +153,7 @@ class QuotationController extends Controller
 
         $data = [
             "id" => $quotation->id,
+            'quotation_no' => $quotation->quotation_no,
             "party_id" => $quotation->party_id,
             "rfq_id" => $quotation->rfq_id,
             "status" => $quotation->status,
