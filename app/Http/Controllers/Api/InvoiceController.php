@@ -13,6 +13,34 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function getCurrentYear()
+    {
+        return substr(date('Y'), 2);
+    }
+
+    public function getLastInvoiceNo()
+    {
+        $invoice = Invoice::latest('created_at')->first();
+        if ($invoice) {
+            $latest_invoice_no = $invoice->invoice_no ? $invoice->invoice_no : 0;
+            return ($latest_invoice_no);
+        } else {
+            return ('AMINV-' . $this->getCurrentYear() . '-' . sprintf("%04d", 0));
+        }
+    }
+
+    public function getInvoiceNo()
+    {
+        $latest_invoice_no = $this->getLastInvoiceNo();
+        $last_year = substr($latest_invoice_no, 6, 2);
+        $current_year = $this->getCurrentYear();
+        // dd([$last_year, $current_year]);
+        if ($current_year != $last_year) {
+            return ('AMINV-' . $current_year . '-' . sprintf("%04d", 1));
+        } else {
+            return ('AMINV-' . $current_year . '-' . sprintf("%04d", ((int)substr($this->getLastInvoiceNo(), 9)) + 1));
+        }
+    }
     public function index()
     {
         $invoices = Invoice::all();
@@ -27,7 +55,9 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        $invoice = Invoice::create($request->all());
+        $data = $request->all();
+        $data['invoice_no'] = $this->getInvoiceNo();
+        $invoice = Invoice::create($data);
         return response()->json($invoice);
     }
 

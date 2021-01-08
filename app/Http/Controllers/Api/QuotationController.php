@@ -233,10 +233,11 @@ class QuotationController extends Controller
                         'status' => $quotation->status,
                         'total_value' => $quotation->total_value,
                         'party_id' => $quotation->party_id,
-                        "party" => $quotation->party,
+                        'quotation_no' => $quotation->quotation_no,
                         "vat_in_value" => $quotation->vat_in_value,
                         "net_amount" => $quotation->net_amount,
                         'discount_in_%' => $quotation['discount_in_%'],
+                        "party" => $quotation->party,
                         'quotation_details' => $quotation->quotationDetail->map(function ($quotation_detail) {
                             $quotation_detail = QuotationDetail::where('id', '=', $quotation_detail->id)->first();
                             return [
