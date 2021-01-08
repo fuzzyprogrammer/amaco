@@ -15,6 +15,11 @@ class QuotationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function getLastQuotation()
+    {
+        
+    }
+
     public function index()
     {
         $quotations = Quotation::where('status','=','New')->orderBy('created_at','DESC')->get();
