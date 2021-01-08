@@ -15,6 +15,11 @@ class QuotationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function getCurrentYear()
+    {
+        return substr(date('Y'), 2);
+    }
+
     public function getLastQuotationNo()
     {
         $quotation = Quotation::latest('created_at')->first();
@@ -22,7 +27,7 @@ class QuotationController extends Controller
         $latest_quotation_no = $quotation->quotation_no ? $quotation->quotation_no : 0;
         return($latest_quotation_no);
         }else{
-            return('AMCT-' . substr(date('Y'), 2) . '-' . sprintf("%04d", 0));
+            return('AMCT-' . $this->getCurrentYear() . '-' . sprintf("%04d", 0));
         }
     }
 
@@ -30,11 +35,11 @@ class QuotationController extends Controller
     {
         $latest_quotation_no = $this->getLastQuotationNo();
         $last_year = substr($latest_quotation_no, 6, 2);
-        $current_year = substr(date('Y'), 2);
+        $current_year = $this->getCurrentYear();
         if($current_year != $last_year){
             return ('AMCT-'.$current_year.'-'.sprintf("%04d",1));
         }else{
-            return ('AMCT-' . $current_year . '-' . sprintf("%04d",((int)$this->getLastQuotationNo())+1));
+            return ('AMCT-' . $current_year . '-' . sprintf("%04d",((int)substr($this->getLastQuotationNo(),9))+1));
         }
     }
 
