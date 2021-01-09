@@ -108,7 +108,7 @@ class InvoiceController extends Controller
             $invoice->invoiceDetail->map(function ($invoice_detail){
                 return $invoice_detail->product;
             }),
-            'quotationDetails'=>$invoice->quotation->quotationDeatil,
+            'quotationDetails'=>$invoice->quotationDeatil,
         ];
     }
 
