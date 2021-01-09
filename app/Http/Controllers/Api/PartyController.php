@@ -7,7 +7,7 @@ use App\Models\Party;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-// use Stichoza\GoogleTranslate\GoogleTranslate;
+use Stichoza\GoogleTranslate\GoogleTranslate;
 
 class PartyController extends Controller
 {
@@ -61,13 +61,13 @@ class PartyController extends Controller
         // }
         $party = Party::create([
             'firm_name'=>$request->firm_name,
-            // 'firm_name_in_ar'=>GoogleTranslate::trans($request->firm_name,'ar'),
+            'firm_name_in_ar'=>GoogleTranslate::trans($request->firm_name,'ar'),
             'registration_no'=>$request->registration_no,
-            // 'registration_no_in_ar'=> $request->registration_no == null ? null : GoogleTranslate::trans(
-                // $request->registration_no,'ar'),
+            'registration_no_in_ar'=> $request->registration_no == null ? null : GoogleTranslate::trans(
+                $request->registration_no,'ar'),
             'vat_no'=>$request->vat_no,
-            // 'vat_no_in_ar'=> $request->registration_no == null ? null :   GoogleTranslate::trans(
-                // $request->vat_no,'ar'),
+            'vat_no_in_ar'=> $request->registration_no == null ? null :   GoogleTranslate::trans(
+                $request->vat_no,'ar'),
             'post_box_no'=>$request->post_box_no,
             'street'=>$request->street,
             'city'=>$request->city,
