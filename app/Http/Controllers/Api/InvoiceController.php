@@ -105,9 +105,9 @@ class InvoiceController extends Controller
         return [
             $invoice,
             $invoice->quotation->party,
-            foreach($invoice->invoiceDetail as $invoiceDetail){
-                return $invoiceDetail->product;
-            }
+            $invoice->invoiceDetail->map(function ($invoice_detail){
+                return $invoice_detail->product;
+            })
         ];
     }
 
