@@ -103,7 +103,7 @@ class InvoiceController extends Controller
     public function show(Invoice $invoice)
     {
         return [
-            $invoice->invoiceDetail->product_id,
+            $invoice->invoiceDetail->product,
             // $invoice,
             // $invoice->quotation->party,
             // $invoice->quotation->quotationDetail,
