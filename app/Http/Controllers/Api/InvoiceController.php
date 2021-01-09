@@ -55,29 +55,8 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = $request->json()->all();
-        // dd($data);
-        // dd($request->vat_in_value);
-        // dd($request->vat_in_value);
-        $data['invoice_no'] = $this->getInvoiceNo();
-        $data['issue_date'] = now();
-        $data['status'] = "New";
-        $data['quotation_id'] = $request['quotation_id'];
-        $data['total_value'] = $request['total_value'];
-        $data['discount_in_percentage'] = $request['discount_in_percentage'];
-        $data['vat_in_value'] = $request['vat_in_value'];
-        $data['grand_total'] = $request['grand_total'];
-        $invoice = Invoice::create([
-            'invoice_no' => $data['invoice_no'],
-            'issue_date' => $data['issue_date'],
-            'status' => $data['status'],
-            'quotation_id' => $data['quotation_id'],
-            'total_value' => $data['total_value'],
-            'discount_in_percentage' => $data['discount_in_percentage'],
-            'vat_in_value' => $data['vat_in_value'],
-            'grand_total' => $data['grand_total'],
-        ]);
-        return response()->json($invoice);
+
+        return response()->json($request);
     }
 
     /**
