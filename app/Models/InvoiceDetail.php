@@ -21,4 +21,9 @@ class InvoiceDetail extends Model
     {
         return $this->hasOne(Product::class, 'product_id', 'id');
     }
+
+    public function quotationDetail()
+    {
+        return $this->hasOne(QuotationDetail::class, 'product_id', 'id');
+    }
 }
