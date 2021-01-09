@@ -113,4 +113,5 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | GET|HEAD  | api/user                                |                          |
 |           |                                         |                          |
 | GET|HEAD  | api/users                               |                          |
++-----------+-----------------------------------------+--------------------------+
 ```
