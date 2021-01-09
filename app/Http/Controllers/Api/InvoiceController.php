@@ -57,6 +57,8 @@ class InvoiceController extends Controller
     {
         $data = $request->all();
         $data['invoice_no'] = $this->getInvoiceNo();
+        $data['issue_date'] = now();
+        $data['status'] = "New";
         $invoice = Invoice::create($data);
         return response()->json($invoice);
     }
