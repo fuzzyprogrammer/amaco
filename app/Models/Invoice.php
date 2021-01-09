@@ -13,7 +13,7 @@ class Invoice extends Model
 
     public function invoiceDetail()
     {
-        return $this->hasMany(InvoiceDetail::class, 'id','invoice_id');
+        return $this->hasMany(InvoiceDetail::class, 'invoice_id','id');
     }
 
     public function quotation()
