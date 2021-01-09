@@ -105,7 +105,7 @@ class InvoiceController extends Controller
         return [
             $invoice,
             $invoice->quotation->party,
-            $invoice->invoiceDetail->quotationDetail,
+            $invoice->invoiceDetail()->quotationDetail,
             // $invoice->quotation,
             // $invoice->quotation->quotationDetail,
         ];
