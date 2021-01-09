@@ -28,6 +28,7 @@ class CreateQuotationsTable extends Migration
             $table->string('warranty')->nullable();
             $table->string('delivery_time')->nullable();
             $table->string('inco_terms')->nullable();
+            $table->string('po_number')->nullable();
             $table->timestamps();
         });
     }

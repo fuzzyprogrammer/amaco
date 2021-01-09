@@ -31,6 +31,17 @@ class QuotationController extends Controller
         }
     }
 
+    public function getLastPONo()
+    {
+        $quotation = Quotation::latest('created_at')->first();
+        if($quotation){
+        $latest_po_number = $quotation->po_number ? $quotation->po_number : 0;
+        return($latest_po_number);
+        }else{
+            return('AMPO-' . $this->getCurrentYear() . '-' . sprintf("%04d", 0));
+        }
+    }
+
     public function getQuotationNo()
     {
         $latest_quotation_no = $this->getLastQuotationNo();
@@ -41,6 +52,19 @@ class QuotationController extends Controller
             return ('AMCT-'.$current_year.'-'.sprintf("%04d",1));
         }else{
             return ('AMCT-' . $current_year . '-' . sprintf("%04d",((int)substr($this->getLastQuotationNo(),9))+1));
+        }
+    }
+
+    public function getPONo()
+    {
+        $latest_po_number = $this->getLastPONo();
+        $last_year = substr($latest_po_number, 5, 2);
+        $current_year = $this->getCurrentYear();
+        // dd([$last_year, $current_year]);
+        if($current_year != $last_year){
+            return ('AMPO-'.$current_year.'-'.sprintf("%04d",1));
+        }else{
+            return ('AMPO-' . $current_year . '-' . sprintf("%04d",((int)substr($this->getLastPONo(),9))+1));
         }
     }
 
@@ -113,6 +137,7 @@ class QuotationController extends Controller
             'warranty' => $data['warranty'],
             'delivery_time' => $data['delivery_time'],
             'inco_terms' => $data['inco_terms'],
+            'po_number' => $data['po_number'],
         ]);
 
         global $quotation_id;
@@ -168,6 +193,7 @@ class QuotationController extends Controller
             "warranty" => $quotation->warranty,
             "delivery_time" => $quotation->delivery_time,
             "inco_terms" => $quotation->inco_terms,
+            "po_number" => $quotation->po_number,
             "party"=> $quotation->party,
             "rfq" => $quotation->rfq,
             "quotation_details" => $quotation->quotationDetail->map(function ($quotation_detail){
@@ -203,6 +229,7 @@ class QuotationController extends Controller
     public function update(Request $request, Quotation $quotation)
     {
         $quotation->update(['status'=>$request->status]);
+        $quotation->update(['po_number'=>$this->getPONo()]);
         return response()->json($quotation);
     }
 

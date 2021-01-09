@@ -20,4 +20,9 @@ class Department extends Model
     {
         return $this->belongsTo('App\Models\Division');
     }
+
+    public function employee()
+    {
+        return $this->hasMany(Employee::class, 'department','id')
+    }
 }
