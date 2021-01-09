@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
+use App\Models\InvoiceDetail;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -55,7 +56,7 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = $request->json()->all();
+        $data = $request->json()->all();
         // dd($data);
         // dd($request->vat_in_value);
         // dd($request->vat_in_value);
@@ -77,6 +78,19 @@ class InvoiceController extends Controller
             'vat_in_value' => $data['vat_in_value'],
             'grand_total' => $data['grand_total'],
         ]);
+
+        global $_invoice_id;
+        $_invoice_id = $invoice['id'];
+
+        foreach ($data['invoice_details'] as $invoice_detail) {
+            $_invoice_detail = InvoiceDetail::create([
+                // 'product_id' => $invoice_detail['id'],
+                'sell_price' => $invoice_detail['sell_price'],
+                'quantity' => $invoice_detail['quantity'],
+                'invoice_id' => $_invoice_id,
+            ]);
+        }
+
         return response()->json($invoice);
     }
 
