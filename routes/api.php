@@ -18,6 +18,8 @@ use App\Http\Controllers\Api\FileUploadController;
 use App\Http\Controllers\Api\RFQImageController;
 use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\InvoiceDetailController;
+use App\Http\Controllers\Api\ExpenseController;
+use App\Http\Controllers\Api\EmployeeController;
 
 
 /*
@@ -51,6 +53,8 @@ Route::apiResource('contact',ContactController::class);
 Route::apiResource('fileUpload',FileUploadController::class);
 Route::apiResource('invoice',InvoiceController::class);
 Route::apiResource('invoice-detail',InvoiceDetailController::class);
+Route::apiResource('expense',ExpenseController::class);
+Route::apiResource('employee',EmployeeController::class);
 
 Route::get('categorized-products/{id}',[CategoryController::class, 'categorized_products'])->name('categorized.products');
 Route::get('quotation-po/',[QuotationController::class, 'invoice_list'])->name('invoice.list');
