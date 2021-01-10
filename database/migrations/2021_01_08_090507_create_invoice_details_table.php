@@ -19,6 +19,7 @@ class CreateInvoiceDetailsTable extends Migration
             $table->unsignedBigInteger('product_id')->nullable();
             $table->string('quantity')->nullable();
             $table->string('sell_price')->nullable();
+            $table->string('total_amount')->nullable();
             $table->timestamps();
         });
     }

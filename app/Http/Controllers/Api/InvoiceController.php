@@ -87,6 +87,7 @@ class InvoiceController extends Controller
                 'product_id' => $invoice_detail['id'],
                 'sell_price' => $invoice_detail['sell_price'],
                 'quantity' => $invoice_detail['quantity'],
+                'total_amount' => $invoice_detail['total_amount'],
                 'invoice_id' => $_invoice_id,
             ]);
         }
