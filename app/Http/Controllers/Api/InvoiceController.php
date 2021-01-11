@@ -45,7 +45,7 @@ class InvoiceController extends Controller
     }
     public function index()
     {
-        $invoices = Invoice::orderBy('created_at','DESC')->all();
+        $invoices = Invoice::orderBy('created_at','DESC')->get();
         return $invoices;
     }
 
