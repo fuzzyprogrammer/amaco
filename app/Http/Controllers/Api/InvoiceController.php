@@ -45,7 +45,7 @@ class InvoiceController extends Controller
     }
     public function index()
     {
-        $invoices = Invoice::all();
+        $invoices = Invoice::orderBy('created_at','DESC')->all();
         return $invoices;
     }
 
@@ -84,7 +84,7 @@ class InvoiceController extends Controller
         global $_invoice_id;
         $_invoice_id = $invoice['id'];
 
-        foreach ($data['invoice_details'] as $invoice_detail) {
+        foreach($data['invoice_details'] as $invoice_detail) {
             $_invoice_detail = InvoiceDetail::create([
                 'quotation_detail_id' => $invoice_detail['id'],
                 'product_id' => $invoice_detail['product_id'],
