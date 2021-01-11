@@ -108,10 +108,10 @@ class InvoiceController extends Controller
             $invoice,
             $invoice->quotation->party,
             $invoice->quotation->quotationDetail,
-            $invoice->invoiceDetail->map(function ($quotation_detail){
+            $invoice->invoiceDetail->map(function ($invoice_detail){
                 return [
-                    $this->invoice->quotation_detail,
-                    $quotation_detail->product
+                    $invoice_detail->quotation_detail_id,
+                    $invoice_detail->product
                 ];
             }),
         ];
