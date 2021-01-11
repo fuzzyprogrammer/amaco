@@ -58,7 +58,7 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $data = $request->json()->all();
-        // return($data);
+        dd($data);
         // dd($request->vat_in_value);
         // dd($request->vat_in_value);
         $data['invoice_no'] = $this->getInvoiceNo();
