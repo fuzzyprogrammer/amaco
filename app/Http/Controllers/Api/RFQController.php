@@ -259,6 +259,17 @@ class RFQController extends Controller
             return (['msg' => 'RFQ' . ' ' . $rfq->id . ' is successfully deleted']);
         }
     }
+
+    public function history()
+    {
+        $rfqs = RFQ::whereExists(function ($query) {
+            $query->select(DB::raw(1))
+                ->from('quotations')
+                ->whereRaw('quotations.rfq_id = r_f_q_s.id');
+        })->orderBy('created_at', 'DESC')
+        ->get();
+        return response()->json($rfqs);
+    }
 }
 
 //////////////

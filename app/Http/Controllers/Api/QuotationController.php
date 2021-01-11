@@ -297,4 +297,17 @@ class QuotationController extends Controller
         return response()->json($quotations_data[0], 200);
     }
 
+    public function history()
+    {
+        $quotations = Quotation::whereExists(function ($query) {
+            $query->select(DB::raw(1))
+            ->from('invoices')
+            ->whereRaw('invoices.quotation_id = quotations.id');
+        })->orderBy('created_at', 'DESC')
+        //->where('status', '=', 'po')
+        ->get();
+
+        return response()->json($quotations);
+    }
+
 }

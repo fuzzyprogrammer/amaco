@@ -181,4 +181,11 @@ class InvoiceController extends Controller
     {
         return ($invoice->delete());
     }
+
+    public function history()
+    {
+        $invoices = Invoice::where('status', '=', 'Delivered')
+        ->orderBy('created_at', 'DESC')->get();
+        return response()->json($invoices);
+    }
 }
