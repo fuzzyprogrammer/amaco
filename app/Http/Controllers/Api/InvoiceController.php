@@ -84,7 +84,8 @@ class InvoiceController extends Controller
 
         foreach ($data['invoice_details'] as $invoice_detail) {
             $_invoice_detail = InvoiceDetail::create([
-                'product_id' => $invoice_detail['id'],
+                'quotation_detail_id' => $invoice_detail['id'],
+                'product_id' => $invoice_detail['product_id'],
                 'sell_price' => $invoice_detail['sell_price'],
                 'quantity' => $invoice_detail['quantity'],
                 'total_amount' => $invoice_detail['total_amount'],
@@ -106,10 +107,10 @@ class InvoiceController extends Controller
         return [
             $invoice,
             $invoice->quotation->party,
-            $invoice->invoiceDetail->map(function ($invoice_detail){
-                return $invoice_detail->product;
-            }),
             $invoice->quotation->quotationDetail,
+            $invoice->invoiceDetail->map(function ($quotation_detail){
+                return $quotation_detail->product;
+            }),
         ];
     }
 

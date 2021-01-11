@@ -16,6 +16,7 @@ class CreateInvoiceDetailsTable extends Migration
         Schema::create('invoice_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('invoice_id')->nullable();
+            $table->unsignedBigInteger('quotation_detail_id')->nullable();
             $table->unsignedBigInteger('product_id')->nullable();
             $table->string('quantity')->nullable();
             $table->string('sell_price')->nullable();
