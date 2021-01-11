@@ -45,7 +45,8 @@ class InvoiceController extends Controller
     }
     public function index()
     {
-        $invoices = Invoice::orderBy('created_at','DESC')->get();
+        $invoices = Invoice::where('status','!=','Delivered')
+        ->orderBy('created_at','DESC')->get();
         return $invoices;
     }
 
