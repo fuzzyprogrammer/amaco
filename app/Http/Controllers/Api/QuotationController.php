@@ -7,6 +7,7 @@ use App\Models\Quotation;
 use App\Models\QuotationDetail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Exception;
+use Illuminate\Support\Facades\DB;
 
 class QuotationController extends Controller
 {
@@ -70,7 +71,14 @@ class QuotationController extends Controller
 
     public function index()
     {
-        $quotations = Quotation::where('status','=','New')->orderBy('created_at','DESC')->get();
+        $quotations = Quotation::where('status', '=', 'New')
+        ->whereNotExists(function ($query) {
+            $query->select(DB::raw(1))
+                ->from('invoices')
+                ->whereRaw('invoices.quotation_id = quotations.id');
+        })->orderBy('created_at', 'DESC')
+        ->get();
+        // $quotations = Quotation::where('status','=','New')->orderBy('created_at','DESC')->get();
         $quotations_data = [
             $quotations->map(
                 function ($quotation) {
