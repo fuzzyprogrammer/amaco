@@ -114,11 +114,11 @@ class InvoiceController extends Controller
                     $invoice_detail->product
                 ];
             }),
-            $invoice->invoiceDetail->map(function ($invoice_detail){
-                return [
-                    $invoice_detail->quotationDetail,
-                ];
-            }),
+            // $invoice->invoiceDetail->map(function ($invoice_detail){
+            //     return [
+            //         $invoice_detail->quotationDetail,
+            //     ];
+            // }),
         ];
     }
 
