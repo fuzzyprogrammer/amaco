@@ -94,7 +94,7 @@ class InvoiceController extends Controller
                 'invoice_id' => $_invoice_id,
             ]);
         }
-        return 'success';
+        // return 'success';
         return response()->json($invoice);
     }
 
