@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\InvoiceDetail;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Null_;
 
 class InvoiceController extends Controller
 {
@@ -77,6 +78,7 @@ class InvoiceController extends Controller
             'discount_in_percentage' => $data['discount_in_percentage'],
             'vat_in_value' => $data['vat_in_value'],
             'grand_total' => $data['grand_total'],
+            'delevery_no' => null,
         ]);
 
         global $_invoice_id;
@@ -122,8 +124,6 @@ class InvoiceController extends Controller
         ];
     }
 
-
-
     /**
      * Update the specified resource in storage.
      *
@@ -131,10 +131,41 @@ class InvoiceController extends Controller
      * @param  \App\Models\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
+
+    public function getCurrentDeliveryYear()
+    {
+        return substr(date('Y'), 2);
+    }
+
+    public function getLastDeliveryNo()
+    {
+        $invoice = Invoice::latest('created_at')->first();
+        if ($invoice) {
+            $latest_delivery_no = $invoice->delivery_no ? $invoice->delivery_no : 0;
+            return ($latest_delivery_no);
+        } else {
+            return ('AMDLV-' . $this->getCurrentDeliveryYear() . '-' . sprintf("%04d", 0));
+        }
+    }
+
+    public function getDeliveryNo()
+    {
+        $latest_delivery_no = $this->getLastDeliveryNo();
+        $last_year = substr($latest_delivery_no, 6, 2);
+        $current_year = $this->getCurrentDeliveryYear();
+        // dd([$last_year, $current_year]);
+        if ($current_year != $last_year) {
+            return ('AMDLV-' . $current_year . '-' . sprintf("%04d", 1));
+        } else {
+            return ('AMDLV-' . $current_year . '-' . sprintf("%04d", ((int)substr($this->getLastDeliveryNo(), 9)) + 1));
+        }
+    }
+
     public function update(Request $request, Invoice $invoice)
     {
         $data = $request->all();
         $data['status'] = 'Delivered';
+        $data['delivery_no'] = $this->getDeliveryNo();
         $invoice->update($data);
         return $invoice;
     }
