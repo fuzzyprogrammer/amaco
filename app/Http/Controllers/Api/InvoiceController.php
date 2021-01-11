@@ -78,7 +78,7 @@ class InvoiceController extends Controller
             'discount_in_percentage' => $data['discount_in_percentage'],
             'vat_in_value' => $data['vat_in_value'],
             'grand_total' => $data['grand_total'],
-            'delevery_no' => null,
+            'delivery_no' => null,
         ]);
 
         global $_invoice_id;
