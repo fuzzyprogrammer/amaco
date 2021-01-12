@@ -61,6 +61,8 @@ class ProductController extends Controller
         $product->type = $request->type;
         $product->hsn_code = $request->hsn_code;
         $product->initial_quantity = $request->initial_quantity;
+        $product->manufacturer_id = $request->manufacturer_id;
+        $product->model_no = $request->model_no;
         $product->minimum_quantity = $request->minimum_quantity;
         $product->save();
         return($product);
