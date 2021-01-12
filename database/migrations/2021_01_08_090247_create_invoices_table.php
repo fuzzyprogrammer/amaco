@@ -24,6 +24,7 @@ class CreateInvoicesTable extends Migration
             $table->string('vat_in_value')->nullable();
             $table->string('grand_total')->nullable();
             $table->string('delivery_no')->nullable();
+            $table->string('payment_type')->nullable();
             $table->timestamps();
         });
     }

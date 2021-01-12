@@ -79,6 +79,8 @@ class PartyController extends Controller
             'website'=>$request->website,
             'fax'=>$request->fax,
             'opening_balance'=>$request->opening_balance,
+            'credit_days'=>$request->credit_days,
+            'credit_limit'=>$request->credit_limit,
         ]);
         $contact = Contact::create([
             'party_id'=>$party->id,
@@ -121,6 +123,8 @@ class PartyController extends Controller
                 'website' => $party->website,
                 'fax' => $party->fax,
                 'opening_balance' => $party->opening_balance,
+                'credit_days' => $party->credit_days,
+                'credit_limit' => $party->credit_limit,
                 'contacts' => $contacts->map(function ($contact){
                     return $contact;
                 }),
@@ -183,6 +187,8 @@ class PartyController extends Controller
             'contact'=>$request->contact,
             'website'=>$request->website,
             'fax'=>$request->fax,
+            'credit_days'=>$request->credit_days,
+            'credit_limit'=>$request->credit_limit,
             'opening_balance'=>$request->opening_balance,
         ]);
 

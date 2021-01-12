@@ -32,6 +32,8 @@ class CreatePartiesTable extends Migration
             $table->string('website')->nullable();
             $table->string('fax')->nullable();
             $table->string('opening_balance')->nullable();
+            $table->string('credit_days')->nullable();
+            $table->string('credit_limit')->nullable();
             $table->timestamps();
         });
     }
