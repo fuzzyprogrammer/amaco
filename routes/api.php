@@ -65,5 +65,5 @@ Route::post('add-user', [UserController::class, 'add'])->name('add.user');
 Route::post('upload-file', [RFQImageController::class, 'store'])->name('file.upload');
 Route::get('parties-vendor',[PartyController::class, 'vendor'])->name('parties.vendor');
 Route::get('products-in-category',[CategoryController::class, 'products_in_category'])->name('products.in.category');
-Route::get('sub-category',[CategoryController::class, 'subCategory'])->name('subCategory');
+Route::get('sub-category/{id}',[CategoryController::class, 'subCategory'])->name('subCategory');
 
