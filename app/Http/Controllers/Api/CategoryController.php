@@ -19,7 +19,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::where('parent_id','=', null)->get();
         return response()->json($categories, 200);
     }
 
@@ -169,7 +169,11 @@ class CategoryController extends Controller
         });
 
         return response()->json($data, 200);
+    }
 
-
+    public function subCategory($id)
+    {
+        $sub_categories = Category::where('parent_id','=',$id)->get();
+        return response()->json($sub_categories);
     }
 }
