@@ -23,7 +23,7 @@ class CreateInvoicesTable extends Migration
             $table->string('discount_in_percentage')->nullable();
             $table->string('vat_in_value')->nullable();
             $table->string('grand_total')->nullable();
-            $table->string('delivery')->nullable();
+            $table->string('delivery_no')->nullable();
             $table->timestamps();
         });
     }
