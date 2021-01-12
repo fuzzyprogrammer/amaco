@@ -9,5 +9,10 @@ class Manufacturer extends Model
 {
     use HasFactory;
 
-    protected $guarded
+    protected $guarded = [];
+
+    public function product()
+    {
+        return $this->hasMany(Product::class, 'manufacturer_id', 'id');
+    }
 }

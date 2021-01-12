@@ -35,4 +35,9 @@ class Product extends Model
     {
         return $this->belongsTo(InvoiceDetail::class);
     }
+
+    public function manufacturer()
+    {
+        return $this->belongsTo(Manufacturer::class);
+    }
 }
