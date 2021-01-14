@@ -177,4 +177,10 @@ class CategoryController extends Controller
         $sub_categories = Category::where('parent_id','=',$id)->get();
         return response()->json($sub_categories);
     }
+
+    public function search($name)
+    {
+        $category = Category::where('name','=',$name)->first();
+        return response()->json($category);
+    }
 }

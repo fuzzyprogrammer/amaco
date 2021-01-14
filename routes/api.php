@@ -66,5 +66,6 @@ Route::post('upload-file', [RFQImageController::class, 'store'])->name('file.upl
 Route::get('parties-vendor',[PartyController::class, 'vendor'])->name('parties.vendor');
 Route::get('products-in-category',[CategoryController::class, 'products_in_category'])->name('products.in.category');
 Route::get('sub-category/{id}', [CategoryController::class, 'subCategory'])->name('subCategory');
+Route::get('category/{name}', [CategoryController::class, 'search'])->name('category.name');
 
 //
