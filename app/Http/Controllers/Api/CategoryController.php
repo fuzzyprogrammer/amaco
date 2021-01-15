@@ -180,6 +180,7 @@ class CategoryController extends Controller
 
     public function search($name)
     {
+        $name = strtolower($name);
         $category = Category::whereLike('name', $name)->get();
         return response()->json($category);
     }
