@@ -81,6 +81,12 @@ class PartyController extends Controller
             'opening_balance'=>$request->opening_balance,
             'credit_days'=>$request->credit_days,
             'credit_limit'=>$request->credit_limit,
+            'account_no'=>$request->account_no,
+            'iban_no'=>$request->iban_no,
+            'bank_name'=>$request->bank_name,
+            'bank_address'=>$request->bank_address,
+            'party_code'=>$request->party_code,
+            'vendor_id'=>$request->vendor_id,
         ]);
         $contact = Contact::create([
             'party_id'=>$party->id,
