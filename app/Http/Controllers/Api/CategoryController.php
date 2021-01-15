@@ -180,7 +180,7 @@ class CategoryController extends Controller
 
     public function search($name)
     {
-        $category = Category::where('name','=',$name)->first();
+        $category = Category::whereLike('name', $name)->get();
         return response()->json($category);
     }
 }
