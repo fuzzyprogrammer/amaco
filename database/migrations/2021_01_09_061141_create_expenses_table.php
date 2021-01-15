@@ -15,18 +15,18 @@ class CreateExpensesTable extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('created_by');
-            $table->unsignedBigInteger('paid_by');
-            $table->unsignedBigInteger('referrence_bill_no');
-            $table->string('paid_date');
-            $table->string('paid_to');
-            $table->string('amount');
-            $table->string('payment_type');
-            $table->string('check_no');
-            $table->string('transaction_id');
-            $table->string('payment_subject');
-            $table->string('description');
-            $table->string('is_paid');
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('paid_by')->nullable();
+            $table->unsignedBigInteger('referrence_bill_no')->nullable();
+            $table->string('paid_date')->nullable();
+            $table->string('paid_to')->nullable();
+            $table->string('amount')->nullable();
+            $table->string('payment_type')->nullable();
+            $table->string('check_no')->nullable();
+            $table->string('transaction_id')->nullable();
+            $table->string('payment_subject')->nullable();
+            $table->string('description')->nullable();
+            $table->string('is_paid')->default(false);
             $table->timestamps();
         });
     }
