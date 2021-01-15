@@ -20,4 +20,9 @@ class Expense extends Model
     {
         return $this->hasOne(Invoice::class, 'referrence_bill_no', 'id');
     }
+
+    public function payment_account()
+    {
+        return $this->hasMany(PaymentAccount::class);
+    }
 }
