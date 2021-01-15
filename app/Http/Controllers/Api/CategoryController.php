@@ -181,7 +181,10 @@ class CategoryController extends Controller
     public function search($name)
     {
         $name = strtolower($name);
-        $category = Category::whereLike('name', $name)->get();
+        // $category = Category::whereLike('name', $name)->get();
+        $category = Category::query()
+        ->where('name', 'LIKE', "%{$name}%")
+        ->get();
         return response()->json($category);
     }
 }
