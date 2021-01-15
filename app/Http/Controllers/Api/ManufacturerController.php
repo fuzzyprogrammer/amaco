@@ -15,7 +15,8 @@ class ManufacturerController extends Controller
      */
     public function index()
     {
-        //
+        $manufacturers = Manufacturer::all();
+        return response()->json($manufacturers);
     }
 
     /**
@@ -26,7 +27,7 @@ class ManufacturerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response()->json(Manufacturer::create($request->all()));
     }
 
     /**
@@ -37,7 +38,7 @@ class ManufacturerController extends Controller
      */
     public function show(Manufacturer $manufacturer)
     {
-        //
+        return response()->json($manufacturer);
     }
 
     /**
@@ -49,7 +50,8 @@ class ManufacturerController extends Controller
      */
     public function update(Request $request, Manufacturer $manufacturer)
     {
-        //
+        $manufacturer->update($request->all());
+        return response()->json($manufacturer);
     }
 
     /**
@@ -60,6 +62,7 @@ class ManufacturerController extends Controller
      */
     public function destroy(Manufacturer $manufacturer)
     {
-        //
+        $manufacturer->delete();
+        return response()->json("Successfully Deleted");
     }
 }
