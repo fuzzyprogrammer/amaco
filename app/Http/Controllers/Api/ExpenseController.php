@@ -27,7 +27,8 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        $expense = Expense::create($request->json()->all());
+        $data = $request->json()->all();
+        $expense = Expense::create($data);
         return response()->json($expense);
 
     }

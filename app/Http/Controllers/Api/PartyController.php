@@ -131,6 +131,12 @@ class PartyController extends Controller
                 'opening_balance' => $party->opening_balance,
                 'credit_days' => $party->credit_days,
                 'credit_limit' => $party->credit_limit,
+                'account_no' => $party->account_no,
+                'iban_no' => $party->iban_no,
+                'bank_name' => $party->bank_name,
+                'bank_address' => $party->bank_address,
+                'party_code' => $party->party_code,
+                'vendor_id' => $party->vendor_id,
                 'contacts' => $contacts->map(function ($contact){
                     return $contact;
                 }),
@@ -196,6 +202,12 @@ class PartyController extends Controller
             'credit_days'=>$request->credit_days,
             'credit_limit'=>$request->credit_limit,
             'opening_balance'=>$request->opening_balance,
+            'account_no' => $party->account_no,
+            'iban_no' => $party->iban_no,
+            'bank_name' => $party->bank_name,
+            'bank_address' => $party->bank_address,
+            'party_code' => $party->party_code,
+            'vendor_id' => $party->vendor_id,
         ]);
 
         return response()->json($party, 200);
