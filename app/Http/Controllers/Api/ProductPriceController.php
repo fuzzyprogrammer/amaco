@@ -27,7 +27,7 @@ class ProductPriceController extends Controller
      */
     public function store(Request $request)
     {
-        $product = ProductPrice::create($request->all())
+        $product = ProductPrice::create($request->all());
     }
 
     /**

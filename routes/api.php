@@ -58,7 +58,7 @@ Route::apiResource('invoice-detail',InvoiceDetailController::class);
 Route::apiResource('expense',ExpenseController::class);
 Route::apiResource('employee',EmployeeController::class);
 Route::apiResource('manufacturer',ManufacturerController::class);
-Route::apiResource('product-price',PoductPriceController::class);
+Route::apiResource('product-price',ProductPriceController::class);
 
 Route::post('rfq-history', [RFQController::class, 'history'])->name('rfq.history');
 Route::post('invoice-history', [InvoiceController::class, 'history'])->name('invoice.history');
