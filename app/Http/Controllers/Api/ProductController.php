@@ -73,6 +73,7 @@ class ProductController extends Controller
 //
     public function show($product)
     {
+        $productPrice = Product::where('id',$product)->first();
         $product = DB::table('products')
             ->leftJoin('categories', 'categories.id', '=', 'products.category_id')
             ->leftJoin('divisions', 'divisions.id', '=', 'products.division_id')
@@ -80,7 +81,9 @@ class ProductController extends Controller
             ->select('products.*', 'categories.name as category_name', 'divisions.name as division_name', 'manufacturers.name as manufacturer_name')
             ->where('products.id','=',$product)
             ->get();
-        return response()->json([$product, $product->productPrice]);
+
+        $data = [$product, $productPrice->productPrice];
+        return response()->json($data);
 
     }
 
