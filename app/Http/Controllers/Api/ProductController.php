@@ -82,7 +82,7 @@ class ProductController extends Controller
             ->where('products.id','=',$product)
             ->get();
 
-        $data = [$product, 'prices' => $productPrice->productPrice()];
+        $data = ['product' => $product, 'prices' => $productPrice->productPrice()];
         return response()->json($data);
 
     }
