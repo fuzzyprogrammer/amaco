@@ -93,8 +93,8 @@ class PartyController extends Controller
             'fname'=>$request->fname,
             'lname'=>$request->lname,
             'designation'=>$request->designation,
-            'phone1'=>$request->phone1,
-            'phone2'=>$request->phone2,
+            'mobno'=>$request->mobno,
+            'landline'=>$request->landline,
             'email'=>$request->email,
 
         ]);
