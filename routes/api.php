@@ -21,6 +21,7 @@ use App\Http\Controllers\Api\InvoiceDetailController;
 use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\ManufacturerController;
+use App\Http\Controllers\Api\ProductPriceController;
 
 
 /*
@@ -57,6 +58,7 @@ Route::apiResource('invoice-detail',InvoiceDetailController::class);
 Route::apiResource('expense',ExpenseController::class);
 Route::apiResource('employee',EmployeeController::class);
 Route::apiResource('manufacturer',ManufacturerController::class);
+Route::apiResource('product-price',PoductPriceController::class);
 
 Route::post('rfq-history', [RFQController::class, 'history'])->name('rfq.history');
 Route::post('invoice-history', [InvoiceController::class, 'history'])->name('invoice.history');

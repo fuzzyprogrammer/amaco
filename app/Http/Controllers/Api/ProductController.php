@@ -31,7 +31,7 @@ class ProductController extends Controller
             'name' => 'required|max:255',
             'description' => 'required|max:500',
             'unit_of_measure' => 'required',
-            'unit_price' => 'required',
+            // 'unit_price' => 'required',
             'type' => 'required',
             'hsn_code' => 'required',
             'initial_quantity' => 'required',
@@ -52,12 +52,12 @@ class ProductController extends Controller
         $product = new Product;
         $product->category_id = $request->category_id;
         $product->division_id = $request->division_id;
-        $product->party_id = $request->party_id;
+        // $product->party_id = $request->party_id;
         $product->name = $request->name;
         // $product->name_in_ar = $request->name == null ? null : GoogleTranslate::trans($request->name, 'ar');
         $product->description = $request->description;
         $product->unit_of_measure = $request->unit_of_measure;
-        $product->unit_price = $request->unit_price;
+        // $product->unit_price = $request->unit_price;
         $product->type = $request->type;
         $product->hsn_code = $request->hsn_code;
         $product->initial_quantity = $request->initial_quantity;
