@@ -28,37 +28,13 @@ class PartyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function store(Request $request)
     {
-        // $rules = [
-        //     'firm_name' => 'required',
-        //     'registration_no' => 'required|max:12',
-        //     'vat_no' => 'required|max:15',
-        //     'post_box_no' => 'required',
-        //     'street' => 'required',
-        //     'city' => 'required',
-        //     'proviance' => 'required',
-        //     'country' => 'required',
-        //     'zip_code' => 'required',
-        //     'party_type' => 'required',
-        //     'fname' => 'required',
-        //     'lname' => 'required',
-        //     'suffix' => 'required',
-        //     'contact1' => 'required',
-        //     'contact2' => 'required',
-        //     'fax' => 'required',
-        //     'email' => 'required|email',
-        //     'opening_balance' => 'required',
-        //     'website' => 'required',
-        // ];
 
-        // $messages=['required'=> 'The :attribute field is required.'];
 
-        // $validator = Validator::make($request->all(),$rules,$messages);
-        // $errors = $validator->errors();
-        // foreach ($errors as $error ) {
-        //     echo $error;
-        // }
         $party = Party::create([
             'firm_name'=>$request->firm_name,
             'firm_name_in_ar'=>GoogleTranslate::trans($request->firm_name,'ar'),
@@ -98,6 +74,11 @@ class PartyController extends Controller
             'email'=>$request->email,
 
         ]);
+
+        if($party->party_code == null){
+            $party->update(['party_code'=>sprintf('%04d', $party->id)]);
+        }
+
         return response()->json([$party, $contact], 200);
     }
 
