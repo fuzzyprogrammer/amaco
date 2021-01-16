@@ -76,6 +76,7 @@ class ProductController extends Controller
         $productPrice = Product::where('id','=',$product)->first();
         $prices = $productPrice->productPrice->map(function ($productdetail){
                 return [
+                    'party_id'=> $productdetail->id,
                     'party_id'=> $productdetail->party_id,
                     'product_id'=> $productdetail->product_id,
                     'price'=> $productdetail->price,
