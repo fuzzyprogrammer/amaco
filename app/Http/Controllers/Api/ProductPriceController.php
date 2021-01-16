@@ -38,7 +38,11 @@ class ProductPriceController extends Controller
      */
     public function show(ProductPrice $productPrice)
     {
-        return response()->json($productPrice);
+        return response()->json([
+            $productPrice,
+            $productPrice->party,
+            $productPrice->product
+        ]);
     }
 
     /**

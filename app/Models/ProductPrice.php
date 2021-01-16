@@ -15,4 +15,9 @@ class ProductPrice extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function party()
+    {
+        return $this->hasOne(Party::class, 'party_id','id');
+    }
 }

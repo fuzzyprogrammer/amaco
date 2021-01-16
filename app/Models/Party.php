@@ -32,4 +32,9 @@ class Party extends Model
     {
         return $this->belongsTo(QuotationDetail::class);
     }
+
+    public function productPrice()
+    {
+        return $this->belongsTo(ProductPrice::class);
+    }
 }
