@@ -75,7 +75,7 @@ class ProductController extends Controller
     {
         $productPrice = Product::where('id','=',$product)->first();
         $prices = $productPrice->productPrice->map(function ($productdetail){
-                return $productdetail->party;
+                return [$productdetail, $productdetail->party];
             });
         $product = DB::table('products')
             ->leftJoin('categories', 'categories.id', '=', 'products.category_id')
