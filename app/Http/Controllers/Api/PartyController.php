@@ -76,7 +76,7 @@ class PartyController extends Controller
         ]);
 
         if($party->party_code == null){
-            $party->update(['party_code'=>'c-'.sprintf('%04d', $party->id)]);
+            $party->update(['party_code'=>'c-'.sprintf('%05d', $party->id)]);
         }
 
         return response()->json([$party, $contact], 200);
