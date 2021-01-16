@@ -73,7 +73,7 @@ class ProductController extends Controller
 //
     public function show($product)
     {
-        $productPrice = Product::where('id',$product)->first();
+        $productPrice = Product::where('id','=',$product)->first();
         $product = DB::table('products')
             ->leftJoin('categories', 'categories.id', '=', 'products.category_id')
             ->leftJoin('divisions', 'divisions.id', '=', 'products.division_id')
