@@ -77,7 +77,7 @@ class ProductController extends Controller
             ->leftJoin('categories', 'categories.id', '=', 'products.category_id')
             ->leftJoin('divisions', 'divisions.id', '=', 'products.division_id')
             ->leftJoin('product_prices', 'product_id', '=', 'products.id')
-            ->leftJoin('manufacturers','products.manufacturer_id', '=','manufacturers.id')
+            ->leftJoin('manufacturers','manufacturers.id', '=', 'products.manufacturer_id')
             ->select('products.*', 'categories.name as category_name', 'divisions.name as division_name', 'product_prices.*','manufacturers.*')
             ->where('products.id','=',$product)
             ->get();
