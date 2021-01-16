@@ -18,6 +18,6 @@ class ProductPrice extends Model
 
     public function party()
     {
-        return $this->hasOne(Party::class, 'party_id','id');
+        return $this->hasOne(Party::class, 'id', 'party_id');
     }
 }
