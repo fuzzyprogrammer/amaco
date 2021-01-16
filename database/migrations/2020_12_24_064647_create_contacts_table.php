@@ -22,6 +22,7 @@ class CreateContactsTable extends Migration
             $table->string('mobno')->nullable();
             $table->string('landline')->nullable();
             $table->string('email')->nullable();
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }
