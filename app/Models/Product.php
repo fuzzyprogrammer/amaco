@@ -40,4 +40,9 @@ class Product extends Model
     {
         return $this->belongsTo(Manufacturer::class);
     }
+
+    public function productPrice()
+    {
+        return $this->hasMany(ProductPrice::class, 'product_id', 'id');
+    }
 }
