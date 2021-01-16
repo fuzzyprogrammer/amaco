@@ -27,7 +27,9 @@ class ManufacturerController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json(Manufacturer::create($request->all()));
+        $data = $request->json()->all();
+        $manufacturer = Manufacturer::create($data);
+        return response()->json($manufacturer);
     }
 
     /**
