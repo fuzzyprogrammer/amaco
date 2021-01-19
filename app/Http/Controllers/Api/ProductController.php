@@ -29,13 +29,13 @@ class ProductController extends Controller
             'category_id' => 'required',
             'division_id' => 'required',
             'name' => 'required|max:255',
-            'description' => 'required|max:500',
+            // 'description' => 'required|max:500',
             'unit_of_measure' => 'required',
             // 'unit_price' => 'required',
             'type' => 'required',
-            'hsn_code' => 'required',
-            'initial_quantity' => 'required',
-            'minimum_quantity' => 'required',
+            // 'hsn_code' => 'required',
+            // 'initial_quantity' => 'required',
+            // 'minimum_quantity' => 'required',
         ];
 
         $validatedData = $request->validate($rules);
