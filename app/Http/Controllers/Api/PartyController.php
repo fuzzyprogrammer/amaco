@@ -9,6 +9,7 @@ use App\Models\Contact;
 use App\Models\ProductPrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use DB;
 // use Stichoza\GoogleTranslate\GoogleTranslate;
 
 class PartyController extends Controller
