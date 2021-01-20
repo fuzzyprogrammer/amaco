@@ -191,7 +191,7 @@ class PartyController extends Controller
             'vendor_id' => $party->vendor_id,
         ]);
 
-        return response()->json($party, 200);
+        return response()->json($request, 200);
     }
 
     /**
