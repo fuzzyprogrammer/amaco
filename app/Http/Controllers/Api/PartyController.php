@@ -220,7 +220,7 @@ class PartyController extends Controller
     public function allVendorExcept($party)
     {
         $vendors = Party::where('party_type', '=', 'vendor')
-        ->except('id','=',$party)
+        ->whereNotIn('id',$party)
         ->select('id', 'firm_name', 'contact')
         ->get()
         ->toArray();
