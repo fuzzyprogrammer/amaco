@@ -222,6 +222,13 @@ class PartyController extends Controller
     public function allVendorExcept($product)
     {
         $product_price = ProductPrice::where('product_id','=',$product)->first();
+        if($product_price == null){
+            $vendors = Party::where('party_type', '=', 'vendor')
+            ->select('id', 'firm_name', 'contact')
+            ->get()
+            ->toArray();
+            return $vendors;
+        }
         $vendors = Party::where('party_type', '=', 'vendor')
         // ->whereNotIn('id',[$party])
         ->orWhere('id','!=', $product_price->party_id)
@@ -231,4 +238,12 @@ class PartyController extends Controller
         return $vendors;
     }
 
+    // public function allVendorExcept($product){
+    //     $vendors = ProductPrice::whereNotExists(function ($query) {
+    //         $query->select(DB::raw(1))
+    //             ->from('quotations')
+    //             ->whereRaw('quotations.rfq_id = r_f_q_s.id');
+    //     })->orderBy('created_at', 'DESC')
+    //     ->get();
+    // }
 }
