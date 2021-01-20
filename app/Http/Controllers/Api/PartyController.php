@@ -218,11 +218,9 @@ class PartyController extends Controller
         return $vendors;
     }
 
-    public function allVendorExcept($product)
+    public function allVendorExcept(Product $product)
     {
-        $product = Product::findOrFail($product);
-        $data = $product->productPrice->party_id;
-        dd($data);
+        dd($product);
         $vendors = Party::where('party_type', '=', 'vendor')
         // ->whereNotIn('id',[$party])
         ->orWhere('id','!=',$product->productPrice->party_id)
