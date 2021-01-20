@@ -71,7 +71,7 @@ Route::get('parties-vendor',[PartyController::class, 'vendor'])->name('parties.v
 Route::get('products-in-category',[CategoryController::class, 'products_in_category'])->name('products.in.category');
 Route::get('sub-category/{id}', [CategoryController::class, 'subCategory'])->name('subCategory');
 Route::get('category/{name}', [CategoryController::class, 'search'])->name('category.name');
-Route::get('parties-except/{party}', [PartyController::class, 'allVendorExcept'])->name('except.vendor');
+Route::get('parties-except/{product}', [PartyController::class, 'allVendorExcept'])->name('except.vendor');
 
 
 //

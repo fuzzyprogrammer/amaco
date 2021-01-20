@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Party;
+use App\Models\Product;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -217,11 +218,12 @@ class PartyController extends Controller
         return $vendors;
     }
 
-    public function allVendorExcept($party)
+    public function allVendorExcept(Product $product)
     {
+
         $vendors = Party::where('party_type', '=', 'vendor')
         // ->whereNotIn('id',[$party])
-        ->orWhere('id','!=',$party)
+        ->orWhere('id','!=',$product->party_id)
         ->select('id', 'firm_name', 'contact')
         ->get()
         ->toArray();
