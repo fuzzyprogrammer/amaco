@@ -253,5 +253,7 @@ class PartyController extends Controller
         $results = DB::select(DB::raw("select * from parties where id not in (select party_id from product_prices where product_id=7) and party_type='vendor'
 "));
 
+return response()->json($results);
+
     }
 }
