@@ -52,11 +52,11 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | PUT|PATCH | api/contact/{contact}                   | contact.update           |
 | DELETE    | api/contact/{contact}                   | contact.destroy          |
 | GET|HEAD  | api/contact/{contact}                   | contact.show             |
-| POST      | api/employee                            | employee.store           |
 | GET|HEAD  | api/employee                            | employee.index           |
+| POST      | api/employee                            | employee.store           |
+| GET|HEAD  | api/employee/{employee}                 | employee.show            |
 | DELETE    | api/employee/{employee}                 | employee.destroy         |
 | PUT|PATCH | api/employee/{employee}                 | employee.update          |
-| GET|HEAD  | api/employee/{employee}                 | employee.show            |
 | GET|HEAD  | api/expense                             | expense.index            |
 | POST      | api/expense                             | expense.store            |
 | PUT|PATCH | api/expense/{expense}                   | expense.update           |
@@ -69,11 +69,11 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | DELETE    | api/fileUpload/{fileUpload}             | fileUpload.destroy       |
 | GET|HEAD  | api/invoice                             | invoice.index            |
 | POST      | api/invoice                             | invoice.store            |
-| POST      | api/invoice-detail                      | invoice-detail.store     |
 | GET|HEAD  | api/invoice-detail                      | invoice-detail.index     |
+| POST      | api/invoice-detail                      | invoice-detail.store     |
+| DELETE    | api/invoice-detail/{invoice_detail}     | invoice-detail.destroy   |
 | PUT|PATCH | api/invoice-detail/{invoice_detail}     | invoice-detail.update    |
 | GET|HEAD  | api/invoice-detail/{invoice_detail}     | invoice-detail.show      |
-| DELETE    | api/invoice-detail/{invoice_detail}     | invoice-detail.destroy   |
 | POST      | api/invoice-history                     | invoice.history          |
 | DELETE    | api/invoice/{invoice}                   | invoice.destroy          |
 | PUT|PATCH | api/invoice/{invoice}                   | invoice.update           |
@@ -85,6 +85,7 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | GET|HEAD  | api/manufacturer/{manufacturer}         | manufacturer.show        |
 | GET|HEAD  | api/parties                             | parties.index            |
 | POST      | api/parties                             | parties.store            |
+| GET|HEAD  | api/parties-except/{party}              | except.vendor            |
 | GET|HEAD  | api/parties-vendor                      | parties.vendor           |
 | DELETE    | api/parties/{party}                     | parties.destroy          |
 | PUT|PATCH | api/parties/{party}                     | parties.update           |
@@ -121,12 +122,12 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | GET|HEAD  | api/rfq-details/{rfq_detail}            | rfq-details.show         |
 | POST      | api/rfq-history                         | rfq.history              |
 | GET|HEAD  | api/rfq/{rfq}                           | rfq.show                 |
-| DELETE    | api/rfq/{rfq}                           | rfq.destroy              |
 | PUT|PATCH | api/rfq/{rfq}                           | rfq.update               |
-| POST      | api/sale                                | sale.store               |
+| DELETE    | api/rfq/{rfq}                           | rfq.destroy              |
 | GET|HEAD  | api/sale                                | sale.index               |
-| GET|HEAD  | api/sale-detail                         | sale-detail.index        |
+| POST      | api/sale                                | sale.store               |
 | POST      | api/sale-detail                         | sale-detail.store        |
+| GET|HEAD  | api/sale-detail                         | sale-detail.index        |
 | GET|HEAD  | api/sale-detail/{sale_detail}           | sale-detail.show         |
 | PUT|PATCH | api/sale-detail/{sale_detail}           | sale-detail.update       |
 | DELETE    | api/sale-detail/{sale_detail}           | sale-detail.destroy      |
@@ -136,6 +137,7 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | GET|HEAD  | api/sub-category/{id}                   | subCategory              |
 | POST      | api/upload-file                         | file.upload              |
 | GET|HEAD  | api/user                                |                          |
+|           |                                         |                          |
 | GET|HEAD  | api/users                               |                          |
 +-----------+-----------------------------------------+--------------------------+
 ```
