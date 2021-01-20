@@ -219,26 +219,38 @@ class PartyController extends Controller
         return $vendors;
     }
 
-    public function allVendorExcept($product)
-    {
-        // to get the all vendors excepts product assigned vendor
-        $product_price = ProductPrice::where('product_id','=',$product)->first();
-        // dd($product_price);
-        if($product_price == null){
-            $vendors = Party::where('party_type', '=', 'vendor')
-            ->select('id', 'firm_name', 'contact')
-            ->get()
-            ->toArray();
-            return $vendors;
-        }
-        else{
-        $vendors = Party::where('id','!=', $product_price->party_id)
-        ->orWhere('party_type', '=', 'vendor')
-        // ->whereNotIn('id',[$party])
-        ->select('id', 'firm_name', 'contact')
-        ->get()
-        ->toArray();
-        return $vendors;
-        }
+    // public function allVendorExcept($product)
+    // {
+    //     // to get the all vendors excepts product assigned vendor
+    //     $product_price = ProductPrice::where('product_id','=',$product)->first();
+    //     // dd($product_price);
+    //     if($product_price == null){
+    //         $vendors = Party::where('party_type', '=', 'vendor')
+    //         ->select('id', 'firm_name', 'contact')
+    //         ->get()
+    //         ->toArray();
+    //         return $vendors;
+    //     }
+    //     else{
+    //     $vendors = Party::where('id','!=', $product_price->party_id)
+    //     ->orWhere('party_type', '=', 'vendor')
+    //     // ->whereNotIn('id',[$party])
+    //     ->select('id', 'firm_name', 'contact')
+    //     ->get()
+    //     ->toArray();
+    //     return $vendors;
+    //     }
+    // }
+    public function allVendorExcept($product){
+        // $this->product = $product;
+        // $vendors = Party::whereNotExists(function ($query) {
+        //     $query->select(DB::raw(1))
+        //         ->from('product_prices')
+        //         ->whereRaw('product_prices.product_id='.$this->product);
+        // })
+        // ->get();
+        $results = DB::select(DB::raw("select * from parties where id not in (select party_id from product_prices where product_id=7) and party_type='vendor'
+"));
+
     }
 }
