@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Party;
 use App\Models\Product;
 use App\Models\Contact;
+use App\Models\ProductPrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 // use Stichoza\GoogleTranslate\GoogleTranslate;
@@ -218,9 +219,10 @@ class PartyController extends Controller
         return $vendors;
     }
 
-    public function allVendorExcept(Product $product)
+    public function allVendorExcept($product)
     {
-        dd($product);
+        $product_price = ProductPrice::where('product_id','=',$product)->first();
+        dd($product_price);
         $vendors = Party::where('party_type', '=', 'vendor')
         // ->whereNotIn('id',[$party])
         ->orWhere('id','!=',$product->productPrice->party_id)
