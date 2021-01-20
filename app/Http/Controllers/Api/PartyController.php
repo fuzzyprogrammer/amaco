@@ -216,4 +216,15 @@ class PartyController extends Controller
         ->toArray();
         return $vendors;
     }
+
+    public function allVendorExcept($party)
+    {
+        $vendors = Party::where('party_type', '=', 'vendor')
+        ->except('id','=',$party)
+        ->select('id', 'firm_name', 'contact')
+        ->get()
+        ->toArray();
+        return $vendors;
+    }
+
 }
