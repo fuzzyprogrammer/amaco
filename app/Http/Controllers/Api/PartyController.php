@@ -222,7 +222,7 @@ class PartyController extends Controller
     {
 
         $data = array($product->productPrice);
-        dd($data);
+        dd($data->party_id);
         $vendors = Party::where('party_type', '=', 'vendor')
         // ->whereNotIn('id',[$party])
         ->orWhere('id','!=',$product->productPrice->party_id)
