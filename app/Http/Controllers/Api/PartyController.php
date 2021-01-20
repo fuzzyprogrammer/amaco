@@ -222,7 +222,7 @@ class PartyController extends Controller
     public function allVendorExcept($product)
     {
         $product_price = ProductPrice::where('product_id','=',$product)->first();
-        dd($product_price);
+        // dd($product_price);
         if($product_price == null){
             $vendors = Party::where('party_type', '=', 'vendor')
             ->select('id', 'firm_name', 'contact')
