@@ -183,7 +183,7 @@ class PartyController extends Controller
             'credit_days'=>$request->credit_days == null ? $party->credit_days : $request->credit_days,
             'credit_limit'=>$request->credit_limit == null ? $party->credit_limits : $request->credit_limit,
             'opening_balance'=>$request->opening_balance == null ? $party->opening_balance : $request->opening_balance,
-            'account_no' =>$request->account_no == null ? $party->account_no :  $request->account_no,
+            'account_no'=> $request->account_no == null ? $party->account_no : $request->account_no,
             'iban_no' =>$request->iban_no == null ? $party->iban_no :  $request->iban_no,
             'bank_name' =>$request->bank_name == null ? $party->bank_name :  $request->bank_name,
             'bank_address' =>$request->bank_address == null ? $party->bank_address :  $request->bank_address,
