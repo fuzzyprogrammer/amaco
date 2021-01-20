@@ -183,12 +183,12 @@ class PartyController extends Controller
             'credit_days'=>$request->credit_days == null ? $party->credit_days : $request->credit_days,
             'credit_limit'=>$request->credit_limit == null ? $party->credit_limits : $request->credit_limit,
             'opening_balance'=>$request->opening_balance == null ? $party->opening_balance : $request->opening_balance,
-            'account_no' =>$request->account_no == null ? $party->account_no :  $party->account_no,
-            'iban_no' =>$request->iban_no == null ? $party->iban_no :  $party->iban_no,
-            'bank_name' =>$request->bank_name == null ? $party->bank_name :  $party->bank_name,
-            'bank_address' =>$request->bank_address == null ? $party->bank_address :  $party->bank_address,
-            'party_code' =>$request->party_code == null ? $party->party_code :  $party->party_code,
-            'vendor_id' =>$request->vendor_id == null ? $party->vendor_id :  $party->vendor_id,
+            'account_no' =>$request->account_no == null ? $party->account_no :  $request->account_no,
+            'iban_no' =>$request->iban_no == null ? $party->iban_no :  $request->iban_no,
+            'bank_name' =>$request->bank_name == null ? $party->bank_name :  $request->bank_name,
+            'bank_address' =>$request->bank_address == null ? $party->bank_address :  $request->bank_address,
+            'party_code' =>$request->party_code == null ? $party->party_code :  $request->party_code,
+            'vendor_id' =>$request->vendor_id == null ? $party->vendor_id :  $request->vendor_id,
         ]);
 
         return response()->json($party, 200);
