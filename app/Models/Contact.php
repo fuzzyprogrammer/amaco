@@ -15,4 +15,9 @@ class Contact extends Model
     {
         return $this->belongsTo(Party::class);
     }
+
+    public function rfq()
+    {
+        return $this->belongsTo(RFQ::class);
+    }
 }

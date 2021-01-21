@@ -30,4 +30,9 @@ class Quotation extends Model
         return $this->hasOne(Invoice::class, 'quotation_id', 'id');
     }
 
+    public function contact()
+    {
+        return $this->hasOne(Contact::class, 'id', 'contact_id');
+    }
+
 }

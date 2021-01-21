@@ -79,6 +79,7 @@ class RFQController extends Controller
                 'require_date' => $request->has('require_date') ? $data['require_date'] : date('Y-m-d'),
                 // 'require_date' => $data['require_date'],
                 // 'requested_date' => $data['requested_date'],
+                'contact_id' => $request['contact_id'],
                 'party_id' => $data['party_id'],
                 ]);
                 // return $rfq;
@@ -166,6 +167,7 @@ class RFQController extends Controller
             'updated_at' => $rfq->updated_at,
             'files' => $rfq->file,
             "party" => $rfq->party ,
+            "contact" => $rfq->contact,
             'rfq_details' => $rfq->rfq_details->map(function($rfq_detail){
                 $rfq_detail = RFQDetails::where('id','=',$rfq_detail->id)->first();
                 return [
@@ -175,7 +177,7 @@ class RFQController extends Controller
                     "product_id"=> $rfq_detail->product_id,
                     "product" => array($rfq_detail->product),
                     "description"=> $rfq_detail->description,
-                    "quantity_required"=> $rfq_detail->quantity_required,
+                    "contact_id"=> $rfq_detail->quantity_required,
                 ];
             }),
         ];
@@ -219,6 +221,7 @@ class RFQController extends Controller
             $rfq->update([
                 'requested_date' => $data['requested_date'],
                 'require_date' => $data['require_date'],
+                'contact_id' => $data['contact_id'],
                 'party_id' => $data['party_id'],
             ]);
 

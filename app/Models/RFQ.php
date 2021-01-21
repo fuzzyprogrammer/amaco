@@ -34,4 +34,9 @@ class RFQ extends Model
     {
         return $this->belongsTo(Quotation::class);
     }
+
+    public function contact()
+    {
+        return $this->hasOne(Contact::class,'id', 'contact_id');
+    }
 }

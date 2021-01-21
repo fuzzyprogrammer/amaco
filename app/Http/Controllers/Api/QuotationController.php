@@ -90,6 +90,8 @@ class QuotationController extends Controller
                         'status' => $quotation->status,
                         'total_value' => $quotation->total_value,
                         'party_id' => $quotation->party_id,
+                        "contact_id" => $quotation->contact_id,
+                        "contact" => $quotation->contact,
                         "party" => $quotation->party,
                         "vat_in_value" => $quotation->vat_in_value,
                         "net_amount" => $quotation->net_amount,
@@ -146,6 +148,7 @@ class QuotationController extends Controller
             'delivery_time' => $data['delivery_time'],
             'inco_terms' => $data['inco_terms'],
             'po_number' => $data['po_number'],
+            'contact_id' => $data['contact_id'],
         ]);
 
         global $quotation_id;
@@ -202,6 +205,8 @@ class QuotationController extends Controller
             "delivery_time" => $quotation->delivery_time,
             "inco_terms" => $quotation->inco_terms,
             "po_number" => $quotation->po_number,
+            "contact" => $quotation->contact,
+            "party" => $quotation->party,
             "party"=> $quotation->party,
             "rfq" => $quotation->rfq,
             "quotation_details" => $quotation->quotationDetail->map(function ($quotation_detail){

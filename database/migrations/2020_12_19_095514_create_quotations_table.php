@@ -18,6 +18,7 @@ class CreateQuotationsTable extends Migration
             $table->string('quotation_no')->nullable()->default(0);
             $table->unsignedBigInteger('party_id')->nullable();
             $table->unsignedBigInteger('rfq_id')->nullable();
+            $table->unsignedBigInteger('contact_id')->nullable();
             $table->string('status')->default('New');
             $table->string('total_value')->nullable();
             $table->string('discount_in_p')->nullable();
