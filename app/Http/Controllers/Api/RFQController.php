@@ -178,6 +178,7 @@ class RFQController extends Controller
                     "product" => array($rfq_detail->product),
                     "description"=> $rfq_detail->description,
                     "prices" => $rfq_detail->product->productPrice,
+                    "prices" => $rfq_detail->product->productPrice->party,
                     "quantity_required" => $rfq_detail->quantity_required,
                 ];
             }),
