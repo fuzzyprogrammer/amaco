@@ -175,14 +175,14 @@ class RFQController extends Controller
                     "created_at"=> $rfq_detail->created_at,
                     "updated_at"=> $rfq_detail->updated_at,
                     "product_id"=> $rfq_detail->product_id,
-                    "product" => array($rfq_detail->product),
+                    "quantity_required" => $rfq_detail->quantity_required,
                     "description"=> $rfq_detail->description,
-                    "prices" => $rfq_detail->product->productPrice,
                     "product_name" => $rfq_detail->product->name,
-                    "prices" => $rfq_detail->product->productPrice->map(function ($price){
+                    "product" => array($rfq_detail->product),
+                    "prices" => $rfq_detail->product->productPrice,
+                    "party" => $rfq_detail->product->productPrice->map(function ($price){
                         return($price->party);
                     }),
-                    "quantity_required" => $rfq_detail->quantity_required,
                 ];
             }),
         ];
