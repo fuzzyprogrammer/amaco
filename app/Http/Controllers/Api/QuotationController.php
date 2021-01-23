@@ -148,7 +148,7 @@ class QuotationController extends Controller
             'delivery_time' => $data['delivery_time'],
             'inco_terms' => $data['inco_terms'],
             'po_number' => $data['po_number'],
-            // 'contact_id' => $data['contact_id'],
+            'contact_id' => $data['contact_id'],
         ]);
 
         global $quotation_id;
