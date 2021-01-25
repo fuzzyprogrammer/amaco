@@ -38,13 +38,15 @@ class ProductQuotationDetail extends Controller
      */
     public function show($id)
     {
-        $quotationDetail = QuotationDetail::where('product_id',$id)->first();
-        $data = [
+        $quotationDetails = QuotationDetail::where('product_id',$id)->get();
+        $data = $quotationDetails->map(function ($quotationDetail){
+            return[
             'firm_name' => $quotationDetail->quotation->firm_name,
             'sellprice' => $quotationDetail->sell_price,
             'purchase_price' => $quotationDetail->purchase_price,
             'margin' => $quotationDetail->margin,
-        ];
+            ];
+        });
         return response()->json($data);
     }
 
