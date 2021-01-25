@@ -45,6 +45,8 @@ class ProductQuotationDetail extends Controller
             'purchase_price' => $quotationDetail->purchase_price,
             'margin' => $quotationDetail->margin,
 
+            return response()->json($data);
+
         ];
     }
 
