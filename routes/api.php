@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ProductQuotationDetail;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\PartyController;
@@ -22,7 +23,6 @@ use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\ManufacturerController;
 use App\Http\Controllers\Api\ProductPriceController;
-use App\Http\Controllers\Api\ProductQuotationDetail;
 
 /*
 |--------------------------------------------------------------------------
