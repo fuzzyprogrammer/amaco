@@ -10,7 +10,7 @@ class QuotationDetail extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function quotataion()
+    public function quotation()
     {
         return $this->belongsTo(Quotation::class);
     }
