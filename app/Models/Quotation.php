@@ -13,7 +13,7 @@ class Quotation extends Model
 
     public function quotationDetail()
     {
-        return $this->hasMany(QuotationDetail::class);
+        return $this->hasMany(QuotationDetail::class,'quotation_id','id');
     }
     public function party()
     {
