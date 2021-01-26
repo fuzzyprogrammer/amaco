@@ -59,7 +59,7 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | GET|HEAD  | api/employee/{employee}                 | employee.show            |
 | GET|HEAD  | api/expense                             | expense.index            |
 | POST      | api/expense                             | expense.store            |
-| GET|HEAD  | api/expense/paid                        | expense.paid             |
+| GET|HEAD  | api/expense-paid                        | expense.paid             |
 | DELETE    | api/expense/{expense}                   | expense.destroy          |
 | PUT|PATCH | api/expense/{expense}                   | expense.update           |
 | GET|HEAD  | api/expense/{expense}                   | expense.show             |
