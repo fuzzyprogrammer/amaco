@@ -76,7 +76,7 @@ Route::get('sub-category/{id}', [CategoryController::class, 'subCategory'])->nam
 Route::get('category/{name}', [CategoryController::class, 'search'])->name('category.name');
 Route::get('parties-except/{product}', [PartyController::class, 'allVendorExcept'])->name('except.vendor');
 Route::get('product-quotation-detail/{id}', [ProductQuotationDetail::class, 'show'])->name('product.quotationdetail');
-Route::get('expense-paid', [Expense::class, 'paid'])->name('expense.paid');
+Route::get('expense-paid', [ExpenseController::class, 'paid'])->name('expense.paid');
 
 
 //
