@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\ManufacturerController;
 use App\Http\Controllers\Api\ProductPriceController;
+use App\Models\Expense;
 use App\Models\PaymentAccount;
 
 /*
@@ -75,6 +76,7 @@ Route::get('sub-category/{id}', [CategoryController::class, 'subCategory'])->nam
 Route::get('category/{name}', [CategoryController::class, 'search'])->name('category.name');
 Route::get('parties-except/{product}', [PartyController::class, 'allVendorExcept'])->name('except.vendor');
 Route::get('product-quotation-detail/{id}', [ProductQuotationDetail::class, 'show'])->name('product.quotationdetail');
+Route::get('expense/paid', [Expense::class, 'paid'])->name('expense.paid');
 
 
 //
