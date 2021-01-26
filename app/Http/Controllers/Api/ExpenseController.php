@@ -66,6 +66,6 @@ class ExpenseController extends Controller
     public function destroy(Expense $expense)
     {
         $expense->delete();
-        return response()->json(['msg' => 'Expense '.$expense.' has deleted.']);
+        return response()->json(['msg' => 'Expense '.$expense.' has been deleted.']);
     }
 }

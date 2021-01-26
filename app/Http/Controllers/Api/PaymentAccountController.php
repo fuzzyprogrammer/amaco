@@ -49,7 +49,7 @@ class PaymentAccountController extends Controller
      */
     public function update(Request $request, payment_account $payment_account)
     {
-        //
+        
     }
 
     /**

@@ -27,6 +27,7 @@ class CreateExpensesTable extends Migration
             $table->unsignedBigInteger('payment_account_id')->nullable();
             $table->string('description')->nullable();
             $table->string('is_paid')->default(false);
+            $table->string('tax')->nullable();
             $table->timestamps();
         });
     }

@@ -174,8 +174,6 @@ class QuotationController extends Controller
         catch(Exception $e){
             return $e;
         }
-
-
     }
 
     /**
