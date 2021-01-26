@@ -23,7 +23,6 @@ use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\ManufacturerController;
 use App\Http\Controllers\Api\ProductPriceController;
-use App\Models\Expense;
 use App\Models\PaymentAccount;
 
 /*
