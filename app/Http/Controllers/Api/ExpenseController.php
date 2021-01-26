@@ -9,13 +9,20 @@ use Illuminate\Http\Request;
 class ExpenseController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the expenses which are not paid.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $expenses = Expense::orderBy('created_at', 'DESC')->get();
+        $expenses = Expense::where("is_paid", false)->orderBy('created_at', 'DESC')->get();
+        return response()->json($expenses);
+    }
+
+    // to get all paid expenses
+    public function paid()
+    {
+        $expenses = Expense::where("is_paid", true)->orderBy('created_at', 'DESC')->get();
         return response()->json($expenses);
     }
 
@@ -69,4 +76,6 @@ class ExpenseController extends Controller
         $expense->delete();
         return response()->json(['msg' => 'Expense '.$expense.' has been deleted.']);
     }
+
+
 }
