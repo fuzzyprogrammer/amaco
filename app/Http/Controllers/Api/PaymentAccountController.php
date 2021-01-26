@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\payment_account;
+use App\Models\PaymentAccount;
 use Illuminate\Http\Request;
 
 class PaymentAccountController extends Controller
@@ -26,7 +27,9 @@ class PaymentAccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->json()->all();
+        $payment_account = PaymentAccount::create($data);
+        return response()->json($payment_account);
     }
 
     /**
@@ -49,7 +52,7 @@ class PaymentAccountController extends Controller
      */
     public function update(Request $request, payment_account $payment_account)
     {
-        
+
     }
 
     /**
