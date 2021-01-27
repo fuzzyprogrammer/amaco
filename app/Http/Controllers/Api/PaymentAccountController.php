@@ -16,7 +16,8 @@ class PaymentAccountController extends Controller
      */
     public function index()
     {
-        //
+        $payment_accounts = PaymentAccount::all();
+        return response()->json($payment_accounts);
     }
 
     /**
