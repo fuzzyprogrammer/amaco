@@ -26,3 +26,4 @@ class Expense extends Model
         return $this->hasMany(PaymentAccount::class,'id','payment_account_id');
     }
 }
+
