@@ -65,6 +65,7 @@ class PaymentAccountController extends Controller
      */
     public function destroy(payment_account $payment_account)
     {
-        //
+        $payment_account->delete();
+        return response()->json(['msg'=>"Successfully deleted"], 200);
     }
 }
