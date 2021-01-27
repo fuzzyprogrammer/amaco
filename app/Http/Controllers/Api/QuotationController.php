@@ -163,7 +163,6 @@ class QuotationController extends Controller
             'product_id' => $quotation_detail['product_id'],
             'purchase_price' => $quotation_detail['purchase_price'],
             'description' => $quotation_detail['description'],
-
             'quantity' => $quotation_detail['quantity_required'],
             'margin' => $quotation_detail['margin'],
             'sell_price' => $quotation_detail['sell_price'],
@@ -221,7 +220,7 @@ class QuotationController extends Controller
                 "quantity"=> $quotation_detail->quantity,
                 "margin"=> $quotation_detail->margin,
                 "sell_price"=> $quotation_detail->sell_price,
-                "remark"=> $quotation_detail->remark
+                "remark"=> $quotation_detail->remark,
                 "created_at"=> $quotation_detail->created_at,
                 "updated_at"=> $quotation_detail->updated_at
                 ];
