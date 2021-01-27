@@ -48,7 +48,10 @@ class ExpenseController extends Controller
      */
     public function show(Expense $expense)
     {
-        return response()->json($expense);
+        return response()->json([
+            'data'=>$expense,
+            'payment_account_name' => $expense->payment_account->name,
+            ]);
     }
 
     /**
