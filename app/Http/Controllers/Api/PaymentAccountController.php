@@ -28,7 +28,7 @@ class PaymentAccountController extends Controller
     public function store(Request $request)
     {
         // $data = $request->json()->all();
-        dd($request);
+        // dd($request);
         $payment_account = PaymentAccount::create($request->all());
         return response()->json($payment_account);
     }
