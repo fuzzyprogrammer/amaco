@@ -13,4 +13,6 @@ class PaymentAccount extends Model
     {
         return $this->belongsTo(Expense::class);
     }
+
+    protected $guarded = [];
 }
