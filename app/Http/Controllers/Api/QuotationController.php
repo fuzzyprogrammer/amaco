@@ -198,10 +198,9 @@ class QuotationController extends Controller
      * @param  \App\Models\Quotation  $quotation
      * @return \Illuminate\Http\Response
      */
-    public function show(Quotation $quotation)
+    public function show($id)
     {
-
-        return response()->json($quotation);
+        $quotation = Quotation::findOrFail($id);
         $data = [
             "id" => $quotation->id,
             'quotation_no' => $quotation->quotation_no,
