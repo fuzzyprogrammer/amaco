@@ -157,7 +157,7 @@ class QuotationController extends Controller
             ];
 
             if ($data['transaction_type'] == 'sale') {
-                return response("I am in sale")
+                return response("I am in sale");
                 $datas['quotation_no']=$this->getQuotationNo();
             }elseif($data['transaction_type'] == 'purchase'){
                 $datas['po_number']=$this->getPONo();
