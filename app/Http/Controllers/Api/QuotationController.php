@@ -165,7 +165,7 @@ class QuotationController extends Controller
                 $datas['po_number'] =null;
             }
 
-        $quotation = Quotation::create($data);
+        $quotation = Quotation::create($datas);
 
         global $quotation_id;
         $quotation_id = $quotation->id;
