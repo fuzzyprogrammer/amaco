@@ -23,7 +23,8 @@ class QuotationController extends Controller
 
     public function getLastQuotationNo()
     {
-        $quotation = Quotation::latest('created_at')->first();
+        $quotation = Quotation::where('transaction_type','sale')
+            ->latest('created_at')->first();
         if($quotation){
         $latest_quotation_no = $quotation->quotation_no ? $quotation->quotation_no : 0;
         return($latest_quotation_no);
@@ -34,7 +35,8 @@ class QuotationController extends Controller
 
     public function getLastPONo()
     {
-        $quotation = Quotation::latest('created_at')->first();
+        $quotation = Quotation::where('transaction_type', 'purchase')
+            ->latest('created_at')->first();
         if($quotation){
         $latest_po_number = $quotation->po_number ? $quotation->po_number : 0;
         return($latest_po_number);
@@ -82,7 +84,7 @@ class QuotationController extends Controller
         $quotations_data = [
             $quotations->map(
                 function ($quotation) {
-                    return [
+                    $data =[
                         'id' => $quotation->id,
                         'quotation_no' => $quotation->quotation_no,
                         'created_at' => $quotation->created_at,
@@ -116,6 +118,7 @@ class QuotationController extends Controller
                             ];
                         }),
                     ];
+                    return $data;
                 }
             ),
         ];
@@ -138,7 +141,11 @@ class QuotationController extends Controller
         $quotation = Quotation::create([
             'party_id' => $data['party_id'],
             'rfq_id' => $data['rfq_id'],
-            'quotation_no' => $this->getQuotationNo(),
+            'quotation_no' => function($data){
+                if ($data['transaction_type'] == 'sale') {
+                    return $this->getQuotationNo();
+                }
+            },
             'status' => 'New',
             'total_value' => $data['total_value'],
             'net_amount' => $data['net_amount'],
@@ -149,7 +156,11 @@ class QuotationController extends Controller
             'warranty' => $data['warranty'],
             'delivery_time' => $data['delivery_time'],
             'inco_terms' => $data['inco_terms'],
-            'po_number' => $data['po_number'],
+            'po_number' => function ($data) {
+                if ($data['transaction_type'] == 'purchase') {
+                    return $this->getPONo();
+                }
+            },
             'contact_id' => $data['contact_id'],
             'transaction_type' => $data['transaction_type'],
         ]);
@@ -245,7 +256,7 @@ class QuotationController extends Controller
     public function update(Request $request, Quotation $quotation)
     {
         $quotation->update(['status'=>$request->status]);
-        $quotation->update(['po_number'=>$this->getPONo()]);
+        // $quotation->update(['po_number'=>$this->getPONo()]);
         return response()->json($quotation);
     }
 

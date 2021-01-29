@@ -24,7 +24,6 @@ use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\ManufacturerController;
 use App\Http\Controllers\Api\PaymentAccountController;
 use App\Http\Controllers\Api\ProductPriceController;
-use App\Models\PaymentAccount;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,8 +47,8 @@ Route::apiResource('categories',CategoryController::class);
 Route::apiResource('rfq',RFQController::class);
 Route::apiResource('rfq-details',RFQDetailsController::class);
 Route::apiResource('analyse',AnalyseController::class);
-Route::apiResource('analyse',AnalyseController::class);
-Route::apiResource('quotation',QuotationController::class);
+Route::apiResource('purchase-quotation',QuotationController::class);
+Route::apiResource('sale-quotation',QuotationController::class);
 Route::apiResource('quotation-detail',QuotationDetailController::class);
 Route::apiResource('sale',SaleController::class);
 Route::apiResource('sale-detail',SaleDetailController::class);
