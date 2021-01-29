@@ -140,11 +140,7 @@ class QuotationController extends Controller
             $data = [
                 'party_id' => $data['party_id'],
                 'rfq_id' => $data['rfq_id'],
-                'quotation_no' => function ($data) {
-                    if ($data['transaction_type'] == 'sale') {
-                        return $this->getQuotationNo();
-                    }
-                },
+
                 'status' => 'New',
                 'total_value' => $data['total_value'],
                 'net_amount' => $data['net_amount'],
@@ -155,14 +151,20 @@ class QuotationController extends Controller
                 'warranty' => $data['warranty'],
                 'delivery_time' => $data['delivery_time'],
                 'inco_terms' => $data['inco_terms'],
-                'po_number' => function ($data) {
-                    if ($data['transaction_type'] == 'purchase') {
-                        return $this->getPONo();
-                    }
-                },
+
                 'contact_id' => $data['contact_id'],
                 'transaction_type' => $data['transaction_type'],
             ];
+
+            if ($data['transaction_type'] == 'sale') {
+                $data['quotation_no']=$this->getQuotationNo();
+            }elseif($data['transaction_type'] == 'purchase'){
+                $data['po_number']=$this->getPONo();
+            }else{
+                $data['quotation_no'] = null;
+                $data['po_number'] =null;
+            }
+
         $quotation = Quotation::create($data);
 
         global $quotation_id;
