@@ -140,6 +140,7 @@ class QuotationController extends Controller
             $datas = [
                 'party_id' => $data['party_id'],
                 'rfq_id' => $data['rfq_id'],
+
                 'status' => 'New',
                 'total_value' => $data['total_value'],
                 'net_amount' => $data['net_amount'],
@@ -150,12 +151,12 @@ class QuotationController extends Controller
                 'warranty' => $data['warranty'],
                 'delivery_time' => $data['delivery_time'],
                 'inco_terms' => $data['inco_terms'],
+
                 'contact_id' => $data['contact_id'],
                 'transaction_type' => $data['transaction_type'],
             ];
 
             if ($data['transaction_type'] == 'sale') {
-                return response("I am in sale");
                 $datas['quotation_no']=$this->getQuotationNo();
             }elseif($data['transaction_type'] == 'purchase'){
                 $datas['po_number']=$this->getPONo();
