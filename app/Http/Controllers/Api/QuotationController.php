@@ -201,6 +201,7 @@ class QuotationController extends Controller
     public function show(Quotation $quotation)
     {
 
+        return response()->json($quotation);
         $data = [
             "id" => $quotation->id,
             'quotation_no' => $quotation->quotation_no,
