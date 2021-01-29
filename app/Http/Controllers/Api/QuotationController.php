@@ -140,7 +140,6 @@ class QuotationController extends Controller
             $datas = [
                 'party_id' => $data['party_id'],
                 'rfq_id' => $data['rfq_id'],
-
                 'status' => 'New',
                 'total_value' => $data['total_value'],
                 'net_amount' => $data['net_amount'],
@@ -151,7 +150,6 @@ class QuotationController extends Controller
                 'warranty' => $data['warranty'],
                 'delivery_time' => $data['delivery_time'],
                 'inco_terms' => $data['inco_terms'],
-
                 'contact_id' => $data['contact_id'],
                 'transaction_type' => $data['transaction_type'],
             ];
