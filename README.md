@@ -151,7 +151,6 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | GET|HEAD  | api/sub-category/{id}                       | subCategory                |
 | POST      | api/upload-file                             | file.upload                |
 | GET|HEAD  | api/user                                    |                            |
-|           |                                             |                            |
 | GET|HEAD  | api/users                                   |                            |
 +-----------+---------------------------------------------+----------------------------+
 ```
