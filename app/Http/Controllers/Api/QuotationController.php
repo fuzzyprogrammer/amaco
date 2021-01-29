@@ -255,8 +255,10 @@ class QuotationController extends Controller
      * @param  \App\Models\Quotation  $quotation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Quotation $quotation)
+    public function update(Request $request, $id)
     {
+        $quotation = Quotation::findOrFail($id);
+
         $quotation->update(['status'=>$request->status]);
         // $quotation->update(['po_number'=>$this->getPONo()]);
         return response()->json($quotation);
@@ -268,8 +270,10 @@ class QuotationController extends Controller
      * @param  \App\Models\Quotation  $quotation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Quotation $quotation)
+    public function destroy($id)
     {
+        $quotation = Quotation::findOrFail($id);
+
         $res = $quotation->delete();
         if ($res) {
             return (['msg' => 'Quotation' . ' ' . $quotation->id . ' is successfully deleted']);
