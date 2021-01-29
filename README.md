@@ -30,121 +30,123 @@ DB_PASSWORD=password
 Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`] 
 
 ```
-+-----------+-----------------------------------------+--------------------------+
-| Method    | URI                                     | Name                     |
-+-----------+-----------------------------------------+--------------------------+
-| GET|HEAD  | /                                       |                          |
-| POST      | api/add-user                            | add.user                 |
-| GET|HEAD  | api/analyse                             | analyse.index            |
-| POST      | api/analyse                             | analyse.store            |
-| PUT|PATCH | api/analyse/{analyse}                   | analyse.update           |
-| GET|HEAD  | api/analyse/{analyse}                   | analyse.show             |
-| DELETE    | api/analyse/{analyse}                   | analyse.destroy          |
-| GET|HEAD  | api/categories                          | categories.index         |
-| POST      | api/categories                          | categories.store         |
-| GET|HEAD  | api/categories/{category}               | categories.show          |
-| PUT|PATCH | api/categories/{category}               | categories.update        |
-| DELETE    | api/categories/{category}               | categories.destroy       |
-| GET|HEAD  | api/categorized-products/{id}           | categorized.products     |
-| GET|HEAD  | api/category/{name}                     | category.name            |
-| POST      | api/contact                             | contact.store            |
-| GET|HEAD  | api/contact                             | contact.index            |
-| PUT|PATCH | api/contact/{contact}                   | contact.update           |
-| GET|HEAD  | api/contact/{contact}                   | contact.show             |
-| DELETE    | api/contact/{contact}                   | contact.destroy          |
-| GET|HEAD  | api/customer-list                       | customer.list            |
-| POST      | api/employee                            | employee.store           |
-| GET|HEAD  | api/employee                            | employee.index           |
-| DELETE    | api/employee/{employee}                 | employee.destroy         |
-| PUT|PATCH | api/employee/{employee}                 | employee.update          |
-| GET|HEAD  | api/employee/{employee}                 | employee.show            |
-| POST      | api/expense                             | expense.store            |
-| GET|HEAD  | api/expense                             | expense.index            |
-| GET|HEAD  | api/expense-paid                        | expense.paid             |
-| DELETE    | api/expense/{expense}                   | expense.destroy          |
-| PUT|PATCH | api/expense/{expense}                   | expense.update           |
-| GET|HEAD  | api/expense/{expense}                   | expense.show             |
-| GET|HEAD  | api/fileUpload                          | fileUpload.index         |
-| POST      | api/fileUpload                          | fileUpload.store         |
-| PUT|PATCH | api/fileUpload/{fileUpload}             | fileUpload.update        |
-| DELETE    | api/fileUpload/{fileUpload}             | fileUpload.destroy       |
-| GET|HEAD  | api/fileUpload/{fileUpload}             | fileUpload.show          |
-| POST      | api/invoice                             | invoice.store            |
-| GET|HEAD  | api/invoice                             | invoice.index            |
-| POST      | api/invoice-detail                      | invoice-detail.store     |
-| GET|HEAD  | api/invoice-detail                      | invoice-detail.index     |
-| PUT|PATCH | api/invoice-detail/{invoice_detail}     | invoice-detail.update    |
-| GET|HEAD  | api/invoice-detail/{invoice_detail}     | invoice-detail.show      |
-| DELETE    | api/invoice-detail/{invoice_detail}     | invoice-detail.destroy   |
-| POST      | api/invoice-history                     | invoice.history          |
-| PUT|PATCH | api/invoice/{invoice}                   | invoice.update           |
-| GET|HEAD  | api/invoice/{invoice}                   | invoice.show             |
-| DELETE    | api/invoice/{invoice}                   | invoice.destroy          |
-| POST      | api/manufacturer                        | manufacturer.store       |
-| GET|HEAD  | api/manufacturer                        | manufacturer.index       |
-| PUT|PATCH | api/manufacturer/{manufacturer}         | manufacturer.update      |
-| DELETE    | api/manufacturer/{manufacturer}         | manufacturer.destroy     |
-| GET|HEAD  | api/manufacturer/{manufacturer}         | manufacturer.show        |
-| GET|HEAD  | api/parties                             | parties.index            |
-| POST      | api/parties                             | parties.store            |
-| GET|HEAD  | api/parties-except/{product}            | except.vendor            |
-| GET|HEAD  | api/parties-vendor                      | parties.vendor           |
-| GET|HEAD  | api/parties/{party}                     | parties.show             |
-| DELETE    | api/parties/{party}                     | parties.destroy          |
-| PUT|PATCH | api/parties/{party}                     | parties.update           |
-| POST      | api/payment-account                     | payment-account.store    |
-| GET|HEAD  | api/payment-account                     | payment-account.index    |
-| GET|HEAD  | api/payment-account/{payment_account}   | payment-account.show     |
-| PUT|PATCH | api/payment-account/{payment_account}   | payment-account.update   |
-| DELETE    | api/payment-account/{payment_account}   | payment-account.destroy  |
-| POST      | api/product-price                       | product-price.store      |
-| GET|HEAD  | api/product-price                       | product-price.index      |
-| DELETE    | api/product-price/{product_price}       | product-price.destroy    |
-| PUT|PATCH | api/product-price/{product_price}       | product-price.update     |
-| GET|HEAD  | api/product-price/{product_price}       | product-price.show       |
-| GET|HEAD  | api/product-quotation-detail/{id}       | product.quotationdetail  |
-| POST      | api/products                            | products.store           |
-| GET|HEAD  | api/products                            | products.index           |
-| GET|HEAD  | api/products-in-category                | products.in.category     |
-| PUT|PATCH | api/products/{product}                  | products.update          |
-| GET|HEAD  | api/products/{product}                  | products.show            |
-| DELETE    | api/products/{product}                  | products.destroy         |
-| GET|HEAD  | api/quotation                           | quotation.index          |
-| POST      | api/quotation                           | quotation.store          |
-| GET|HEAD  | api/quotation-detail                    | quotation-detail.index   |
-| POST      | api/quotation-detail                    | quotation-detail.store   |
-| GET|HEAD  | api/quotation-detail/{quotation_detail} | quotation-detail.show    |
-| DELETE    | api/quotation-detail/{quotation_detail} | quotation-detail.destroy |
-| PUT|PATCH | api/quotation-detail/{quotation_detail} | quotation-detail.update  |
-| POST      | api/quotation-history                   | quotation.history        |
-| GET|HEAD  | api/quotation-po                        | invoice.list             |
-| GET|HEAD  | api/quotation/{quotation}               | quotation.show           |
-| PUT|PATCH | api/quotation/{quotation}               | quotation.update         |
-| DELETE    | api/quotation/{quotation}               | quotation.destroy        |
-| POST      | api/rfq                                 | rfq.store                |
-| GET|HEAD  | api/rfq                                 | rfq.index                |
-| GET|HEAD  | api/rfq-details                         | rfq-details.index        |
-| POST      | api/rfq-details                         | rfq-details.store        |
-| PUT|PATCH | api/rfq-details/{rfq_detail}            | rfq-details.update       |
-| DELETE    | api/rfq-details/{rfq_detail}            | rfq-details.destroy      |
-| GET|HEAD  | api/rfq-details/{rfq_detail}            | rfq-details.show         |
-| POST      | api/rfq-history                         | rfq.history              |
-| GET|HEAD  | api/rfq/{rfq}                           | rfq.show                 |
-| DELETE    | api/rfq/{rfq}                           | rfq.destroy              |
-| PUT|PATCH | api/rfq/{rfq}                           | rfq.update               |
-| POST      | api/sale                                | sale.store               |
-| GET|HEAD  | api/sale                                | sale.index               |
-| POST      | api/sale-detail                         | sale-detail.store        |
-| GET|HEAD  | api/sale-detail                         | sale-detail.index        |
-| DELETE    | api/sale-detail/{sale_detail}           | sale-detail.destroy      |
-| PUT|PATCH | api/sale-detail/{sale_detail}           | sale-detail.update       |
-| GET|HEAD  | api/sale-detail/{sale_detail}           | sale-detail.show         |
-| DELETE    | api/sale/{sale}                         | sale.destroy             |
-| PUT|PATCH | api/sale/{sale}                         | sale.update              |
-| GET|HEAD  | api/sale/{sale}                         | sale.show                |
-| GET|HEAD  | api/sub-category/{id}                   | subCategory              |
-| POST      | api/upload-file                         | file.upload              |
-| GET|HEAD  | api/user                                |                          |
-| GET|HEAD  | api/users                               |                          |
-+-----------+-----------------------------------------+--------------------------+
++-----------+-----------------------------------------+
+| Method    | URI                                     |
++-----------+-----------------------------------------+
+| GET|HEAD  | /                                       |
+| POST      | api/add-user                            |
+| GET|HEAD  | api/analyse                             |
+| POST      | api/analyse                             |
+| PUT|PATCH | api/analyse/{analyse}                   |
+| GET|HEAD  | api/analyse/{analyse}                   |
+| DELETE    | api/analyse/{analyse}                   |
+| POST      | api/categories                          |
+| GET|HEAD  | api/categories                          |
+| DELETE    | api/categories/{category}               |
+| GET|HEAD  | api/categories/{category}               |
+| PUT|PATCH | api/categories/{category}               |
+| GET|HEAD  | api/categorized-products/{id}           |
+| GET|HEAD  | api/category/{name}                     |
+| GET|HEAD  | api/contact                             |
+| POST      | api/contact                             |
+| DELETE    | api/contact/{contact}                   |
+| GET|HEAD  | api/contact/{contact}                   |
+| PUT|PATCH | api/contact/{contact}                   |
+| GET|HEAD  | api/customer-list                       |
+| POST      | api/employee                            |
+| GET|HEAD  | api/employee                            |
+| DELETE    | api/employee/{employee}                 |
+| PUT|PATCH | api/employee/{employee}                 |
+| GET|HEAD  | api/employee/{employee}                 |
+| GET|HEAD  | api/expense                             |
+| POST      | api/expense                             |
+| GET|HEAD  | api/expense-paid                        |
+| PUT|PATCH | api/expense/{expense}                   |
+| DELETE    | api/expense/{expense}                   |
+| GET|HEAD  | api/expense/{expense}                   |
+| POST      | api/fileUpload                          |
+| GET|HEAD  | api/fileUpload                          |
+| DELETE    | api/fileUpload/{fileUpload}             |
+| PUT|PATCH | api/fileUpload/{fileUpload}             |
+| GET|HEAD  | api/fileUpload/{fileUpload}             |
+| GET|HEAD  | api/invoice                             |
+| POST      | api/invoice                             |
+| GET|HEAD  | api/invoice-detail                      |
+| POST      | api/invoice-detail                      |
+| GET|HEAD  | api/invoice-detail/{invoice_detail}     |
+| PUT|PATCH | api/invoice-detail/{invoice_detail}     |
+| DELETE    | api/invoice-detail/{invoice_detail}     |
+| POST      | api/invoice-history                     |
+| PUT|PATCH | api/invoice/{invoice}                   |
+| DELETE    | api/invoice/{invoice}                   |
+| GET|HEAD  | api/invoice/{invoice}                   |
+| GET|HEAD  | api/manufacturer                        |
+| POST      | api/manufacturer                        |
+| GET|HEAD  | api/manufacturer/{manufacturer}         |
+| PUT|PATCH | api/manufacturer/{manufacturer}         |
+| DELETE    | api/manufacturer/{manufacturer}         |
+| POST      | api/parties                             |
+| GET|HEAD  | api/parties                             |
+| GET|HEAD  | api/parties-except/{product}            |
+| GET|HEAD  | api/parties-vendor                      |
+| PUT|PATCH | api/parties/{party}                     |
+| GET|HEAD  | api/parties/{party}                     |
+| DELETE    | api/parties/{party}                     |
+| GET|HEAD  | api/payment-account                     |
+| POST      | api/payment-account                     |
+| DELETE    | api/payment-account/{payment_account}   |
+| GET|HEAD  | api/payment-account/{payment_account}   |
+| PUT|PATCH | api/payment-account/{payment_account}   |
+| GET|HEAD  | api/product-price                       |
+| POST      | api/product-price                       |
+| DELETE    | api/product-price/{product_price}       |
+| PUT|PATCH | api/product-price/{product_price}       |
+| GET|HEAD  | api/product-price/{product_price}       |
+| GET|HEAD  | api/product-quotation-detail/{id}       |
+| GET|HEAD  | api/products                            |
+| POST      | api/products                            |
+| GET|HEAD  | api/products-in-category                |
+| PUT|PATCH | api/products/{product}                  |
+| DELETE    | api/products/{product}                  |
+| GET|HEAD  | api/products/{product}                  |
+| POST      | api/quotation                           |
+| GET|HEAD  | api/quotation                           |
+| POST      | api/quotation-detail                    |
+| GET|HEAD  | api/quotation-detail                    |
+| DELETE    | api/quotation-detail/{quotation_detail} |
+| PUT|PATCH | api/quotation-detail/{quotation_detail} |
+| GET|HEAD  | api/quotation-detail/{quotation_detail} |
+| POST      | api/quotation-history                   |
+| GET|HEAD  | api/quotation-po                        |
+| PUT|PATCH | api/quotation/{quotation}               |
+| GET|HEAD  | api/quotation/{quotation}               |
+| DELETE    | api/quotation/{quotation}               |
+| GET|HEAD  | api/rfq                                 |
+| POST      | api/rfq                                 |
+| POST      | api/rfq-details                         |
+| GET|HEAD  | api/rfq-details                         |
+| PUT|PATCH | api/rfq-details/{rfq_detail}            |
+| GET|HEAD  | api/rfq-details/{rfq_detail}            |
+| DELETE    | api/rfq-details/{rfq_detail}            |
+| POST      | api/rfq-history                         |
+| PUT|PATCH | api/rfq/{rfq}                           |
+| GET|HEAD  | api/rfq/{rfq}                           |
+| DELETE    | api/rfq/{rfq}                           |
+| GET|HEAD  | api/sale                                |
+| POST      | api/sale                                |
+| POST      | api/sale-detail                         |
+| GET|HEAD  | api/sale-detail                         |
+| GET|HEAD  | api/sale-detail/{sale_detail}           |
+| PUT|PATCH | api/sale-detail/{sale_detail}           |
+| DELETE    | api/sale-detail/{sale_detail}           |
+| DELETE    | api/sale/{sale}                         |
+| PUT|PATCH | api/sale/{sale}                         |
+| GET|HEAD  | api/sale/{sale}                         |
+| GET|HEAD  | api/sales-list                          |
+| GET|HEAD  | api/sub-category/{id}                   |
+| POST      | api/upload-file                         |
+| GET|HEAD  | api/user                                |
+|           |                                         |
+| GET|HEAD  | api/users                               |
++-----------+-----------------------------------------+
 ```

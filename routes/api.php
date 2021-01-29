@@ -78,6 +78,8 @@ Route::get('parties-except/{product}', [PartyController::class, 'allVendorExcept
 Route::get('product-quotation-detail/{id}', [ProductQuotationDetail::class, 'show'])->name('product.quotationdetail');
 Route::get('expense-paid', [ExpenseController::class, 'paid'])->name('expense.paid');
 Route::get('customer-list', [PartyController::class, 'customer'])->name('customer.list');
+Route::get('sales-list', [QuotationController::class, 'salesList'])->name('sales.list');
+
 
 
 //
