@@ -68,3 +68,6 @@ class PurchaseInvoiceController extends Controller
         return response(["msg" => $purchaseInvoice->id . "has deleted"]);
     }
 }
+
+
+
