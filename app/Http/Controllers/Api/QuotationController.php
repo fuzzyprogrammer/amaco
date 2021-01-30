@@ -262,7 +262,7 @@ class QuotationController extends Controller
     {
         $quotation = Quotation::findOrFail($id);
 
-        $quotation->update(['status'=>$request->status]);
+        // $quotation->update(['status'=>$request->status]);
         // $quotation->update(['po_number'=>$this->getPONo()]);
         return response()->json($quotation);
     }
