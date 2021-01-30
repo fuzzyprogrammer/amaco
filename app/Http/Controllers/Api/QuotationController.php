@@ -296,8 +296,8 @@ class QuotationController extends Controller
 
             // dd($request->quotation_details);
             foreach ($data['quotation_details'] as $quotation_detail) {
-                $quotation_detail=QuotationDetail::where('id',$quotation_detail['id'])->first();
-                $quotation_detail->update([
+                $quotation_d=QuotationDetail::where('id',$quotation_detail['id'])->first();
+                $quotation_d->update([
                     // 'quotation_id' => $quotation->id,
                     'total_amount' => $quotation_detail['total_amount'],
                     'analyse_id' => null,
