@@ -299,15 +299,15 @@ class QuotationController extends Controller
                 $quotation_detail=QuotationDetail::where('id',$quotation_detail['id'])->first();
                 $quotation_detail->update([
                     'quotation_id' => $quotation->id,
-                    'total_amount' => $quotation_detail['total_amount'],
+                    'total_amount' => $quotation_detail->total_amount,
                     'analyse_id' => null,
-                    'product_id' => $quotation_detail['product_id'],
-                    'purchase_price' => $quotation_detail['purchase_price'],
-                    'description' => $quotation_detail['description'],
-                    'quantity' => $quotation_detail['quantity'],
-                    'margin' => $quotation_detail['margin'],
-                    'sell_price' => $quotation_detail['sell_price'],
-                    'remark' => $quotation_detail['remark'],
+                    'product_id' => $quotation_detail->product_id,
+                    'purchase_price' => $quotation_detail->purchase_price,
+                    'description' => $quotation_detail->description,
+                    'quantity' => $quotation_detail->quantity,
+                    'margin' => $quotation_detail->margin,
+                    'sell_price' => $quotation_detail->sell_price,
+                    'remark' => $quotation_detail->remark,
                 ]);
             }
             return response()->json(['msg' => 'successfully added']);
