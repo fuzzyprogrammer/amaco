@@ -8,6 +8,7 @@ use App\Models\QuotationDetail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Exception;
 use Illuminate\Support\Facades\DB;
+use Mockery\Undefined;
 
 class QuotationController extends Controller
 {
@@ -139,8 +140,7 @@ class QuotationController extends Controller
         try {
             $datas = [
                 'party_id' => $data['party_id'],
-                'rfq_id' => $data['rfq_id'],
-
+                'rfq_id' => $data['rfq_id'] ? $data['rfq_id'] : null ,
                 'status' => 'New',
                 'total_value' => $data['total_value'],
                 'net_amount' => $data['net_amount'],
@@ -151,7 +151,6 @@ class QuotationController extends Controller
                 'warranty' => $data['warranty'],
                 'delivery_time' => $data['delivery_time'],
                 'inco_terms' => $data['inco_terms'],
-
                 'contact_id' => $data['contact_id'],
                 'transaction_type' => $data['transaction_type'],
             ];
@@ -178,7 +177,7 @@ class QuotationController extends Controller
             'product_id' => $quotation_detail['product_id'],
             'purchase_price' => $quotation_detail['purchase_price'],
             'description' => $quotation_detail['description'],
-            'quantity' => $quotation_detail['quantity_required'],
+            'quantity' => $quotation_detail['quantity'],
             'margin' => $quotation_detail['margin'],
             'sell_price' => $quotation_detail['sell_price'],
             'remark' => $quotation_detail['remark'],
