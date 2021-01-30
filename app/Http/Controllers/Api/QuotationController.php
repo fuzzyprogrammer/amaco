@@ -86,7 +86,7 @@ class QuotationController extends Controller
                 function ($quotation) {
                     $data =[
                         'id' => $quotation->id,
-                        'quotation_no' => $quotation->quotation_no,
+                        'po_number' => $quotation->po_number,
                         'created_at' => $quotation->created_at,
                         'updated_at' => $quotation->updated_at,
                         'status' => $quotation->status,
@@ -98,7 +98,7 @@ class QuotationController extends Controller
                         "vat_in_value" => $quotation->vat_in_value,
                         "net_amount" => $quotation->net_amount,
                         "transaction_type" => $quotation->transaction_type,
-                        'discount_in_%' => $quotation['discount_in_%'],
+                        'discount_in_p' => $quotation->discount_in_p,
                         'quotation_details' => $quotation->quotationDetail->map(function ($quotation_detail) {
                             $quotation_detail = QuotationDetail::where('id', '=', $quotation_detail->id)->first();
                             return [
