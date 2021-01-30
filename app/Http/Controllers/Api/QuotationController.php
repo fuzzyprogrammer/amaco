@@ -232,7 +232,7 @@ class QuotationController extends Controller
                 "total_amount"=> $quotation_detail->total_amount,
                 "analyse_id"=> $quotation_detail->analyse_id,
                 "product_id"=> $quotation_detail->product_id,
-                "product_description" => $quotation_detail->product->description,
+                "descriptionss" => $quotation_detail->product->description,
                 "product" => $quotation_detail->product,
                 "purchase_price"=> $quotation_detail->purchase_price,
                 "description"=> $quotation_detail->description,
