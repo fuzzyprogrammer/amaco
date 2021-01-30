@@ -390,6 +390,4 @@ class QuotationController extends Controller
         ];
         return response()->json($quotations_data[0], 200);
     }
-
-
 }
