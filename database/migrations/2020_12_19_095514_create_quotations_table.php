@@ -31,6 +31,7 @@ class CreateQuotationsTable extends Migration
             $table->string('inco_terms')->nullable();
             $table->string('po_number')->nullable();
             $table->string('transaction_type')->nullable();
+            $table->string('ps_date')->nullable();
             $table->timestamps();
         });
     }

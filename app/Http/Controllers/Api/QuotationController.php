@@ -100,6 +100,7 @@ class QuotationController extends Controller
                         "net_amount" => $quotation->net_amount,
                         "transaction_type" => $quotation->transaction_type,
                         'discount_in_p' => $quotation->discount_in_p,
+                        'ps_date' => $quotation->ps_date,
                         'quotation_details' => $quotation->quotationDetail->map(function ($quotation_detail) {
                             $quotation_detail = QuotationDetail::where('id', '=', $quotation_detail->id)->first();
                             return [
@@ -153,6 +154,7 @@ class QuotationController extends Controller
                 'inco_terms' => $data['inco_terms'],
                 'contact_id' => $data['contact_id'],
                 'transaction_type' => $data['transaction_type'],
+                'ps_date' => $data['ps_date'],
             ];
 
             if ($request->transaction_type === 'sale') {
@@ -219,6 +221,7 @@ class QuotationController extends Controller
             "inco_terms" => $quotation->inco_terms,
             "po_number" => $quotation->po_number,
             "transaction_type" => $quotation->transaction_type,
+            "ps_date" => $quotation->ps_date,
             "contact" => $quotation->contact,
             "party" => $quotation->party,
             "party"=> $quotation->party,
@@ -295,7 +298,7 @@ class QuotationController extends Controller
                         'quotation_no' => $quotation->quotation_no,
                         "vat_in_value" => $quotation->vat_in_value,
                         "net_amount" => $quotation->net_amount,
-                        'discount_in_%' => $quotation['discount_in_%'],
+                        'discount_in_p' => $quotation['discount_in_p'],
                         "party" => $quotation->party,
                         'quotation_details' => $quotation->quotationDetail->map(function ($quotation_detail) {
                             $quotation_detail = QuotationDetail::where('id', '=', $quotation_detail->id)->first();
@@ -362,7 +365,7 @@ class QuotationController extends Controller
                         "vat_in_value" => $quotation->vat_in_value,
                         "net_amount" => $quotation->net_amount,
                         "transaction_type" => $quotation->transaction_type,
-                        'discount_in_%' => $quotation['discount_in_%'],
+                        'discount_in_p' => $quotation['discount_in_p'],
                         'quotation_details' => $quotation->quotationDetail->map(function ($quotation_detail) {
                             $quotation_detail = QuotationDetail::where('id', '=', $quotation_detail->id)->first();
                             return [
