@@ -167,7 +167,7 @@ class PurchaseInvoiceController extends Controller
     {
         $data = $request->all();
         $data['status'] = 'Delivered';
-        $data['bill_no'] = $this->getDeliveryNo();
+        // $data['bill_no'] = $this->getDeliveryNo();
         $purchaseInvoice->update($data);
         return $purchaseInvoice;
     }
