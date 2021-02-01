@@ -113,7 +113,7 @@ class PurchaseInvoiceController extends Controller
         return [
             $purchaseInvoice,
             $purchaseInvoice->quotation->party,
-            $purchaseInvoice->quotation->quotationDetail,
+            // $purchaseInvoice->quotation->quotationDetail,
             $purchaseInvoice->purchaseInvoiceDetail->map(function ($purchaseInvoice_detail){
                 return [
                     // $purchaseInvoice_detail->quotationDetail,
