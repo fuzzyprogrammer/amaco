@@ -201,6 +201,8 @@ class PurchaseInvoiceController extends Controller
         ->where("transaction_type",'purchase')
         ->orderBy('created_at', 'DESC')
         ->get();
+
+        return response()->json($quotaions);
     }
 }
 
