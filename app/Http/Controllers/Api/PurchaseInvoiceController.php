@@ -45,7 +45,7 @@ class PurchaseInvoiceController extends Controller
     }
     public function index()
     {
-        $invoices = PurchaseInvoice::where('status','!=','Delivered')
+        $invoices = PurchaseInvoice::where('status','=','Delivered')
         ->orderBy('created_at','DESC')->get();
         return $invoices;
     }
