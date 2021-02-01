@@ -246,7 +246,7 @@ class PurchaseInvoiceController extends Controller
             ),
         ];
 
-        return response()->json($quotations_data[0]);
+        return response()->json($quotations_data[0], 200);
     }
 }
 
