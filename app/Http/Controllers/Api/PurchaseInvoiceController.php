@@ -63,13 +63,14 @@ class PurchaseInvoiceController extends Controller
         // dd($request->vat_in_value);
         // dd($request->vat_in_value);
         $data['invoice_no'] = $this->getInvoiceNo();
-        $data['issue_date'] = now();
+        $data['issue_date'] = $request['issue_date'];
         $data['status'] = "New";
         $data['quotation_id'] = $request['quotation_id'];
         $data['total_value'] = $request['total_value'];
         $data['discount_in_percentage'] = $request['discount_in_percentage'];
         $data['vat_in_value'] = $request['vat_in_value'];
         $data['grand_total'] = $request['grand_total'];
+        $data['bill_no'] = $request['bill_no'];
         $invoice = PurchaseInvoice::create([
             'invoice_no' => $data['invoice_no'],
             'issue_date' => $data['issue_date'],
@@ -79,7 +80,7 @@ class PurchaseInvoiceController extends Controller
             'discount_in_percentage' => $data['discount_in_percentage'],
             'vat_in_value' => $data['vat_in_value'],
             'grand_total' => $data['grand_total'],
-            'bill_no' => null,
+            'bill_no' => $data['bill_no'],
         ]);
 
         global $_invoice_id;
@@ -108,13 +109,13 @@ class PurchaseInvoiceController extends Controller
     public function show(PurchaseInvoice $purchaseInvoice)
     {
         return [
-            $invoice,
-            $invoice->quotation->party,
-            $invoice->quotation->quotationDetail,
-            $invoice->invoiceDetail->map(function ($invoice_detail){
+            $purchaseInvoice,
+            $purchaseInvoice->quotation->party,
+            $purchaseInvoice->quotation->quotationDetail,
+            $purchaseInvoice->purchaseInvoiceDetail->map(function ($purchaseInvoice_detail){
                 return [
-                    $invoice_detail->quotationDetail,
-                    $invoice_detail->product
+                    $purchaseInvoice_detail->quotationDetail,
+                    $purchaseInvoice_detail->product
                 ];
             }),
             // $invoice->invoiceDetail->map(function ($invoice_detail){
@@ -167,19 +168,19 @@ class PurchaseInvoiceController extends Controller
         $data = $request->all();
         $data['status'] = 'Delivered';
         $data['bill_no'] = $this->getDeliveryNo();
-        $invoice->update($data);
-        return $invoice;
+        $purchaseInvoice->update($data);
+        return $purchaseInvoice;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Invoice  $invoice
+     * @param  \App\Models\Invoice  $purchaseInvoice
      * @return \Illuminate\Http\Response
      */
     public function destroy(PurchaseInvoice $purchaseInvoice)
     {
-        return ($invoice->delete());
+        return ($purchaseInvoice->delete());
     }
 
     public function history()
