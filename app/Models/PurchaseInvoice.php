@@ -18,6 +18,6 @@ class PurchaseInvoice extends Model
 
     public function quotation()
     {
-        return $this->hasOne(Quotation::class, "quotation_id", 'id');
+        return $this->belongsTo(Quotation::class);
     }
 }
