@@ -7,6 +7,7 @@ use App\Models\PurchaseInvoice;
 use App\Models\PurchaseInvoiceDetail;
 use Illuminate\Http\Request;
 
+
 class PurchaseInvoiceController extends Controller
 {
     /**
@@ -14,10 +15,39 @@ class PurchaseInvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function getCurrentYear()
+    {
+        return substr(date('Y'), 2);
+    }
+
+    public function getLastInvoiceNo()
+    {
+        $invoice = PurchaseInvoice::latest('created_at')->first();
+        if ($invoice) {
+            $latest_invoice_no = $invoice->invoice_no ? $invoice->invoice_no : 0;
+            return ($latest_invoice_no);
+        } else {
+            return ('AMINV-' . $this->getCurrentYear() . '-' . sprintf("%04d", 0));
+        }
+    }
+
+    public function getInvoiceNo()
+    {
+        $latest_invoice_no = $this->getLastInvoiceNo();
+        $last_year = substr($latest_invoice_no, 6, 2);
+        $current_year = $this->getCurrentYear();
+        // dd([$last_year, $current_year]);
+        if ($current_year != $last_year) {
+            return ('AMINV-' . $current_year . '-' . sprintf("%04d", 1));
+        } else {
+            return ('AMINV-' . $current_year . '-' . sprintf("%04d", ((int)substr($this->getLastInvoiceNo(), 9)) + 1));
+        }
+    }
     public function index()
     {
-        $purchaseInvoices = PurchaseInvoiceDetail::all();
-        return response()->json($purchaseInvoices);
+        $invoices = PurchaseInvoice::where('status','!=','Delivered')
+        ->orderBy('created_at','DESC')->get();
+        return $invoices;
     }
 
     /**
@@ -28,48 +58,137 @@ class PurchaseInvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        $purchaseInvoice = PurchaseInvoice::create($request->all());
-        return response()->json($purchaseInvoice);
+        $data = $request->json()->all();
+        // dd($data);
+        // dd($request->vat_in_value);
+        // dd($request->vat_in_value);
+        $data['invoice_no'] = $this->getInvoiceNo();
+        $data['issue_date'] = now();
+        $data['status'] = "New";
+        $data['quotation_id'] = $request['quotation_id'];
+        $data['total_value'] = $request['total_value'];
+        $data['discount_in_percentage'] = $request['discount_in_percentage'];
+        $data['vat_in_value'] = $request['vat_in_value'];
+        $data['grand_total'] = $request['grand_total'];
+        $invoice = PurchaseInvoice::create([
+            'invoice_no' => $data['invoice_no'],
+            'issue_date' => $data['issue_date'],
+            'status' => $data['status'],
+            'quotation_id' => $data['quotation_id'],
+            'total_value' => $data['total_value'],
+            'discount_in_percentage' => $data['discount_in_percentage'],
+            'vat_in_value' => $data['vat_in_value'],
+            'grand_total' => $data['grand_total'],
+            'delivery_no' => null,
+        ]);
+
+        global $_invoice_id;
+        $_invoice_id = $invoice['id'];
+
+        foreach($data['invoice_details'] as $invoice_detail) {
+            $_invoice_detail = PurchaseInvoiceDetail::create([
+                'quotation_detail_id' => $invoice_detail['id'],
+                'product_id' => $invoice_detail['product_id'],
+                'sell_price' => $invoice_detail['sell_price'],
+                'quantity' => $invoice_detail['quantity'],
+                'total_amount' => $invoice_detail['total_amount'],
+                'invoice_id' => $_invoice_id,
+            ]);
+        }
+        // return 'success';
+        return response()->json($invoice);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PurchaseInvoice  $purchaseInvoice
+     * @param  \App\Models\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
     public function show(PurchaseInvoice $purchaseInvoice)
     {
-        return response()->json($purchaseInvoice);
+        return [
+            $invoice,
+            $invoice->quotation->party,
+            $invoice->quotation->quotationDetail,
+            $invoice->invoiceDetail->map(function ($invoice_detail){
+                return [
+                    $invoice_detail->quotationDetail,
+                    $invoice_detail->product
+                ];
+            }),
+            // $invoice->invoiceDetail->map(function ($invoice_detail){
+            //     return [
+            //         $invoice_detail->quotationDetail,
+            //     ];
+            // }),
+        ];
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PurchaseInvoice  $purchaseInvoice
+     * @param  \App\Models\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
+
+    public function getCurrentDeliveryYear()
+    {
+        return substr(date('Y'), 2);
+    }
+
+    public function getLastDeliveryNo()
+    {
+        $invoice = PurchaseInvoice::latest('created_at')->first();
+        if ($invoice) {
+            $latest_delivery_no = $invoice->delivery_no ? $invoice->delivery_no : 0;
+            return ($latest_delivery_no);
+        } else {
+            return ('AMDLV-' . $this->getCurrentDeliveryYear() . '-' . sprintf("%04d", 0));
+        }
+    }
+
+    public function getDeliveryNo()
+    {
+        $latest_delivery_no = $this->getLastDeliveryNo();
+        $last_year = substr($latest_delivery_no, 6, 2);
+        $current_year = $this->getCurrentDeliveryYear();
+        // dd([$last_year, $current_year]);
+        if ($current_year != $last_year) {
+            return ('AMDLV-' . $current_year . '-' . sprintf("%04d", 1));
+        } else {
+            return ('AMDLV-' . $current_year . '-' . sprintf("%04d", ((int)substr($this->getLastDeliveryNo(), 9)) + 1));
+        }
+    }
+
     public function update(Request $request, PurchaseInvoice $purchaseInvoice)
     {
-        $purchaseInvoice->update($request->all());
-        return response()->json($purchaseInvoice);
+        $data = $request->all();
+        $data['status'] = 'Delivered';
+        $data['delivery_no'] = $this->getDeliveryNo();
+        $invoice->update($data);
+        return $invoice;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PurchaseInvoice  $purchaseInvoice
+     * @param  \App\Models\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
     public function destroy(PurchaseInvoice $purchaseInvoice)
     {
-        $purchaseInvoice->delete();
-        return response(["msg" => $purchaseInvoice->id . "has deleted"]);
+        return ($invoice->delete());
+    }
+
+    public function history()
+    {
+        $invoices = PurchaseInvoice::where('status', '=', 'Delivered')
+        ->orderBy('created_at', 'DESC')->get();
+        return response()->json($invoices);
     }
 }
-
-
 
 
 

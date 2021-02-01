@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\InvoiceDetail;
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\Types\Null_;
 
 class InvoiceController extends Controller
 {
