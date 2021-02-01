@@ -24,6 +24,7 @@ use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\ManufacturerController;
 use App\Http\Controllers\Api\PaymentAccountController;
 use App\Http\Controllers\Api\ProductPriceController;
+use App\Http\Controllers\Api\PurchaseInvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,7 @@ Route::apiResource('employee',EmployeeController::class);
 Route::apiResource('manufacturer',ManufacturerController::class);
 Route::apiResource('product-price',ProductPriceController::class);
 Route::apiResource('payment-account',PaymentAccountController::class);
+Route::apiResource('purchase-invoice',PurchaseInvoiceController::class);
 
 Route::post('rfq-history', [RFQController::class, 'history'])->name('rfq.history');
 Route::post('invoice-history', [InvoiceController::class, 'history'])->name('invoice.history');
