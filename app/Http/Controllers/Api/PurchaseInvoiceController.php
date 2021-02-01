@@ -116,8 +116,8 @@ class PurchaseInvoiceController extends Controller
             // $purchaseInvoice->quotation->quotationDetail,
             $purchaseInvoice->purchaseInvoiceDetail->map(function ($purchaseInvoice_detail){
                 return [
-                    // $purchaseInvoice_detail->quotationDetail,
-                    $purchaseInvoice_detail->product
+                    $purchaseInvoice_detail->quotationDetail,
+                    $purchaseInvoice_detail->product,
                 ];
             }),
             // $invoice->invoiceDetail->map(function ($invoice_detail){
