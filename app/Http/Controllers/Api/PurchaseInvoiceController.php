@@ -203,7 +203,7 @@ class PurchaseInvoiceController extends Controller
         ->orderBy('created_at', 'DESC')
         ->get();
 
-        $quotations_data = [
+        $quotations_data =
             $quotations->map(
                 function ($quotation) {
                     $data = [
@@ -243,10 +243,9 @@ class PurchaseInvoiceController extends Controller
                     ];
                     return $data;
                 }
-            ),
-        ];
+            );
 
-        return response()->json($quotations_data[0], 200);
+        return response()->json($quotations_data, 200);
     }
 }
 
