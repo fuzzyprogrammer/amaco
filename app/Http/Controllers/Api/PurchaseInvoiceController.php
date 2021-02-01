@@ -47,7 +47,7 @@ class PurchaseInvoiceController extends Controller
     }
     public function index()
     {
-        $invoices = PurchaseInvoice::where('status','=','Delivered')
+        $invoices = PurchaseInvoice::where('status','!=','Delivered')
         ->orderBy('created_at','DESC')->get();
         return $invoices;
     }
@@ -206,7 +206,7 @@ class PurchaseInvoiceController extends Controller
         $quotations_data = [
             $quotations->map(
                 function ($quotation) {
-                    $data = [
+                    $data =
                         'id' => $quotation->id,
                         'po_number' => $quotation->po_number,
                         'created_at' => $quotation->created_at,
@@ -243,10 +243,9 @@ class PurchaseInvoiceController extends Controller
                     ];
                     return $data;
                 }
-            ),
-        ];
+            );
 
-        return response()->json($quotations_data[0], 200);
+        return response()->json($quotations_data, 200);
     }
 }
 
