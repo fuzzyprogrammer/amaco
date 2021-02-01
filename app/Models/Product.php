@@ -35,6 +35,10 @@ class Product extends Model
     {
         return $this->belongsTo(InvoiceDetail::class);
     }
+    public function purchaseInvoiceDetail()
+    {
+        return $this->belongsTo(PurchaseInvoiceDetail::class);
+    }
 
     public function manufacturer()
     {

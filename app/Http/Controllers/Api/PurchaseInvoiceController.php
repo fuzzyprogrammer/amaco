@@ -95,7 +95,7 @@ class PurchaseInvoiceController extends Controller
                 'sell_price' => $invoice_detail['sell_price'],
                 'quantity' => $invoice_detail['quantity'],
                 'total_amount' => $invoice_detail['total_amount'],
-                'invoice_id' => $_invoice_id,
+                'purchase_invoice_id' => $_invoice_id,
             ]);
         }
         // return 'success';
@@ -116,7 +116,7 @@ class PurchaseInvoiceController extends Controller
             $purchaseInvoice->quotation->quotationDetail,
             $purchaseInvoice->purchaseInvoiceDetail->map(function ($purchaseInvoice_detail){
                 return [
-                    $purchaseInvoice_detail->quotationDetail,
+                    // $purchaseInvoice_detail->quotationDetail,
                     $purchaseInvoice_detail->product
                 ];
             }),
@@ -203,7 +203,7 @@ class PurchaseInvoiceController extends Controller
         ->orderBy('created_at', 'DESC')
         ->get();
 
-        $quotations_data = 
+        $quotations_data =
             $quotations->map(
                 function ($quotation) {
                     $data = [
