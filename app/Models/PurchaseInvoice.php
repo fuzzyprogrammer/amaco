@@ -15,4 +15,9 @@ class PurchaseInvoice extends Model
     {
         return $this->hasMany(PurchaseInvoiceDetail::class, 'purchase_invoice_id', 'id');
     }
+
+    public function quotation()
+    {
+        return $this->hasOne(Quotation::class, "quotation_id", 'id');
+    }
 }
