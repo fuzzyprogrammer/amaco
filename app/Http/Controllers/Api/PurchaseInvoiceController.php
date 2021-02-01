@@ -46,7 +46,7 @@ class PurchaseInvoiceController extends Controller
     }
     public function index()
     {
-        $invoices = PurchaseInvoice::where('status','!=','Delivered')
+        $invoices = PurchaseInvoice::where('status','=','Delivered')
         ->orderBy('created_at','DESC')->get();
         return $invoices;
     }
@@ -167,7 +167,7 @@ class PurchaseInvoiceController extends Controller
     public function update(Request $request, PurchaseInvoice $purchaseInvoice)
     {
         $data = $request->all();
-        $data['status'] = 'Delivered';
+        // $data['status'] = 'Delivered';
         // $data['bill_no'] = $this->getDeliveryNo();
         $purchaseInvoice->update($data);
         return $purchaseInvoice;
@@ -184,12 +184,12 @@ class PurchaseInvoiceController extends Controller
         return ($purchaseInvoice->delete());
     }
 
-    public function history()
-    {
-        $invoices = PurchaseInvoice::where('status', '=', 'Delivered')
-        ->orderBy('created_at', 'DESC')->get();
-        return response()->json($invoices);
-    }
+    // public function history()
+    // {
+    //     $invoices = PurchaseInvoice::where('status', '=', 'Delivered')
+    //     ->orderBy('created_at', 'DESC')->get();
+    //     return response()->json($invoices);
+    // }
 
     public function purchaseInvoiceList()
     {
