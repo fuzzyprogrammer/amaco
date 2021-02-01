@@ -203,10 +203,10 @@ class PurchaseInvoiceController extends Controller
         ->orderBy('created_at', 'DESC')
         ->get();
 
-        $quotations_data = [
+        $quotations_data = 
             $quotations->map(
                 function ($quotation) {
-                    $data =
+                    $data = [
                         'id' => $quotation->id,
                         'po_number' => $quotation->po_number,
                         'created_at' => $quotation->created_at,
