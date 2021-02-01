@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\PurchaseInvoice;
 use App\Models\PurchaseInvoiceDetail;
+use App\Models\Quotation;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class PurchaseInvoiceController extends Controller
 {
@@ -45,7 +46,7 @@ class PurchaseInvoiceController extends Controller
     }
     public function index()
     {
-        $invoices = PurchaseInvoice::where('status','=','Delivered')
+        $invoices = PurchaseInvoice::where('status','!=','Delivered')
         ->orderBy('created_at','DESC')->get();
         return $invoices;
     }
@@ -64,7 +65,7 @@ class PurchaseInvoiceController extends Controller
         // dd($request->vat_in_value);
         $data['invoice_no'] = $this->getInvoiceNo();
         $data['issue_date'] = $request['issue_date'];
-        $data['status'] = "Delivered";
+        $data['status'] = "New";
         $data['quotation_id'] = $request['quotation_id'];
         $data['total_value'] = $request['total_value'];
         $data['discount_in_percentage'] = $request['discount_in_percentage'];
@@ -188,6 +189,18 @@ class PurchaseInvoiceController extends Controller
         $invoices = PurchaseInvoice::where('status', '=', 'Delivered')
         ->orderBy('created_at', 'DESC')->get();
         return response()->json($invoices);
+    }
+
+    public function purchaseInvoiceList()
+    {
+        $quotaions = Quotation::whereNotExists(function ($query) {
+            $query->select(DB::raw(1))
+                ->from('purchase_invoices')
+                ->whereRaw('purchase_invoices.quotation_id = quotations.id');
+        })
+        ->where("transaction_type",'purchase')
+        ->orderBy('created_at', 'DESC')
+        ->get();
     }
 }
 

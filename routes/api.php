@@ -80,6 +80,7 @@ Route::get('product-quotation-detail/{id}', [ProductQuotationDetail::class, 'sho
 Route::get('expense-paid', [ExpenseController::class, 'paid'])->name('expense.paid');
 Route::get('customer-list', [PartyController::class, 'customer'])->name('customer.list');
 Route::get('sales-list', [QuotationController::class, 'salesList'])->name('sales.list');
+Route::get('purchase-invoice-list',[PurchaseInvoiceController::class,'purchaseInvoiceList']);
 
 
 
