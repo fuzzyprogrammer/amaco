@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PurchaseInvoice;
 use App\Models\PurchaseInvoiceDetail;
 use App\Models\Quotation;
+use App\Models\QuotationDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -193,7 +194,7 @@ class PurchaseInvoiceController extends Controller
 
     public function purchaseInvoiceList()
     {
-        $quotaions = Quotation::whereNotExists(function ($query) {
+        $quotations = Quotation::whereNotExists(function ($query) {
             $query->select(DB::raw(1))
                 ->from('purchase_invoices')
                 ->whereRaw('purchase_invoices.quotation_id = quotations.id');
