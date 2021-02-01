@@ -64,7 +64,7 @@ class PurchaseInvoiceController extends Controller
         // dd($request->vat_in_value);
         $data['invoice_no'] = $this->getInvoiceNo();
         $data['issue_date'] = $request['issue_date'];
-        $data['status'] = "New";
+        $data['status'] = "Delivered";
         $data['quotation_id'] = $request['quotation_id'];
         $data['total_value'] = $request['total_value'];
         $data['discount_in_percentage'] = $request['discount_in_percentage'];
