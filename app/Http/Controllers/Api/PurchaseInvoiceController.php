@@ -202,7 +202,50 @@ class PurchaseInvoiceController extends Controller
         ->orderBy('created_at', 'DESC')
         ->get();
 
-        return response()->json($quotaions);
+        $quotations_data = [
+            $quotations->map(
+                function ($quotation) {
+                    $data = [
+                        'id' => $quotation->id,
+                        'po_number' => $quotation->po_number,
+                        'created_at' => $quotation->created_at,
+                        'updated_at' => $quotation->updated_at,
+                        'status' => $quotation->status,
+                        'total_value' => $quotation->total_value,
+                        'party_id' => $quotation->party_id,
+                        "contact_id" => $quotation->contact_id,
+                        "contact" => $quotation->contact,
+                        "party" => $quotation->party,
+                        "vat_in_value" => $quotation->vat_in_value,
+                        "net_amount" => $quotation->net_amount,
+                        "transaction_type" => $quotation->transaction_type,
+                        'discount_in_p' => $quotation->discount_in_p,
+                        'ps_date' => $quotation->ps_date,
+                        'quotation_details' => $quotation->quotationDetail->map(function ($quotation_detail) {
+                            $quotation_detail = QuotationDetail::where('id', '=', $quotation_detail->id)->first();
+                            return [
+                                "id" => $quotation_detail['id'],
+                                "created_at" => $quotation_detail->created_at,
+                                "updated_at" => $quotation_detail->updated_at,
+                                "product_id" => $quotation_detail->product_id,
+                                "product" => array($quotation_detail->product),
+                                "description" => $quotation_detail->description,
+                                "quantity" => $quotation_detail->quantity,
+                                "total_amount" => $quotation_detail->total_amount,
+                                "analyse_id" => $quotation_detail->analyse_id,
+                                "purchase_price" => $quotation_detail->purchase_price,
+                                "margin" => $quotation_detail->margin,
+                                "sell_price" => $quotation_detail->sell_price,
+                                "remark" => $quotation_detail->remark,
+                            ];
+                        }),
+                    ];
+                    return $data;
+                }
+            ),
+        ];
+
+        return response()->json($quotations_data[0]);
     }
 }
 
