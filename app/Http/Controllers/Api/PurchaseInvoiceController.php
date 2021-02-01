@@ -79,7 +79,7 @@ class PurchaseInvoiceController extends Controller
             'discount_in_percentage' => $data['discount_in_percentage'],
             'vat_in_value' => $data['vat_in_value'],
             'grand_total' => $data['grand_total'],
-            'delivery_no' => null,
+            'bill_no' => null,
         ]);
 
         global $_invoice_id;
@@ -142,8 +142,8 @@ class PurchaseInvoiceController extends Controller
     {
         $invoice = PurchaseInvoice::latest('created_at')->first();
         if ($invoice) {
-            $latest_delivery_no = $invoice->delivery_no ? $invoice->delivery_no : 0;
-            return ($latest_delivery_no);
+            $latest_bill_no = $invoice->bill_no ? $invoice->bill_no : 0;
+            return ($latest_bill_no);
         } else {
             return ('AMDLV-' . $this->getCurrentDeliveryYear() . '-' . sprintf("%04d", 0));
         }
@@ -151,8 +151,8 @@ class PurchaseInvoiceController extends Controller
 
     public function getDeliveryNo()
     {
-        $latest_delivery_no = $this->getLastDeliveryNo();
-        $last_year = substr($latest_delivery_no, 6, 2);
+        $latest_bill_no = $this->getLastDeliveryNo();
+        $last_year = substr($latest_bill_no, 6, 2);
         $current_year = $this->getCurrentDeliveryYear();
         // dd([$last_year, $current_year]);
         if ($current_year != $last_year) {
@@ -166,7 +166,7 @@ class PurchaseInvoiceController extends Controller
     {
         $data = $request->all();
         $data['status'] = 'Delivered';
-        $data['delivery_no'] = $this->getDeliveryNo();
+        $data['bill_no'] = $this->getDeliveryNo();
         $invoice->update($data);
         return $invoice;
     }
