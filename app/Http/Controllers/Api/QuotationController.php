@@ -283,14 +283,14 @@ class QuotationController extends Controller
                 'ps_date' => $data['ps_date'],
             ];
 
-            if ($request->transaction_type === 'sale') {
-                $datas['quotation_no'] = $this->getQuotationNo();
-            } elseif ($request->transaction_type === 'purchase') {
-                $datas['po_number'] = $this->getPONo();
-            } else {
-                $datas['quotation_no'] = null;
-                $datas['po_number'] = null;
-            }
+            // if ($request->transaction_type === 'sale') {
+            //     $datas['quotation_no'] = $this->getQuotationNo();
+            // } elseif ($request->transaction_type === 'purchase') {
+            //     $datas['po_number'] = $this->getPONo();
+            // } else {
+            //     $datas['quotation_no'] = null;
+            //     $datas['po_number'] = null;
+            // }
 
             $quotation->update($datas);
 
@@ -299,7 +299,7 @@ class QuotationController extends Controller
                 $quotation_d=QuotationDetail::where('id',$quotation_detail['id'])->first();
                 if($quotation_d){
                 $quotation_d->update([
-                    // 'quotation_id' => $quotation->id,
+                    'quotation_id' => $quotation->id,
                     'total_amount' => $quotation_detail['total_amount'],
                     'analyse_id' => null,
                     'product_id' => $quotation_detail['product_id'],
