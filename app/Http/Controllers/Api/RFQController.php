@@ -51,7 +51,7 @@ class RFQController extends Controller
                                 "product_id" => $rfq_detail->product_id,
                                 "product" => array($rfq_detail->product),
                                 "description" => $rfq_detail->description,
-                                "quantity_required" => $rfq_detail->quantity_required,
+                                "quantity" => $rfq_detail->quantity,
                             ];
                         }),
                     ];
@@ -97,7 +97,7 @@ class RFQController extends Controller
             //         RFQDetails::create([
             //             'product_id' => $rfq_detail['id'],
             //             'description' => $rfq_detail['descriptionss'],
-            //             'quantity_required' => $rfq_detail['quantity'],
+            //             'quantity' => $rfq_detail['quantity'],
             //             'rfq_id' => $_rfq_id,
             //         ])
             //         ];
@@ -107,7 +107,7 @@ class RFQController extends Controller
                     $_rfq_detail = RFQDetails::create([
                         'product_id' => $rfq_detail['id'],
                         'description' => $rfq_detail['descriptionss'],
-                        'quantity_required' => $rfq_detail['quantity'],
+                        'quantity' => $rfq_detail['quantity'],
                         'rfq_id' => $_rfq_id,
                     ]);
                 }
@@ -175,7 +175,7 @@ class RFQController extends Controller
                     "created_at"=> $rfq_detail->created_at,
                     "updated_at"=> $rfq_detail->updated_at,
                     "product_id"=> $rfq_detail->product_id,
-                    "quantity_required" => $rfq_detail->quantity_required,
+                    "quantity" => $rfq_detail->quantity,
                     "description"=> $rfq_detail->description,
                     "product_name" => $rfq_detail->product->name,
                     "product" => array($rfq_detail->product),
@@ -239,7 +239,7 @@ class RFQController extends Controller
                 $_rfq_detail = $rfq_update_data->update([
                     'product_id' => $rfq_detail['id'],
                     'description' => $rfq_detail['descriptionss'],
-                    'quantity_required' => $rfq_detail['quantity'],
+                    'quantity' => $rfq_detail['quantity'],
                     'rfq_id' => $_rfq_id,
                 ]);
             }

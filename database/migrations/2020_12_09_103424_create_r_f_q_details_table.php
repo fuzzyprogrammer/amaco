@@ -18,7 +18,7 @@ class CreateRFQDetailsTable extends Migration
             $table->unsignedBigInteger('rfq_id')->nullable();
             $table->unsignedBigInteger('product_id')->nullable();
             $table->text('description')->nullable();
-            $table->string('quantity_required')->nullable();
+            $table->string('quantity')->nullable();
             $table->timestamps();
         });
     }
