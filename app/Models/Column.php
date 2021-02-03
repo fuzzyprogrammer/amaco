@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class column extends Model
+class Column extends Model
 {
     use HasFactory;
-
+    
     protected $guarded = [];
 
     public function accountCategory()
@@ -18,7 +18,7 @@ class column extends Model
 
     public function columnData()
     {
-        return $this->hasMany(ColumnData::class, 'column_id','id');
+        return $this->hasMany(ColumnData::class, 'column_id', 'id');
     }
 
 }

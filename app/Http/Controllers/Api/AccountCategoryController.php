@@ -15,7 +15,9 @@ class AccountCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $accountCategories = AccountCategory::where('parent_id', '=', null)->get();
+
+        return response()->json($accountCategories);
     }
 
     /**
@@ -26,7 +28,10 @@ class AccountCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $accountCategory = AccountCategory::create($data);
+
+        return response()->json($accountCategory);
     }
 
     /**
@@ -37,7 +42,7 @@ class AccountCategoryController extends Controller
      */
     public function show(AccountCategory $accountCategory)
     {
-        //
+        return response()->json($accountCategory);
     }
 
     /**
@@ -49,7 +54,10 @@ class AccountCategoryController extends Controller
      */
     public function update(Request $request, AccountCategory $accountCategory)
     {
-        //
+        $data = $request->all();
+        $accountCategory->update($data);
+
+        return response()->json($accountCategory);
     }
 
     /**
@@ -60,6 +68,23 @@ class AccountCategoryController extends Controller
      */
     public function destroy(AccountCategory $accountCategory)
     {
-        //
+        $accountCategory->delete();
+
+        return response()->json($accountCategory->id." has been successfully deleted.");
+    }
+
+    public function subCategory($id)
+    {
+        $sub_categories = AccountCategory::where('parent_id', '=', $id)->get();
+        return response()->json($sub_categories);
+    }
+
+    public function search($name)
+    {
+        $name = strtolower($name);
+        $category = AccountCategory::query()
+            ->where('name', 'LIKE', "%{$name}%")
+            ->get();
+        return response()->json($category);
     }
 }

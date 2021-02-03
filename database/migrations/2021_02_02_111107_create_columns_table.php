@@ -15,8 +15,8 @@ class CreateColumnsTable extends Migration
     {
         Schema::create('columns', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('account_category_id');
-            $table->string('name');
+            $table->unsignedBigInteger('account_category_id')->nullable();
+            $table->string('name')->nullable();
             $table->timestamps();
         });
     }

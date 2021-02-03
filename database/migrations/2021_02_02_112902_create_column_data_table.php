@@ -15,9 +15,9 @@ class CreateColumnDataTable extends Migration
     {
         Schema::create('column_data', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('expense_id');
-            $table->unsignedBigInteger('column_id');
-            $table->unsignedBigInteger('value');
+            $table->unsignedBigInteger('expense_id')->nullable();
+            $table->unsignedBigInteger('column_id')->nullable();
+            $table->unsignedBigInteger('value')->nullable();
             $table->timestamps();
         });
     }

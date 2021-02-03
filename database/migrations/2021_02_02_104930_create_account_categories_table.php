@@ -15,9 +15,9 @@ class CreateAccountCategoriesTable extends Migration
     {
         Schema::create('account_categories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('parent_id');
-            $table->string('name');
-            $table->string('description');
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->string('name')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

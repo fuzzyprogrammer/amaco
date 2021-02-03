@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AccountCategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductQuotationDetail;
@@ -10,6 +11,8 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\RFQController;
 use App\Http\Controllers\Api\RFQDetailsController;
 use App\Http\Controllers\Api\AnalyseController;
+use App\Http\Controllers\Api\ColumnController;
+use App\Http\Controllers\Api\ColumnDataController;
 use App\Http\Controllers\Api\QuotationController;
 use App\Http\Controllers\Api\QuotationDetailController;
 use App\Http\Controllers\Api\SaleController;
@@ -63,6 +66,9 @@ Route::apiResource('manufacturer',ManufacturerController::class);
 Route::apiResource('product-price',ProductPriceController::class);
 Route::apiResource('payment-account',PaymentAccountController::class);
 Route::apiResource('purchase-invoice',PurchaseInvoiceController::class);
+Route::apiResource('account-categories',AccountCategoryController::class);
+Route::apiResource('columns',ColumnController::class);
+Route::apiResource('columnDatas',ColumnDataController::class);
 
 Route::post('rfq-history', [RFQController::class, 'history'])->name('rfq.history');
 Route::post('invoice-history', [InvoiceController::class, 'history'])->name('invoice.history');
@@ -81,7 +87,6 @@ Route::get('expense-paid', [ExpenseController::class, 'paid'])->name('expense.pa
 Route::get('customer-list', [PartyController::class, 'customer'])->name('customer.list');
 Route::get('sales-list', [QuotationController::class, 'salesList'])->name('sales.list');
 Route::get('purchase-invoice-list',[PurchaseInvoiceController::class, 'purchaseInvoiceList'])->name('purchase.invoice.list');
+Route::get('account-subcategories/{id}', [AccountCategoryController::class, 'subCategory'])->name('account.category.subcategory');
+Route::get('account-categories-search/{name}', [AccountCategoryController::class, 'search'])->name('account.category.search');
 
-
-
-//

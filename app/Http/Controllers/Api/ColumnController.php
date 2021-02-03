@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\column;
+use App\Models\AccountCategory;
+use App\Models\Column;
 use Illuminate\Http\Request;
 
 class ColumnController extends Controller
@@ -26,40 +27,67 @@ class ColumnController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $column = Column::create($data);
+
+        return response()->json($column);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\column  $column
+     * @param  \App\Models\Column  $column
      * @return \Illuminate\Http\Response
      */
-    public function show(column $column)
+    public function show($id)
     {
-        //
+        $accountCategory = AccountCategory::where('id',$id)->firstOrFail();
+        if ($accountCategory == null) {
+            // Account Category not found, show 404 or whatever you want to do
+            return response()->json("There is no Account Category with id: ".$id);
+        } else {
+            // if account categoty is found then try finding the columns associated with respective category
+            $columns = Column::where('account_category_id',$accountCategory->id)->get();
+            if ($columns == null) {
+                // Columns not found, show 404 or whatever you want to do
+                return response()->json("There is no Column for Account Category with id: " . $id .".\n Create new column");
+            } else {
+                // if columns are available then proceed the following
+                $data = [
+                    $accountCategory,
+                    $accountCategory->column
+                ];
+
+                return response()->json($data);
+            }
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\column  $column
+     * @param  \App\Models\Column  $column
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, column $column)
+    public function update(Request $request, Column $column)
     {
-        //
+        $data = $request->all();
+        $column->update($data);
+
+        return response()->json($column);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\column  $column
+     * @param  \App\Models\Column  $column
      * @return \Illuminate\Http\Response
      */
-    public function destroy(column $column)
+    public function destroy(Column $column)
     {
-        //
+        $column->delete();
+
+        return response()->json($column->name." has been successfully deleted.");
     }
 }
