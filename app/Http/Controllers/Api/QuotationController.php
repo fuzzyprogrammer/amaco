@@ -235,8 +235,8 @@ class QuotationController extends Controller
                 "product" => $quotation_detail->product,
                 "product_price_list" => $quotation_detail->product->productPrice->map(function ($productP){
                     return [
-                        $productP,
-                        $productP->party
+                        'price'=>$productP->price,
+                        'firm_name'=>$productP->party->firm_name
                     ];
                 }),
                 // "product_price_list" => $quotation_detail->product->productPrice->party,
