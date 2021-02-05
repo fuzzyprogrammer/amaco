@@ -46,10 +46,9 @@ class ProductQuotationDetail extends Controller
                 return[
                 'firm_name' => function ($quotationDetail){
                     if($quotationDetail->quotation->party == null){
-                        return "party is empty";
-                    }else{
-                        return $quotationDetail->quotation->party->firm_name;
+                        return $this->res = "party is empty";
                     }
+                    return $quotationDetail->quotation->party->firm_name;
                 },
                 'sellprice' => $quotationDetail->sell_price,
                 'purchase_price' => $quotationDetail->purchase_price,
