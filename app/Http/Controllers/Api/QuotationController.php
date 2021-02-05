@@ -224,7 +224,7 @@ class QuotationController extends Controller
             "ps_date" => $quotation->ps_date,
             "contact" => $quotation->contact,
             "party" => $quotation->party,
-            "party"=> $quotation->party,
+            // "party"=> $quotation->party,
             "rfq" => $quotation->rfq,
             "quotation_details" => $quotation->quotationDetail->map(function ($quotation_detail){
                 return[
