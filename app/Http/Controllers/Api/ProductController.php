@@ -92,7 +92,6 @@ class ProductController extends Controller
             ->get();
 
         $data = ['product' => $product,'prices' => $prices];
-        $data['name_ar'] = file_get_contents('https://api.mymemory.translated.net/get?q=helloworld!&langpair=en|ar');
         return response()->json($data);
 
     }

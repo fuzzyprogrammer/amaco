@@ -121,6 +121,9 @@ class InvoiceController extends Controller
             //         $invoice_detail->quotationDetail,
             //     ];
             // }),
+
+            // $product['name_ar'] = file_get_contents('https://api.mymemory.translated.net/get?q=helloworld!&langpair=en|ar');
+
         ];
     }
 
