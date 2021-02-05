@@ -44,7 +44,7 @@ class ProductQuotationDetail extends Controller
         else{
             $data = $quotationDetails->map(function ($quotationDetail){
                 return[
-                'firm_name' => $quotationDetail->quotation->party->firm_name,
+                'firm_name' => $quotationDetail->quotation->party,
                 'sellprice' => $quotationDetail->sell_price,
                 'purchase_price' => $quotationDetail->purchase_price,
                 'margin' => $quotationDetail->margin,
