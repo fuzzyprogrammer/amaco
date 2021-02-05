@@ -28,6 +28,7 @@ use App\Http\Controllers\Api\ManufacturerController;
 use App\Http\Controllers\Api\PaymentAccountController;
 use App\Http\Controllers\Api\ProductPriceController;
 use App\Http\Controllers\Api\PurchaseInvoiceController;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,26 @@ use App\Http\Controllers\Api\PurchaseInvoiceController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// jwt auth links
+
+Route::group(
+    [
+
+        'middleware' => 'api',
+        'prefix' => 'auth'
+
+    ],
+    function ($router) {
+
+        Route::post('login', [AuthController::class, 'login']);
+        Route::post('logout', [AuthController::class, 'logout']);
+        Route::post('refresh', [AuthController::class, 'refresh']);
+        Route::post('me', [AuthController::class, 'me']);
+    }
+);
+
+// resource api links
 
 Route::get('users', [UserController::class, 'index']);
 Route::apiResource('products',ProductController::class);
@@ -69,6 +90,8 @@ Route::apiResource('purchase-invoice',PurchaseInvoiceController::class);
 Route::apiResource('account-categories',AccountCategoryController::class);
 Route::apiResource('columns',ColumnController::class);
 Route::apiResource('columnDatas',ColumnDataController::class);
+
+// restful api links
 
 Route::post('rfq-history', [RFQController::class, 'history'])->name('rfq.history');
 Route::post('invoice-history', [InvoiceController::class, 'history'])->name('invoice.history');
