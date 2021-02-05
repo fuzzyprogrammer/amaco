@@ -45,7 +45,7 @@ class ProductQuotationDetail extends Controller
             $data = $quotationDetails->map(function ($quotationDetail){
                 return[
                 'firm_name' => function ($quotationDetail){
-                    if($quotationDetail->quotation->party->isEmpty()){
+                    if($quotationDetail->quotation->party == null){
                         return "party is empty";
                     }else{
                         return $quotationDetail->quotation->party->firm_name;
