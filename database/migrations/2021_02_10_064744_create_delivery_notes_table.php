@@ -15,10 +15,10 @@ class CreateDeliveryNotesTable extends Migration
     {
         Schema::create('delivery_notes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('quotaion_id');
-            $table->string('delivery_number');
-            $table->string('po_number');
-            $table->string('delivery_date');
+            $table->unsignedBigInteger('quotaion_id')->nullable();
+            $table->string('delivery_number')->nullable();
+            $table->string('po_number')->nullable();
+            $table->string('delivery_date')->nullable();
             $table->timestamps();
         });
     }

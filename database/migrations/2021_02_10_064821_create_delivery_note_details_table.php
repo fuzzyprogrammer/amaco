@@ -15,9 +15,9 @@ class CreateDeliveryNoteDetailsTable extends Migration
     {
         Schema::create('delivery_note_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('delivery_note_id');
-            $table->unsignedBigInteger('product_id');
-            $table->string('delivery_quantity');
+            $table->unsignedBigInteger('delivery_note_id')->nullable();
+            $table->unsignedBigInteger('product_id')->nullable();
+            $table->string('delivery_quantity')->nullable();
             $table->timestamps();
         });
     }

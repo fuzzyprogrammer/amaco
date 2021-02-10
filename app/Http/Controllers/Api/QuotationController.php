@@ -266,27 +266,27 @@ class QuotationController extends Controller
     public function update(Request $request, $id)
     {
         $quotation = Quotation::findOrFail($id);
-        $data = $request->all();
+        $data = $request->json()->all();
         // return $request;
 
         try {
-            $datas = [
-                'party_id' => $data['party_id'],
-                'rfq_id' => $data['rfq_id'] ? $data['rfq_id'] : null,
-                'status' => $data['status'],
-                'total_value' => $data['total_value'],
-                'net_amount' => $data['net_amount'],
-                'vat_in_value' => $data['vat_in_value'],
-                'discount_in_p' => $data['discount_in_p'],
-                'validity' => $data['validity'],
-                'payment_terms' => $data['payment_terms'],
-                'warranty' => $data['warranty'],
-                'delivery_time' => $data['delivery_time'],
-                'inco_terms' => $data['inco_terms'],
-                'contact_id' => $data['contact_id'],
-                'transaction_type' => $data['transaction_type'],
-                'ps_date' => $data['ps_date'],
-            ];
+            // $datas = [
+            //     'party_id' => $data['party_id'],
+            //     'rfq_id' => $data['rfq_id'] ? $data['rfq_id'] : null,
+            //     'status' => $data['status'],
+            //     'total_value' => $data['total_value'],
+            //     'net_amount' => $data['net_amount'],
+            //     'vat_in_value' => $data['vat_in_value'],
+            //     'discount_in_p' => $data['discount_in_p'],
+            //     'validity' => $data['validity'],
+            //     'payment_terms' => $data['payment_terms'],
+            //     'warranty' => $data['warranty'],
+            //     'delivery_time' => $data['delivery_time'],
+            //     'inco_terms' => $data['inco_terms'],
+            //     'contact_id' => $data['contact_id'],
+            //     'transaction_type' => $data['transaction_type'],
+            //     'ps_date' => $data['ps_date'],
+            // ];
 
             // if ($request->transaction_type === 'sale') {
             //     $datas['quotation_no'] = $this->getQuotationNo();
@@ -297,7 +297,7 @@ class QuotationController extends Controller
             //     $datas['po_number'] = null;
             // }
 
-            $quotation->update($datas);
+            $quotation->update($data);
 
             // dd($request->quotation_details);
             foreach ($data['quotation_details'] as $quotation_detail) {
