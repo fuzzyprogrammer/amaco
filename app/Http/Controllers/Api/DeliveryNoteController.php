@@ -40,8 +40,8 @@ class DeliveryNoteController extends Controller
         $data = $request->json()->all();
 
         $deliveryNote = DeliveryNote::create($data);
-        $data['deliveryNoteDetails'] ??
-        $data['deliveryNoteDetails']->map(function ($deliveryNoteDeatilData){
+        $data['delivery_note_details'] ??
+        $data['delivery_note_details']->map(function ($deliveryNoteDeatilData){
             DeliveryNoteDetail::create($deliveryNoteDeatilData);
         });
 
