@@ -75,7 +75,7 @@ class DeliveryNoteController extends Controller
      */
     public function update(Request $request, DeliveryNote $deliveryNote)
     {
-        $data = $request->json()->all();
+        $data = $request->all();
         $deliveryNote->update($data);
 
         return response()->json($deliveryNote);
