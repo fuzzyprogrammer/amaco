@@ -29,6 +29,8 @@ use App\Http\Controllers\Api\PaymentAccountController;
 use App\Http\Controllers\Api\ProductPriceController;
 use App\Http\Controllers\Api\PurchaseInvoiceController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\DeliveryNoteController;
+use App\Http\Controllers\Api\DeliveryNoteDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,7 +67,6 @@ Route::group(
 
 // resource api links
 
-Route::get('users', [UserController::class, 'index']);
 Route::apiResource('products',ProductController::class);
 Route::apiResource('parties',PartyController::class);
 Route::apiResource('categories',CategoryController::class);
@@ -90,9 +91,11 @@ Route::apiResource('purchase-invoice',PurchaseInvoiceController::class);
 Route::apiResource('account-categories',AccountCategoryController::class);
 Route::apiResource('columns',ColumnController::class);
 Route::apiResource('columnDatas',ColumnDataController::class);
+Route::apiResource('delivery-notes',DeliveryNoteController::class);
+Route::apiResource('delivery-notes-details',DeliveryNoteDetailController::class);
 
 // restful api links
-
+Route::get('users', [UserController::class, 'index']);
 Route::post('rfq-history', [RFQController::class, 'history'])->name('rfq.history');
 Route::post('invoice-history', [InvoiceController::class, 'history'])->name('invoice.history');
 Route::post('quotation-history', [QuotationController::class, 'history'])->name('quotation.history');
@@ -112,4 +115,6 @@ Route::get('sales-list', [QuotationController::class, 'salesList'])->name('sales
 Route::get('purchase-invoice-list',[PurchaseInvoiceController::class, 'purchaseInvoiceList'])->name('purchase.invoice.list');
 Route::get('account-subcategories/{id}', [AccountCategoryController::class, 'subCategory'])->name('account.category.subcategory');
 Route::get('account-categories-search/{name}', [AccountCategoryController::class, 'search'])->name('account.category.search');
+Route::get('quotations-accepted-list', [QuotationController::class, 'acceptedList'])->name('quotaions.accepted.list');
+Route::get('quotations-rejected-list', [QuotationController::class, 'rejectedList'])->name('quotaions.rejected.list');
 

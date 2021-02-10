@@ -8,7 +8,6 @@ use App\Models\QuotationDetail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Exception;
 use Illuminate\Support\Facades\DB;
-use Mockery\Undefined;
 
 class QuotationController extends Controller
 {
@@ -274,7 +273,7 @@ class QuotationController extends Controller
             $datas = [
                 'party_id' => $data['party_id'],
                 'rfq_id' => $data['rfq_id'] ? $data['rfq_id'] : null,
-                'status' => 'New',
+                'status' => $data['status'],
                 'total_value' => $data['total_value'],
                 'net_amount' => $data['net_amount'],
                 'vat_in_value' => $data['vat_in_value'],
@@ -413,6 +412,112 @@ class QuotationController extends Controller
     public function salesList()
     {
         $quotations = Quotation::where(['status' => 'New', 'transaction_type' => 'sale'])
+            ->whereNotExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('invoices')
+                    ->whereRaw('invoices.quotation_id = quotations.id');
+            })->orderBy('created_at', 'DESC')
+            ->get();
+        // $quotations = Quotation::where('status','=','New')->orderBy('created_at','DESC')->get();
+        $quotations_data = [
+            $quotations->map(
+                function ($quotation) {
+                    return [
+                        'id' => $quotation->id,
+                        'quotation_no' => $quotation->quotation_no,
+                        'created_at' => $quotation->created_at,
+                        'updated_at' => $quotation->updated_at,
+                        'status' => $quotation->status,
+                        'total_value' => $quotation->total_value,
+                        'party_id' => $quotation->party_id,
+                        "contact_id" => $quotation->contact_id,
+                        "contact" => $quotation->contact,
+                        "party" => $quotation->party,
+                        "vat_in_value" => $quotation->vat_in_value,
+                        "net_amount" => $quotation->net_amount,
+                        "transaction_type" => $quotation->transaction_type,
+                        'discount_in_p' => $quotation['discount_in_p'],
+                        'quotation_details' => $quotation->quotationDetail->map(function ($quotation_detail) {
+                            $quotation_detail = QuotationDetail::where('id', '=', $quotation_detail->id)->first();
+                            return [
+                                "id" => $quotation_detail['id'],
+                                "created_at" => $quotation_detail->created_at,
+                                "updated_at" => $quotation_detail->updated_at,
+                                "product_id" => $quotation_detail->product_id,
+                                "product" => array($quotation_detail->product),
+                                "description" => $quotation_detail->description,
+                                "quantity" => $quotation_detail->quantity,
+                                "total_amount" => $quotation_detail->total_amount,
+                                "analyse_id" => $quotation_detail->analyse_id,
+                                "purchase_price" => $quotation_detail->purchase_price,
+                                "margin" => $quotation_detail->margin,
+                                "sell_price" => $quotation_detail->sell_price,
+                                "remark" => $quotation_detail->remark,
+                            ];
+                        }),
+                    ];
+                }
+            ),
+        ];
+        return response()->json($quotations_data[0], 200);
+    }
+
+    public function acceptedList()
+    {
+        $quotations = Quotation::where(['status' => 'Accept', 'transaction_type' => 'sale'])
+            ->whereNotExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('invoices')
+                    ->whereRaw('invoices.quotation_id = quotations.id');
+            })->orderBy('created_at', 'DESC')
+            ->get();
+        // $quotations = Quotation::where('status','=','New')->orderBy('created_at','DESC')->get();
+        $quotations_data = [
+            $quotations->map(
+                function ($quotation) {
+                    return [
+                        'id' => $quotation->id,
+                        'quotation_no' => $quotation->quotation_no,
+                        'created_at' => $quotation->created_at,
+                        'updated_at' => $quotation->updated_at,
+                        'status' => $quotation->status,
+                        'total_value' => $quotation->total_value,
+                        'party_id' => $quotation->party_id,
+                        "contact_id" => $quotation->contact_id,
+                        "contact" => $quotation->contact,
+                        "party" => $quotation->party,
+                        "vat_in_value" => $quotation->vat_in_value,
+                        "net_amount" => $quotation->net_amount,
+                        "transaction_type" => $quotation->transaction_type,
+                        'discount_in_p' => $quotation['discount_in_p'],
+                        'quotation_details' => $quotation->quotationDetail->map(function ($quotation_detail) {
+                            $quotation_detail = QuotationDetail::where('id', '=', $quotation_detail->id)->first();
+                            return [
+                                "id" => $quotation_detail['id'],
+                                "created_at" => $quotation_detail->created_at,
+                                "updated_at" => $quotation_detail->updated_at,
+                                "product_id" => $quotation_detail->product_id,
+                                "product" => array($quotation_detail->product),
+                                "description" => $quotation_detail->description,
+                                "quantity" => $quotation_detail->quantity,
+                                "total_amount" => $quotation_detail->total_amount,
+                                "analyse_id" => $quotation_detail->analyse_id,
+                                "purchase_price" => $quotation_detail->purchase_price,
+                                "margin" => $quotation_detail->margin,
+                                "sell_price" => $quotation_detail->sell_price,
+                                "remark" => $quotation_detail->remark,
+                            ];
+                        }),
+                    ];
+                }
+            ),
+        ];
+        return response()->json($quotations_data[0], 200);
+    }
+
+    public function rejectedList()
+    {
+        $quotations = Quotation::where(['status' => 'Accept', 'transaction_type' => 'sale'])
             ->whereNotExists(function ($query) {
                 $query->select(DB::raw(1))
                     ->from('invoices')

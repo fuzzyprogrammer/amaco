@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Analyse;
 use Illuminate\Http\Request;
 
+
 class AnalyseController extends Controller
 {
     /**
