@@ -300,6 +300,7 @@ class QuotationController extends Controller
             $quotation->update($data);
 
             // dd($request->quotation_details);
+            if($data['quotation_details']){
             foreach ($data['quotation_details'] as $quotation_detail) {
                 $quotation_d=QuotationDetail::where('id',$quotation_detail['id'])->first();
                 if($quotation_d){
@@ -329,7 +330,7 @@ class QuotationController extends Controller
                         'remark' => $quotation_detail['remark'],
                     ]);
             }
-            }
+            }}
             return response()->json(['msg' => 'successfully added']);
         } catch (Exception $e) {
             return $e;
