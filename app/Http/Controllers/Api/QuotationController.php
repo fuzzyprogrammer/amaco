@@ -465,7 +465,7 @@ class QuotationController extends Controller
 
     public function acceptedList()
     {
-        $quotations = Quotation::where(['status' => 'Accept', 'transaction_type' => 'sale'])
+        $quotations = Quotation::where(['status' => 'accept', 'transaction_type' => 'sale'])
             ->whereNotExists(function ($query) {
                 $query->select(DB::raw(1))
                     ->from('invoices')
@@ -518,7 +518,7 @@ class QuotationController extends Controller
 
     public function rejectedList()
     {
-        $quotations = Quotation::where(['status' => 'Accept', 'transaction_type' => 'sale'])
+        $quotations = Quotation::where(['status' => 'reject', 'transaction_type' => 'sale'])
             ->whereNotExists(function ($query) {
                 $query->select(DB::raw(1))
                     ->from('invoices')
