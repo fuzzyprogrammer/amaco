@@ -266,7 +266,7 @@ class QuotationController extends Controller
     public function update(Request $request, $id)
     {
         $quotation = Quotation::findOrFail($id);
-        $data = $request->json()->all();
+        $data = $request->all();
         // return $request;
 
         try {
