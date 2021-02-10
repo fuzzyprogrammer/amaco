@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DeliveryNoteDetail;
 use Illuminate\Http\Request;
 
-class DeliveryNoteDetailDetailController extends Controller
+class DeliveryNoteDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
