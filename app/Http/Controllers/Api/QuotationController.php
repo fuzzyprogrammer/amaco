@@ -7,6 +7,8 @@ use App\Models\Quotation;
 use App\Models\QuotationDetail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Exception;
+use App\Models\DeliveryNote;
+use App\Models\DeliveryNoteDetail;
 use Illuminate\Support\Facades\DB;
 
 class QuotationController extends Controller
@@ -16,6 +18,26 @@ class QuotationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // public function checkDeliveredProductQuantity($quotation_detail)
+    // {
+    //     $product_quantity = $quotation_detail->product->quantity;
+    //     $product_id = $quotation_detail->product->id;
+    //     $quotation_id = $quotation_detail->quotation->id;
+    //     $deliveryNote = DeliveryNote::where('quotation_id',$quotation_id)->firstOrFail();
+    //     $res = $deliveryNote->deliveryNoteDetail ?? $deliveryNote->deliveryNoteDetail->map(function($deliveryNoteD, $this->product_quantity,$this->product_id){
+    //         if($deliveryNoteD->product_id == $product_id){
+    //             if($product_quantity - $deliveryNoteD->quantity != 0){
+    //                 return true;
+    //             }else{
+    //                 return false;
+    //             }
+    //         }
+    //     });
+    //     // dd($quotation_detail);
+    //     return $res;
+    // }
+
     public function getCurrentYear()
     {
         return substr(date('Y'), 2);
@@ -242,6 +264,7 @@ class QuotationController extends Controller
                 "purchase_price"=> $quotation_detail->purchase_price,
                 "description"=> $quotation_detail->description,
                 "quantity"=> $quotation_detail->quantity,
+                "delivered_quantity"=> $quotation_detail->quantity,
                 "margin"=> $quotation_detail->margin,
                 "sell_price"=> $quotation_detail->sell_price,
                 "remark"=> $quotation_detail->remark,
@@ -494,6 +517,8 @@ class QuotationController extends Controller
                         'discount_in_p' => $quotation['discount_in_p'],
                         'quotation_details' => $quotation->quotationDetail->map(function ($quotation_detail) {
                             $quotation_detail = QuotationDetail::where('id', '=', $quotation_detail->id)->first();
+                            // $isDelivered = $this->checkDeliveredProductQuantity($quotation_detail);
+                            // dd($isDelivered);
                             return [
                                 "id" => $quotation_detail['id'],
                                 "created_at" => $quotation_detail->created_at,
