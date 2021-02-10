@@ -300,7 +300,7 @@ class QuotationController extends Controller
             $quotation->update($data);
 
             // dd($request->quotation_details);
-            if($data['quotation_details']){
+            if(in_array('quotation_details',(array)($data), true)){
             foreach ($data['quotation_details'] as $quotation_detail) {
                 $quotation_d=QuotationDetail::where('id',$quotation_detail['id'])->first();
                 if($quotation_d){
