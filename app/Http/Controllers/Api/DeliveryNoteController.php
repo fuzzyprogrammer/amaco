@@ -39,7 +39,7 @@ class DeliveryNoteController extends Controller
     {
 
         $data = $request->json()->all();
-        return($data);
+        // return($data);
 
         $deliveryNote = DeliveryNote::create($data);
         if ($data['delivery_note_details']){
