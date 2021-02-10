@@ -17,7 +17,7 @@ class CreateDeliveryNoteDetailsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('delivery_note_id')->nullable();
             $table->unsignedBigInteger('product_id')->nullable();
-            $table->string('delivery_quantity')->nullable();
+            $table->string('delivered_quantity')->nullable();
             $table->timestamps();
         });
     }
