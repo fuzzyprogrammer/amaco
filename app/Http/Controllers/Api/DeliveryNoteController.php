@@ -42,10 +42,11 @@ class DeliveryNoteController extends Controller
         return($data['delivery_note_details']);
 
         $deliveryNote = DeliveryNote::create($data);
-        $data['delivery_note_details'] ??
-        $data['delivery_note_details']->map(function ($deliveryNoteDeatilData){
-            DeliveryNoteDetail::create($deliveryNoteDeatilData);
-        });
+        if (!type($data['delivery_note_details']) == 'undefined'){
+            $data['delivery_note_details']->map(function ($deliveryNoteDeatilData){
+                DeliveryNoteDetail::create($deliveryNoteDeatilData);
+            });
+        }
 
         return response()->json($deliveryNote, $deliveryNote->deliveryNoteDetail);
 
