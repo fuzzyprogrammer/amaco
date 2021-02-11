@@ -286,81 +286,12 @@ class QuotationController extends Controller
      * @param  \App\Models\Quotation  $quotation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Quotation $quotation) //$id
+    public function update(Request $request, $id) 
     {
-        // $quotation = Quotation::findOrFail($id);
-        $data = $request->all();
+        $quotation = Quotation::where("id",$id)->firstOrFail();
+        $quotation->update($request->status);
 
-        // return $request;
-
-        try {
-            $datas = [
-                // 'party_id' => $data['party_id'],
-                // 'rfq_id' => $data['rfq_id'] ? $data['rfq_id'] : null,
-                'status' => $data['status'],
-                // 'total_value' => $data['total_value'],
-                // 'net_amount' => $data['net_amount'],
-                // 'vat_in_value' => $data['vat_in_value'],
-                // 'discount_in_p' => $data['discount_in_p'],
-                // 'validity' => $data['validity'],
-                // 'payment_terms' => $data['payment_terms'],
-                // 'warranty' => $data['warranty'],
-                // 'delivery_time' => $data['delivery_time'],
-                // 'inco_terms' => $data['inco_terms'],
-                // 'contact_id' => $data['contact_id'],
-                // 'transaction_type' => $data['transaction_type'],
-                // 'ps_date' => $data['ps_date'],
-            ];
-
-            // if ($request->transaction_type === 'sale') {
-            //     $datas['quotation_no'] = $this->getQuotationNo();
-            // } elseif ($request->transaction_type === 'purchase') {
-            //     $datas['po_number'] = $this->getPONo();
-            // } else {
-            //     $datas['quotation_no'] = null;
-            //     $datas['po_number'] = null;
-            // }
-
-            $quotation->update($datas);
-
-            // dd($request->quotation_details);
-            // if(in_array('quotation_details',(array)($data), true)){
-            // foreach ($data['quotation_details'] as $quotation_detail) {
-            //     $quotation_d=QuotationDetail::where('id',$quotation_detail['id'])->first();
-            //     if($quotation_d){
-            //     $quotation_d->update([
-            //         'quotation_id' => $quotation->id,
-            //         'total_amount' => $quotation_detail['total_amount'],
-            //         'analyse_id' => null,
-            //         'product_id' => $quotation_detail['product_id'],
-            //         'purchase_price' => $quotation_detail['purchase_price'],
-            //         'description' => $quotation_detail['description'],
-            //         'quantity' => $quotation_detail['quantity'],
-            //         'margin' => $quotation_detail['margin'],
-            //         'sell_price' => $quotation_detail['sell_price'],
-            //         'remark' => $quotation_detail['remark'],
-            //     ]);
-            // }else{
-            //         QuotationDetail::create([
-            //             'quotation_id' => $quotation->id,
-            //             'total_amount' => $quotation_detail['total_amount'],
-            //             'analyse_id' => null,
-            //             'product_id' => $quotation_detail['product_id'],
-            //             'purchase_price' => $quotation_detail['purchase_price'],
-            //             'description' => $quotation_detail['description'],
-            //             'quantity' => $quotation_detail['quantity'],
-            //             'margin' => $quotation_detail['margin'],
-            //             'sell_price' => $quotation_detail['sell_price'],
-            //             'remark' => $quotation_detail['remark'],
-            //         ]);
-            // }
-            // }
-        }
-            return response()->json(['msg' => 'successfully added']);
-        } catch (Exception $e) {
-            return $e;
-        }
-        // return response()->json($quotation);
+        return response()->json($quotation);
     }
 
     /**
