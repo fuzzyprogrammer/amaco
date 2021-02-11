@@ -294,34 +294,34 @@ class QuotationController extends Controller
         // return $request;
 
         try {
-            // $datas = [
-            //     'party_id' => $data['party_id'],
-            //     'rfq_id' => $data['rfq_id'] ? $data['rfq_id'] : null,
-            //     'status' => $data['status'],
-            //     'total_value' => $data['total_value'],
-            //     'net_amount' => $data['net_amount'],
-            //     'vat_in_value' => $data['vat_in_value'],
-            //     'discount_in_p' => $data['discount_in_p'],
-            //     'validity' => $data['validity'],
-            //     'payment_terms' => $data['payment_terms'],
-            //     'warranty' => $data['warranty'],
-            //     'delivery_time' => $data['delivery_time'],
-            //     'inco_terms' => $data['inco_terms'],
-            //     'contact_id' => $data['contact_id'],
-            //     'transaction_type' => $data['transaction_type'],
-            //     'ps_date' => $data['ps_date'],
-            // ];
+            $datas = [
+                'party_id' => $data['party_id'],
+                'rfq_id' => $data['rfq_id'] ? $data['rfq_id'] : null,
+                'status' => $data['status'],
+                'total_value' => $data['total_value'],
+                'net_amount' => $data['net_amount'],
+                'vat_in_value' => $data['vat_in_value'],
+                'discount_in_p' => $data['discount_in_p'],
+                'validity' => $data['validity'],
+                'payment_terms' => $data['payment_terms'],
+                'warranty' => $data['warranty'],
+                'delivery_time' => $data['delivery_time'],
+                'inco_terms' => $data['inco_terms'],
+                'contact_id' => $data['contact_id'],
+                'transaction_type' => $data['transaction_type'],
+                'ps_date' => $data['ps_date'],
+            ];
 
-            // if ($request->transaction_type === 'sale') {
-            //     $datas['quotation_no'] = $this->getQuotationNo();
-            // } elseif ($request->transaction_type === 'purchase') {
-            //     $datas['po_number'] = $this->getPONo();
-            // } else {
-            //     $datas['quotation_no'] = null;
-            //     $datas['po_number'] = null;
-            // }
+            if ($request->transaction_type === 'sale') {
+                $datas['quotation_no'] = $this->getQuotationNo();
+            } elseif ($request->transaction_type === 'purchase') {
+                $datas['po_number'] = $this->getPONo();
+            } else {
+                $datas['quotation_no'] = null;
+                $datas['po_number'] = null;
+            }
 
-            $quotation->update($data);
+            $quotation->update($datas);
 
             // dd($request->quotation_details);
             if(in_array('quotation_details',(array)($data), true)){

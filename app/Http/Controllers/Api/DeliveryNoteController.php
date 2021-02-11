@@ -37,19 +37,26 @@ class DeliveryNoteController extends Controller
      */
     public function store(Request $request)
     {
-
-        $data = $request->all();
-        // return($data);
-
-        $deliveryNote = DeliveryNote::create($request->all());
-        if ($data['delivery_note_details']){
-            $data['delivery_note_details']->map(function ($deliveryNoteDetailData){
-                $deliveryNoteDetailData->delivery_note_id = $this->deliveryNote->id;
-                DeliveryNoteDetail::create($deliveryNoteDetailData);
-            });
+        $data = [
+            'quotation_id' => $request->quotation_id,
+            'delivery_number' => $request->delivery_number,
+            'po_number' => $request->po_number,
+            'delivery_date' => $request->delivery_date,
+        ];
+        
+        $deliveryNote = DeliveryNote::create($data);
+        
+        foreach($request->delivery_note_details as $deliveryNoteDetail){
+            $deliveryNoteDetailData = [
+                'delivery_note_id' => $deliveryNote->id,
+                'product_id' => $deliveryNoteDetail->product_id,
+                'delivered_quantity' => $deliveryNoteDetail
+                ->delivered_quantity,
+            ];
+            $deliveryNoteDetails = DeliveryNoteController::create($deliveryNoteDetailData);
         }
 
-        return response()->json($deliveryNote, $deliveryNote->deliveryNoteDetail);
+        return response->json(['msg'=>"successfully added"]);
 
     }
 
