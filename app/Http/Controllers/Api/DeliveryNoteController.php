@@ -49,8 +49,8 @@ class DeliveryNoteController extends Controller
         foreach($request->delivery_note_details as $deliveryNoteDetail){
             $deliveryNoteDetailData = [
                 'delivery_note_id' => $deliveryNote->id,
-                'product_id' => $deliveryNoteDetail->product_id,
-                'delivered_quantity' => $deliveryNoteDetail->delivered_quantity,
+                'product_id' => $deliveryNoteDetail['product_id'],
+                'delivered_quantity' => $deliveryNoteDetail['delivered_quantity'],
             ];
             $deliveryNoteDetails = DeliveryNoteDetail::create($deliveryNoteDetailData);
         };
