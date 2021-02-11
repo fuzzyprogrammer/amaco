@@ -304,7 +304,7 @@ class QuotationController extends Controller
             ]);
             if($data['quotation_details']){
                 foreach($data['quotation_details'] as $quotation_detail){
-                    $quotationDetail = QuotationDetail::where('id', $quotation_id['id'])->firstOrFail();
+                    $quotationDetail = QuotationDetail::where('id', $quotation_detail['id'])->firstOrFail();
                 $quotationDetail->update([
                 // 'quotation_id' => $quotation_id,
                 'total_amount' => $quotation_detail['total_amount'],
