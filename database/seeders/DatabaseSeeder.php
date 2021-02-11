@@ -13,6 +13,41 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        
+        \App\Models\User::factory()->create([
+            'fname' => 'superadmin',
+            'email' => 'superadmin@email.com',
+            'password' => bcrypt("superadmin@123"),
+            'role_id' => 1,
+            ]);
+        \App\Models\User::factory()->create([
+            'fname' => 'admin',
+            'email' => 'admin@email.com',
+            'password' => bcrypt("admin@123"),
+            'role_id' => 2,
+            ]);
+        \App\Models\User::factory()->create([
+            'fname' => 'editor',
+            'email' => 'editor@email.com',
+            'password' => bcrypt("editor@123"),
+            'role_id' => 3,
+            ]);
+        \App\Models\User::factory()->create([
+            'fname' => 'guest',
+            'email' => 'guest@email.com',
+            'password' => bcrypt("guest@123"),
+            'role_id' => 4,
+            ]);
+        \App\Models\Roles::create([
+            'name' => 'SA',
+        ]);
+        \App\Models\Roles::create([
+            'name' => 'ADMIN',
+        ]);
+        \App\Models\Roles::create([
+            'name' => 'EDITOR',
+        ]);
+        \App\Models\Roles::create([
+            'name' => 'GUEST',
+        ]);
     }
 }
