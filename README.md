@@ -33,7 +33,6 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 +-----------+----------------------------------------------------+--------------------------------+
 | Method    | URI                                                | Name                           |
 +-----------+----------------------------------------------------+--------------------------------+
-| GET|HEAD  | /                                                  |                                |
 | GET|HEAD  | api/account-categories                             | account-categories.index       |
 | POST      | api/account-categories                             | account-categories.store       |
 | GET|HEAD  | api/account-categories-search/{name}               | account.category.search        |
@@ -49,11 +48,8 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | DELETE    | api/analyse/{analyse}                              | analyse.destroy                |
 | POST      | api/auth/login                                     |                                |
 | POST      | api/auth/logout                                    |                                |
-|           |                                                    |                                |
 | POST      | api/auth/me                                        |                                |
-|           |                                                    |                                |
 | POST      | api/auth/refresh                                   |                                |
-|           |                                                    |                                |
 | GET|HEAD  | api/categories                                     | categories.index               |
 | POST      | api/categories                                     | categories.store               |
 | GET|HEAD  | api/categories/{category}                          | categories.show                |
@@ -191,9 +187,9 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | DELETE    | api/sale/{sale}                                    | sale.destroy                   |
 | GET|HEAD  | api/sales-list                                     | sales.list                     |
 | GET|HEAD  | api/sub-category/{id}                              | subCategory                    |
+| GET|HEAD  | api/update-quotation                               | quotations.status.update       |
 | POST      | api/upload-file                                    | file.upload                    |
 | GET|HEAD  | api/user                                           |                                |
-|           |                                                    |                                |
 | GET|HEAD  | api/users                                          |                                |
 +-----------+----------------------------------------------------+--------------------------------+
 ```
