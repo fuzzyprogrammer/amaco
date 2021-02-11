@@ -286,9 +286,9 @@ class QuotationController extends Controller
      * @param  \App\Models\Quotation  $quotation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Quotation $quotation) //$id
     {
-        $quotation = Quotation::findOrFail($id);
+        // $quotation = Quotation::findOrFail($id);
         $data = $request->all();
 
         // return $request;
@@ -312,14 +312,14 @@ class QuotationController extends Controller
                 'ps_date' => $data['ps_date'],
             ];
 
-            if ($request->transaction_type === 'sale') {
-                $datas['quotation_no'] = $this->getQuotationNo();
-            } elseif ($request->transaction_type === 'purchase') {
-                $datas['po_number'] = $this->getPONo();
-            } else {
-                $datas['quotation_no'] = null;
-                $datas['po_number'] = null;
-            }
+            // if ($request->transaction_type === 'sale') {
+            //     $datas['quotation_no'] = $this->getQuotationNo();
+            // } elseif ($request->transaction_type === 'purchase') {
+            //     $datas['po_number'] = $this->getPONo();
+            // } else {
+            //     $datas['quotation_no'] = null;
+            //     $datas['po_number'] = null;
+            // }
 
             $quotation->update($datas);
 
