@@ -54,7 +54,7 @@ class DeliveryNoteController extends Controller
                 $deliveryNote,
                 $deliveryNote->deliveryNoteDetail,
             ];
-        }),
+        });
 
 
         return response()->json($data);
