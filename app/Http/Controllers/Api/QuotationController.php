@@ -289,7 +289,7 @@ class QuotationController extends Controller
     public function update(Request $request, $id) 
     {
         $quotation = Quotation::where("id",$id)->firstOrFail();
-        $quotation->update($request->status);
+        $quotation->update($request->all());
 
         return response()->json($quotation);
     }
