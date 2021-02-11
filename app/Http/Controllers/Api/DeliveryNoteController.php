@@ -15,34 +15,34 @@ class DeliveryNoteController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //  public function getCurrentDeliveryYear()
-    // {
-    //     return substr(date('Y'), 2);
-    // }
+     public function getCurrentDeliveryYear()
+    {
+        return substr(date('Y'), 2);
+    }
 
-    // public function getLastDeliveryNo()
-    // {
-    //     $invoice = DeliveryNote::latest('created_at')->first();
-    //     if ($invoice) {
-    //         $latest_delivery_no = $invoice->delivery_no ? $invoice->delivery_no : 0;
-    //         return ($latest_delivery_no);
-    //     } else {
-    //         return ('AMDLV-' . $this->getCurrentDeliveryYear() . '-' . sprintf("%04d", 0));
-    //     }
-    // }
+    public function getLastDeliveryNo()
+    {
+        $deliverynote = DeliveryNote::latest('created_at')->first();
+        if ($deliverynote) {
+            $latest_delivery_no = $deliverynote->delivery_no ? $deliverynote->delivery_no : 0;
+            return ($latest_delivery_no);
+        } else {
+            return ('AMDLV-' . $this->getCurrentDeliveryYear() . '-' . sprintf("%04d", 0));
+        }
+    }
 
-    // public function getDeliveryNo()
-    // {
-    //     $latest_delivery_no = $this->getLastDeliveryNo();
-    //     $last_year = substr($latest_delivery_no, 6, 2);
-    //     $current_year = $this->getCurrentDeliveryYear();
-    //     // dd([$last_year, $current_year]);
-    //     if ($current_year != $last_year) {
-    //         return ('AMDLV-' . $current_year . '-' . sprintf("%04d", 1));
-    //     } else {
-    //         return ('AMDLV-' . $current_year . '-' . sprintf("%04d", ((int)substr($this->getLastDeliveryNo(), 9)) + 1));
-    //     }
-    // }
+    public function getDeliveryNo()
+    {
+        $latest_delivery_no = $this->getLastDeliveryNo();
+        $last_year = substr($latest_delivery_no, 6, 2);
+        $current_year = $this->getCurrentDeliveryYear();
+        // dd([$last_year, $current_year]);
+        if ($current_year != $last_year) {
+            return ('AMDLV-' . $current_year . '-' . sprintf("%04d", 1));
+        } else {
+            return ('AMDLV-' . $current_year . '-' . sprintf("%04d", ((int)substr($this->getLastDeliveryNo(), 9)) + 1));
+        }
+    }
 
 
     public function index()
@@ -70,7 +70,7 @@ class DeliveryNoteController extends Controller
     {
         $data = [
             'quotation_id' => $request->quotation_id,
-            'delivery_number' => $request->delivery_number,
+            'delivery_number' => $this->getDeliveryNo(),
             'po_number' => $request->po_number,
             'delivery_date' => $request->delivery_date,
         ];
