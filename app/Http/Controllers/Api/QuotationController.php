@@ -289,7 +289,18 @@ class QuotationController extends Controller
     public function update(Request $request, $id) 
     {
         $quotation = Quotation::where("id",$id)->firstOrFail();
-        $quotation->update($request->all());
+        $quotation->update([
+            $request->po_number,
+            $request->status,
+            $request->total_value,
+            $request->party_id,
+            $request->contact_id,
+            $request->vat_in_value,
+            $request->net_amount,
+            $request->transaction_type,
+            $request->discount_in_p,
+            $request->ps_date,
+            ]);
         $data = $request->json->all();
             if($data['quotation_details']){
                 foreach($data['quotation_details'] as $quotation_detail){
