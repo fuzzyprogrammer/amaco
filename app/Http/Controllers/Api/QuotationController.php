@@ -290,7 +290,7 @@ class QuotationController extends Controller
     {
         $quotation = Quotation::where("id",$id)->firstOrFail();
         $quotation->update($request->all());
-        $data = $request->all();
+        $data = $request->json->all();
             if($data['quotation_details']){
                 foreach($data['quotation_details'] as $quotation_detail){
                     $quotationDetail = QuotationDetail::where('id', $quotation_id['id'])->firstOrFail();
