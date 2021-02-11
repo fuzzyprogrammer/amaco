@@ -292,7 +292,7 @@ class QuotationController extends Controller
         $data = $request->all();
         $quotation->update([
             'po_number' => $data['po_number'],
-            'status' => $data['status'],
+            // 'status' => $data['status'],
             'total_value' => $data['total_value'],
             'party_id' => $data['party_id'],
             'contact_id' => $data['contact_id'],
@@ -320,7 +320,7 @@ class QuotationController extends Controller
             }
             return response()->json(['msg' => 'successfully added']);
         }
-        return response()->json($quotation);
+        // return response()->json($quotation);
     }
 
     public function updateQuotation(Request $request, $id)
