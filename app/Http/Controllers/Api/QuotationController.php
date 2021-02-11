@@ -290,6 +290,16 @@ class QuotationController extends Controller
     {
         $quotation = Quotation::where("id",$id)->firstOrFail();
         $quotation->update($request->all());
+        $res = $request->$quotation_details->map(function($quotation_detail){
+            return QuotationDetailController::update($quotation_detail, $quotation_detail->id);
+        });
+        return response()->json($quotation);
+    }
+
+    public function updateQuotation(Request $request, $id)
+    {
+        $quotation = Quotation::where("id",$id)->firstOrFail();
+        $quotation->update($request->all());
 
         return response()->json($quotation);
     }
