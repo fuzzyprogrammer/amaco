@@ -55,7 +55,8 @@ class DeliveryNoteController extends Controller
             $deliveryNoteDetails = DeliveryNoteDetail::create($deliveryNoteDetailData);
         };
 
-        return response->json(['msg'=>"successfully added"]);
+        // return response->json(['msg'=>"successfully added"]);
+        return response("Success");
     }
 
     /**
