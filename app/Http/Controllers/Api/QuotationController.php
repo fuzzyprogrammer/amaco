@@ -295,7 +295,6 @@ class QuotationController extends Controller
             foreach($quotation->quotation_details as $quotation_detail){
                 $quotation_detail_data = QuotationDetail::where('id', $quotation_detail['id'])->firstOrFail();
                 $quotationDetail = $quotation_detail_data->update([
-                    // 'id' => $quotation_detail['id'],
                     'quotation_id' => $quotation_detail['quotation_id'],
                     'total_amount' => $quotation_detail['total_amount'],
                     'analyse_id' => $quotation_detail['analyse_id'],

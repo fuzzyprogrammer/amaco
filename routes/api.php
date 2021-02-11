@@ -117,5 +117,5 @@ Route::get('account-subcategories/{id}', [AccountCategoryController::class, 'sub
 Route::get('account-categories-search/{name}', [AccountCategoryController::class, 'search'])->name('account.category.search');
 Route::get('quotations-accepted-list', [QuotationController::class, 'acceptedList'])->name('quotaions.accepted.list');
 Route::get('quotations-rejected-list', [QuotationController::class, 'rejectedList'])->name('quotaions.rejected.list');
-Route::get('update-quotation', [QuotationController::class, 'updateQuotation'])->name('quotations.status.update');
+Route::get('update-quotation/{id}', [QuotationController::class, 'updateQuotation'])->name('quotations.status.update');
 
