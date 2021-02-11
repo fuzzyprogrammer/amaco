@@ -291,7 +291,7 @@ class QuotationController extends Controller
         $quotation = Quotation::findOrFail($id);
         $data = $request->all();
 
-        return $request;
+        // return $request;
 
         try {
             // $datas = [
