@@ -41,11 +41,11 @@ class DeliveryNoteController extends Controller
         $data = $request->all();
         // return($data);
 
-        $deliveryNote = DeliveryNote::create($data);
+        $deliveryNote = DeliveryNote::create($request->all());
         if ($data['delivery_note_details']){
-            $data['delivery_note_details']->map(function ($deliveryNoteDeatilData){
-                $deliveryNoteDeatilData['delivery_note_id'] = $this->deliveryNote->id;
-                DeliveryNoteDetail::create($deliveryNoteDeatilData);
+            $data['delivery_note_details']->map(function ($deliveryNoteDetailData){ 
+                $deliveryNoteDetailData->delivery_note_id = $this->deliveryNote->id;
+                DeliveryNoteDetail::create($deliveryNoteDetailData);
             });
         }
 
