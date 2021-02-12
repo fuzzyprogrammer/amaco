@@ -15,12 +15,12 @@ class DeliveryNoteDetailController extends Controller
      */
     public function index()
     {
-        $deliveryNoteDetails = DeliveryNoteDetail::all();
+        $delivery_notes_details = DeliveryNoteDetail::all();
         $data = [
-            $deliveryNoteDetails->map(function ($deliveryNoteDetail) {
+            $delivery_notes_details->map(function ($delivery_notes_detail) {
                 return [
-                    $deliveryNoteDetail,
-                    $deliveryNoteDetail->product,
+                    $delivery_notes_detail,
+                    $delivery_notes_detail->product,
                 ];
             }),
         ];
@@ -38,22 +38,22 @@ class DeliveryNoteDetailController extends Controller
     {
         $data = $request->json()->all();
 
-        $deliveryNoteDetail = DeliveryNoteDetail::create($data);
+        $delivery_notes_detail = DeliveryNoteDetail::create($data);
 
-        return response()->json($deliveryNoteDetail);
+        return response()->json($delivery_notes_detail);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\DeliveryNoteDetail  $deliveryNoteDetail
+     * @param  \App\Models\DeliveryNoteDetail $delivery_notes_detail
      * @return \Illuminate\Http\Response
      */
-    public function show(DeliveryNoteDetail $deliveryNoteDetail)
+    public function show(DeliveryNoteDetail $delivery_notes_detail)
     {
         $data = [
-            $deliveryNoteDetail,
-            $deliveryNoteDetail->product,
+            $delivery_notes_detail,
+            $delivery_notes_detail->product,
         ];
 
         return response()->json($data);
@@ -63,27 +63,27 @@ class DeliveryNoteDetailController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\DeliveryNoteDetail  $deliveryNoteDetail
+     * @param  \App\Models\DeliveryNoteDetail $delivery_notes_detail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DeliveryNoteDetail $deliveryNoteDetail)
+    public function update(Request $request, DeliveryNoteDetail $delivery_notes_detail)
     {
         $data = $request->json()->all();
-        $deliveryNoteDetail->update($data);
+       $delivery_notes_detail->update($data);
 
-        return response()->json($deliveryNoteDetail);
+        return response()->json($delivery_notes_detail);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\DeliveryNoteDetail  $deliveryNoteDetail
+     * @param  \App\Models\DeliveryNoteDetail $delivery_notes_detail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DeliveryNoteDetail $deliveryNoteDetail)
+    public function destroy(DeliveryNoteDetail$delivery_notes_detail)
     {
-        $deliveryNoteDetail->delete();
+        $delivery_notes_detail->delete();
 
-        return response()->json(['msg' => "Delivery Note Detail with id: " . $deliveryNoteDetail->id . " has successfully Deleted"]);
+        return response()->json(['msg' => "Delivery Note Detail with id: " .$delivery_notes_detail->id . " has successfully Deleted"]);
     }
 }
