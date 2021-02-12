@@ -105,7 +105,7 @@ class QuotationController extends Controller
         }
     }
 
-    public function getSalesOrderNo()
+    public function getSalesOrderNumber()
     {
         $latest_sales_order_number = $this->getLastSONo();
         $last_year = substr($latest_sales_order_number, 5, 2);
