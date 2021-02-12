@@ -355,7 +355,10 @@ class QuotationController extends Controller
         $data = $request->all();
         $data['sales_order_number'] = $this->getSalesOrderNumber();
         $quotation = Quotation::where("id",$id)->firstOrFail();
-        $quotation->update(array($data));
+        $quotation->update([
+            'status' => $data['status'],
+            'sales_order_number' => $data['sales_order_number'],
+        ]);
 
         return response()->json($quotation);
     }
