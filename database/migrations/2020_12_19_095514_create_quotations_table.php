@@ -32,6 +32,7 @@ class CreateQuotationsTable extends Migration
             $table->string('po_number')->nullable();
             $table->string('transaction_type')->nullable();
             $table->string('ps_date')->nullable();
+            $table->string('sales_order_number')->nullable();
             $table->timestamps();
         });
     }

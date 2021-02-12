@@ -67,6 +67,18 @@ class QuotationController extends Controller
         }
     }
 
+    public function getLastSONo()
+    {
+        $quotation = Quotation::where('transaction_type', 'sale')
+            ->latest('created_at')->first();
+        if($quotation){
+            $latest_sales_order_number = $quotation->sales_order_number ? $quotation->sales_order_number : 0;
+        return($latest_sales_order_number);
+        }else{
+            return('ASON-' . $this->getCurrentYear() . '-' . sprintf("%04d", 0));
+        }
+    }
+
     public function getQuotationNo()
     {
         $latest_quotation_no = $this->getLastQuotationNo();
@@ -90,6 +102,19 @@ class QuotationController extends Controller
             return ('AMPO-'.$current_year.'-'.sprintf("%04d",1));
         }else{
             return ('AMPO-' . $current_year . '-' . sprintf("%04d",((int)substr($this->getLastPONo(),9))+1));
+        }
+    }
+
+    public function getSalesOrderNo()
+    {
+        $latest_sales_order_number = $this->getLastSONo();
+        $last_year = substr($latest_sales_order_number, 5, 2);
+        $current_year = $this->getCurrentYear();
+        // dd([$last_year, $current_year]);
+        if($current_year != $last_year){
+            return ('ASON-'.$current_year.'-'.sprintf("%04d",1));
+        }else{
+            return ('ASON-' . $current_year . '-' . sprintf("%04d",((int)substr($this->getLastSONo(),9))+1));
         }
     }
 
@@ -243,6 +268,7 @@ class QuotationController extends Controller
             "po_number" => $quotation->po_number,
             "transaction_type" => $quotation->transaction_type,
             "ps_date" => $quotation->ps_date,
+            "sales_order_number" => $quotation->sales_order_number,
             "contact" => $quotation->contact,
             "party" => $quotation->party,
             "rfq" => $quotation->rfq,
@@ -286,7 +312,7 @@ class QuotationController extends Controller
      * @param  \App\Models\Quotation  $quotation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) 
+    public function update(Request $request, $id)
     {
         $quotation = Quotation::where("id",$id)->firstOrFail();
         $data = $request->all();
@@ -301,6 +327,7 @@ class QuotationController extends Controller
             'transaction_type' => $data['transaction_type'],
             'discount_in_p' => $data['discount_in_p'],
             'ps_date' => $data['ps_date'],
+            'sales_order_number' => $data['sales_order_number'],
             ]);
             if($data['quotation_details']){
                 foreach($data['quotation_details'] as $quotation_detail){
@@ -325,8 +352,10 @@ class QuotationController extends Controller
 
     public function updateQuotation(Request $request, $id)
     {
+        $data = $request->all();
+        $data['sales_order_number'] = $this->getSalesOrderNumber();
         $quotation = Quotation::where("id",$id)->firstOrFail();
-        $quotation->update($request->all());
+        $quotation->update(array($data));
 
         return response()->json($quotation);
     }
