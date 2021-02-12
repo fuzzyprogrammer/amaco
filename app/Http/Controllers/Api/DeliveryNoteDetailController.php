@@ -53,6 +53,7 @@ class DeliveryNoteDetailController extends Controller
     {
         $data = [
             $delivery_notes_detail,
+            $delivery_notes_detail->deliveryNote,
             $delivery_notes_detail->product,
         ];
 
@@ -69,7 +70,7 @@ class DeliveryNoteDetailController extends Controller
     public function update(Request $request, DeliveryNoteDetail $delivery_notes_detail)
     {
         $data = $request->json()->all();
-       $delivery_notes_detail->update($data);
+        $delivery_notes_detail->update($data);
 
         return response()->json($delivery_notes_detail);
     }
