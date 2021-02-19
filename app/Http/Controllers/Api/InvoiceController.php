@@ -19,6 +19,11 @@ class InvoiceController extends Controller
         return substr(date('Y'), 2);
     }
 
+    public function getCurrentMonth()
+    {
+        return date('M');
+    }
+
     public function getLastInvoiceNo()
     {
         $invoice = Invoice::latest('created_at')->first();
@@ -26,7 +31,7 @@ class InvoiceController extends Controller
             $latest_invoice_no = $invoice->invoice_no ? $invoice->invoice_no : 0;
             return ($latest_invoice_no);
         } else {
-            return ('AMINV-' . $this->getCurrentYear() . '-' . sprintf("%04d", 0));
+            return ('AMC-INV-' . $this->getCurrentYear() . '-' . sprintf("%02d", 0));
         }
     }
 
@@ -34,12 +39,22 @@ class InvoiceController extends Controller
     {
         $latest_invoice_no = $this->getLastInvoiceNo();
         $last_year = substr($latest_invoice_no, 6, 2);
+        $last_month = substr($latest_invoice_no, 11, 2);
         $current_year = $this->getCurrentYear();
+        $current_month = $this->getCurrentMonth();
         // dd([$last_year, $current_year]);
         if ($current_year != $last_year) {
-            return ('AMINV-' . $current_year . '-' . sprintf("%04d", 1));
+            return ('AMC-INV-' . $current_year . '-'. $current_month  . sprintf("%02d", 1));
         } else {
-            return ('AMINV-' . $current_year . '-' . sprintf("%04d", ((int)substr($this->getLastInvoiceNo(), 9)) + 1));
+            if($current_month != $last_month){
+                return ('AMC-INV-' . $current_year . '-'. $current_month . sprintf("%02d", 1));
+            }else{
+                if((int)substr($this->getLastInvoiceNo(), 13) < 99){
+                    return ('AMC-INV-' . $current_year . '-'. $current_month . sprintf("%02d", ((int)substr($this->getLastInvoiceNo(), 13)) + 1));
+                }else{
+                    return ('AMC-INV-' . $current_year . '-'. $current_month . sprintf("%03d", ((int)substr($this->getLastInvoiceNo(), 13)) + 1));
+                }
+            }
         }
     }
     public function index()
