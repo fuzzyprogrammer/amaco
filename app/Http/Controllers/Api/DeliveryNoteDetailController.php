@@ -55,8 +55,8 @@ class DeliveryNoteDetailController extends Controller
             $delivery_notes_detail,
             $delivery_notes_detail->deliveryNote,
             $delivery_notes_detail->product,
-            $delivery_notes_detail->quotation,
-            $delivery_notes_detail->quotation->party,
+            $delivery_notes_detail->deliveryNote->quotation,
+            $delivery_notes_detail->deliveryNote->quotation->party,
         ];
 
         return response()->json($data);
