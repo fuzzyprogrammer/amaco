@@ -21,7 +21,7 @@ class InvoiceController extends Controller
 
     public function getCurrentMonth()
     {
-        return date('M');
+        return date('m');
     }
 
     public function getLastInvoiceNo()
