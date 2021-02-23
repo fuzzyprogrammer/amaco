@@ -92,7 +92,7 @@ Route::apiResource('account-categories',AccountCategoryController::class);
 Route::apiResource('columns',ColumnController::class);
 Route::apiResource('columnDatas',ColumnDataController::class);
 Route::apiResource('delivery-notes',DeliveryNoteController::class);
-Route::apiResource('delivery-notes-details',DeliveryNoteDetailController::class);
+// Route::apiResource('delivery-notes-details',DeliveryNoteDetailController::class);
 
 // restful api links
 Route::get('users', [UserController::class, 'index']);
