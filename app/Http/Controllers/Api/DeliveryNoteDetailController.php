@@ -81,7 +81,7 @@ class DeliveryNoteDetailController extends Controller
         $quotationDetail = QuotationDetail::where([
             'quotation_id' => $delivery_notes_detail->quotation_id,
             'product_id'=> $delivery_notes_detail->product_id,
-        ])->firstOrFail();
+        ])->first();
 
         $totalDeliveredQuantity = $this->getTotalDeliveredQuantity($totalDeliveryNoteDetail);
 
