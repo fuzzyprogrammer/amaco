@@ -71,24 +71,22 @@ class DeliveryNoteDetailController extends Controller
         return ($totalQuantity - $totalDeliveredQuantity);
     }
 
-    public function show($id)
+    public function show(DeliveryNoteDetail $delivery_notes_detail)
     {
-        $delivery_notes_detail = DeliveryNoteDetail::where('id',$id)->firstOrFail();
-
         $totalDeliveryNoteDetail = DeliveryNoteDetail::where([
             'delivery_note_id' => $delivery_notes_detail->delivery_note_id,
             'product_id' => $delivery_notes_detail->product_id,
         ])->get();
 
-        $quotationDetail = QuotationDetail::where([
-            'quotation_id' => $delivery_notes_detail->quotation_id,
-            'product_id'=> $delivery_notes_detail->product_id,
-        ])->firstOrFail();
+        // $quotationDetail = QuotationDetail::where([
+        //     'quotation_id' => $delivery_notes_detail->quotation_id,
+        //     'product_id'=> $delivery_notes_detail->product_id,
+        // ])->firstOrFail();
 
         $totalDeliveredQuantity = $this->getTotalDeliveredQuantity($totalDeliveryNoteDetail);
 
         $data = [
-            "total_quantity"=>$totalQuantity = $quotationDetail->quantity,
+            // "total_quantity"=>$totalQuantity = $quotationDetail->quantity,
             "total_delivered_quantity"=>$totalDeliveredQuantity,
             'balance_quantity' => $this->getBalanceQuantity($totalQuantity, $totalDeliveredQuantity),
             "delivery_notes_detail"=>$delivery_notes_detail,
