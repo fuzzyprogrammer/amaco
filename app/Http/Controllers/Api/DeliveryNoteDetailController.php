@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\DeliveryNoteDetail;
+use App\Models\QuotationDetail;
 use Illuminate\Http\Request;
 
 class DeliveryNoteDetailController extends Controller
@@ -65,10 +66,10 @@ class DeliveryNoteDetailController extends Controller
     }
 
     // there is no need for this
-    // public function getBalanceQuantity($totalQuantity = 0, $totalDeliveredQuantity = 0)
-    // {
-    //     return ($totalQuantity - $totalDeliveredQuantity);
-    // }
+    public function getBalanceQuantity($totalQuantity = 0, $totalDeliveredQuantity = 0)
+    {
+        return ($totalQuantity - $totalDeliveredQuantity);
+    }
 
     public function show(DeliveryNoteDetail $delivery_notes_detail)
     {
@@ -76,16 +77,21 @@ class DeliveryNoteDetailController extends Controller
             'delivery_note_id' => $delivery_notes_detail->delivery_note_id,
             'product_id' => $delivery_notes_detail->product_id,
         ])->get();
+        $quotationDetail = QuotationDetail::where([
+            'quotation_id' => $delivery_notes_detail->quotation_id,
+            'product_id'=> $delivery_notes_detail->product_id,
+        ])->firstOrFail();
         $totalDeliveredQuantity = $this->getTotalDeliveredQuantity($totalDeliveryNoteDetail);
 
         $data = [
-            $totalDeliveredQuantity,
-            $delivery_notes_detail,
-            $delivery_notes_detail->deliveryNote->quotation->quotationDetail,
-            // 'balance_quantity' => $this->getBalanceQuantity($totalQuantity, $totalDeliveredQuantity),
-            $delivery_notes_detail->deliveryNote,
-            $delivery_notes_detail->product,
-            $delivery_notes_detail->deliveryNote->quotation->party,
+            "total_quantity"=>$totalQuantity = $quotationDetail->quantity,
+            "total_delivered_quantity"=>$totalDeliveredQuantity,
+            'balance_quantity' => $this->getBalanceQuantity($totalQuantity, $totalDeliveredQuantity),
+            "delivery_notes_detail"=>$delivery_notes_detail,
+            "quotation"=>$delivery_notes_detail->deliveryNote->quotation,
+            "delivery_note"=>$delivery_notes_detail->deliveryNote,
+            "party"=>$delivery_notes_detail->deliveryNote->quotation->party,
+            "product"=>$delivery_notes_detail->product,
         ];
 
         return response()->json($data);
