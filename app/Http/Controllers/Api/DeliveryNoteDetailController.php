@@ -48,15 +48,43 @@ class DeliveryNoteDetailController extends Controller
      *
      * @param  \App\Models\DeliveryNoteDetail $delivery_notes_detail
      * @return \Illuminate\Http\Response
+     *
+     *
      */
+
+    public function getTotalDeliveredQuantity($val)
+    {
+        if(isset($val)){
+            $totalDeliveryNoteDetail = 0;
+            foreach($val as $item){
+                $totalDeliveryNoteDetail += intval($item->delivered_quantity);
+            }
+            return $totalDeliveryNoteDetail;
+        }
+        return 0;
+    }
+
+    public function getBalanceQuantity($totalQuantity = 0, $totalDeliveredQuantity = 0)
+    {
+        return ($totalQuantity - $totalDeliveredQuantity);
+    }
+
     public function show(DeliveryNoteDetail $delivery_notes_detail)
     {
+        $totalDeliveryNoteDetail = DeliveryNoteDetail::where([
+            'delivery_note_id' => $delivery_notes_detail->delivery_note_id,
+            'product_id' => $delivery_notes_detail->product_id,
+        ])->get();
+        $totalDeliveredQuantity = $this->getTotalDeliveredQuantity($totalDeliveryNoteDetail);
+
         $data = [
             $delivery_notes_detail,
+            'total_quantity' => $totalQuantity =         $delivery_notes_detail->deliveryNote->quotation->quotationDetail->quantity,
+            'total_delivered_quantity' => $totalDeliveredQuantity,
+            'balance_quantity' => $this->getBalanceQuantity($totalQuantity, $totalDeliveredQuantity),
             $delivery_notes_detail->deliveryNote,
             $delivery_notes_detail->product,
-            $delivery_notes_detail->deliveryNote->quotation,
-            $delivery_notes_detail->deliveryNote->quotation->quotationDetail,
+            $delivery_notes_detail->deliveryNote->quotation->party,
         ];
 
         return response()->json($data);
