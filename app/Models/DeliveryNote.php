@@ -18,6 +18,6 @@ class DeliveryNote extends Model
 
     public function quotation()
     {
-        return $this->hasOne(Quotation::class,'quotation_id','id');
+        return $this->hasOne(Quotation::class,'id', 'quotation_id');
     }
 }
