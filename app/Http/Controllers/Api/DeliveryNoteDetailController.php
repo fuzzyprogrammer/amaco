@@ -64,10 +64,11 @@ class DeliveryNoteDetailController extends Controller
         return 0;
     }
 
-    public function getBalanceQuantity($totalQuantity = 0, $totalDeliveredQuantity = 0)
-    {
-        return ($totalQuantity - $totalDeliveredQuantity);
-    }
+    // there is no need for this
+    // public function getBalanceQuantity($totalQuantity = 0, $totalDeliveredQuantity = 0)
+    // {
+    //     return ($totalQuantity - $totalDeliveredQuantity);
+    // }
 
     public function show(DeliveryNoteDetail $delivery_notes_detail)
     {
@@ -79,9 +80,9 @@ class DeliveryNoteDetailController extends Controller
 
         $data = [
             $delivery_notes_detail,
-            'total_quantity' => $totalQuantity =         $delivery_notes_detail->deliveryNote->quotation->quotationDetail->quantity,
             'total_delivered_quantity' => $totalDeliveredQuantity,
-            'balance_quantity' => $this->getBalanceQuantity($totalQuantity, $totalDeliveredQuantity),
+            $delivery_notes_detail->deliveryNote->quotation->quotationDetail,
+            // 'balance_quantity' => $this->getBalanceQuantity($totalQuantity, $totalDeliveredQuantity),
             $delivery_notes_detail->deliveryNote,
             $delivery_notes_detail->product,
             $delivery_notes_detail->deliveryNote->quotation->party,
