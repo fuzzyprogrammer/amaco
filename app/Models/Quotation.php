@@ -43,6 +43,6 @@ class Quotation extends Model
 
     public function deliveryNote()
     {
-        return $this->hasOne(DeliveryNote::class, 'quotation_id', 'id');
+        return $this->belongsTo(DeliveryNote::class);
     }
 }
