@@ -13,7 +13,7 @@ class DeliveryNoteDetail extends Model
 
     public function deliveryNote()
     {
-        return $this->belongsTo(DeliveryNoteDetail::class);
+        return $this->belongsTo(DeliveryNote::class);
     }
 
     public function product()
