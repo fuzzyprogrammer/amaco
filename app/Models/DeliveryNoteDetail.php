@@ -20,4 +20,55 @@ class DeliveryNoteDetail extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+
+    // functions
+
+    // to get total delivered quantity
+    public function getTotalDeliveredQuantity($val)
+    {
+        if (isset($val)) {
+            $totalDeliveryNoteDetail = 0;
+            foreach ($val as $item) {
+                $totalDeliveryNoteDetail += intval($item->delivered_quantity);
+            }
+            return $totalDeliveryNoteDetail;
+        }
+        return 0;
+    }
+
+    // there is no need for this
+    public function getBalanceQuantity($totalQuantity = 0, $totalDeliveredQuantity = 0)
+    {
+        return ($totalQuantity - $totalDeliveredQuantity);
+    }
+
+    public function showDeliveredNoteDetail($id, DeliveryNoteDetail $delivery_notes_detail)
+    {
+        $totalDeliveryNoteDetail = DeliveryNoteDetail::where([
+            'delivery_note_id' => $delivery_notes_detail->delivery_note_id,
+            'product_id' => $delivery_notes_detail->product_id,
+        ])->get();
+
+        $quotationDetail = QuotationDetail::where([
+            'quotation_id' => $delivery_notes_detail->deliveryNote->quotation_id,
+            'product_id' => $delivery_notes_detail->product_id,
+        ])->firstOrFail();
+
+        $totalDeliveredQuantity = $this->getTotalDeliveredQuantity($totalDeliveryNoteDetail);
+
+        $data = [
+            "total_quantity" => $totalQuantity = $quotationDetail->quantity,
+            "total_delivered_quantity" => $totalDeliveredQuantity,
+            'balance_quantity' => $this->getBalanceQuantity($totalQuantity, $totalDeliveredQuantity),
+            "delivery_notes_detail" => $delivery_notes_detail,
+            // "quotation" => $delivery_notes_detail->deliveryNote->quotation,
+            // "delivery_note" => $delivery_notes_detail->deliveryNote,
+            // "party" => $delivery_notes_detail->deliveryNote->quotation->party,
+            "product" => $delivery_notes_detail->product,
+        ];
+
+        return $data;
+    }
 }
+

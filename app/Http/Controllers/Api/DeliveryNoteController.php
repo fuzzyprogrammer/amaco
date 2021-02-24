@@ -48,7 +48,7 @@ class DeliveryNoteController extends Controller
     public function index()
     {
         $deliveryNotes = DeliveryNote::all();
-        
+
         $data = $deliveryNotes->map(function($deliveryNote){
             return[
                 $deliveryNote,
@@ -74,9 +74,9 @@ class DeliveryNoteController extends Controller
             'po_number' => $request->po_number,
             'delivery_date' => $request->delivery_date,
         ];
-        
+
         $deliveryNote = DeliveryNote::create($data);
-        
+
         foreach($request->delivery_note_details as $deliveryNoteDetail){
             $deliveryNoteDetailData = [
                 'delivery_note_id' => $deliveryNote->id,
@@ -100,7 +100,11 @@ class DeliveryNoteController extends Controller
     {
         $data = [
             $deliveryNote,
-            $deliveryNote->deliveryNoteDetail,
+            $deliveryNote->deliveryNoteDetail->map(function ($deliveryNoteDetailItem){
+                return $deliveryNoteDetailItem->showDeliveredNoteDetail($deliveryNoteDetailItem->id);
+            }),
+            $deliveryNote->party,
+            $deliveryNote->quotation,
         ];
 
         return response()->json($data);
