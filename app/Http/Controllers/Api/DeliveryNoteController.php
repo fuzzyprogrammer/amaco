@@ -103,8 +103,8 @@ class DeliveryNoteController extends Controller
                 return $deliveryNoteDetailItem->showDeliveredNoteDetail($deliveryNoteDetailItem->id);
             }),
             $deliveryNote,
-            $deliveryNote->party,
             $deliveryNote->quotation,
+            $deliveryNote->quotation->party,
         ];
 
         return response()->json($data);
