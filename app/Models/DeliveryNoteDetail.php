@@ -38,10 +38,10 @@ class DeliveryNoteDetail extends Model
     }
 
     // there is no need for this
-    public function getBalanceQuantity($totalQuantity = 0, $totalDeliveredQuantity = 0)
-    {
-        return ($totalQuantity - $totalDeliveredQuantity);
-    }
+    // public function getBalanceQuantity($totalQuantity = 0, $totalDeliveredQuantity = 0)
+    // {
+    //     return ($totalQuantity - $totalDeliveredQuantity);
+    // }
 
     public function showDeliveredNoteDetail($id)
     {
@@ -58,16 +58,21 @@ class DeliveryNoteDetail extends Model
         ])->firstOrFail();
 
         $totalDeliveredQuantity = $this->getTotalDeliveredQuantity($totalDeliveryNoteDetail);
+        if(isset($totalDeliveredQuantity)){
+            $totalDeliveredQuantityExceptCurrentValue = $totalDeliveredQuantity - intval($delivery_notes_detail->delivered_quantity);
+        }else{
+            $totalDeliveredQuantityExceptCurrentValue = 0;
+        }
 
         $data = [
             "total_quantity" => $totalQuantity = $quotationDetail->quantity,
-            "total_delivered_quantity" => $totalDeliveredQuantity,
-            'balance_quantity' => $this->getBalanceQuantity($totalQuantity, $totalDeliveredQuantity),
+            "total_delivered_quantity" => $totalDeliveredQuantityExceptCurrentValue,
             "delivery_notes_detail" => $delivery_notes_detail,
             "product" => $delivery_notes_detail->product,
             // "quotation" => $delivery_notes_detail->deliveryNote->quotation,
             // "delivery_note" => $delivery_notes_detail->deliveryNote,
             // "party" => $delivery_notes_detail->deliveryNote->quotation->party,
+            // 'balance_quantity' => $this->getBalanceQuantity($totalQuantity, $totalDeliveredQuantity), //not required anymore
         ];
 
         return ['delivery_notes_detail_'.$delivery_notes_detail->id => $data];
