@@ -64,10 +64,10 @@ class DeliveryNoteDetail extends Model
             "total_delivered_quantity" => $totalDeliveredQuantity,
             'balance_quantity' => $this->getBalanceQuantity($totalQuantity, $totalDeliveredQuantity),
             "delivery_notes_detail" => $delivery_notes_detail,
+            "product" => $delivery_notes_detail->product,
             // "quotation" => $delivery_notes_detail->deliveryNote->quotation,
             // "delivery_note" => $delivery_notes_detail->deliveryNote,
-            "party" => $delivery_notes_detail->deliveryNote->quotation->party,
-            "product" => $delivery_notes_detail->product,
+            // "party" => $delivery_notes_detail->deliveryNote->quotation->party,
         ];
 
         return [$delivery_notes_detail->id => $data];
