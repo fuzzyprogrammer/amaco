@@ -76,7 +76,7 @@ class DeliveryNoteDetail extends Model
             // 'balance_quantity' => $this->getBalanceQuantity($totalQuantity, $totalDeliveredQuantity), //not required anymore
         ];
 
-        return ['delivery_notes_detail_'.$delivery_notes_detail->id => $data];
+        return [$data];
     }
 }
 
