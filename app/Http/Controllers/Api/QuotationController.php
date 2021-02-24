@@ -384,6 +384,7 @@ class QuotationController extends Controller
         $quotation->update([
             'status' => $data['status'],
             'sales_order_number' => $data['sales_order_number'],
+            'po_number' => $data['po_number'],
         ]);
 
         return response()->json($quotation);
