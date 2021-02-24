@@ -99,10 +99,10 @@ class DeliveryNoteController extends Controller
     public function show(DeliveryNote $deliveryNote)
     {
         $data = [
-            $deliveryNote,
             $deliveryNote->deliveryNoteDetail->map(function ($deliveryNoteDetailItem){
                 return $deliveryNoteDetailItem->showDeliveredNoteDetail($deliveryNoteDetailItem->id);
             }),
+            $deliveryNote,
             $deliveryNote->party,
             $deliveryNote->quotation,
         ];
