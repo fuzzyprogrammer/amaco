@@ -106,6 +106,7 @@ class DeliveryNoteController extends Controller
             $deliveryNote->quotation,
             $deliveryNote->quotation->party,
             $deliveryNote->quotation->party->contact,
+            
         ];
 
         return response()->json($data);
