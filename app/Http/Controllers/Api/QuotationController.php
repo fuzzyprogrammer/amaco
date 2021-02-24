@@ -379,6 +379,10 @@ class QuotationController extends Controller
     public function updateQuotation(Request $request, $id)
     {
         $data = $request->all();
+        $redundantValue = Quotation::find($data['po_number']);
+        if(isset($redundantValue)){
+            return response()->json(['msg'=>'P.O Number is already exists']);
+        }
         $data['sales_order_number'] = $this->getSalesOrderNumber();
         $quotation = Quotation::where("id",$id)->firstOrFail();
         $quotation->update([
