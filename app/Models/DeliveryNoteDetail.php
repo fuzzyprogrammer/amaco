@@ -43,8 +43,10 @@ class DeliveryNoteDetail extends Model
         return ($totalQuantity - $totalDeliveredQuantity);
     }
 
-    public function showDeliveredNoteDetail(DeliveryNoteDetail $delivery_notes_detail)
+    public function showDeliveredNoteDetail($id)
     {
+        $delivery_notes_detail = DeliveryNoteDetail::where('id',$id)->first();
+
         $totalDeliveryNoteDetail = DeliveryNoteDetail::where([
             'delivery_note_id' => $delivery_notes_detail->delivery_note_id,
             'product_id' => $delivery_notes_detail->product_id,
