@@ -66,7 +66,7 @@ class DeliveryNoteDetail extends Model
             "delivery_notes_detail" => $delivery_notes_detail,
             // "quotation" => $delivery_notes_detail->deliveryNote->quotation,
             // "delivery_note" => $delivery_notes_detail->deliveryNote,
-            // "party" => $delivery_notes_detail->deliveryNote->quotation->party,
+            "party" => $delivery_notes_detail->deliveryNote->quotation->party,
             "product" => $delivery_notes_detail->product,
         ];
 
