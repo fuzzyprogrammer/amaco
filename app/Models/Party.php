@@ -23,7 +23,7 @@ class Party extends Model
         return $this->belongsTo(Quotation::class);
     }
 
-    public function contact()
+    public function contacts()
     {
         return $this->hasMany(Contact::class,'id','party_id');
     }
