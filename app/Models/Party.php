@@ -25,7 +25,7 @@ class Party extends Model
 
     public function contacts()
     {
-        return $this->hasMany(Contact::class,'id','party_id');
+        return $this->hasMany(Contact::class,'party_id','id');
     }
 
     public function quotationDetail()
