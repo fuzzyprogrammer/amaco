@@ -65,7 +65,7 @@ class DeliveryNoteDetail extends Model
         }
 
         $data = [
-            "total_quantity" => $totalQuantity = $quotationDetail->quantity,
+            "total_quantity" => $quotationDetail->quantity, //$totalQuantity = 
             "total_delivered_quantity" => $totalDeliveredQuantityExceptCurrentValue,
             "delivery_notes_detail" => $delivery_notes_detail,
             "product" => $delivery_notes_detail->product,
