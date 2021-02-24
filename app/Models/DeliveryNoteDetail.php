@@ -70,7 +70,7 @@ class DeliveryNoteDetail extends Model
             // "party" => $delivery_notes_detail->deliveryNote->quotation->party,
         ];
 
-        return ['delivery_notes_detail '.$delivery_notes_detail->id => $data];
+        return ['delivery_notes_detail_'.$delivery_notes_detail->id => $data];
     }
 }
 
