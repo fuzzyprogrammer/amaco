@@ -69,7 +69,7 @@ class DeliveryNoteController extends Controller
      */
     public function store(Request $request)
     {
-        $quotation = Quotation::find($request->quotaion_id);
+        $quotation = Quotation::where('id',$request->quotation_id)->first();
         $data = [
             'quotation_id' => $request->quotation_id,
             'delivery_number' => $this->getDeliveryNo(),
