@@ -374,7 +374,7 @@ class QuotationController extends Controller
                     }else{
                         QuotationDetail::create([
                             'total_amount' => $quotation_detail['total_amount'],
-                            'analyse_id' => $quotation_detail['analyse_id'],
+                            // 'analyse_id' => $quotation_detail['analyse_id'],
                             'product_id' => $quotation_detail['product_id'],
                             'purchase_price' => $quotation_detail['purchase_price'],
                             'description' => $quotation_detail['description'],
