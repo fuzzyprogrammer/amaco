@@ -47,7 +47,7 @@ class DeliveryNoteController extends Controller
 
     public function index()
     {
-        $deliveryNotes = DeliveryNote::all();
+        $deliveryNotes = DeliveryNote::latest();
 
         $data = $deliveryNotes->map(function($deliveryNote){
             return[

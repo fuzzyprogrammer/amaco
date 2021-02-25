@@ -379,6 +379,9 @@ class QuotationController extends Controller
 
     public function updateQuotation(Request $request, $id)
     {
+
+        // add validation
+
         $data = $request->all();
         $redundantValue = Quotation::find($data['po_number']);
         if(!isset($redundantValue)){
