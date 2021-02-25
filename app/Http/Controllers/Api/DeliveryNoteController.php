@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\DeliveryNote;
 use App\Models\DeliveryNoteDetail;
+use App\Models\Quotation;
 use Illuminate\Http\Request;
 
 class DeliveryNoteController extends Controller
@@ -68,10 +69,11 @@ class DeliveryNoteController extends Controller
      */
     public function store(Request $request)
     {
+        $quotation = Quotation::find($request->quotaion_id);
         $data = [
             'quotation_id' => $request->quotation_id,
             'delivery_number' => $this->getDeliveryNo(),
-            'po_number' => $request->quotation->po_number,
+            'po_number' => $quotation->po_number,
             'delivery_date' => $request->delivery_date,
         ];
 
