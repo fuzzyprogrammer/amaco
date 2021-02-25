@@ -354,7 +354,7 @@ class QuotationController extends Controller
             'transaction_type' => $data['transaction_type'],
             'discount_in_p' => $data['discount_in_p'],
             'ps_date' => $data['ps_date'],
-            'sales_order_number' => $data['sales_order_number'],
+            // 'sales_order_number' => $data['sales_order_number'],
             ]);
             if($data['quotation_details']){
                 foreach($data['quotation_details'] as $quotation_detail){
