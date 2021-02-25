@@ -47,7 +47,7 @@ class DeliveryNoteController extends Controller
 
     public function index()
     {
-        $deliveryNotes = DeliveryNote::latest();
+        $deliveryNotes = DeliveryNote::orderBy('created_at','DESC')->get();
 
         $data = $deliveryNotes->map(function($deliveryNote){
             return[
