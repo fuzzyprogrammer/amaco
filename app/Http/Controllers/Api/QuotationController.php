@@ -358,20 +358,33 @@ class QuotationController extends Controller
             ]);
             if($data['quotation_details']){
                 foreach($data['quotation_details'] as $quotation_detail){
-                    $quotationDetail = QuotationDetail::where('id', $quotation_detail['id'])->firstOrFail();
-                $quotationDetail->update([
-                // 'quotation_id' => $quotation_id,
-                'total_amount' => $quotation_detail['total_amount'],
-                'analyse_id' => $quotation_detail['analyse_id'],
-                'product_id' => $quotation_detail['product_id'],
-                'purchase_price' => $quotation_detail['purchase_price'],
-                'description' => $quotation_detail['description'],
-                'quantity' => $quotation_detail['quantity'],
-                'margin' => $quotation_detail['margin'],
-                'sell_price' => $quotation_detail['sell_price'],
-                'remark' => $quotation_detail['remark'],
-                ]);
-            }
+                    $quotationDetail = QuotationDetail::where('id', $quotation_detail['id'])->first();
+                    if(isset($quotationDetail)){
+                        $quotationDetail->update([
+                        'total_amount' => $quotation_detail['total_amount'],
+                        'analyse_id' => $quotation_detail['analyse_id'],
+                        'product_id' => $quotation_detail['product_id'],
+                        'purchase_price' => $quotation_detail['purchase_price'],
+                        'description' => $quotation_detail['description'],
+                        'quantity' => $quotation_detail['quantity'],
+                        'margin' => $quotation_detail['margin'],
+                        'sell_price' => $quotation_detail['sell_price'],
+                        'remark' => $quotation_detail['remark'],
+                        ]);
+                    }else{
+                        QuotationDetail::create([
+                            'total_amount' => $quotation_detail['total_amount'],
+                            'analyse_id' => $quotation_detail['analyse_id'],
+                            'product_id' => $quotation_detail['product_id'],
+                            'purchase_price' => $quotation_detail['purchase_price'],
+                            'description' => $quotation_detail['description'],
+                            'quantity' => $quotation_detail['quantity'],
+                            'margin' => $quotation_detail['margin'],
+                            'sell_price' => $quotation_detail['sell_price'],
+                            'remark' => $quotation_detail['remark'],
+                        ]);
+                    }
+                }
             return response()->json(['msg' => 'successfully added']);
         }
         // return response()->json($quotation);
