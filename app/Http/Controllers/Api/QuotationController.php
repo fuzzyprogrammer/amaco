@@ -414,10 +414,8 @@ class QuotationController extends Controller
      * @param  \App\Models\Quotation  $quotation
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Quotation $quotation)
     {
-        $quotation = Quotation::where('id',$id)->first();
-
         $res = $quotation->delete();
         if ($res) {
             return (['msg' => 'Quotation' . ' ' . $quotation->id . ' is successfully deleted']);
