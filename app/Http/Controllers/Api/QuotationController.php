@@ -416,7 +416,7 @@ class QuotationController extends Controller
      */
     public function destroy($id)
     {
-        $quotation = Quotation::findOrFail($id);
+        $quotation = Quotation::where('id',$id)->first();
 
         $res = $quotation->delete();
         if ($res) {
