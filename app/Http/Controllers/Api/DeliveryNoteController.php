@@ -71,7 +71,7 @@ class DeliveryNoteController extends Controller
         $data = [
             'quotation_id' => $request->quotation_id,
             'delivery_number' => $this->getDeliveryNo(),
-            'po_number' => $request->po_number,
+            'po_number' => $request->quotation->po_number,
             'delivery_date' => $request->delivery_date,
         ];
 
