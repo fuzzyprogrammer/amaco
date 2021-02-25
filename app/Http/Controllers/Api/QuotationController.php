@@ -373,6 +373,7 @@ class QuotationController extends Controller
                         ]);
                     }else{
                         QuotationDetail::create([
+                            'quotation_id' => $quotation->id,
                             'total_amount' => $quotation_detail['total_amount'],
                             // 'analyse_id' => $quotation_detail['analyse_id'],
                             'product_id' => $quotation_detail['product_id'],
