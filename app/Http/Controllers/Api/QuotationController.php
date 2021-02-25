@@ -414,7 +414,7 @@ class QuotationController extends Controller
      * @param  \App\Models\Quotation  $quotation
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy($id)
     {
         $quotation = Quotation::where('id',$id)->first();
 
