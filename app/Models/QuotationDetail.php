@@ -45,7 +45,14 @@ class QuotationDetail extends Model
         ->where(['delivery_notes.quotation_id'=>$quotation_detail->quotation_id,
             'delivery_note_details.product_id' => $quotation_detail->product_id])
         ->get();
-        $data = $quotation_detail->quotation->deliveryNote->deliveryNoteDetail->getTotalDeliveredQuantity($deliveryNoteDetails);
-        return $data;
+
+        if(isset($deliveryNoteDetails)) {
+            $totalDeliveryNoteDetail = 0;
+            foreach ($deliveryNoteDetails as $item) {
+                $totalDeliveryNoteDetail += intval($item->delivered_quantity);
+            }
+            return $totalDeliveryNoteDetail;
+        }
+        return 0;
     }
 }
