@@ -35,7 +35,7 @@ class QuotationDetail extends Model
         if($deliveryNoteDetail == []){
             return 0;
         }
-        return $deliveryNoteDetail;
+        // return $deliveryNoteDetail;
         $data = $deliveryNoteDetail->getTotalDeliveredQuantity($deliveryNoteDetail);
         return $data;
     }
