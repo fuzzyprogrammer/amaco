@@ -46,7 +46,7 @@ class QuotationDetail extends Model
             'delivery_note_details.product_id' => $quotation_detail->product_id])
         ->get();
 
-        if(isset($deliveryNoteDetails)) {
+        if($deliveryNoteDetails) {
             $totalDeliveryNoteDetail = 0;
             foreach ($deliveryNoteDetails as $item) {
                 $totalDeliveryNoteDetail += intval($item->delivered_quantity);
