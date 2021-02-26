@@ -398,12 +398,20 @@ class QuotationController extends Controller
 
         // add validation
 
-        $validator = Validator::make($request->all(), [
-            'title' => 'unique:quotations'
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['msg' => 'P.O.Number is already exists'],201);
+        // $validator = Validator::make($request->all(), [
+        //     'title' => 'unique:quotations'
+        // ]);
+        // if ($validator->fails()) {
+        //     return response()->json(['msg' => 'P.O.Number is already exists'],201);
+        // }
+
+        // new validation logic for po_number
+
+        $unique_po_no = Quotation::where('po_number', $request->po_number)->first();
+        if(isset($unique_po_no)){
+            return response()->json(['msg'=>'P.O.Number is exsits']);
         }
+
         $data = $request->all();
         $data['sales_order_number'] = $this->getSalesOrderNumber();
         $quotation = Quotation::where("id",$id)->firstOrFail();
