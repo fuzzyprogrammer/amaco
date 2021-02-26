@@ -27,9 +27,10 @@ class QuotationDetail extends Model
     public function getDeliveredQuantity(QuotationDetail $quotation_detail)
     {
         $delivery_note = $quotation_detail->quotation->deliveryNote;
-        if(!($delivery_note)){
-            return 0;
-        }
+        // if(!($delivery_note)){
+
+        //     return 0;
+        // }
         $deliveryNoteDetail = DeliveryNoteDetail::where([
             'delivery_note_id' => $delivery_note->id,
             'product_id' => $quotation_detail->product_id

@@ -16,7 +16,7 @@ class DeliveryNoteController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function getCurrentDeliveryYear()
+    public function getCurrentDeliveryYear()
     {
         return substr(date('Y'), 2);
     }
