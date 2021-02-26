@@ -32,7 +32,7 @@ class QuotationDetail extends Model
             'delivery_note_id' => $delivery_note ? $delivery_note->id : '',
             'product_id' => $quotation_detail->product_id
         ])->get();
-        if($deliveryNoteDetail == null){
+        if($deliveryNoteDetail == []){
             return 0;
         }
         return $deliveryNoteDetail;
