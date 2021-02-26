@@ -27,7 +27,7 @@ class DeliveryNoteDetail extends Model
     // to get total delivered quantity
     public function getTotalDeliveredQuantity($val)
     {
-        if ($val) {
+        if($val) {
             $totalDeliveryNoteDetail = 0;
             foreach ($val as $item) {
                 $totalDeliveryNoteDetail += intval($item->delivered_quantity);
@@ -47,7 +47,7 @@ class DeliveryNoteDetail extends Model
     {
         $delivery_notes_detail = DeliveryNoteDetail::where('id',$id)->first();
 
-        $totalDeliveryNoteDetail = DeliveryNoteDetail::where([
+        $totalDeliveryNoteDetails = DeliveryNoteDetail::where([
             'delivery_note_id' => $delivery_notes_detail->delivery_note_id,
             'product_id' => $delivery_notes_detail->product_id,
         ])->get();
@@ -57,7 +57,7 @@ class DeliveryNoteDetail extends Model
             'product_id' => $delivery_notes_detail->product_id,
         ])->firstOrFail();
 
-        $totalDeliveredQuantity = $this->getTotalDeliveredQuantity($totalDeliveryNoteDetail);
+        $totalDeliveredQuantity = $this->getTotalDeliveredQuantity($totalDeliveryNoteDetails);
         if($totalDeliveredQuantity){
             $totalDeliveredQuantityExceptCurrentValue = $totalDeliveredQuantity - intval($delivery_notes_detail->delivered_quantity);
         }else{
