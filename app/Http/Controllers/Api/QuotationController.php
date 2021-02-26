@@ -398,14 +398,14 @@ class QuotationController extends Controller
 
         // add validation
 
-
-        $validator = $request->validate([
-            'po_number' => 'unique:posts|max:255',
+        $validator = Validator::make($request->po_number, [
+            'title' => 'unique:quotations|max:255'
         ]);
-        $data = $request->all();
+
         if ($validator->fails()) {
             return response()->json(['msg' => 'P.O.Number is already exists'],201);
         }
+        $data = $request->all();
         $data['sales_order_number'] = $this->getSalesOrderNumber();
         $quotation = Quotation::where("id",$id)->firstOrFail();
         $quotation->update([
