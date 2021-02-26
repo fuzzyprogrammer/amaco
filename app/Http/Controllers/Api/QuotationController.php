@@ -399,10 +399,11 @@ class QuotationController extends Controller
         // add validation
 
 
-        $data = Validator::make($request->all(), [
-            'po_number' => 'nuique:quotations',
+        $validator = $request->validate([
+            'po_number' => 'unique:posts|max:255',
         ]);
-        if ($data->fails()) {
+        $data = $request->all();
+        if ($validator->fails()) {
             return response()->json(['msg' => 'P.O.Number is already exists'],201);
         }
         $data['sales_order_number'] = $this->getSalesOrderNumber();
