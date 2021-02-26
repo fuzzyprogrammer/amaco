@@ -58,7 +58,7 @@ class DeliveryNoteDetail extends Model
         ])->firstOrFail();
 
         $totalDeliveredQuantity = $this->getTotalDeliveredQuantity($totalDeliveryNoteDetail);
-        if(isset($totalDeliveredQuantity)){
+        if($totalDeliveredQuantity){
             $totalDeliveredQuantityExceptCurrentValue = $totalDeliveredQuantity - intval($delivery_notes_detail->delivered_quantity);
         }else{
             $totalDeliveredQuantityExceptCurrentValue = 0;
