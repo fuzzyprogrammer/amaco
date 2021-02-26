@@ -10,6 +10,8 @@ use App\Http\Controllers\Api\Exception;
 use App\Models\DeliveryNote;
 use App\Models\DeliveryNoteDetail;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+
 
 class QuotationController extends Controller
 {
@@ -396,7 +398,13 @@ class QuotationController extends Controller
 
         // add validation
 
-        $data = $request->all();
+
+        $data = Validator::make($request->all(), [
+            'po_number' => 'nuique:quotations',
+        ]);
+        if ($data->fails()) {
+            return response()->json(['msg' => 'P.O.Number is already exists']);
+        }
         $data['sales_order_number'] = $this->getSalesOrderNumber();
         $quotation = Quotation::where("id",$id)->firstOrFail();
         $quotation->update([
