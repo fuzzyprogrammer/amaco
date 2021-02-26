@@ -398,7 +398,7 @@ class QuotationController extends Controller
 
         // add validation
 
-        $validator = Validator::make($request->po_number, [
+        $validator = Validator::make([$request->po_number], [
             'title' => 'unique:quotations|max:255'
         ]);
 
