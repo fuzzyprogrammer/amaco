@@ -399,9 +399,8 @@ class QuotationController extends Controller
         // add validation
 
         $validator = Validator::make([$request->po_number], [
-            'title' => 'unique:quotations|max:255'
+            'title' => 'unique:quotations'
         ]);
-
         if ($validator->fails()) {
             return response()->json(['msg' => 'P.O.Number is already exists'],201);
         }
