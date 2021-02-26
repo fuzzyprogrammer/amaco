@@ -403,7 +403,7 @@ class QuotationController extends Controller
             'po_number' => 'nuique:quotations',
         ]);
         if ($data->fails()) {
-            return response()->json(['msg' => 'P.O.Number is already exists']);
+            return response()->json(['msg' => 'P.O.Number is already exists'],201);
         }
         $data['sales_order_number'] = $this->getSalesOrderNumber();
         $quotation = Quotation::where("id",$id)->firstOrFail();
