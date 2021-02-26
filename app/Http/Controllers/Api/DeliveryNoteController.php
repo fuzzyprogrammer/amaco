@@ -83,7 +83,7 @@ class DeliveryNoteController extends Controller
             $deliveryNoteDetailData = [
                 'delivery_note_id' => $deliveryNote->id,
                 'product_id' => $deliveryNoteDetail['product_id'],
-                'delivered_quantity' => $deliveryNoteDetail['delivered_quantity'],
+                'delivered_quantity' => $deliveryNoteDetail['delivering_quantity'],
             ];
             $deliveryNoteDetails = DeliveryNoteDetail::create($deliveryNoteDetailData);
         };
