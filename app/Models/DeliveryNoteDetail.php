@@ -27,7 +27,7 @@ class DeliveryNoteDetail extends Model
     // to get total delivered quantity
     public function getTotalDeliveredQuantity($val)
     {
-        if (isset($val)) {
+        if ($val) {
             $totalDeliveryNoteDetail = 0;
             foreach ($val as $item) {
                 $totalDeliveryNoteDetail += intval($item->delivered_quantity);
