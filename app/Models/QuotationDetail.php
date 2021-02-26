@@ -42,8 +42,8 @@ class QuotationDetail extends Model
 
         $deliveryNoteDetails = DB::table('delivery_notes')
         ->leftJoin('delivery_note_details', 'delivery_note_details.delivery_note_id','=', 'delivery_notes.id')
-        ->where(['delivery_notes.quotation_id'=>$quotation_detail->quotation_id,
-            'delivery_note_details.product_id' => $quotation_detail->product_id])
+        ->where('delivery_notes.quotation_id',$quotation_detail->quotation_id)
+        ->where('delivery_note_details.product_id', $quotation_detail->product_id)
         ->get();
 
         if($deliveryNoteDetails) {
