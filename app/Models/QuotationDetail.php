@@ -27,19 +27,6 @@ class QuotationDetail extends Model
 
     public function getDeliveredQuantity(QuotationDetail $quotation_detail)
     {
-        // $delivery_note = $quotation_detail->quotation->deliveryNote;
-
-        // $deliveryNoteDetail = DeliveryNoteDetail::where([
-        //     'delivery_note_id' => $delivery_note ? $delivery_note->id : '',
-        //     'product_id' => $quotation_detail->product_id
-        // ])->get();
-        // if($deliveryNoteDetail == []){
-        //     return 0;
-        // }
-        // // return $deliveryNoteDetail;
-        // $data = $deliveryNoteDetail->getTotalDeliveredQuantity($deliveryNoteDetail);
-        // return $data;
-
         $deliveryNoteDetails = DB::table('delivery_notes')
         ->leftJoin('delivery_note_details', 'delivery_note_details.delivery_note_id','=', 'delivery_notes.id')
         ->where('delivery_notes.quotation_id',$quotation_detail->quotation_id)
