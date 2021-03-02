@@ -275,7 +275,7 @@ class QuotationController extends Controller
      */
     public function show($id)
     {
-        $quotation = Quotation::findOrFail($id);
+        $quotation = Quotation::where('id',$id)->first();
         $data = [
             "id" => $quotation->id,
             'quotation_no' => $quotation->quotation_no,
