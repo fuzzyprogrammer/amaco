@@ -18,16 +18,16 @@ class AccountCategoryController extends Controller
     public function checkSubcategories($id)
     {
         $groupedCategories = AccountCategory::all()->groupBy('parent_id');
-
-        if($groupedCategories.include($id)){
-            $temp = $groupedCategories[$id];
-            return [
-                'sub_categories'=>$temp->map(function ($category){
-                    return $this->subCategory($category->id);
-                }),
-            ];
-        }
-        return $this->subCategory($accountCategory->id);;
+        dd($groupedCategories[0]);
+        // if($groupedCategories.include($id)){
+        //     $temp = $groupedCategories[$id];
+        //     return [
+        //         'sub_categories'=>$temp->map(function ($category){
+        //             return $this->subCategory($category->id);
+        //         }),
+        //     ];
+        // }
+        // return $this->subCategory($accountCategory->id);;
     }
 
     public function index()
