@@ -17,9 +17,10 @@ class AccountCategoryController extends Controller
     {
         $accountCategories = AccountCategory::where('parent_id', '=', null)->get();
         $data = [
-            $accountCategories,
+            // $accountCategories,
             $accountCategories->map(function($accountCategory){
             return [
+                'category' => $accountCategory,
                 'sub_categories' => $this->subCategory($accountCategory->id),
             ];
         }),
