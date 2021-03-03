@@ -29,6 +29,11 @@ class AccountCategoryController extends Controller
         return response()->json($data[0]);
     }
 
+    public function showCategories()
+    {
+        $categories = AccountCategory::all()->groupBy('parent_id');
+        dd($categories);
+    }
     /**
      * Store a newly created resource in storage.
      *
