@@ -21,13 +21,14 @@ class AccountCategoryController extends Controller
         // dd($groupedCategories[0]);
         if($groupedCategories->has($id)){
             $temp = $groupedCategories[$id];
-            return [
+            $data = [
                 $temp->map(function ($category){
                     return [
                         $category,
                         $this->checkSubcategories($category->id)];
                 }),
             ];
+            return $data[0];
         }
         return $this->subCategory($id);
     }
