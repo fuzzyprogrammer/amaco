@@ -27,7 +27,7 @@ class AccountCategoryController extends Controller
                 }),
             ];
         }
-        return $this->subCategory($accountCategory->id);;
+        return $this->subCategory($accountCategory->id);
     }
 
     public function index()
@@ -41,6 +41,7 @@ class AccountCategoryController extends Controller
             return [
                 'category' => $accountCategory,
                 'sub_categories' => $this->checkSubcategories($accountCategory->id),
+                // 'sub_categories' => $this->subCategory($accountCategory->id),
             ];
         }),
     ];
