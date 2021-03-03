@@ -19,8 +19,11 @@ class AccountCategoryController extends Controller
         $data = [
             $accountCategories,
             $accountCategories->map(function($accountCategory){
-            return $this->subCategory($accountCategory->id);
-        })];
+            return [
+                'sub_categories' => $this->subCategory($accountCategory->id),
+            ];
+        }),
+    ];
 
         return response()->json($data);
     }
