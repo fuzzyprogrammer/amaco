@@ -23,10 +23,11 @@ class AccountCategoryController extends Controller
             $temp = $groupedCategories[$id];
             $data = [
                 $temp->map(function ($category){
-                    return [
+                    return  [
                         $category,
-                        $this->checkSubcategories($category->id)];
-                }),
+                        'sub_categories'=>$this->checkSubcategories($category->id)];
+                }
+            ),
             ];
             return $data[0];
         }
