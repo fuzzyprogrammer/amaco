@@ -12,7 +12,24 @@ class AccountCategoryController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
      */
+
+    public function checkSubcategories($id)
+    {
+        $groupedCategories = AccountCategory::all()->groupBy('parent_id');
+
+        if($groupedCategories.include($id)){
+            $temp = $groupedCategories[$id];
+            return [
+                'sub_categories'=>$temp->map(function ($category){
+                    return $this->subCategory($category->id);
+                }),
+            ];
+        }
+        return $this->subCategory($accountCategory->id);;
+    }
+
     public function index()
     {
         $accountCategories = AccountCategory::where('parent_id', '=', null)->get();
@@ -21,7 +38,7 @@ class AccountCategoryController extends Controller
             $accountCategories->map(function($accountCategory){
             return [
                 'category' => $accountCategory,
-                'sub_categories' => $this->subCategory($accountCategory->id),
+                'sub_categories' => $this->checkSubcategories($accountCategory->id),
             ];
         }),
     ];
@@ -29,11 +46,11 @@ class AccountCategoryController extends Controller
         return response()->json($data[0]);
     }
 
-    public function showCategories()
-    {
-        $categories = AccountCategory::all()->groupBy('parent_id');
-        return($categories);
-    }
+    // public function showCategories()
+    // {
+    //     $groupedCategories = AccountCategory::all()->groupBy('parent_id');
+
+    // }
     /**
      * Store a newly created resource in storage.
      *
