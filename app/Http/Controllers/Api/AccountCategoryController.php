@@ -32,6 +32,8 @@ class AccountCategoryController extends Controller
 
     public function index()
     {
+        $groupedCategories = AccountCategory::all()->groupBy('parent_id');
+        dd($groupedCategories[0]);
         $accountCategories = AccountCategory::where('parent_id', '=', null)->get();
         $data = [
             // $accountCategories,
