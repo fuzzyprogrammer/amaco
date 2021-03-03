@@ -16,8 +16,11 @@ class AccountCategoryController extends Controller
     public function index()
     {
         $accountCategories = AccountCategory::where('parent_id', '=', null)->get();
+        $data = $accountCategories->map(function($accountCategory){
+            return $this->subCategory($accountCategory->id);
+        });
 
-        return response()->json($accountCategories);
+        return response()->json($data);
     }
 
     /**
