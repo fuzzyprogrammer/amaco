@@ -32,7 +32,7 @@ class AccountCategoryController extends Controller
     public function showCategories()
     {
         $categories = AccountCategory::all()->groupBy('parent_id');
-        dd($categories);
+        return($categories);
     }
     /**
      * Store a newly created resource in storage.
