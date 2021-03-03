@@ -19,7 +19,7 @@ class AccountCategoryController extends Controller
     {
         $groupedCategories = AccountCategory::all()->groupBy('parent_id');
         // dd($groupedCategories[0]);
-        if($groupedCategories->include($id)){
+        if($groupedCategories->has($id)){
             $temp = $groupedCategories[$id];
             return [
                 'sub_categories'=>$temp->map(function ($category){
