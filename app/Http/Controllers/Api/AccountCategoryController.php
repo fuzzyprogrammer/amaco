@@ -24,7 +24,7 @@ class AccountCategoryController extends Controller
             $data = [
                 $temp->map(function ($category){
                     return  [
-                        $category,
+                        'category'=>$category,
                         'sub_categories'=>$this->checkSubcategories($category->id)];
                 }
             ),
