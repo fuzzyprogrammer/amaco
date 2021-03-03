@@ -26,7 +26,7 @@ class AccountCategoryController extends Controller
         }),
     ];
 
-        return response()->json($data);
+        return response()->json($data[0]);
     }
 
     /**
