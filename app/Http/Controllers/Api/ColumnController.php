@@ -27,8 +27,8 @@ class ColumnController extends Controller
      */
     public function store(Request $request)
     {
-        $accountCategoryId = $request->account_category_id;
         $data = $request->all();
+        $accountCategoryId = $data['account_category_id'];
         foreach ($data as $column ) {
             Column::create([
                 'account_category_id'=>$accountCategoryId,
