@@ -27,10 +27,12 @@ class ColumnController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $column = Column::create($data);
+        foreach ($request as $column ) {
+            $data = $column->all();
+            return (Column::create($data));
+        }
 
-        return response()->json($column);
+        return response()->json(['msg Successfully added']);
     }
 
     /**
