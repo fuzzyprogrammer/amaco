@@ -27,14 +27,17 @@ class ColumnController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->json()->all();
-        $accountCategoryId = $data->account_category_id;
+        $data = $request->all();
+        $accountCategoryId = $request->account_category_id;
         foreach ($data as $column ) {
-            Column::create([
-                'account_category_id'=>$accountCategoryId,
-                'name'=>$column['name'],
-                'type'=>$column['type'],
-            ]);
+            Column::create($column->all(
+                [
+                    'account_category_id' => $accountCategoryId,
+                    'name' => $column['name'],
+                    'type' => $column['type'],
+                ]
+            ));
+
         }
 
         return response()->json(['msg Successfully added']);
