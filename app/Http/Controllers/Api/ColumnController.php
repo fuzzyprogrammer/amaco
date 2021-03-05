@@ -27,9 +27,9 @@ class ColumnController extends Controller
      */
     public function store(Request $request)
     {
-        foreach ($request as $column ) {
-            $data = $column->all();
-            return (Column::create($data));
+        $data = $request->all();
+        foreach ($data as $column ) {
+            return (Column::create($column));
         }
 
         return response()->json(['msg Successfully added']);
