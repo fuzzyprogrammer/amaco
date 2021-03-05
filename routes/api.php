@@ -118,5 +118,4 @@ Route::get('account-categories-search/{name}', [AccountCategoryController::class
 Route::get('quotations-accepted-list', [QuotationController::class, 'acceptedList'])->name('quotaions.accepted.list');
 Route::get('quotations-rejected-list', [QuotationController::class, 'rejectedList'])->name('quotaions.rejected.list');
 Route::put('update-quotation/{id}', [QuotationController::class, 'updateQuotation'])->name('quotations.status.update');
-Route::get('account-category-list/', [AccountCategoryController::class, 'showCategories']);
 

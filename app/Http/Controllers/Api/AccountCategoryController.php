@@ -53,11 +53,6 @@ class AccountCategoryController extends Controller
         return response()->json($data[0]);
     }
 
-    // public function showCategories()
-    // {
-    //     $groupedCategories = AccountCategory::all()->groupBy('parent_id');
-
-    // }
     /**
      * Store a newly created resource in storage.
      *
@@ -113,7 +108,11 @@ class AccountCategoryController extends Controller
 
     public function subCategory($id)
     {
-        $sub_categories = AccountCategory::where('parent_id', '=', $id)->get();
+        if($id == 0){
+            $sub_categories = AccountCategory::where('parent_id', '=', 'null')->get();
+        }else{
+            $sub_categories = AccountCategory::where('parent_id', '=', $id)->get();
+        }
         return response()->json($sub_categories);
     }
 
