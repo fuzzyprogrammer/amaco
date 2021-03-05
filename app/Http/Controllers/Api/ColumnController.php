@@ -29,7 +29,11 @@ class ColumnController extends Controller
     {
         $data = $request->all();
         foreach ($data as $column ) {
-            return (Column::create($column));
+            Column::create([
+                'account_category_id'=>$column['account_category_id'],
+                'name'=>$column['name'],
+                'type'=>$column['type'],
+            ]);
         }
 
         return response()->json(['msg Successfully added']);
