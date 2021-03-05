@@ -109,7 +109,7 @@ class AccountCategoryController extends Controller
     public function subCategory($id)
     {
         if($id == 0){
-            $sub_categories = AccountCategory::where('parent_id', '=', 'null')->get();
+            $sub_categories = AccountCategory::where('parent_id', '=', null)->get();
         }else{
             $sub_categories = AccountCategory::where('parent_id', '=', $id)->get();
         }
