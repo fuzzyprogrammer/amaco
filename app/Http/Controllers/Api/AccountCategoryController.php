@@ -113,7 +113,10 @@ class AccountCategoryController extends Controller
         }else{
             $sub_categories = AccountCategory::where('parent_id', '=', $id)->get();
         }
-        return response()->json($sub_categories);
+        if($sub_categories){
+            return response()->json($sub_categories);
+        }
+        return response()->json(null);
     }
 
     public function search($name)
