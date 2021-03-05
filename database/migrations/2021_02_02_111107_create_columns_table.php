@@ -17,6 +17,7 @@ class CreateColumnsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('account_category_id')->nullable();
             $table->string('name')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }
