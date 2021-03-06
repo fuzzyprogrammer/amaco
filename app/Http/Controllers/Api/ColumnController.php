@@ -16,7 +16,9 @@ class ColumnController extends Controller
      */
     public function index()
     {
-        //
+        $columns = Column::all();
+
+        return response()->json($columns, 200);
     }
 
     /**
@@ -51,7 +53,7 @@ class ColumnController extends Controller
      */
     public function show($id)
     {
-        $accountCategory = AccountCategory::where('id',$id)->firstOrFail();
+        $accountCategory = AccountCategory::where('id',$id)->first();
         if ($accountCategory == null) {
             // Account Category not found, show 404 or whatever you want to do
             return response()->json("There is no Account Category with id: ".$id);
