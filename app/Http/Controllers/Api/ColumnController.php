@@ -40,7 +40,7 @@ class ColumnController extends Controller
 
         }
 
-        // return response()->json(['msg'=>'Successfully added'],200);
+        return response()->json(['msg'=>'Successfully added'],200);
     }
 
     /**
