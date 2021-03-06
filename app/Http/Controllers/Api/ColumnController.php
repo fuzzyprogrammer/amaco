@@ -27,6 +27,7 @@ class ColumnController extends Controller
      */
     public function store(Request $request)
     {
+        return $request;
         $data = $request->all();
         $accountCategoryId = $request->account_category_id;
         foreach ($data as $column ) {
