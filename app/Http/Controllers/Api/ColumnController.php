@@ -32,13 +32,16 @@ class ColumnController extends Controller
         $data = $request->all();
         $accountCategoryId = $request->account_category_id;
         foreach ($data as $column ) {
-            Column::create(
-                [
-                    'account_category_id' => $accountCategoryId,
-                    'name' => $column['name'],
-                    'type' => $column['type'],
-                ]
-            );
+            if(!$column == $accountCategoryId){
+                Column::create(
+                    [
+                        'account_category_id' => $accountCategoryId,
+                        'name' => $column['name'],
+                        'type' => $column['type'],
+                    ]
+                );
+            }
+
 
         }
 
