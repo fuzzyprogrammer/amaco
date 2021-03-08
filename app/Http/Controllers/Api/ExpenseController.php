@@ -38,7 +38,7 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         // $data = $request->json()->all();
-        if(request()->hasFile('bank_slip')){
+        if($request->bank_slip){
             $path = $request->file('bank_slip')->store('expences/bankSlip');
         }else{
             return response()->json(['msg'=>'no bank slip has uploaded']);
