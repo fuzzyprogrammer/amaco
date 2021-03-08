@@ -59,7 +59,7 @@ class ExpenseController extends Controller
             $column_data_value = $column_data[$column_type];
             ColumnData::create([
                 "expense_id" => $expense->id,
-                "column_id" => $column_data->column_id,
+                "column_id" => $column_data['column_id'],
                 "value" => $column_data_value,
             ]);
         }
