@@ -64,12 +64,9 @@ class ExpenseController extends Controller
         foreach ($request->data as $column_data ) {
             $column_type = $column_data['type'];
             if($column_type == 'file'){
-
-                // $path = Storage::disk('local')->put('expences', $column_data['file']);
-                $file = $request['data'][$column_data]->file('file');
-                $filepath = public_path() . '/expences/'.$expense->id;
-                $file->move($path, $file->getClientOriginalName());
-                $column_data_value = $filepath;
+                $obj_column_data =(object) $column_data;
+                $path = $obj_column_data->file('file')->store('expences');
+                $column_data_value = $path;
             }else{
                 $column_data_value = $column_data[$column_type];
             }
