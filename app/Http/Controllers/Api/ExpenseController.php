@@ -48,7 +48,7 @@ class ExpenseController extends Controller
             'transaction_id'=>$request->transaction_id,
             'payment_account_id'=>$request->payment_account_id,
             'description'=>$request->description,
-            'is_paid'=>$request->is_paid,
+            // 'is_paid'=>$request->is_paid,
             'referrence_bill_no'=>$request->referrence_bill_no,
             'tax'=>$request->tax,
             'status'=>$request->status,
