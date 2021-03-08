@@ -29,6 +29,8 @@ class CreateExpensesTable extends Migration
             $table->string('is_paid')->default(false);
             $table->string('tax')->default('0');
             $table->string('status')->default('new');
+            $table->string('bank_ref_no')->nullable();
+            $table->string('bank_slip')->nullable();
             $table->timestamps();
         });
     }
