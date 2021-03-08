@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\ColumnData;
 use App\Models\Expense;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class ExpenseController extends Controller
 {
@@ -57,8 +59,9 @@ class ExpenseController extends Controller
         foreach ($request->data as $column_data ) {
             $column_type = $column_data['type'];
             if($column_type == 'file'){
-                $path=$request->data->$column_data->file($column_data['file'])->store('Expences/' . $expense->id);
-                // $path = $request->file($column_data[$column_type])->store('Expences/'.$expense->id);
+
+                $path = Storage::disk('local')->put('expences', $column_data['file']);
+
                 $column_data_value = $path;
             }else{
                 $column_data_value = $column_data[$column_type];
