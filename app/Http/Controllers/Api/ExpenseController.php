@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\ColumnData;
 use App\Models\Expense;
 use Illuminate\Http\Request;
 
@@ -34,9 +35,35 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->json()->all();
-        $expense = Expense::create($data);
-        return response()->json($expense);
+        // $data = $request->json()->all();
+
+        $expense = Expense::create([
+            'created_by'=>$request->created_by,
+            'paid_date'=>$request->paid_date,
+            'paid_by'=>$request->paid_by,
+            'paid_to'=>$request->paid_to,
+            'amount'=>$request->amount,
+            'payment_type'=>$request->payment_type,
+            'check_no'=>$request->check_no,
+            'transaction_id'=>$request->transaction_id,
+            'payment_account_id'=>$request->payment_account_id,
+            'description'=>$request->description,
+            'is_paid'=>$request->is_paid,
+            'referrence_bill_no'=>$request->referrence_bill_no,
+            'tax'=>$request->tax,
+            'status'=>$request->status,
+        ]);
+
+        foreach ($request->data as $column_data ) {
+            $column_type = $column_data->type;
+            $column_data_value = $column_data[$column_type];
+            ColumnData::create([
+                "expense_id" => $expense->id,
+                "column_id" => $column_data->column_id,
+                "value" => $column_data_value,
+            ]);
+        }
+        return response()->json(['msg' => "successfully added."]);
 
     }
 

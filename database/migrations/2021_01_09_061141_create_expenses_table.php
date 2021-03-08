@@ -28,6 +28,7 @@ class CreateExpensesTable extends Migration
             $table->string('description')->nullable();
             $table->string('is_paid')->default(false);
             $table->string('tax')->default('0');
+            $table->string('status')->default('new');
             $table->timestamps();
         });
     }
