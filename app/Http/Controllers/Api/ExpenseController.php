@@ -57,7 +57,7 @@ class ExpenseController extends Controller
         foreach ($request->data as $column_data ) {
             $column_type = $column_data['type'];
             if($column_type == 'file'){
-                $path = $column_data->file($column_type)->store('Expences/'.$expense->id);
+                $path = $column_data->file($column_data[$column_type])->store('Expences/'.$expense->id);
                 $column_data_value = $path;
             }else{
                 $column_data_value = $column_data[$column_type];
