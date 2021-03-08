@@ -65,8 +65,8 @@ class ExpenseController extends Controller
             $column_type = $column_data['type'];
             if($column_type == 'file'){
                 $obj_column_data =(object) $column_data;
-                $path = $obj_column_data->file('file')->store('expences/'.$expense->id);
-                $column_data_value = $path;
+                $column_path = $obj_column_data->file('file')->store('expences/'.$expense->id);
+                $column_data_value = $column_path;
             }else{
                 $column_data_value = $column_data[$column_type];
             }
