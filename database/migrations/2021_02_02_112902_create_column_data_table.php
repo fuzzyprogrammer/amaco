@@ -17,7 +17,7 @@ class CreateColumnDataTable extends Migration
             $table->id();
             $table->unsignedBigInteger('expense_id')->nullable();
             $table->unsignedBigInteger('column_id')->nullable();
-            $table->unsignedBigInteger('value')->nullable();
+            $table->string('value')->nullable();
             $table->timestamps();
         });
     }
