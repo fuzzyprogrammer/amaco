@@ -55,7 +55,7 @@ class ExpenseController extends Controller
         ]);
 
         foreach ($request->data as $column_data ) {
-            $column_type = $column_data->type;
+            $column_type = $column_data['type'];
             $column_data_value = $column_data[$column_type];
             ColumnData::create([
                 "expense_id" => $expense->id,
