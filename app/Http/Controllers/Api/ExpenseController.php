@@ -67,9 +67,9 @@ class ExpenseController extends Controller
 
                 // $path = Storage::disk('local')->put('expences', $column_data['file']);
                 $file = $request['data'][$column_data]->file('file');
-                $path = public_path() . '/expences/'.$expense->id;
+                $filepath = public_path() . '/expences/'.$expense->id;
                 $file->move($path, $file->getClientOriginalName());
-                $column_data_value = $path;
+                $column_data_value = $filepath;
             }else{
                 $column_data_value = $column_data[$column_type];
             }
