@@ -25,5 +25,10 @@ class Expense extends Model
     {
         return $this->hasMany(PaymentAccount::class,'id','payment_account_id');
     }
+
+    public function column_data()
+    {
+        return $this->hasMany(ColumnData::class,'id','expense_id');
+    }
 }
 

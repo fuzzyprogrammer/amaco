@@ -16,4 +16,8 @@ class ColumnData extends Model
         return $this->belongsTo(Column::class);
     }
 
+    public function expense()
+    {
+        return $this->belongsTo(Expense::class);
+    }
 }
