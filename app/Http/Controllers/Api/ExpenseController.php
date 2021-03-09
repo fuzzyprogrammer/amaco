@@ -105,6 +105,7 @@ class ExpenseController extends Controller
      */
     public function update(Request $request, Expense $expense)
     {
+        $request['is_paid'] = true;
         $expense->update($request->all());
         return response()->json($expense);
     }
