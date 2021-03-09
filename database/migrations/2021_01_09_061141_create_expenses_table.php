@@ -16,7 +16,6 @@ class CreateExpensesTable extends Migration
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('paid_by')->nullable();
             $table->unsignedBigInteger('referrence_bill_no')->nullable();
             $table->string('paid_date')->nullable();
             $table->string('paid_to')->nullable();

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ColumnData;
 use App\Models\Expense;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 
 class ExpenseController extends Controller
@@ -40,7 +41,6 @@ class ExpenseController extends Controller
         $expense = Expense::create([
             'created_by'=>$request->created_by,
             'paid_date'=>$request->paid_date,
-            'paid_by'=>$request->paid_by,
             'paid_to'=>$request->paid_to,
             'amount'=>$request->amount,
             'payment_type'=>$request->payment_type,
@@ -84,9 +84,12 @@ class ExpenseController extends Controller
      */
     public function show(Expense $expense)
     {
+        $path = $expense->bank_slip;
+        $imgUrl = Storage::url($path);
         return response()->json([
             $expense,
             $expense->payment_account,
+            $imgUrl
             // $expense->payment_account,
             ]);
     }
