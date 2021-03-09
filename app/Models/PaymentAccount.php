@@ -9,6 +9,8 @@ class PaymentAccount extends Model
 {
     use HasFactory;
 
+    protected $table = 'payment_accounts';
+
     public function expense()
     {
         return $this->belongsTo(Expense::class);
