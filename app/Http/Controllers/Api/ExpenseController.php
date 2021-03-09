@@ -85,7 +85,7 @@ class ExpenseController extends Controller
     public function show(Expense $expense)
     {
         $path = $expense->bank_slip;
-        $imgUrl = Storage::download($path);
+        $imgUrl = asset($path);
         return response()->json([
             $expense,
             $expense->payment_account,
@@ -105,7 +105,6 @@ class ExpenseController extends Controller
      */
     public function update(Request $request, Expense $expense)
     {
-        $request['is_paid'] = true;
         $expense->update($request->all());
         return response()->json($expense);
     }
