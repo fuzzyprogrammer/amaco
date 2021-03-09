@@ -88,7 +88,7 @@ class ExpenseController extends Controller
         $imgUrl = Storage::url($path);
         return response()->json([
             $expense,
-            $expense->payment_account->name,
+            $expense->payment_account,
             $imgUrl
             // $expense->payment_account,
             ]);
