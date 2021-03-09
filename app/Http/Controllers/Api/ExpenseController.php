@@ -57,7 +57,7 @@ class ExpenseController extends Controller
             'tax'=>$request->tax,
             'status'=>$request->status,
             'bank_ref_no'=>$request->bank_ref_no,
-            'bank_slip'=> $request->file('bank_slip') ? '/expenses/bankSlip'.$new_path :"No file uploaded",
+            'bank_slip'=> $request->file('bank_slip') ? '/expenses/bankSlip/'.$new_path :"No file uploaded",
         ]);
 
         $tempArray = json_decode($request->data, true);
