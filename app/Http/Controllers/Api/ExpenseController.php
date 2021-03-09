@@ -37,7 +37,9 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
-
+        if($request->file('bank_slip')){
+            $path = $request->file('bank_slip')->move(public_path("/expences/bankSlip"));
+        }
         $expense = Expense::create([
             'created_by'=>$request->created_by,
             'paid_date'=>$request->paid_date,
@@ -52,7 +54,7 @@ class ExpenseController extends Controller
             'tax'=>$request->tax,
             'status'=>$request->status,
             'bank_ref_no'=>$request->bank_ref_no,
-            'bank_slip'=> $request->file('bank_slip') ? $request->file('bank_slip')->store("/expences/bankSlip") :" No file uploaded",
+            'bank_slip'=> $request->file('bank_slip') ? $path :"No file uploaded",
         ]);
 
         $tempArray = json_decode($request->data, true);
@@ -61,7 +63,7 @@ class ExpenseController extends Controller
             $column_type = $column_data['type'];
             if($column_type == 'file'){
                 $obj_column_data =(object) $column_data;
-                $column_path = $obj_column_data->file('file')->move('expences/'.$expense->id);
+                $column_path = $obj_column_data->file('file')->move(public_path('expences/'.$expense->id));
                 $column_data_value = $column_path;
             }else{
                 $column_data_value = $column_data[$column_type];
