@@ -89,7 +89,9 @@ class ExpenseController extends Controller
         return response()->json([
             $expense,
             $expense->payment_account,
-            $expense->column_data,
+            $expense->column_data->map(function($item){
+                return $item->column;
+            }),
             $imgUrl
             ]);
     }

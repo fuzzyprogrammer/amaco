@@ -30,5 +30,6 @@ class Expense extends Model
     {
         return $this->hasMany(ColumnData::class, 'expense_id','id');
     }
+    
 }
 
