@@ -87,7 +87,7 @@ class ExpenseController extends Controller
         return response()->json([
             $expense,
             $expense->payment_account,
-            $expense->payment_account->name,
+            // $expense->payment_account,
             ]);
     }
 
