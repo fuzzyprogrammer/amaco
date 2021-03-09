@@ -18,7 +18,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses = Expense::where("is_paid", false)->orderBy('created_at', 'DESC')->get();
+        $expenses = Expense::where("status", "new")->orderBy('created_at', 'DESC')->get();
         return response()->json($expenses);
     }
 
