@@ -25,7 +25,7 @@ class ExpenseController extends Controller
     // to get all paid expenses
     public function paid()
     {
-        $expenses = Expense::where("is_paid", true)->orderBy('created_at', 'DESC')->get();
+        $expenses = Expense::where("status", 'verified')->orderBy('created_at', 'DESC')->get();
         return response()->json($expenses);
     }
 
