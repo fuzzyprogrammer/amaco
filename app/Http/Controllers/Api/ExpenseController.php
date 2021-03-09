@@ -38,10 +38,10 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         if($request->file('bank_slip')){
-            $path = $request->file('bank_slip')->move(public_path("/expences/bankSlip"));
+            $path = $request->file('bank_slip')->move(public_path("/expenses/bankSlip"));
             $temp = explode('/',$path);
-            $dig = count($temp)-3;
-            $new_path = $path.substr(intval($dig),null);
+            $dig = count($temp)-1;
+            $new_path = $temp[$dig];
         }
         $expense = Expense::create([
             'created_by'=>$request->created_by,
@@ -57,7 +57,7 @@ class ExpenseController extends Controller
             'tax'=>$request->tax,
             'status'=>$request->status,
             'bank_ref_no'=>$request->bank_ref_no,
-            'bank_slip'=> $request->file('bank_slip') ? $new_path :"No file uploaded",
+            'bank_slip'=> $request->file('bank_slip') ? '/expenses/bankSlip'.$new_path :"No file uploaded",
         ]);
 
         $tempArray = json_decode($request->data, true);
@@ -90,7 +90,7 @@ class ExpenseController extends Controller
     public function show(Expense $expense)
     {
         $path = $expense->bank_slip;
-        $imgUrl = asset($path);
+        $imgUrl = url($path);
         return response()->json([
             $expense,
             $expense->payment_account,
