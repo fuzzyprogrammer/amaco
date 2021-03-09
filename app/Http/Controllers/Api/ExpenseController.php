@@ -37,11 +37,11 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         // $data = $request->json()->all();
-        if($request->file('bank_slip')){
-            $path = $request->file('bank_slip')->store('expences/bankSlip');
-        }else{
-            return response()->json(['msg'=>'no bank slip has uploaded']);
-        }
+        // if($request->file('bank_slip')){
+        //     $path = $request->file('bank_slip')->store('expences/bankSlip');
+        // }else{
+        //     return response()->json(['msg'=>'no bank slip has uploaded']);
+        // }
         $expense = Expense::create([
             'created_by'=>$request->created_by,
             'paid_date'=>$request->paid_date,
@@ -57,7 +57,7 @@ class ExpenseController extends Controller
             'tax'=>$request->tax,
             'status'=>$request->status,
             'bank_ref_no'=>$request->bank_ref_no,
-            'bank_slip'=>$request->$path,
+            'bank_slip'=> $request->file('bank_slip') ? $request->file('bank_slip')->store('expences/bankSlip') :" No file uploaded",
         ]);
 
         foreach ($request->data as $column_data ) {
