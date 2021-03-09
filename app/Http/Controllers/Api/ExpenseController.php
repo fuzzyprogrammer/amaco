@@ -37,23 +37,23 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
 
-        // $expense = Expense::create([
-        //     'created_by'=>$request->created_by,
-        //     'paid_date'=>$request->paid_date,
-        //     'paid_by'=>$request->paid_by,
-        //     'paid_to'=>$request->paid_to,
-        //     'amount'=>$request->amount,
-        //     'payment_type'=>$request->payment_type,
-        //     'check_no'=>$request->check_no,
-        //     'transaction_id'=>$request->transaction_id,
-        //     'payment_account_id'=>$request->payment_account_id,
-        //     'description'=>$request->description,
-        //     'referrence_bill_no'=>$request->referrence_bill_no,
-        //     'tax'=>$request->tax,
-        //     'status'=>$request->status,
-        //     'bank_ref_no'=>$request->bank_ref_no,
-        //     'bank_slip'=> $request->file('bank_slip') ? $request->file('bank_slip')->store('expences/bankSlip') :" No file uploaded",
-        // ]);
+        $expense = Expense::create([
+            'created_by'=>$request->created_by,
+            'paid_date'=>$request->paid_date,
+            'paid_by'=>$request->paid_by,
+            'paid_to'=>$request->paid_to,
+            'amount'=>$request->amount,
+            'payment_type'=>$request->payment_type,
+            'check_no'=>$request->check_no,
+            'transaction_id'=>$request->transaction_id,
+            'payment_account_id'=>$request->payment_account_id,
+            'description'=>$request->description,
+            'referrence_bill_no'=>$request->referrence_bill_no,
+            'tax'=>$request->tax,
+            'status'=>$request->status,
+            'bank_ref_no'=>$request->bank_ref_no,
+            'bank_slip'=> $request->file('bank_slip') ? $request->file('bank_slip')->store('expences/bankSlip') :" No file uploaded",
+        ]);
 
         $tempArray = json_decode($request->data, true);
         foreach ((array)$tempArray as $column_data ) {
