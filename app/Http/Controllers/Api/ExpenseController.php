@@ -57,7 +57,7 @@ class ExpenseController extends Controller
 
         $tempArray = json_decode($request->data, true);
         foreach ((array)$tempArray as $column_data ) {
-            return response($column_data);
+            // return response($column_data);
             $column_type = $column_data['type'];
             if($column_type == 'file'){
                 $obj_column_data =(object) $column_data;
@@ -90,7 +90,6 @@ class ExpenseController extends Controller
             $expense,
             $expense->payment_account,
             $imgUrl
-            // $expense->payment_account,
             ]);
     }
 
