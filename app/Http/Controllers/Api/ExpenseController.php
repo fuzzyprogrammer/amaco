@@ -36,32 +36,28 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = $request->json()->all();
-        // if($request->file('bank_slip')){
-        //     $path = $request->file('bank_slip')->store('expences/bankSlip');
-        // }else{
-        //     return response()->json(['msg'=>'no bank slip has uploaded']);
-        // }
-        $expense = Expense::create([
-            'created_by'=>$request->created_by,
-            'paid_date'=>$request->paid_date,
-            'paid_by'=>$request->paid_by,
-            'paid_to'=>$request->paid_to,
-            'amount'=>$request->amount,
-            'payment_type'=>$request->payment_type,
-            'check_no'=>$request->check_no,
-            'transaction_id'=>$request->transaction_id,
-            'payment_account_id'=>$request->payment_account_id,
-            'description'=>$request->description,
-            'referrence_bill_no'=>$request->referrence_bill_no,
-            'tax'=>$request->tax,
-            'status'=>$request->status,
-            'bank_ref_no'=>$request->bank_ref_no,
-            'bank_slip'=> $request->file('bank_slip') ? $request->file('bank_slip')->store('expences/bankSlip') :" No file uploaded",
-        ]);
+
+        // $expense = Expense::create([
+        //     'created_by'=>$request->created_by,
+        //     'paid_date'=>$request->paid_date,
+        //     'paid_by'=>$request->paid_by,
+        //     'paid_to'=>$request->paid_to,
+        //     'amount'=>$request->amount,
+        //     'payment_type'=>$request->payment_type,
+        //     'check_no'=>$request->check_no,
+        //     'transaction_id'=>$request->transaction_id,
+        //     'payment_account_id'=>$request->payment_account_id,
+        //     'description'=>$request->description,
+        //     'referrence_bill_no'=>$request->referrence_bill_no,
+        //     'tax'=>$request->tax,
+        //     'status'=>$request->status,
+        //     'bank_ref_no'=>$request->bank_ref_no,
+        //     'bank_slip'=> $request->file('bank_slip') ? $request->file('bank_slip')->store('expences/bankSlip') :" No file uploaded",
+        // ]);
 
         $tempArray = json_decode($request->data, true);
         foreach ((array)$tempArray as $column_data ) {
+            return response($column_data);
             $column_type = $column_data['type'];
             if($column_type == 'file'){
                 $obj_column_data =(object) $column_data;
