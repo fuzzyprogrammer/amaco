@@ -85,8 +85,7 @@ class ExpenseController extends Controller
     public function show(Expense $expense)
     {
         $path = $expense->bank_slip;
-        $path = explode('/',$path);
-        $imgUrl = url($path[count($path)-1]);
+        $imgUrl = url($path);
         return response()->json([
             $expense,
             $expense->payment_account,
