@@ -28,7 +28,7 @@ class Expense extends Model
 
     public function column_data()
     {
-        return $this->hasMany(ColumnData::class,'id','expense_id');
+        return $this->hasMany(ColumnData::class, 'expense_id','id');
     }
 }
 
