@@ -60,7 +60,8 @@ class ExpenseController extends Controller
             'bank_slip'=> $request->file('bank_slip') ? $request->file('bank_slip')->store('expences/bankSlip') :" No file uploaded",
         ]);
 
-        foreach ($request->data as $column_data ) {
+        $tempArray = json_decode($request->data, true);
+        foreach ((array)$tempArray as $column_data ) {
             $column_type = $column_data['type'];
             if($column_type == 'file'){
                 $obj_column_data =(object) $column_data;
