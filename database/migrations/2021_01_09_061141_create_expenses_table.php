@@ -30,7 +30,7 @@ class CreateExpensesTable extends Migration
             $table->string('status')->default('new');
             $table->string('bank_ref_no')->nullable();
             $table->string('bank_slip')->nullable();
-            $table->string('company_name')->nullable();
+            $table->boolean('company_name')->default(false);
             $table->timestamps();
         });
     }
