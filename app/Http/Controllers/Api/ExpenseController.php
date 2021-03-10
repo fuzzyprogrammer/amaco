@@ -59,7 +59,8 @@ class ExpenseController extends Controller
             'status'=>$request->status,
             'bank_ref_no'=>$request->bank_ref_no,
             'bank_slip'=> $request->file('bank_slip') ? '/expenses/bankSlip/'.$new_path :"No file uploaded",
-            // "account_category_id" => $tempArray[0]->account_category_id,
+            "account_category_id" => $tempArray[0]->account_category_id,
+            "company_name" => $request->company_name ? $request->company_name : null,
         ]);
 
         foreach ((array)$tempArray as $column_data ) {
