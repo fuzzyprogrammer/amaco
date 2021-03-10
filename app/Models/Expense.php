@@ -31,7 +31,7 @@ class Expense extends Model
         return $this->hasMany(ColumnData::class, 'expense_id','id');
     }
 
-    public function Img()
+    public function img()
     {
         $path = $this->bank_slip;
         return url($path);
