@@ -91,15 +91,13 @@ class ExpenseController extends Controller
      */
     public function show(Expense $expense)
     {
-        $path = $expense->bank_slip;
-        $imgUrl = url($path);
         return response()->json([
             $expense,
             $expense->payment_account,
             $expense->column_data->map(function($item){
                 return $item->column;
             }),
-            $imgUrl
+            $expense->getImgUrl($expense),
             ]);
     }
 
