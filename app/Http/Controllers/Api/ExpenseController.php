@@ -20,7 +20,7 @@ class ExpenseController extends Controller
     {
         $expenses = Expense::where("status", "new")->orderBy('created_at', 'DESC')->get();
         $expenses->map(function($expense){
-            return $expense->payment_account->name;
+            return $expense->payment_account['name'];
         });
         return response()->json($expenses);
     }
