@@ -29,6 +29,9 @@ class ExpenseController extends Controller
     public function paid()
     {
         $expenses = Expense::where("status", 'verified')->orderBy('created_at', 'DESC')->get();
+        $expenses->map(function ($expense) {
+            return $expense->payment_account;
+        });
         return response()->json($expenses);
     }
 
