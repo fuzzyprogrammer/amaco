@@ -34,7 +34,7 @@ class Expense extends Model
     public function img()
     {
         $path = $this->bank_slip;
-        return ['img'=>url($path)];
+        return url($path);
 
     }
 }
