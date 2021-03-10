@@ -97,7 +97,7 @@ class ExpenseController extends Controller
             $expense->column_data->map(function($item){
                 return $item->column;
             }),
-            $expense->img,
+            $expense->Img,
             ]);
     }
 
