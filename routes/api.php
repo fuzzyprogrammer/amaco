@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AccountCategoryController;
+use App\Http\Controllers\Api\AdvancePaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductQuotationDetail;
@@ -31,6 +32,7 @@ use App\Http\Controllers\Api\PurchaseInvoiceController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DeliveryNoteController;
 use App\Http\Controllers\Api\DeliveryNoteDetailController;
+use App\Http\Controllers\Api\ReceiptController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +95,8 @@ Route::apiResource('columns',ColumnController::class);
 Route::apiResource('columnDatas',ColumnDataController::class);
 Route::apiResource('delivery-notes',DeliveryNoteController::class);
 Route::apiResource('delivery-notes-details',DeliveryNoteDetailController::class);
+Route::apiResource('receipts', ReceiptController::class);
+Route::apiResource('advance-payments', AdvancePaymentController::class);
 
 // restful api links
 Route::get('users', [UserController::class, 'index']);
