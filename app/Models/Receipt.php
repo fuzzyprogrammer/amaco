@@ -10,4 +10,9 @@ class Receipt extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function party()
+    {
+        return $this->hasOne(Party::class, 'id','party_id');
+    }
 }

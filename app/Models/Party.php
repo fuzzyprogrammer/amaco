@@ -37,4 +37,9 @@ class Party extends Model
     {
         return $this->belongsTo(ProductPrice::class);
     }
+
+    public function receipt()
+    {
+        return $this->belongsTo(Receipt::class);
+    }
 }
