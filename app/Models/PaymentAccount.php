@@ -9,6 +9,8 @@ class PaymentAccount extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     protected $table = 'payment_accounts';
 
     public function expense()
@@ -16,5 +18,8 @@ class PaymentAccount extends Model
         return $this->belongsTo(Expense::class);
     }
 
-    protected $guarded = [];
+    public function advanceAccount()
+    {
+        return $this->belongsTo(AdvancePayment::class);
+    }
 }

@@ -10,4 +10,9 @@ class AdvancePayment extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function paymentAccount()
+    {
+        return $this->hasOne(PaymentAccount::class, 'id','payment_account_id');
+    }
 }

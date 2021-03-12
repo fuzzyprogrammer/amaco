@@ -17,6 +17,10 @@ class AdvancePaymentController extends Controller
     {
         $allPayments = AdvancePayment::all();
 
+        $allPayments->map(function($payment){
+            $payment->paymentAccount;
+        });
+
         return response()->json($allPayments);
     }
 
