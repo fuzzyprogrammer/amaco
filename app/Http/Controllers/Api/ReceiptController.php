@@ -18,7 +18,7 @@ class ReceiptController extends Controller
         $allReceipt = Receipt::all();
 
         $allReceipt->map(function ($receipt){
-            $receipt->party;
+            return $receipt->party;
         });
 
         return response()->json($allReceipt, 200);
