@@ -245,10 +245,10 @@ class QuotationController extends Controller
         global $quotation_id;
         $quotation_id = $quotation->id;
             // dd($request->quotation_details);
-        foreach($data['quotation_details'] as $quotation_detail){
+        foreach($data['quotation_details'] as $key => $quotation_detail){
             $temp = (object) $quotation_detail;
             if( $temp->file('files')){
-                $filePath = $temp->file('files')->move('quotation/quotation_detail/'.$quotation_id);
+                $filePath = $request->quotation_details[$key]->file('files')->move('quotation/quotation_detail/'.$quotation_id);
             }
             QuotationDetail::create([
             'quotation_id' => $quotation_id,
