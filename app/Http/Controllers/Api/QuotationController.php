@@ -246,6 +246,9 @@ class QuotationController extends Controller
         $quotation_id = $quotation->id;
             // dd($request->quotation_details);
         foreach($data['quotation_details'] as $quotation_detail){
+            if($quotation_detail->file('files')){
+                $filePath = $quotation_detail->file('files')->move('quotation/quotation_detail/'.$quotation_id);
+            }
             QuotationDetail::create([
             'quotation_id' => $quotation_id,
             'total_amount' => $quotation_detail['total_amount'],
@@ -257,6 +260,7 @@ class QuotationController extends Controller
             'margin' => $quotation_detail['margin'],
             'sell_price' => $quotation_detail['sell_price'],
             'remark' => $quotation_detail['remark'],
+            'file_img_url' => $filePath,
             ]);
         }
         return response()->json(['msg' => 'successfully added']);
@@ -301,6 +305,8 @@ class QuotationController extends Controller
             "party" => $quotation->party,
             "rfq" => $quotation->rfq,
             "quotation_details" => $quotation->quotationDetail->map(function ($quotation_detail){
+                $filePath = $quotation_detail->file_img_url && $quotation_detail->file_img_url;
+                $urlPath = url($filePath) || '';
                 return[
                 "id"=> $quotation_detail->id,
                 "total_amount"=> $quotation_detail->total_amount,
@@ -323,6 +329,7 @@ class QuotationController extends Controller
                 "margin"=> $quotation_detail->margin,
                 "sell_price"=> $quotation_detail->sell_price,
                 "remark"=> $quotation_detail->remark,
+                "files" => $urlPath,
                 "created_at"=> $quotation_detail->created_at,
                 "updated_at"=> $quotation_detail->updated_at
                 ];
