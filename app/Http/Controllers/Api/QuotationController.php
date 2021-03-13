@@ -246,8 +246,9 @@ class QuotationController extends Controller
         $quotation_id = $quotation->id;
             // dd($request->quotation_details);
         foreach($data['quotation_details'] as $quotation_detail){
-            if((object) $quotation_detail->file('files')){
-                $filePath =(object) $quotation_detail->file('files')->move('quotation/quotation_detail/'.$quotation_id);
+            $temp = (object) $quotation_detail;
+            if( $temp->file('files')){
+                $filePath = $temp->file('files')->move('quotation/quotation_detail/'.$quotation_id);
             }
             QuotationDetail::create([
             'quotation_id' => $quotation_id,
