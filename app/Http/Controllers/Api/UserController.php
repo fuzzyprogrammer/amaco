@@ -20,6 +20,9 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+        $users->map(function($user){
+            $user['role_name']=$user->role->name;
+        });
         return (
             $users
         );
