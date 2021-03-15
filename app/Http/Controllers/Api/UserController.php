@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 // use App\Http\Controllers\Api\Hash;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 
 class UserController extends Controller
@@ -42,7 +43,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $user = User::create([
+            "name"=> $request->name,
+            "email"=> $request->email,
+            "contact"=> $request->contact,
+            "password"=> bcrypt($request->password),
+            "role_id"=> $request->role_id,
+            'remember_token' => Str::random(10),
+        ]);
+
+        return response()->json($user);
     }
 
     /**
