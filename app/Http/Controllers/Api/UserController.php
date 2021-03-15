@@ -91,6 +91,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $request['password'] = bcrypt($request->password);
         $user->update($request->all());
 
         return response()->json($user);
