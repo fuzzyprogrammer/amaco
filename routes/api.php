@@ -99,9 +99,9 @@ Route::apiResource('delivery-notes-details',DeliveryNoteDetailController::class)
 Route::apiResource('receipts', ReceiptController::class);
 Route::apiResource('advance-payments', AdvancePaymentController::class);
 Route::apiResource('roles', RoleController::class);
+Route::apiResource('users', UserController::class);
 
 // restful api links
-Route::get('users', [UserController::class, 'index']);
 Route::post('rfq-history', [RFQController::class, 'history'])->name('rfq.history');
 Route::post('invoice-history', [InvoiceController::class, 'history'])->name('invoice.history');
 Route::post('quotation-history', [QuotationController::class, 'history'])->name('quotation.history');
