@@ -33,6 +33,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DeliveryNoteController;
 use App\Http\Controllers\Api\DeliveryNoteDetailController;
 use App\Http\Controllers\Api\ReceiptController;
+use App\Http\Controllers\Api\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +98,7 @@ Route::apiResource('delivery-notes',DeliveryNoteController::class);
 Route::apiResource('delivery-notes-details',DeliveryNoteDetailController::class);
 Route::apiResource('receipts', ReceiptController::class);
 Route::apiResource('advance-payments', AdvancePaymentController::class);
+Route::apiResource('roles', RoleController::class);
 
 // restful api links
 Route::get('users', [UserController::class, 'index']);
