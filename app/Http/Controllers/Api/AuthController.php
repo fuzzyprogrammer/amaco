@@ -32,7 +32,7 @@ class AuthController extends Controller
         }
         $data = [
             "accessToken" => $token,
-            "user" => auth()->user,
+            "user" => Auth::user(),
             "role" => Auth::user()->role->name,
         ];
         // return $this->respondWithToken($token);
