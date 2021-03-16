@@ -60,11 +60,12 @@ class UserController extends Controller
             'remember_token' => Str::random(10),
         ]);
 
-        $payment_account = PaymentAccount::create([
-            'name' => $user->name,
-            'user_id' => $user->id,
-        ]);
-
+        if($user){
+                PaymentAccount::create([
+                'name' => $user->name,
+                'user_id' => $user->id,
+            ]);
+        }
         return response()->json($user);
     }
 
