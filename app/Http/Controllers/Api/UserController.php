@@ -134,7 +134,7 @@ class UserController extends Controller
 
     public function oldPassword(Request $request, User $user)
     {
-        return $user->password;
+        return $user;
         if( Hash::check($request->password, $user->password  ) )
         {
             return response()->json(true);
