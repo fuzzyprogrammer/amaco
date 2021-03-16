@@ -21,7 +21,11 @@ class UserController extends Controller
     {
         $users = User::all();
         $users->map(function($user){
-            $user['role_name']=$user->role->name;
+            if ($user->role){
+                $user['role_name'] = $user->role->name;
+            }else{
+                $user['role_name'] = null;
+            }
         });
         return (
             $users
