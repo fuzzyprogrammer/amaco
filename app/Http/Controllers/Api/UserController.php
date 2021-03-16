@@ -132,9 +132,12 @@ class UserController extends Controller
         }
     }
 
-    public function oldPassword(Request $request, User $user)
+    public function oldPassword(Request $request)
     {
-        return $user;
+        $user = User::where('id',$request->id)->first();
+        if(!$user){
+            return response()->json(['msg'=>"No user by the given id"]);
+        }
         if( Hash::check($request->password, $user->password  ) )
         {
             return response()->json(true);
