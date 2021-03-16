@@ -140,9 +140,9 @@ class UserController extends Controller
         }
         if( Hash::check($request->password, $user->password  ) )
         {
-            return response()->json(true);
+            return response()->json(['msg'=>true]);
         }
-        return response()->json(false);
+        return response()->json(['msg'=>false]);
     }
 
 }
