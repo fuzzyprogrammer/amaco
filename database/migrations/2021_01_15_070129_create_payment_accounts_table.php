@@ -16,6 +16,7 @@ class CreatePaymentAccountsTable extends Migration
         Schema::create('payment_accounts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

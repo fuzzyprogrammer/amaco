@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
+use App\Models\PaymentAccount;
 use Illuminate\Http\Request;
 use App\Models\User;
 // use App\Http\Controllers\Api\Hash;
@@ -57,6 +58,11 @@ class UserController extends Controller
             "password"=> bcrypt($request->password),
             "role_id"=> $request->role_id,
             'remember_token' => Str::random(10),
+        ]);
+
+        $payment_account = PaymentAccount::create([
+            'name' => $user->name,
+            'user_id' => $user->id,
         ]);
 
         return response()->json($user);
