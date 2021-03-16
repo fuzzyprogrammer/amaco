@@ -83,7 +83,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -95,7 +95,11 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $request['password'] = bcrypt($request->password);
+        if($request->password){
+            $request['password'] = bcrypt($request->password);
+        }else{
+            $request['password'] = $user->password;
+        }
         $user->update($request->all());
 
         return response()->json($user);
