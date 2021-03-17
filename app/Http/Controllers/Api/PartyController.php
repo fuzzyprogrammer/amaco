@@ -39,6 +39,7 @@ class PartyController extends Controller
 
 
         $party = Party::create([
+            'prefix' => $request->prefix,
             'firm_name'=>$request->firm_name,
             // 'firm_name_in_ar'=>GoogleTranslate::trans($request->firm_name,'ar'),
             'registration_no'=>$request->registration_no,
@@ -96,6 +97,7 @@ class PartyController extends Controller
         $contacts = Contact::where('party_id','=',$party->id)->get();
         $data =
             [
+                'prefix' => $party->prefix,
                 'firm_name' => $party->firm_name,
                 // 'firm_name_in_ar' => $party->firm_name_in_ar,
                 'registration_no' => $party->registration_no,
@@ -167,6 +169,7 @@ class PartyController extends Controller
         // return ("somethin went wrong");
 
         $party->update([
+            'prefix' => $request->prefix,
             'firm_name'=> $request->firm_name == null ? $party->firm_name : $request->firm_name,
             // 'firm_name_in_ar'=> $request->firm_name == null ? $party->firm_name_in_ar : GoogleTranslate::trans($request->firm_name,'ar'),
             'registration_no'=> $request->registration_no == null ? $party->registration_no : $request->registration_no,
