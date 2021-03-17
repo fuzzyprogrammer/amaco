@@ -50,7 +50,7 @@ class AuthController extends Controller
             'user' => Auth::user(),
             'role' => Auth::user()->role->name,
         ];
-        return response()->json(auth()->user());
+        return response()->json($data);
     }
 
     /**
