@@ -15,6 +15,7 @@ class CreatePartiesTable extends Migration
     {
         Schema::create('parties', function (Blueprint $table) {
             $table->id();
+            $table->string('prefix');
             $table->string('firm_name');
             $table->string('firm_name_in_ar')->nullable();
             $table->string('registration_no')->nullable();
