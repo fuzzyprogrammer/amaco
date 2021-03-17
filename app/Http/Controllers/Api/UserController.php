@@ -106,7 +106,7 @@ class UserController extends Controller
         if($request->name){
             $payment_account = PaymentAccount::where('user_id',$user->id)->first();
             if(!$payment_account){
-                return response()->json(["msg" => "There is no payment account by the given user name for update"]);
+                return response()->json(["msg" => "There is no payment account by the given user name for update"], 201);
             }
             $payment_account->update([
                 'name'=>$request->name,
