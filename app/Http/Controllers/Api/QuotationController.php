@@ -246,10 +246,10 @@ class QuotationController extends Controller
         $quotation_id = $quotation->id;
             // dd($request->quotation_details);
         foreach($data['quotation_details'] as $key => $quotation_detail){
-            $temp = (object) $quotation_detail;
-            if( $temp->file('files')){
-                $filePath = $request->quotation_details[$key]->file('files')->move('quotation/quotation_detail/'.$quotation_id);
-            }
+            // $temp = (object) $quotation_detail;
+            // if( $temp->file('files')){
+            //     $filePath = $request->quotation_details[$key]->file('files')->move('quotation/quotation_detail/'.$quotation_id);
+            // }
             QuotationDetail::create([
             'quotation_id' => $quotation_id,
             'total_amount' => $quotation_detail['total_amount'],
@@ -261,7 +261,7 @@ class QuotationController extends Controller
             'margin' => $quotation_detail['margin'],
             'sell_price' => $quotation_detail['sell_price'],
             'remark' => $quotation_detail['remark'],
-            'file_img_url' => $filePath,
+            // 'file_img_url' => $filePath,
             ]);
         }
         return response()->json(['msg' => 'successfully added']);
