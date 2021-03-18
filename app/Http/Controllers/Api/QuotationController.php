@@ -245,10 +245,14 @@ class QuotationController extends Controller
         global $quotation_id;
         $quotation_id = $quotation->id;
             // dd($request->quotation_details);
-        foreach($data['quotation_details'] as $key => $quotation_detail){
-            $temp = (object) $quotation_detail;
-            if( $temp->file('files')){
-                $filePath = $request->quotation_details[$key]->file('files')->move('quotation/quotation_detail/'.$quotation_id);
+        // foreach($data['quotation_details'] as $key => $quotation_detail){
+
+            // $temp = (object) $quotation_detail;
+            $index = 0;
+        while($request['quotation_detail'.$index] != null){
+            $quotation_detail = json_decode($request['quotation_detail' . $index]);
+            if( $request->file('file'.$index)){
+                $filePath = $request->file('file' . $index)->move('quotation/quotation_detail/'.$quotation_id);
             }
 
             QuotationDetail::create([
@@ -264,6 +268,7 @@ class QuotationController extends Controller
             'remark' => $quotation_detail['remark'],
             'file_img_url' => $filePath,
             ]);
+            $index++;
         }
         return response()->json(['msg' => 'successfully added']);
         }
