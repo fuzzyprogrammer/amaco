@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Quotation;
 use App\Models\QuotationDetail;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Api\Exception;
 use App\Models\DeliveryNote;
 use App\Models\DeliveryNoteDetail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Exception;
 
 
 class QuotationController extends Controller
@@ -210,7 +210,7 @@ class QuotationController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        return $request;
+        // return $request;
 
         try {
             $datas = [
