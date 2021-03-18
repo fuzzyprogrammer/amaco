@@ -274,7 +274,7 @@ class QuotationController extends Controller
         }
 
         catch(Exception $e){
-            return $e;
+            return response()->json($e, 201);
         }
     }
 
