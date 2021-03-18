@@ -336,7 +336,7 @@ class QuotationController extends Controller
                 "margin"=> $quotation_detail->margin,
                 "sell_price"=> $quotation_detail->sell_price,
                 "remark"=> $quotation_detail->remark,
-                "files" => $urlPath,
+                "file" => $urlPath,
                 "created_at"=> $quotation_detail->created_at,
                 "updated_at"=> $quotation_detail->updated_at
                 ];
