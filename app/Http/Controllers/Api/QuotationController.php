@@ -250,7 +250,7 @@ class QuotationController extends Controller
             // $temp = (object) $quotation_detail;
             $index = 0;
         while($request['quotation_detail'.$index] != null){
-            $quotation_detail = json_decode($request['quotation_detail' . $index]);
+            $quotation_detail =(array) json_decode($request['quotation_detail' . $index], true);
             if( $request->file('file'.$index)){
                 $filePath = $request->file('file' . $index)->move('quotation/quotation_detail/'.$quotation_id);
             }
