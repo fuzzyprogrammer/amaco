@@ -70,17 +70,17 @@ class RFQController extends Controller
     public function store(Request $request)
     {
         $data = $request->json()->all();
-        return response()->json($request, 201);
+        // return response()->json($request, 201);
         // dd($request->file('files'));
 
         try{
             $rfq = RFQ::create([
-                'requested_date' => $request->has('requested_date') ? $data['requested_date'] : date('Y-m-d'),
-                'require_date' => $request->has('require_date') ? $data['require_date'] : date('Y-m-d'),
+                'requested_date' => $request->has('requested_date') ? $request['requested_date'] : date('Y-m-d'),
+                'require_date' => $request->has('require_date') ? $request['require_date'] : date('Y-m-d'),
                 // 'require_date' => $data['require_date'],
                 // 'requested_date' => $data['requested_date'],
                 'contact_id' => $request['contact_id'],
-                'party_id' => $data['party_id'],
+                'party_id' => $request['party_id'],
                 ]);
 
                 //-------------------------------------------
