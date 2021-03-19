@@ -157,6 +157,11 @@ class RFQController extends Controller
         // ->get();
 
         // return $_rfq->rfq_details;
+        $files_path = json_decode($rfq['files_url'],true);
+        $files_url = $files_path->map(function ($file){
+            return url($file);
+        });
+
         $data = [
             'id' => $rfq->id,
             'requested_date' => $rfq->requested_date,
@@ -168,6 +173,7 @@ class RFQController extends Controller
             'files' => $rfq->file,
             "party" => $rfq->party ,
             "contact" => $rfq->contact,
+            'files_url' => $files_url,
             'rfq_details' => $rfq->rfq_details->map(function($rfq_detail){
                 $rfq_detail = RFQDetails::where('id','=',$rfq_detail->id)->first();
                 return [
