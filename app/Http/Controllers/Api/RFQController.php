@@ -163,7 +163,7 @@ class RFQController extends Controller
         // return $_rfq->rfq_details;
 
 
-        
+
         // if($rfq['files_url'] != null){
         //     $files_path = json_decode($rfq['files_url'], true);
         //     $files_url = $files_path->map(function ($file) {
@@ -180,7 +180,7 @@ class RFQController extends Controller
             'user_id' => $rfq->user_id,
             'created_at' => $rfq->created_at,
             'updated_at' => $rfq->updated_at,
-            'files' => $rfq->file,
+            // 'files' => $rfq->file,
             "party" => $rfq->party ,
             "contact" => $rfq->contact,
             // 'files_url' => $rfq['files_url'] ? $files_url : null,
