@@ -95,9 +95,12 @@ class RFQController extends Controller
                     }
                 $index++;
             }
+            dd($paths);
+            if ($request->hasFile('myFile0')) {
                 $rfq->update([
                     'files_url' => json_encode($paths),
                 ]);
+            }
                 // return $rfq;
                 global $_rfq_id;
                 $_rfq_id = $rfq['id'];
@@ -105,7 +108,7 @@ class RFQController extends Controller
 
 
                 foreach($data['rfq_details'] as $rfq_detail) {
-                    $_rfq_detail = RFQDetails::create([
+                    RFQDetails::create([
                         'product_id' => $rfq_detail['id'],
                         'description' => $rfq_detail['descriptionss'],
                         'quantity' => $rfq_detail['quantity'],
@@ -158,7 +161,7 @@ class RFQController extends Controller
         // ->get();
 
         // return $_rfq->rfq_details;
-        if($rfq['files_url']){
+        if($rfq['files_url'] != null){
             $files_path = json_decode($rfq['files_url'], true);
             $files_url = $files_path->map(function ($file) {
                 return url($file);
@@ -177,7 +180,7 @@ class RFQController extends Controller
             'files' => $rfq->file,
             "party" => $rfq->party ,
             "contact" => $rfq->contact,
-            'files_url' => $files_url ? $files_url : null,
+            'files_url' => $rfq['files_url'] ? $files_url : null,
             'rfq_details' => $rfq->rfq_details->map(function($rfq_detail){
                 $rfq_detail = RFQDetails::where('id','=',$rfq_detail->id)->first();
                 return [
