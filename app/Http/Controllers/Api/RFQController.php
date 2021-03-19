@@ -90,9 +90,8 @@ class RFQController extends Controller
                     // $image = (array) json_decode($request['myFile' . $index], true);
                     if ($request->file('myFile' . $index)) {
                         $path = $request->file('myFile' . $index)->move('rfq/' . $rfq->id.'/rfq_details');
-                        return response()->json($path);
-                        array_push($paths, $path);
                     }
+                    array_push($paths, $path ? $path : null);
                     $index++;
                 }
             if ($request->file('myFile0')) {
