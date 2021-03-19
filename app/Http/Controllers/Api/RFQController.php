@@ -94,6 +94,7 @@ class RFQController extends Controller
                     array_push($paths, $path ? $path : null);
                     $index++;
                 }
+                return response()->json($paths);
             if ($request->file('myFile0')) {
                 $rfq->update([
                     'files_url' => $paths,
