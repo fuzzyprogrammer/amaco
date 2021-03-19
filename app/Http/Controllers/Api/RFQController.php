@@ -82,26 +82,26 @@ class RFQController extends Controller
                 'contact_id' => $request['contact_id'],
                 'party_id' => $data['party_id'],
                 ]);
+
+                //-------------------------------------------
+                $index = 0;
+                $paths = [];
+                while ($request['myFile' . $index] != null) {
+                    $image = json_decode($request['myFile' . $index], true);
+                    if ($request->hasFile('myFile' . $index)) {
+                        $filename = $image->getClientOriginalName();
+                        $path = $request->file('myFile' . $index)->move('rfq/' . $rfq->id, $filename);
+                        array_push($paths, $path);
+                    }
+            }
+                $rfq->update([
+                    'files_url' => json_encode($paths),
+                ]);
                 // return $rfq;
                 global $_rfq_id;
                 $_rfq_id = $rfq['id'];
 
-            // if ($data['rfq_details']!=null){
-            //     // return $data->rfq_details;
-            //     $rfq_details = $data->rfq_details->map(function ($rfq_detail){
 
-            //     });
-
-            //     $rfq_details = $request->rfq_details->map(function ($rfq_detail, $_rfq_id){
-            //         return[
-            //         RFQDetails::create([
-            //             'product_id' => $rfq_detail['id'],
-            //             'description' => $rfq_detail['descriptionss'],
-            //             'quantity' => $rfq_detail['quantity'],
-            //             'rfq_id' => $_rfq_id,
-            //         ])
-            //         ];
-            //     });
 
                 foreach($data['rfq_details'] as $rfq_detail) {
                     $_rfq_detail = RFQDetails::create([
