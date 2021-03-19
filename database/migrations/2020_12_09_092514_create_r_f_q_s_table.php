@@ -20,7 +20,7 @@ class CreateRFQSTable extends Migration
             $table->unsignedBigInteger('party_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('contact_id')->nullable();
-            $table->string('files_url')->nullable();
+            $table->text('files_url')->nullable();
             $table->timestamps();
         });
     }
