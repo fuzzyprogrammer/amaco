@@ -93,6 +93,7 @@ class RFQController extends Controller
                         $path = $request->file('myFile' . $index)->move('rfq/' . $rfq->id, $filename);
                         array_push($paths, $path);
                     }
+                $index++;
             }
                 $rfq->update([
                     'files_url' => json_encode($paths),
