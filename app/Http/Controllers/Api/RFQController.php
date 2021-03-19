@@ -95,7 +95,7 @@ class RFQController extends Controller
                     }
                 $index++;
             }
-            dd($paths);
+            // dd($paths);
             if ($request->hasFile('myFile0')) {
                 $rfq->update([
                     'files_url' => json_encode($paths),
