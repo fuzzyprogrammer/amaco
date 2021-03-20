@@ -45,9 +45,9 @@ class AccountStatementController extends Controller
             ->whereBetween('created_at',[$request['from_date'], $request['to_date']])
             ->get();
 
-        foreach ($receiptCollection as $receipt) {
-            $data = $invoiceCollection->merge($receipt);
-        }
+            $data = $invoiceCollection->merge($receiptCollection);
+        // foreach ($receiptCollection as $receipt) {
+        // }
 
         return response()->json($data);
     }
