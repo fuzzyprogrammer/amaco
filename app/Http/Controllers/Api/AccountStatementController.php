@@ -50,6 +50,6 @@ class AccountStatementController extends Controller
         // foreach ($receiptCollection as $receipt) {
         // }
 
-        return response()->json($data);
+        // return response()->json($data);
     }
 }
