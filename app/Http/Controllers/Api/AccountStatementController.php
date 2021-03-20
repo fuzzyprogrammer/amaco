@@ -77,7 +77,7 @@ class AccountStatementController extends Controller
 
             }
 
-            if($item->receipt_no){
+            if($item->paid_amount){
                 $balance -= floatVal($item['paid_amount']);
                 $item['date'] = $item->created_at;
                 $item['code_no']= $item->receipt_no;
