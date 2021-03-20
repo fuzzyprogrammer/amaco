@@ -44,7 +44,7 @@ class AccountStatementController extends Controller
         $oldData = $oldInvoiceCollection->merge($oldReceiptCollection);
         $oldData = $oldData->sortBy('created_at');
 
-        foreach ($oldData as $item ) {
+        foreach ($oldData as $key => $item ) {
             if ($item->contains('total_value', $item->total_value))
             {
                 $partyOpeningBalance += floatVal($item['total_value']);
