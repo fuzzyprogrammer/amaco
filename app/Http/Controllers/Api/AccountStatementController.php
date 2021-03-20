@@ -19,7 +19,7 @@ class AccountStatementController extends Controller
         $data = DB::table('parties')
             ->join('invoices','invoices.party_id','=','parties.id')
             ->join('receipts', 'receipts.party_id','=','parties.id')
-            ->where('id',$party->id)
+            ->where('parties.id',$party->id)
             ->whereBetween('created_at',[$request['from_date'], $request['to_date']])
             ->orderBy('created_at')
             ->get();
