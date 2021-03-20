@@ -45,12 +45,12 @@ class AccountStatementController extends Controller
         $oldData = $oldData->sortBy('created_at');
 
         foreach ($oldData as $key => $item ) {
-            if ($item->has('total_value', $item->total_value))
+            if ($item->has('total_value'))
             {
                 $partyOpeningBalance += floatVal($item['total_value']);
             }
 
-            if ($item->has('receipt_no', $item->receipt_no))
+            if ($item->has('receipt_no'))
             {
                 $partyOpeningBalance -= floatVal($item['paid_amount']);
             }
