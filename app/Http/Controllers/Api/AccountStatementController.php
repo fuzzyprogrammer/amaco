@@ -36,15 +36,56 @@ class AccountStatementController extends Controller
             return response('No party exists by this id', 400);
         }
 
-        $invoiceCollection = $this->getInvoiceData($party->id, $request['to_date'], $request['from_date']);
+        // -----------------------------------
+        $partyOpeningBalance = floatval($party->opening_balance);
 
+        $oldInvoiceCollection = $this->getInvoiceData($party->id, $request['from_date']);
+        $oldReceiptCollection = $this->getReceiptData($party->id, $request['from_date']);
+        $oldData = $oldInvoiceCollection->merge($oldReceiptCollection);
+        $oldData = $oldData->sortBy('created_at');
+        foreach ($oldData as $item ) {
+            if($item->contains('total_value', $item->total_value){
+                $partyOpeningBalance += floatVal($item['total_value'])
+            })
+
+            if($item->contains('receipt_no', $item->receipt_no){
+                $partyOpeningBalance -= floatVal($item['paid_amount'])
+            })
+        }
+        // ------------------------------------
+
+        $balance = $partyOpeningBalance;
+        $invoiceCollection = $this->getInvoiceData($party->id, $request['to_date'], $request['from_date']);
 
         $receiptCollection = $this->getReceiptData($party->id, $request['to_date'], $request['from_date']);
 
         $data = $invoiceCollection->merge($receiptCollection);
         $data = $data->sortBy('created_at');
+        $data->map(function ($item, $balance){
+            if($item->contains('total_value', $item->total_value){
+                $balance += floatVal($item['total_value']);
+                $item['date'] = $item->created_at;
+                $item['code_no']= $item->invoice_no;
+                $item['description']= "Sale";
+                $item['credit']= $item->total_value;
+                $item['debit'] = null;
+                $item['balance'] = $balance;
+                return $item;
 
-        $openingBalance = $party->opening_balance;
+            })
+
+            if($item->contains('receipt_no', $item->receipt_no){
+                $balance -= floatVal($item['paid_amount']);
+                $item['date'] = $item->created_at;
+                $item['code_no']= $item->receipt_no;
+                $item['description']= "Return";
+                $item['debit']= $item->paid_amount;
+                $item['credit'] = null;
+                $item['balance'] = $balance;
+                return $item;
+            })
+        });
+
 
         // return response()->json($data);
     }
