@@ -40,7 +40,7 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | DELETE    | api/account-categories/{account_category}          | account-categories.destroy     |
 | PUT|PATCH | api/account-categories/{account_category}          | account-categories.update      |
 | GET|HEAD  | api/account-categories/{account_category}          | account-categories.show        |
-| POST      | api/account-statement/{party}                      |                                |
+| GET      | api/account-statement/{party}                      |                                |
 | GET|HEAD  | api/account-subcategories/{id}                     | account.category.subcategory   |
 | POST      | api/add-user                                       | add.user                       |
 | GET|HEAD  | api/advance-payments                               | advance-payments.index         |
