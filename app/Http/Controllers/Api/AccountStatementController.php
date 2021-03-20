@@ -35,16 +35,16 @@ class AccountStatementController extends Controller
         //     ->orderBy('invoices.created_at')
         //     ->orderBy('receipts.created_at')
         //     ->get();
-        // $invoiceCollection = new Collection();
-        // $invoiceCollection = Invoice::where('party_id',$request['party_id'])
-        //     ->whereBetween('created_at',[$request['from_date'], $request['to_date']])
-        //     ->get();
+        $invoiceCollection = new Collection();
+        $invoiceCollection = Invoice::where('party_id',$request['party_id'])
+            ->whereBetween('created_at',[$request['from_date'], $request['to_date']])
+            ->get();
 
             $receiptCollection = new Collection();
             $receiptCollection = Receipt::where('party_id', $request['party_id'])
             ->whereBetween('created_at',[$request['from_date'], $request['to_date']])
             ->get();
-        return response($receiptCollection);
+        return response($invoiceCollection);
 
             // $data = $invoiceCollection->merge($receiptCollection);
         // foreach ($receiptCollection as $receipt) {
