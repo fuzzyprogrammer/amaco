@@ -89,7 +89,7 @@ class AccountStatementController extends Controller
             }
         });
 
-
+        $data['opening_balance'] = $partyOpeningBalance;
         return response()->json($data);
     }
 }
