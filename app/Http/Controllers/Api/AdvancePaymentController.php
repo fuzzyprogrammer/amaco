@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AdvancePayment;
 use App\Models\Party;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdvancePaymentController extends Controller
 {
@@ -80,7 +81,7 @@ class AdvancePaymentController extends Controller
 
     public function accountStatement(Request $request)
     {
-        
+
         $party = Party::find($request->party_id);
         if (!$party) {
             return response('No party exists by this id', 400);
