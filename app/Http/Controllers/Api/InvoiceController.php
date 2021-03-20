@@ -94,6 +94,7 @@ class InvoiceController extends Controller
             'vat_in_value' => $data['vat_in_value'],
             'grand_total' => $data['grand_total'],
             'delivery_no' => null,
+            'party_id' => $request['party_id']
         ]);
 
         global $_invoice_id;

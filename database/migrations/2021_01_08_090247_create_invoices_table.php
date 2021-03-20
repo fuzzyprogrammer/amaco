@@ -25,6 +25,7 @@ class CreateInvoicesTable extends Migration
             $table->string('grand_total')->nullable();
             $table->string('delivery_no')->nullable();
             $table->string('payment_type')->nullable();
+            $table->unsignedBigInteger('party_id')->nullable();
             $table->timestamps();
         });
     }

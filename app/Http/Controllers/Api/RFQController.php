@@ -88,7 +88,6 @@ class RFQController extends Controller
                 //-------------------------------------------
                 $index = 0;
                 while ($request['myFile' . $index] != null) {
-                    // $image = (array) json_decode($request['myFile' . $index], true);
                     if ($request->file('myFile' . $index)) {
                         $path = $request->file('myFile' . $index)->move('rfq/' . $rfq->id);
                         FileUpload::create([
@@ -99,7 +98,6 @@ class RFQController extends Controller
                     $index++;
                 }
 
-                // return $rfq;
                 global $_rfq_id;
                 $_rfq_id = $rfq['id'];
 
