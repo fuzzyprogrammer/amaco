@@ -57,14 +57,14 @@ class AccountStatementController extends Controller
         }
         // ------------------------------------
 
-        $balance = $partyOpeningBalance;
         $invoiceCollection = $this->getInvoiceData($party->id, $request['to_date'], $request['from_date']);
 
         $receiptCollection = $this->getReceiptData($party->id, $request['to_date'], $request['from_date']);
 
         $data = $invoiceCollection->merge($receiptCollection);
         $data = $data->sortBy('created_at');
-        $data->map(function ($item, $balance){
+        $balance = $partyOpeningBalance;
+        $data->map(function ($item) use ($balance){
             if($item->contains('total_value', $item->total_value)){
                 $balance += floatVal($item['total_value']);
                 $item['date'] = $item->created_at;
