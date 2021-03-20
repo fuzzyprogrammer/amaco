@@ -37,7 +37,7 @@ class AccountStatementController extends Controller
             ->get();
 
         $data = $invoiceCollection->merge($receiptCollection);
-        $data->sortBy('created_at');
+        $data = $data->sortBy('created_at');
 
         return response()->json($data);
     }
