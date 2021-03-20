@@ -43,14 +43,17 @@ class AccountStatementController extends Controller
         $oldReceiptCollection = $this->getReceiptData($party->id, $request['from_date']);
         $oldData = $oldInvoiceCollection->merge($oldReceiptCollection);
         $oldData = $oldData->sortBy('created_at');
-        foreach ($oldData as $item ) {
-            if($item->contains('total_value', $item->total_value){
-                $partyOpeningBalance += floatVal($item['total_value'])
-            })
 
-            if($item->contains('receipt_no', $item->receipt_no){
-                $partyOpeningBalance -= floatVal($item['paid_amount'])
-            })
+        foreach ($oldData as $item ) {
+            if ($item->contains('total_value', $item->total_value))
+            {
+                $partyOpeningBalance += floatVal($item['total_value']);
+            }
+
+            if ($item->contains('receipt_no', $item->receipt_no))
+            {
+                $partyOpeningBalance -= floatVal($item['paid_amount']);
+            }
         }
         // ------------------------------------
 
@@ -62,7 +65,7 @@ class AccountStatementController extends Controller
         $data = $invoiceCollection->merge($receiptCollection);
         $data = $data->sortBy('created_at');
         $data->map(function ($item, $balance){
-            if($item->contains('total_value', $item->total_value){
+            if($item->contains('total_value', $item->total_value)){
                 $balance += floatVal($item['total_value']);
                 $item['date'] = $item->created_at;
                 $item['code_no']= $item->invoice_no;
@@ -72,9 +75,9 @@ class AccountStatementController extends Controller
                 $item['balance'] = $balance;
                 return $item;
 
-            })
+            }
 
-            if($item->contains('receipt_no', $item->receipt_no){
+            if($item->contains('receipt_no', $item->receipt_no)){
                 $balance -= floatVal($item['paid_amount']);
                 $item['date'] = $item->created_at;
                 $item['code_no']= $item->receipt_no;
@@ -83,7 +86,7 @@ class AccountStatementController extends Controller
                 $item['credit'] = null;
                 $item['balance'] = $balance;
                 return $item;
-            })
+            }
         });
 
 
