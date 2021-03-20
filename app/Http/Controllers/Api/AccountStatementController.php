@@ -65,7 +65,7 @@ class AccountStatementController extends Controller
         $data = $data->sortBy('created_at');
         $balance = $partyOpeningBalance;
         $data->map(function ($item) use ($balance){
-            if($item->has('total_value', $item->total_value)){
+            if($item->has('total_value')){
                 $balance += floatVal($item['total_value']);
                 $item['date'] = $item->created_at;
                 $item['code_no']= $item->invoice_no;
@@ -77,7 +77,7 @@ class AccountStatementController extends Controller
 
             }
 
-            if($item->has('receipt_no', $item->receipt_no)){
+            if($item->has('receipt_no')){
                 $balance -= floatVal($item['paid_amount']);
                 $item['date'] = $item->created_at;
                 $item['code_no']= $item->receipt_no;
