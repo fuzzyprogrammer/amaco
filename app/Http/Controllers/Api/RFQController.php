@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\FileUpload;
 use App\Models\Party;
 use App\Models\RFQ;
 use App\Models\RFQDetails;
@@ -90,9 +91,9 @@ class RFQController extends Controller
                     // $image = (array) json_decode($request['myFile' . $index], true);
                     if ($request->file('myFile' . $index)) {
                         $path = $request->file('myFile' . $index)->move('rfq/' . $rfq->id);
-                        RFQFile::create([
+                        FileUpload::create([
                             'rfq_id' => $rfq->id,
-                            'img_path' => $path
+                            'file_name' => $path
                         ]);
                     }
                     $index++;
@@ -160,8 +161,8 @@ class RFQController extends Controller
         // return $_rfq->rfq_details;
 
 
-        if($rfq->rfq_file){
-            foreach ($rfq->rfq_file as $img) {
+        if($rfq->file){
+            foreach ($rfq->file as $img) {
                 $img['img_url'] = url($img->img_path);
             }
         }
@@ -175,7 +176,7 @@ class RFQController extends Controller
             'user_id' => $rfq->user_id,
             'created_at' => $rfq->created_at,
             'updated_at' => $rfq->updated_at,
-            'files' => $rfq->rfq_file ? $rfq->rfq_file : null,
+            'files' => $rfq->file ? $rfq->file : null,
             "party" => $rfq->party ,
             "contact" => $rfq->contact,
             'rfq_details' => $rfq->rfq_details->map(function($rfq_detail){
