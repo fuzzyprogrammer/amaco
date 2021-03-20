@@ -39,4 +39,9 @@ class RFQ extends Model
     {
         return $this->hasOne(Contact::class,'id', 'contact_id');
     }
+
+    public function img()
+    {
+        return $this->hasMany(RFQFile::class, 'rfq_id','id');
+    }
 }

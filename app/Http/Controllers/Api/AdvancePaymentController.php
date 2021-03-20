@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\AdvancePayment;
+use App\Models\Party;
 use Illuminate\Http\Request;
 
 class AdvancePaymentController extends Controller
@@ -76,4 +77,5 @@ class AdvancePaymentController extends Controller
 
         return response()->json(['msg'=>"Successfully destroyed"], 200);
     }
+
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Party;
 use App\Models\RFQ;
 use App\Models\RFQDetails;
+use App\Models\RFQFile;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -85,20 +86,18 @@ class RFQController extends Controller
 
                 //-------------------------------------------
                 $index = 0;
-                $paths = [];
                 while ($request['myFile' . $index] != null) {
                     // $image = (array) json_decode($request['myFile' . $index], true);
                     if ($request->file('myFile' . $index)) {
-                        array_push($paths, $request->file('myFile' . $index)->move('rfq/' . $rfq->id));
+                        $path = $request->file('myFile' . $index)->move('rfq/' . $rfq->id);
+                        RFQFile::create([
+                            'rfq_id' => $rfq->id,
+                            'img_path' => $path
+                        ]);
                     }
                     $index++;
                 }
-                // return response()->json($paths);
-            if ($request->file('myFile0')) {
-                $rfq->update([
-                    'files_url' => json_encode($paths),
-                ]);
-            }
+
                 // return $rfq;
                 global $_rfq_id;
                 $_rfq_id = $rfq['id'];
@@ -161,13 +160,11 @@ class RFQController extends Controller
         // return $_rfq->rfq_details;
 
 
-
-        // if($rfq['files_url'] != null){
-        //     $files_path = json_decode($rfq['files_url'], true);
-        //     $files_url = $files_path->map(function ($file) {
-        //         return url($file);
-        //     });
-        // }
+        if($rfq->rfq_file){
+            foreach ($rfq->rfq_file as $img) {
+                $img['img_url'] = url($img->img_path);
+            }
+        }
 
 
         $data = [
@@ -178,10 +175,9 @@ class RFQController extends Controller
             'user_id' => $rfq->user_id,
             'created_at' => $rfq->created_at,
             'updated_at' => $rfq->updated_at,
-            // 'files' => $rfq->file,
+            'files' => $rfq->rfq_file ? $rfq->rfq_file : null,
             "party" => $rfq->party ,
             "contact" => $rfq->contact,
-            // 'files_url' => $rfq['files_url'] ? $files_url : null,
             'rfq_details' => $rfq->rfq_details->map(function($rfq_detail){
                 $rfq_detail = RFQDetails::where('id','=',$rfq_detail->id)->first();
                 return [

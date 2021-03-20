@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AccountCategoryController;
+use App\Http\Controllers\Api\AccountStatementController;
 use App\Http\Controllers\Api\AdvancePaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -125,4 +126,6 @@ Route::get('quotations-accepted-list', [QuotationController::class, 'acceptedLis
 Route::get('quotations-rejected-list', [QuotationController::class, 'rejectedList'])->name('quotaions.rejected.list');
 Route::put('update-quotation/{id}', [QuotationController::class, 'updateQuotation'])->name('quotations.status.update');
 Route::post('old-password', [UserController::class, 'oldPassword']);
+Route::post('account-statement/{party}', [AccountStatementController::class, 'accountStatement']);
+
 
