@@ -50,7 +50,7 @@ class AccountStatementController extends Controller
                 $partyOpeningBalance += floatVal($item['total_value']);
             }
 
-            if ($item->has('receipt_no'))
+            if ($item->has('paid_amount'))
             {
                 $partyOpeningBalance -= floatVal($item['paid_amount']);
             }
