@@ -37,12 +37,12 @@ class AccountStatementController extends Controller
         //     ->get();
         $invoiceCollection = new Collection();
         $invoiceCollection = Invoice::where('party_id', $request['party_id'])
-            ->whereBetween('created_at', [$request['from_date'] . '00:00:00', $request['to_date'] . '23:59:59'])
+            ->whereBetween('created_at', [$request['from_date'] .' '. '00:00:00', $request['to_date'] . ' ' . '23:59:59'])
             ->get();
 
         $receiptCollection = new Collection();
         $receiptCollection = Receipt::where('party_id', $request['party_id'])
-            ->whereBetween('created_at', [$request['from_date'] . '00:00:00', $request['to_date'] . '23:59:59'])
+            ->whereBetween('created_at', [$request['from_date'] .' '.'00:00:00', $request['to_date'] .' '.'23:59:59'])
             ->get();
         // return response($invoiceCollection);
 
