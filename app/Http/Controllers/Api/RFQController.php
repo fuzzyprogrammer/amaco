@@ -89,7 +89,7 @@ class RFQController extends Controller
                 $index = 0;
                 while ($request['myFile' . $index] != null) {
                     if ($request->file('myFile' . $index)) {
-                        $name = $request->file('myFile')->getClientOriginalName();
+                        $name = $request['myFile']->getClientOriginalName();
                         $path = $request->file('myFile' . $index)->move('rfq/' . $rfq->id , $name);
                         FileUpload::create([
                             'rfq_id' => $rfq->id,
