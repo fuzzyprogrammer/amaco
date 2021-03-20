@@ -31,7 +31,6 @@ class AccountStatementController extends Controller
 
     public function accountStatement(Request $request)
     {
-        // return response()->json($request);
         $party = Party::where('id', intval($request['party_id']))->first();
         if (!$party) {
             return response('No party exists by this id', 400);
@@ -45,6 +44,8 @@ class AccountStatementController extends Controller
         $data = $invoiceCollection->merge($receiptCollection);
         $data = $data->sortBy('created_at');
 
-        return response()->json($data);
+        $openingBalance = $party->opening_balance;
+
+        // return response()->json($data);
     }
 }
