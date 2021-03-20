@@ -80,6 +80,7 @@ class AdvancePaymentController extends Controller
 
     public function accountStatement(Request $request)
     {
+        
         $party = Party::find($request->party_id);
         if (!$party) {
             return response('No party exists by this id', 400);
