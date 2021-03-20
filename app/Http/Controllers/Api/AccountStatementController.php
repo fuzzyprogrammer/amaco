@@ -64,7 +64,7 @@ class AccountStatementController extends Controller
         $data = $invoiceCollection->merge($receiptCollection);
         $data = $data->sortBy('created_at');
         $balance = $partyOpeningBalance;
-        $data->map(function ($item) use ($balance){
+        $data->each(function ($item) use ($balance){
             if($item->total_value){
                 $balance += floatVal($item['total_value']);
                 $item['date'] = $item->created_at;
@@ -73,7 +73,6 @@ class AccountStatementController extends Controller
                 $item['credit']= $item->total_value;
                 $item['debit'] = null;
                 $item['balance'] = $balance;
-                $this->balance = $balance;
                 return $item;
 
             }
