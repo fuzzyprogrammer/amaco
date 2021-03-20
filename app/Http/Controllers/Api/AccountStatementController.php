@@ -22,6 +22,7 @@ class AccountStatementController extends Controller
             ->where('parties.id',$party->id)
             ->whereBetween('invoices.created_at',[$request['from_date'], $request['to_date']])
             ->orWhereBetween('receipts.created_at',[$request['from_date'], $request['to_date']])
+            ->select('parties.*',"parties.id as party_id", 'invoices.*','invoices.id as invoice_id', 'receipts.*', 'receipts.id as receipt_id')
             ->get();
 
         return response()->json($data);
