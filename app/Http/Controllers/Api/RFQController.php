@@ -163,7 +163,7 @@ class RFQController extends Controller
 
         if($rfq->file){
             foreach ($rfq->file as $img) {
-                $img['img_url'] = url($img->img_path);
+                $img['img_url'] = url($img->file_name);
             }
         }
 
