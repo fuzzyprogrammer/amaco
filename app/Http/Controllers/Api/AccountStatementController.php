@@ -21,8 +21,8 @@ class AccountStatementController extends Controller
     public function accountStatement(Request $request)
     {
         // return response()->json($request);
-        $party = Party::where('id' , intval($request['party_id']))->first();
-        if(!$party){
+        $party = Party::where('id', intval($request['party_id']))->first();
+        if (!$party) {
             return response('No party exists by this id', 400);
         }
 
@@ -36,17 +36,17 @@ class AccountStatementController extends Controller
         //     ->orderBy('receipts.created_at')
         //     ->get();
         $invoiceCollection = new Collection();
-        $invoiceCollection = Invoice::where('party_id',$request['party_id'])
-            ->whereBetween('created_at',[$request['from_date'], $request['to_date']])
+        $invoiceCollection = Invoice::where('party_id', $request['party_id'])
+            ->whereBetween('created_at', [$request['from_date'] . '00:00:00', $request['to_date'] . '23:59:59'])
             ->get();
 
-            $receiptCollection = new Collection();
-            $receiptCollection = Receipt::where('party_id', $request['party_id'])
-            ->whereBetween('created_at',[$request['from_date'], $request['to_date']])
+        $receiptCollection = new Collection();
+        $receiptCollection = Receipt::where('party_id', $request['party_id'])
+            ->whereBetween('created_at', [$request['from_date'] . '00:00:00', $request['to_date'] . '23:59:59'])
             ->get();
         // return response($invoiceCollection);
 
-            $data = $invoiceCollection->merge($receiptCollection);
+        $data = $invoiceCollection->merge($receiptCollection);
         // foreach ($receiptCollection as $receipt) {
         // }
 
