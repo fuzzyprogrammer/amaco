@@ -66,7 +66,6 @@ class AccountStatementController extends Controller
         $balance = $partyOpeningBalance;
         $data->map(function ($item) use ($balance){
             if($item->total_value){
-                var_dump($balance);
                 $balance += floatVal($item['total_value']);
                 $item['date'] = $item->created_at;
                 $item['code_no']= $item->invoice_no;
@@ -74,12 +73,12 @@ class AccountStatementController extends Controller
                 $item['credit']= $item->total_value;
                 $item['debit'] = null;
                 $item['balance'] = $balance;
+                $this->balance = $balance;
                 return $item;
 
             }
 
             if($item->paid_amount){
-                var_dump($balance);
                 $balance -= floatVal($item['paid_amount']);
                 $item['date'] = $item->created_at;
                 $item['code_no']= $item->receipt_no;
