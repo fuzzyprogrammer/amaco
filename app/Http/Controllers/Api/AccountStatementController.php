@@ -29,7 +29,7 @@ class AccountStatementController extends Controller
             return response('No party exists by this id', 400);
         }
 
-        $invoiceCollection = $this->getInvoiceData($party->id, $request['to_date']);
+        $invoiceCollection = $this->getInvoiceData($party->id, $request['from_date'], $request['to_date']);
         // $invoiceCollection = Invoice::where('party_id', $request['party_id'])
         //     ->whereBetween('created_at', [$request['from_date'] .' '. '00:00:00', $request['to_date'] . ' ' . '23:59:59'])
         //     ->get();
