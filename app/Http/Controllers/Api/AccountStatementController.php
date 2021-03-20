@@ -13,9 +13,12 @@ use Illuminate\Support\Facades\DB;
 class AccountStatementController extends Controller
 {
 
-    public function getAccountStatement(Request $request)
+    public function getInvoiceData($party_id,  $to_date, $from_date = null)
     {
-        # code...
+        $temp = new Collection();
+        $temp = Invoice::where('party_id', $party_id)
+            ->whereBetween('created_at', [$from_date .' '. '00:00:00', $to_date . ' ' . '23:59:59'])->get();
+        return $temp;
     }
 
     public function accountStatement(Request $request)
@@ -26,10 +29,10 @@ class AccountStatementController extends Controller
             return response('No party exists by this id', 400);
         }
 
-        $invoiceCollection = new Collection();
-        $invoiceCollection = Invoice::where('party_id', $request['party_id'])
-            ->whereBetween('created_at', [$request['from_date'] .' '. '00:00:00', $request['to_date'] . ' ' . '23:59:59'])
-            ->get();
+        $invoiceCollection = $this->getInvoiceData($party->id, $request['to_date'], $request['from_date']);
+        // $invoiceCollection = Invoice::where('party_id', $request['party_id'])
+        //     ->whereBetween('created_at', [$request['from_date'] .' '. '00:00:00', $request['to_date'] . ' ' . '23:59:59'])
+        //     ->get();
 
         $receiptCollection = new Collection();
         $receiptCollection = Receipt::where('party_id', $request['party_id'])
