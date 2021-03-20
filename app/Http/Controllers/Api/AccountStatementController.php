@@ -10,9 +10,12 @@ use Illuminate\Support\Facades\DB;
 class AccountStatementController extends Controller
 {
 
-    public function accountStatement(Request $request, Party $party)
+    public function accountStatement(Request $request)
     {
-        // return response('hahaha');
+        $party = Party::find($request->party_id);
+        if(!$party){
+            return response('No party exists by this id', 400);
+        }
         $data = DB::table('parties')
             ->join('invoices','invoices.party_id','=','parties.id')
             ->join('receipts', 'receipts.party_id','=','parties.id')

@@ -126,6 +126,6 @@ Route::get('quotations-accepted-list', [QuotationController::class, 'acceptedLis
 Route::get('quotations-rejected-list', [QuotationController::class, 'rejectedList'])->name('quotaions.rejected.list');
 Route::put('update-quotation/{id}', [QuotationController::class, 'updateQuotation'])->name('quotations.status.update');
 Route::post('old-password', [UserController::class, 'oldPassword']);
-Route::get('account-statement/{party}', [AccountStatementController::class, 'accountStatement']);
+Route::get('account-statement', [AccountStatementController::class, 'accountStatement']);
 
 
