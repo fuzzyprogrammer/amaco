@@ -18,7 +18,7 @@ class AccountStatementController extends Controller
         }
         $data = DB::table('parties')
             ->join('invoices','invoices.party_id','=','parties.id')
-            ->join('receipts', 'receipts.party_id','=','parties.id')
+            ->orJoin('receipts', 'receipts.party_id','=','parties.id')
             ->where('parties.id',$party->id)
             ->whereBetween('invoices.created_at',[$request['from_date'], $request['to_date']])
             ->orWhereBetween('receipts.created_at',[$request['from_date'], $request['to_date']])
