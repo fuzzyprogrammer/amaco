@@ -44,12 +44,12 @@ class AccountStatementController extends Controller
             $receiptCollection = Receipt::where('party_id', $request['party_id'])
             ->whereBetween('created_at',[$request['from_date'], $request['to_date']])
             ->get();
-        return response($invoiceCollection);
+        // return response($invoiceCollection);
 
-            // $data = $invoiceCollection->merge($receiptCollection);
+            $data = $invoiceCollection->merge($receiptCollection);
         // foreach ($receiptCollection as $receipt) {
         // }
 
-        // return response()->json($data);
+        return response()->json($data);
     }
 }
