@@ -127,5 +127,6 @@ Route::get('quotations-rejected-list', [QuotationController::class, 'rejectedLis
 Route::put('update-quotation/{id}', [QuotationController::class, 'updateQuotation'])->name('quotations.status.update');
 Route::post('old-password', [UserController::class, 'oldPassword']);
 Route::get('account-statement', [AccountStatementController::class, 'accountStatement']);
+Route::get('qwerty', [AccountStatementController::class, 'accountStatement']);
 
 
