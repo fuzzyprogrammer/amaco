@@ -210,7 +210,7 @@ class QuotationController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        return $request;
+        // return $request;
 
         try {
             $datas = [
