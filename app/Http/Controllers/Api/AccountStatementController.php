@@ -12,15 +12,15 @@ class AccountStatementController extends Controller
 
     public function accountStatement(Request $request, Party $party)
     {
-        return response('hahaha');
-        // $data = DB::table('parties')
-        //     ->join('invoices','invoices.party_id','=','parties.id')
-        //     ->join('receipts', 'receipts.party_id','=','parties.id')
-        //     ->where('id',$party->id)
-        //     ->whereBetween('created_at',[$request->from_date, $request->to_date])
-        //     ->orderBy('created_at')
-        //     ->get();
+        // return response('hahaha');
+        $data = DB::table('parties')
+            ->join('invoices','invoices.party_id','=','parties.id')
+            ->join('receipts', 'receipts.party_id','=','parties.id')
+            ->where('id',$party->id)
+            ->whereBetween('created_at',[$request->from_date, $request->to_date])
+            ->orderBy('created_at')
+            ->get();
 
-        // return response()->json($data);
+        return response()->json($data);
     }
 }
