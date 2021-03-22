@@ -215,7 +215,7 @@ class QuotationController extends Controller
         try {
             $datas = [
                 'party_id' => $data['party_id'],
-                'rfq_id' => $data['rfq_id']? $data['rfq_id']:null,
+                // 'rfq_id' => $data['rfq_id'],
                 'status' => 'New',
                 'total_value' => $data['total_value'],
                 'net_amount' => $data['net_amount'],
@@ -251,26 +251,23 @@ class QuotationController extends Controller
             $index = 0;
         while($request['quotation_detail'.$index] != null){
             $quotation_detail =(array) json_decode($request['quotation_detail' . $index], true);
-            $filePath = null;
             if( $request->file('file'.$index)){
                 $filePath = $request->file('file' . $index)->move('quotation/quotation_detail/'.$quotation_id);
             }
 
-            $item = [
-                'quotation_id' => $quotation_id,
-                'total_amount' => $quotation_detail['total_amount'],
-                'analyse_id' => null,
-                'product_id' => $quotation_detail['product_id'],
-                'purchase_price' => $quotation_detail['purchase_price'],
-                'description' => $quotation_detail['description'],
-                'quantity' => $quotation_detail['quantity'],
-                'margin' => $quotation_detail['margin'],
-                'sell_price' => $quotation_detail['sell_price'],
-                'remark' => $quotation_detail['remark'],
-                // 'file_img_url' => $filePath,
-            ];
-            $filePath ? $item['file_img_url']  = $filePath : null ;
-            QuotationDetail::create($item);
+            QuotationDetail::create([
+            'quotation_id' => $quotation_id,
+            'total_amount' => $quotation_detail['total_amount'],
+            'analyse_id' => null,
+            'product_id' => $quotation_detail['product_id'],
+            'purchase_price' => $quotation_detail['purchase_price'],
+            'description' => $quotation_detail['description'],
+            'quantity' => $quotation_detail['quantity'],
+            'margin' => $quotation_detail['margin'],
+            'sell_price' => $quotation_detail['sell_price'],
+            'remark' => $quotation_detail['remark'],
+            'file_img_url' => $filePath ? $filePath : null,
+            ]);
             $index++;
         }
         return response()->json(['msg' => 'successfully added']);
