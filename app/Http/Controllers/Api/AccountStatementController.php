@@ -31,8 +31,6 @@ class AccountStatementController extends Controller
 
     public function accountStatement(Request $request)
     {
-        // $request = $request[0];
-        // return response()->json($request);
         $party = Party::where('id', intval($request['party_id']))->first();
         if (!$party) {
             return response('No party exists by this id', 400);
@@ -65,7 +63,7 @@ class AccountStatementController extends Controller
         $receiptCollection = $this->getReceiptData($party->id, $request['to_date'], $request['from_date']);
         $data = $invoiceCollection->merge($receiptCollection);
         $data = $data->sortBy('created_at');
-        $data->each(function ($item) {
+        $data && $data->each(function ($item) {
             if($item->total_value){
                 $item['date'] = $item->created_at;
                 $item['code_no']= $item->invoice_no;
@@ -86,11 +84,13 @@ class AccountStatementController extends Controller
             }
         });
 
+        $data && $data['data'] = null ;
         $data['opening_balance'] = $partyOpeningBalance;
         $data['firm_name'] = $party->firm_name;
         $data['credit_days'] = $party->credit_days;
         $data['from_date'] = $request['from_date'];
         $data['to_date'] = $request['to_date'];
+
         return response()->json([$data]);
     }
 }
