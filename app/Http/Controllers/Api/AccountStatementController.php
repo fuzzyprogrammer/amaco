@@ -64,9 +64,9 @@ class AccountStatementController extends Controller
         $receiptCollection = $this->getReceiptData($party->id, $request['to_date'], $request['from_date']);
         $data = $invoiceCollection->merge($receiptCollection);
         $data = $data->sortBy('created_at');
-
+        $data = (array)$data;
         // return $data;
-        $data && $data->map(function ($item) {
+        $data && ($data->each(function ($item) {
             if ($item->total_value) {
                 $item['date'] = $item->created_at;
                 $item['code_no'] = $item->invoice_no;
@@ -84,7 +84,7 @@ class AccountStatementController extends Controller
                 $item['debit'] = null;
                 return [$item];
             }
-        });
+        }));
 
         // $data && $data['data'] = null;
         // $data['opening_balance'] = $partyOpeningBalance;
