@@ -57,39 +57,39 @@ class AccountStatementController extends Controller
         }
         // ------------------------------------
 
+
         $invoiceCollection = $this->getInvoiceData($party->id, $request['to_date'], $request['from_date']);
 
         $receiptCollection = $this->getReceiptData($party->id, $request['to_date'], $request['from_date']);
 
         $data = $invoiceCollection->merge($receiptCollection);
         $data = $data->sortBy('created_at');
-        $balance = $partyOpeningBalance;
-        $data->each(function ($item) use ($balance){
+        $data->each(function ($item) {
             if($item->total_value){
-                $balance += floatVal($item['total_value']);
                 $item['date'] = $item->created_at;
                 $item['code_no']= $item->invoice_no;
                 $item['description']= "Sale";
-                $item['credit']= $item->total_value;
-                $item['debit'] = null;
-                $item['balance'] = $balance;
+                $item['debit']= $item->total_value;
+                $item['credit'] = null;
                 return $item;
 
             }
 
             if($item->paid_amount){
-                $balance -= floatVal($item['paid_amount']);
                 $item['date'] = $item->created_at;
                 $item['code_no']= $item->receipt_no;
                 $item['description']= "Return";
-                $item['debit']= $item->paid_amount;
-                $item['credit'] = null;
-                $item['balance'] = $balance;
+                $item['credit']= $item->paid_amount;
+                $item['debit'] = null;
                 return $item;
             }
         });
 
         $data['opening_balance'] = $partyOpeningBalance;
+        $data['firm_name'] = $party->firm_name;
+        $data['credit_days'] = $party->credit_days;
+        $data['from_date'] = $request['from_date'];
+        $data['to_date'] = $request['to_date'];
         return response()->json($data);
     }
 }
