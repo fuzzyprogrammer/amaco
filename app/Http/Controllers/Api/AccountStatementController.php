@@ -61,7 +61,6 @@ class AccountStatementController extends Controller
         $invoiceCollection = $this->getInvoiceData($party->id, $request['to_date'], $request['from_date']);
 
         $receiptCollection = $this->getReceiptData($party->id, $request['to_date'], $request['from_date']);
-        $data = [];
         $data = $invoiceCollection->merge($receiptCollection);
         $data = $data->sortBy('created_at');
         $data->each(function ($item) {
@@ -90,6 +89,6 @@ class AccountStatementController extends Controller
         $data['credit_days'] = $party->credit_days;
         $data['from_date'] = $request['from_date'];
         $data['to_date'] = $request['to_date'];
-        return response()->json($data);
+        return response()->json((array)$data);
     }
 }
