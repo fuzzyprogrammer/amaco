@@ -65,7 +65,7 @@ class AccountStatementController extends Controller
         $data = $invoiceCollection->merge($receiptCollection);
         $data = $data->sortBy('created_at');
 
-        $data && ( $data['data'] = $data->map(function ($item)  {
+        $data && ( $datas['data'] = $data->map(function ($item)  {
             if ($item->total_value) {
                 $item['date'] = $item->created_at;
                 $item['code_no'] = $item->invoice_no;
@@ -86,13 +86,13 @@ class AccountStatementController extends Controller
             }
         }));
 
-        !$data && $data['data'] = null;
-        $data['opening_balance'] = $partyOpeningBalance;
-        $data['firm_name'] = $party->firm_name;
-        $data['credit_days'] = $party->credit_days;
-        $data['from_date'] = $request['from_date'];
-        $data['to_date'] = $request['to_date'];
+        !$data && $datas['data'] = null;
+        $datas['opening_balance'] = $partyOpeningBalance;
+        $datas['firm_name'] = $party->firm_name;
+        $datas['credit_days'] = $party->credit_days;
+        $datas['from_date'] = $request['from_date'];
+        $datas['to_date'] = $request['to_date'];
 
-        return response()->json([$data]);
+        return response()->json([$datas]);
     }
 }
