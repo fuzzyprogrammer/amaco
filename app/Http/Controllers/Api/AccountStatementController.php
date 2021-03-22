@@ -16,7 +16,7 @@ class AccountStatementController extends Controller
     {
         $temp = new Collection();
         $temp = Invoice::where('party_id', $party_id)
-            ->whereBetween('created_at', [$from_date .' '. '00:00:00', $to_date . ' ' . '23:59:59'])->get();
+            ->whereBetween('created_at', [$from_date . ' ' . '00:00:00', $to_date . ' ' . '23:59:59'])->get();
         return $temp;
     }
 
@@ -42,19 +42,17 @@ class AccountStatementController extends Controller
         $oldInvoiceCollection = $this->getInvoiceData($party->id, $request['from_date']);
         $oldReceiptCollection = $this->getReceiptData($party->id, $request['from_date']);
         $oldData = $oldInvoiceCollection->merge($oldReceiptCollection);
-        if(!$oldData){
-            return response()->json(['msg' => "There are no entries between". $request['from_date']." to ". $request['from_date']], 400);
+        if (!$oldData) {
+            return response()->json(['msg' => "There are no entries between" . $request['from_date'] . " to " . $request['from_date']], 400);
         }
         $oldData = $oldData->sortBy('created_at');
 
-        foreach ($oldData as $key => $item ) {
-            if ($item->total_value)
-            {
+        foreach ($oldData as $key => $item) {
+            if ($item->total_value) {
                 $partyOpeningBalance += floatVal($item['total_value']);
             }
 
-            if ($item->paid_amount)
-            {
+            if ($item->paid_amount) {
                 $partyOpeningBalance -= floatVal($item['paid_amount']);
             }
         }
@@ -67,28 +65,34 @@ class AccountStatementController extends Controller
         $data = $invoiceCollection->merge($receiptCollection);
         $data = $data->sortBy('created_at');
 
+        return $data;
         $data && $data->map(function ($item) {
-            if($item->total_value){
+            if ($item->total_value) {
                 $item['date'] = $item->created_at;
-                $item['code_no']= $item->invoice_no;
-                $item['description']= "Sale";
-                $item['debit']= $item->total_value;
+                $item['code_no'] = $item->invoice_no;
+                $item['description'] = "Sale";
+                $item['debit'] = $item->total_value;
                 $item['credit'] = null;
-                return [$item->id => $item];
-
+                return [
+                    'date' => $item->created_at,
+                    'code_no' => $item->invoice_no,
+                    'description' => "Sale",
+                    'debit' => $item->total_value,
+                    'credit' => null,
+                ];
             }
 
-            if($item->paid_amount){
+            if ($item->paid_amount) {
                 $item['date'] = $item->created_at;
-                $item['code_no']= $item->receipt_no;
-                $item['description']= "Received";
-                $item['credit']= $item->paid_amount;
+                $item['code_no'] = $item->receipt_no;
+                $item['description'] = "Received";
+                $item['credit'] = $item->paid_amount;
                 $item['debit'] = null;
                 return [$item];
             }
         });
 
-        $data && $data['data'] = null ;
+        $data && $data['data'] = null;
         $data['opening_balance'] = $partyOpeningBalance;
         $data['firm_name'] = $party->firm_name;
         $data['credit_days'] = $party->credit_days;
