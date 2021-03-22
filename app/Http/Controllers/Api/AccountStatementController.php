@@ -66,7 +66,7 @@ class AccountStatementController extends Controller
         $data = $data->sortBy('created_at');
         $data = (array)$data;
         // return $data;
-        $data && ($data->each(function ($item) {
+        $data && ($data->map(function ($item) {
             if ($item->total_value) {
                 $item['date'] = $item->created_at;
                 $item['code_no'] = $item->invoice_no;
