@@ -73,13 +73,7 @@ class AccountStatementController extends Controller
                 $item['description'] = "Sale";
                 $item['debit'] = $item->total_value;
                 $item['credit'] = null;
-                return [
-                    'date' => $item->created_at,
-                    'code_no' => $item->invoice_no,
-                    'description' => "Sale",
-                    'debit' => $item->total_value,
-                    'credit' => null,
-                ];
+                return [ $item ];
             }
 
             if ($item->paid_amount) {
@@ -92,12 +86,12 @@ class AccountStatementController extends Controller
             }
         });
 
-        $data && $data['data'] = null;
-        $data['opening_balance'] = $partyOpeningBalance;
-        $data['firm_name'] = $party->firm_name;
-        $data['credit_days'] = $party->credit_days;
-        $data['from_date'] = $request['from_date'];
-        $data['to_date'] = $request['to_date'];
+        // $data && $data['data'] = null;
+        // $data['opening_balance'] = $partyOpeningBalance;
+        // $data['firm_name'] = $party->firm_name;
+        // $data['credit_days'] = $party->credit_days;
+        // $data['from_date'] = $request['from_date'];
+        // $data['to_date'] = $request['to_date'];
 
         return response()->json([$data]);
     }
