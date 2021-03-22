@@ -73,7 +73,7 @@ class AccountStatementController extends Controller
                 $item['debit'] = $item->total_value;
                 $item['credit'] = null;
                 return [ $item ];
-                array_push($tempArr['data'],$item);
+                array_push($this->tempArr['data'],$item);
             }
 
             if ($item->paid_amount) {
@@ -83,7 +83,7 @@ class AccountStatementController extends Controller
                 $item['credit'] = $item->paid_amount;
                 $item['debit'] = null;
                 return [$item];
-                array_push($tempArr['data'], $item);
+                array_push($this->tempArr['data'], $item);
 
             }
         }));
