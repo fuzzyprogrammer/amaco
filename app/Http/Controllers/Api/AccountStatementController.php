@@ -8,7 +8,6 @@ use App\Models\Party;
 use App\Models\Receipt;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class AccountStatementController extends Controller
 {
@@ -28,6 +27,7 @@ class AccountStatementController extends Controller
             ->whereBetween('created_at', [$from_date . ' ' . '00:00:00', $to_date . ' ' . '23:59:59'])->get();
         return $temp;
     }
+
 
     public function accountStatement(Request $request)
     {
