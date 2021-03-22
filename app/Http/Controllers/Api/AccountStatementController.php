@@ -64,9 +64,8 @@ class AccountStatementController extends Controller
         $receiptCollection = $this->getReceiptData($party->id, $request['to_date'], $request['from_date']);
         $data = $invoiceCollection->merge($receiptCollection);
         $data = $data->sortBy('created_at');
-        $data = (object)$data;
-        // return $data;
-        $data && ($data->map(function ($item) {
+        $tempArr = [];
+        $data && ($data->map(function ($item) use ($tempArr) {
             if ($item->total_value) {
                 $item['date'] = $item->created_at;
                 $item['code_no'] = $item->invoice_no;
@@ -74,6 +73,7 @@ class AccountStatementController extends Controller
                 $item['debit'] = $item->total_value;
                 $item['credit'] = null;
                 return [ $item ];
+                array_push($tempArr['data'],$item);
             }
 
             if ($item->paid_amount) {
@@ -83,6 +83,8 @@ class AccountStatementController extends Controller
                 $item['credit'] = $item->paid_amount;
                 $item['debit'] = null;
                 return [$item];
+                array_push($tempArr['data'], $item);
+
             }
         }));
 
@@ -93,6 +95,6 @@ class AccountStatementController extends Controller
         // $data['from_date'] = $request['from_date'];
         // $data['to_date'] = $request['to_date'];
 
-        return response()->json([$data]);
+        return response()->json([$tempArr]);
     }
 }
