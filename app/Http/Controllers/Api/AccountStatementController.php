@@ -42,6 +42,9 @@ class AccountStatementController extends Controller
         $oldInvoiceCollection = $this->getInvoiceData($party->id, $request['from_date']);
         $oldReceiptCollection = $this->getReceiptData($party->id, $request['from_date']);
         $oldData = $oldInvoiceCollection->merge($oldReceiptCollection);
+        if(!$oldData){
+            return response()->json(['msg' => "There are no entries between". $request['from_date']." to ". $request['from_date']], 400);
+        }
         $oldData = $oldData->sortBy('created_at');
 
         foreach ($oldData as $key => $item ) {
