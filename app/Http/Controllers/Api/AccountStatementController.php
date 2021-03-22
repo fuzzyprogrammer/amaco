@@ -74,7 +74,7 @@ class AccountStatementController extends Controller
                 $item['description']= "Sale";
                 $item['debit']= $item->total_value;
                 $item['credit'] = null;
-                return [$item];
+                return [$item->id => $item];
 
             }
 
