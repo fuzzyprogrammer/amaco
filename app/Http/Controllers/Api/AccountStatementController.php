@@ -86,7 +86,7 @@ class AccountStatementController extends Controller
             }
         }));
 
-        $data && $data['data'] = null;
+        !$data && $data['data'] = null;
         $data['opening_balance'] = $partyOpeningBalance;
         $data['firm_name'] = $party->firm_name;
         $data['credit_days'] = $party->credit_days;
