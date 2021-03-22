@@ -72,7 +72,7 @@ class AccountStatementController extends Controller
                 $item['description']= "Sale";
                 $item['debit']= $item->total_value;
                 $item['credit'] = null;
-                return $item;
+                return [$item];
 
             }
 
@@ -82,7 +82,7 @@ class AccountStatementController extends Controller
                 $item['description']= "Return";
                 $item['credit']= $item->paid_amount;
                 $item['debit'] = null;
-                return $item;
+                return [$item];
             }
         });
 
