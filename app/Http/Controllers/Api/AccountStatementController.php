@@ -80,7 +80,7 @@ class AccountStatementController extends Controller
             if($item->paid_amount){
                 $item['date'] = $item->created_at;
                 $item['code_no']= $item->receipt_no;
-                $item['description']= "Return";
+                $item['description']= "Received";
                 $item['credit']= $item->paid_amount;
                 $item['debit'] = null;
                 return [$item];
