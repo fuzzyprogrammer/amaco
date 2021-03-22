@@ -256,19 +256,21 @@ class QuotationController extends Controller
                 $filePath = $request->file('file' . $index)->move('quotation/quotation_detail/'.$quotation_id);
             }
 
-            QuotationDetail::create([
-            'quotation_id' => $quotation_id,
-            'total_amount' => $quotation_detail['total_amount'],
-            'analyse_id' => null,
-            'product_id' => $quotation_detail['product_id'],
-            'purchase_price' => $quotation_detail['purchase_price'],
-            'description' => $quotation_detail['description'],
-            'quantity' => $quotation_detail['quantity'],
-            'margin' => $quotation_detail['margin'],
-            'sell_price' => $quotation_detail['sell_price'],
-            'remark' => $quotation_detail['remark'],
-            'file_img_url' => $filePath ,
-            ]);
+            $item = [
+                'quotation_id' => $quotation_id,
+                'total_amount' => $quotation_detail['total_amount'],
+                'analyse_id' => null,
+                'product_id' => $quotation_detail['product_id'],
+                'purchase_price' => $quotation_detail['purchase_price'],
+                'description' => $quotation_detail['description'],
+                'quantity' => $quotation_detail['quantity'],
+                'margin' => $quotation_detail['margin'],
+                'sell_price' => $quotation_detail['sell_price'],
+                'remark' => $quotation_detail['remark'],
+                // 'file_img_url' => $filePath,
+            ];
+            $filePath ? $item['file_img_url']  = $filePath : null ;
+            QuotationDetail::create($item);
             $index++;
         }
         return response()->json(['msg' => 'successfully added']);
