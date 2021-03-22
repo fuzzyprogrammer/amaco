@@ -65,7 +65,7 @@ class AccountStatementController extends Controller
         $data = $invoiceCollection->merge($receiptCollection);
         $data = $data->sortBy('created_at');
 
-        $data && ( $data = $data->map(function ($item)  {
+        $data && ( $data['data'] = $data->map(function ($item)  {
             if ($item->total_value) {
                 $item['date'] = $item->created_at;
                 $item['code_no'] = $item->invoice_no;
