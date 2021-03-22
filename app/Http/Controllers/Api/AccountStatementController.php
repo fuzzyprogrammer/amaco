@@ -32,7 +32,7 @@ class AccountStatementController extends Controller
     public function accountStatement(Request $request)
     {
         $res = $request->json()->all();
-        $party = Party::where('id', intval($res['party_id']))->first();
+        $party = Party::where('id', intval($res->party_id))->first();
         if (!$party) {
             return response('No party exists by this id', 400);
         }
