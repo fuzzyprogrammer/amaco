@@ -61,7 +61,7 @@ class AccountStatementController extends Controller
         $invoiceCollection = $this->getInvoiceData($party->id, $request['to_date'], $request['from_date']);
 
         $receiptCollection = $this->getReceiptData($party->id, $request['to_date'], $request['from_date']);
-
+        $data = [];
         $data = $invoiceCollection->merge($receiptCollection);
         $data = $data->sortBy('created_at');
         $data->each(function ($item) {
