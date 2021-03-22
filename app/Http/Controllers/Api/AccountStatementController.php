@@ -64,8 +64,8 @@ class AccountStatementController extends Controller
         $receiptCollection = $this->getReceiptData($party->id, $request['to_date'], $request['from_date']);
         $data = $invoiceCollection->merge($receiptCollection);
         $data = $data->sortBy('created_at');
-        $tempArr = [];
-        $data && ($data->map(function ($item) use ($tempArr) {
+
+        $data && ( $data = $data->map(function ($item)  {
             if ($item->total_value) {
                 $item['date'] = $item->created_at;
                 $item['code_no'] = $item->invoice_no;
@@ -73,7 +73,6 @@ class AccountStatementController extends Controller
                 $item['debit'] = $item->total_value;
                 $item['credit'] = null;
                 return [ $item ];
-                array_push($this->tempArr['data'],$item);
             }
 
             if ($item->paid_amount) {
@@ -83,18 +82,17 @@ class AccountStatementController extends Controller
                 $item['credit'] = $item->paid_amount;
                 $item['debit'] = null;
                 return [$item];
-                array_push($this->tempArr['data'], $item);
 
             }
         }));
 
-        // $data && $data['data'] = null;
-        // $data['opening_balance'] = $partyOpeningBalance;
-        // $data['firm_name'] = $party->firm_name;
-        // $data['credit_days'] = $party->credit_days;
-        // $data['from_date'] = $request['from_date'];
-        // $data['to_date'] = $request['to_date'];
+        $data && $data['data'] = null;
+        $data['opening_balance'] = $partyOpeningBalance;
+        $data['firm_name'] = $party->firm_name;
+        $data['credit_days'] = $party->credit_days;
+        $data['from_date'] = $request['from_date'];
+        $data['to_date'] = $request['to_date'];
 
-        return response()->json([$tempArr]);
+        return response()->json([$data]);
     }
 }
