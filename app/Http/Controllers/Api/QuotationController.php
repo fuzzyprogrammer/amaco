@@ -251,6 +251,7 @@ class QuotationController extends Controller
             $index = 0;
         while($request['quotation_detail'.$index] != null){
             $quotation_detail =(array) json_decode($request['quotation_detail' . $index], true);
+            $filePath = null;
             if( $request->file('file'.$index)){
                 $filePath = $request->file('file' . $index)->move('quotation/quotation_detail/'.$quotation_id);
             }
@@ -266,7 +267,7 @@ class QuotationController extends Controller
             'margin' => $quotation_detail['margin'],
             'sell_price' => $quotation_detail['sell_price'],
             'remark' => $quotation_detail['remark'],
-            'file_img_url' => $filePath ? $filePath : null,
+            'file_img_url' => $filePath ,
             ]);
             $index++;
         }
