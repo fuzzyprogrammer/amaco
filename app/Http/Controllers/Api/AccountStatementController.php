@@ -66,6 +66,8 @@ class AccountStatementController extends Controller
         $receiptCollection = $this->getReceiptData($party->id, $request['to_date'], $request['from_date']);
         $data = $invoiceCollection->merge($receiptCollection);
         $data = $data->sortBy('created_at');
+
+        return $data;
         $data && $data->map(function ($item) {
             if($item->total_value){
                 $item['date'] = $item->created_at;
