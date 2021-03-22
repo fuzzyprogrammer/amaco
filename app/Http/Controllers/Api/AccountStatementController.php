@@ -89,6 +89,6 @@ class AccountStatementController extends Controller
         $data['credit_days'] = $party->credit_days;
         $data['from_date'] = $request['from_date'];
         $data['to_date'] = $request['to_date'];
-        return response()->json((array)$data);
+        return response($data);
     }
 }
