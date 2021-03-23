@@ -52,13 +52,13 @@ class QuotationController extends Controller
 
     public function getLastQuotationNo()
     {
-        $quotation = Quotation::where('transaction_type','sale')
+        $quotation = Quotation::where('transaction_type', 'sale')
             ->latest('created_at')->first();
-        if($quotation){
-        $latest_quotation_no = $quotation->quotation_no ? $quotation->quotation_no : 0;
-        return($latest_quotation_no);
-        }else{
-            return('AMC-QT-' . $this->getCurrentYear() . '-' .$this->getCurrentMonth() . sprintf("%02d", 0));
+        if ($quotation) {
+            $latest_quotation_no = $quotation->quotation_no ? $quotation->quotation_no : 0;
+            return ($latest_quotation_no);
+        } else {
+            return ('AMC-QT-' . $this->getCurrentYear() . '-' . $this->getCurrentMonth() . sprintf("%02d", 0));
         }
     }
 
@@ -66,11 +66,11 @@ class QuotationController extends Controller
     {
         $quotation = Quotation::where('transaction_type', 'purchase')
             ->latest('created_at')->first();
-        if($quotation){
-        $latest_po_number = $quotation->po_number ? $quotation->po_number : 0;
-        return($latest_po_number);
-        }else{
-            return('AMC-PO-' . $this->getCurrentYear() . '-' .$this->getCurrentMonth() . sprintf("%02d", 0));
+        if ($quotation) {
+            $latest_po_number = $quotation->po_number ? $quotation->po_number : 0;
+            return ($latest_po_number);
+        } else {
+            return ('AMC-PO-' . $this->getCurrentYear() . '-' . $this->getCurrentMonth() . sprintf("%02d", 0));
         }
     }
 
@@ -78,11 +78,11 @@ class QuotationController extends Controller
     {
         $quotation = Quotation::where('transaction_type', 'sale')
             ->latest('created_at')->first();
-        if($quotation){
+        if ($quotation) {
             $latest_sales_order_number = $quotation->sales_order_number ? $quotation->sales_order_number : 0;
-        return($latest_sales_order_number);
-        }else{
-            return('ASON-' . $this->getCurrentYear() . '-' . sprintf("%04d", 0));
+            return ($latest_sales_order_number);
+        } else {
+            return ('ASON-' . $this->getCurrentYear() . '-' . sprintf("%04d", 0));
         }
     }
 
@@ -93,16 +93,16 @@ class QuotationController extends Controller
         $last_month = substr($latest_quotation_no, 10, 2);
         $current_year = $this->getCurrentYear();
         $current_month = $this->getCurrentMonth();
-        if($current_year != $last_year){
-            return ('AMC-QT-'.$current_year . '-' . $current_month  . sprintf("%02d", 1));
-        }else{
+        if ($current_year != $last_year) {
+            return ('AMC-QT-' . $current_year . '-' . $current_month  . sprintf("%02d", 1));
+        } else {
             if ($current_month != $last_month) {
-                return ('AMC-QT-'.$current_year . '-' . $current_month  . sprintf("%02d", 1));
-            }else{
-                if(((int)substr($this->getLastQuotationNo(), 12) < 99)){
-                    return ('AMC-QT-' . $current_year . '-' .$current_month. sprintf("%02d",((int)substr($this->getLastQuotationNo(),12))+1));
-                }else{
-                    return ('AMC-QT-' . $current_year . '-' .$current_month. sprintf("%03d",((int)substr($this->getLastQuotationNo(),12))+1));
+                return ('AMC-QT-' . $current_year . '-' . $current_month  . sprintf("%02d", 1));
+            } else {
+                if (((int)substr($this->getLastQuotationNo(), 12) < 99)) {
+                    return ('AMC-QT-' . $current_year . '-' . $current_month . sprintf("%02d", ((int)substr($this->getLastQuotationNo(), 12)) + 1));
+                } else {
+                    return ('AMC-QT-' . $current_year . '-' . $current_month . sprintf("%03d", ((int)substr($this->getLastQuotationNo(), 12)) + 1));
                 }
             }
         }
@@ -139,27 +139,27 @@ class QuotationController extends Controller
         $last_year = substr($latest_sales_order_number, 5, 2);
         $current_year = $this->getCurrentYear();
         // dd([$last_year, $current_year]);
-        if($current_year != $last_year){
-            return ('ASON-'.$current_year.'-'.sprintf("%04d",1));
-        }else{
-            return ('ASON-' . $current_year . '-' . sprintf("%04d",((int)substr($this->getLastSONo(),9))+1));
+        if ($current_year != $last_year) {
+            return ('ASON-' . $current_year . '-' . sprintf("%04d", 1));
+        } else {
+            return ('ASON-' . $current_year . '-' . sprintf("%04d", ((int)substr($this->getLastSONo(), 9)) + 1));
         }
     }
 
     public function index() // Purchase List
     {
-        $quotations = Quotation::where(['status'=>'New', 'transaction_type' => 'purchase'])
-        ->whereNotExists(function ($query) {
-            $query->select(DB::raw(1))
-                ->from('invoices')
-                ->whereRaw('invoices.quotation_id = quotations.id');
-        })->orderBy('created_at', 'DESC')
-        ->get();
+        $quotations = Quotation::where(['status' => 'New', 'transaction_type' => 'purchase'])
+            ->whereNotExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('invoices')
+                    ->whereRaw('invoices.quotation_id = quotations.id');
+            })->orderBy('created_at', 'DESC')
+            ->get();
         // $quotations = Quotation::where('status','=','New')->orderBy('created_at','DESC')->get();
         $quotations_data = [
             $quotations->map(
                 function ($quotation) {
-                    $data =[
+                    $data = [
                         'id' => $quotation->id,
                         'po_number' => $quotation->po_number,
                         'created_at' => $quotation->created_at,
@@ -232,49 +232,63 @@ class QuotationController extends Controller
             ];
 
             if ($request->transaction_type === 'sale') {
-                $datas['quotation_no']=$this->getQuotationNo();
-            }elseif($request->transaction_type === 'purchase'){
-                $datas['po_number']=$this->getPONo();
-            }else{
+                $datas['quotation_no'] = $this->getQuotationNo();
+            } elseif ($request->transaction_type === 'purchase') {
+                $datas['po_number'] = $this->getPONo();
+            } else {
                 $datas['quotation_no'] = null;
-                $datas['po_number'] =null;
+                $datas['po_number'] = null;
             }
 
-        $quotation = Quotation::create($datas);
+            $quotation = Quotation::create($datas);
 
-        global $quotation_id;
-        $quotation_id = $quotation->id;
+            global $quotation_id;
+            $quotation_id = $quotation->id;
             // dd($request->quotation_details);
-        // foreach($request['quotation_details'] as $key => $quotation_detail){
-
-            // $temp = (object) $quotation_detail;
-            $index = 0;
-        while($request['quotation_detail'.$index] != null){
-            $quotation_detail =(array) json_decode($request['quotation_detail' . $index], true);
-            $filePath = null;
-            if( $request->file('file'.$index)){
-                $filePath = $request->file('file' . $index)->move('quotation/quotation_detail/'.$quotation_id);
+            if ($request->transaction_type === 'purchase') {
+                foreach ($request['quotation_details'] as $key => $quotation_detail) {
+                    QuotationDetail::create([
+                        'quotation_id' => $quotation_id,
+                        'total_amount' => $quotation_detail['total_amount'],
+                        'analyse_id' => null,
+                        'product_id' => $quotation_detail['product_id'],
+                        'purchase_price' => $quotation_detail['purchase_price'],
+                        'description' => $quotation_detail['description'],
+                        'quantity' => $quotation_detail['quantity'],
+                        'margin' => $quotation_detail['margin'],
+                        'sell_price' => $quotation_detail['sell_price'],
+                        'remark' => $quotation_detail['remark'],
+                    ]);
+                }
+            } else {
+                $index = 0;
+                while ($request['quotation_detail' . $index] != null) {
+                    $quotation_detail = (array) json_decode($request['quotation_detail' . $index], true);
+                    $filePath = null;
+                    if ($request->file('file' . $index)) {
+                        $filePath = $request->file('file' . $index)->move('quotation/quotation_detail/' . $quotation_id);
+                    }
+                    QuotationDetail::create([
+                        'quotation_id' => $quotation_id,
+                        'total_amount' => $quotation_detail['total_amount'],
+                        'analyse_id' => null,
+                        'product_id' => $quotation_detail['product_id'],
+                        'purchase_price' => $quotation_detail['purchase_price'],
+                        'description' => $quotation_detail['description'],
+                        'quantity' => $quotation_detail['quantity'],
+                        'margin' => $quotation_detail['margin'],
+                        'sell_price' => $quotation_detail['sell_price'],
+                        'remark' => $quotation_detail['remark'],
+                        'file_img_url' => $filePath,
+                    ]);
+                    $index++;
+                }
             }
 
-            QuotationDetail::create([
-            'quotation_id' => $quotation_id,
-            'total_amount' => $quotation_detail['total_amount'],
-            'analyse_id' => null,
-            'product_id' => $quotation_detail['product_id'],
-            'purchase_price' => $quotation_detail['purchase_price'],
-            'description' => $quotation_detail['description'],
-            'quantity' => $quotation_detail['quantity'],
-            'margin' => $quotation_detail['margin'],
-            'sell_price' => $quotation_detail['sell_price'],
-            'remark' => $quotation_detail['remark'],
-            'file_img_url' => $filePath ,
-            ]);
-            $index++;
-        }
-    // }
-    return response()->json(['msg' => 'successfully added']);
-    }
-        catch(Exception $e){
+
+
+            return response()->json(['msg' => 'successfully added']);
+        } catch (Exception $e) {
             return response()->json($e, 201);
         }
     }
@@ -287,17 +301,17 @@ class QuotationController extends Controller
      */
     public function show($id)
     {
-        $quotation = Quotation::where('id',$id)->first();
+        $quotation = Quotation::where('id', $id)->first();
         $data = [
             "id" => $quotation->id,
             'quotation_no' => $quotation->quotation_no,
             "party_id" => $quotation->party_id,
             "rfq_id" => $quotation->rfq_id,
             "status" => $quotation->status,
-            "total_value" => $quotation->total_value ,
-            "discount_in_p" => $quotation->discount_in_p ,
-            "vat_in_value" => $quotation->vat_in_value ,
-            "net_amount" => $quotation->net_amount ,
+            "total_value" => $quotation->total_value,
+            "discount_in_p" => $quotation->discount_in_p,
+            "vat_in_value" => $quotation->vat_in_value,
+            "net_amount" => $quotation->net_amount,
             "created_at" => $quotation->created_at,
             "updated_at" => $quotation->updated_at,
             "validity" => $quotation->validity,
@@ -312,34 +326,34 @@ class QuotationController extends Controller
             "contact" => $quotation->contact,
             "party" => $quotation->party,
             "rfq" => $quotation->rfq,
-            "quotation_details" => $quotation->quotationDetail->map(function ($quotation_detail){
+            "quotation_details" => $quotation->quotationDetail->map(function ($quotation_detail) {
                 $filePath = $quotation_detail->file_img_url ? $quotation_detail->file_img_url : '';
                 $urlPath = url($filePath);
-                return[
-                "id"=> $quotation_detail->id,
-                "total_amount"=> $quotation_detail->total_amount,
-                "analyse_id"=> $quotation_detail->analyse_id,
-                "product_id"=> $quotation_detail->product_id,
-                "descriptionss" => $quotation_detail->product->description,
-                "product" => $quotation_detail->product,
-                "product_price_list" => $quotation_detail->product->productPrice->map(function ($productP){
-                    return [
-                        'price'=>$productP->price,
-                        'firm_name'=>$productP->party->firm_name
-                    ];
-                }),
-                // "product_price_list" => $quotation_detail->product->productPrice->party,
-                "purchase_price"=> $quotation_detail->purchase_price,
-                "description"=> $quotation_detail->description,
-                "quantity"=> $quotation_detail->quantity,
-                // "delivered_quantity"=> $quotation_detail->quantity,
-                "delivered_quantity"=> $quotation_detail->getDeliveredQuantity($quotation_detail),
-                "margin"=> $quotation_detail->margin,
-                "sell_price"=> $quotation_detail->sell_price,
-                "remark"=> $quotation_detail->remark,
-                "file" => $urlPath,
-                "created_at"=> $quotation_detail->created_at,
-                "updated_at"=> $quotation_detail->updated_at
+                return [
+                    "id" => $quotation_detail->id,
+                    "total_amount" => $quotation_detail->total_amount,
+                    "analyse_id" => $quotation_detail->analyse_id,
+                    "product_id" => $quotation_detail->product_id,
+                    "descriptionss" => $quotation_detail->product->description,
+                    "product" => $quotation_detail->product,
+                    "product_price_list" => $quotation_detail->product->productPrice->map(function ($productP) {
+                        return [
+                            'price' => $productP->price,
+                            'firm_name' => $productP->party->firm_name
+                        ];
+                    }),
+                    // "product_price_list" => $quotation_detail->product->productPrice->party,
+                    "purchase_price" => $quotation_detail->purchase_price,
+                    "description" => $quotation_detail->description,
+                    "quantity" => $quotation_detail->quantity,
+                    // "delivered_quantity"=> $quotation_detail->quantity,
+                    "delivered_quantity" => $quotation_detail->getDeliveredQuantity($quotation_detail),
+                    "margin" => $quotation_detail->margin,
+                    "sell_price" => $quotation_detail->sell_price,
+                    "remark" => $quotation_detail->remark,
+                    "file" => $urlPath,
+                    "created_at" => $quotation_detail->created_at,
+                    "updated_at" => $quotation_detail->updated_at
                 ];
             })
         ];
@@ -358,7 +372,7 @@ class QuotationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $quotation = Quotation::where("id",$id)->firstOrFail();
+        $quotation = Quotation::where("id", $id)->firstOrFail();
         $data = $request->all();
         $quotation->update([
             'po_number' => $data['po_number'],
@@ -372,12 +386,12 @@ class QuotationController extends Controller
             'discount_in_p' => $data['discount_in_p'],
             'ps_date' => $data['ps_date'],
             // 'sales_order_number' => $data['sales_order_number'],
-            ]);
-            if($data['quotation_details']){
-                foreach($data['quotation_details'] as $quotation_detail){
-                    $quotationDetail = QuotationDetail::where('id', $quotation_detail['id'])->first();
-                    if(isset($quotationDetail)){
-                        $quotationDetail->update([
+        ]);
+        if ($data['quotation_details']) {
+            foreach ($data['quotation_details'] as $quotation_detail) {
+                $quotationDetail = QuotationDetail::where('id', $quotation_detail['id'])->first();
+                if (isset($quotationDetail)) {
+                    $quotationDetail->update([
                         'total_amount' => $quotation_detail['total_amount'],
                         'analyse_id' => $quotation_detail['analyse_id'],
                         'product_id' => $quotation_detail['product_id'],
@@ -387,22 +401,22 @@ class QuotationController extends Controller
                         'margin' => $quotation_detail['margin'],
                         'sell_price' => $quotation_detail['sell_price'],
                         'remark' => $quotation_detail['remark'],
-                        ]);
-                    }else{
-                        QuotationDetail::create([
-                            'quotation_id' => $quotation->id,
-                            'total_amount' => $quotation_detail['total_amount'],
-                            // 'analyse_id' => $quotation_detail['analyse_id'],
-                            'product_id' => $quotation_detail['product_id'],
-                            'purchase_price' => $quotation_detail['purchase_price'],
-                            'description' => $quotation_detail['description'],
-                            'quantity' => $quotation_detail['quantity'],
-                            'margin' => $quotation_detail['margin'],
-                            'sell_price' => $quotation_detail['sell_price'],
-                            'remark' => $quotation_detail['remark'],
-                        ]);
-                    }
+                    ]);
+                } else {
+                    QuotationDetail::create([
+                        'quotation_id' => $quotation->id,
+                        'total_amount' => $quotation_detail['total_amount'],
+                        // 'analyse_id' => $quotation_detail['analyse_id'],
+                        'product_id' => $quotation_detail['product_id'],
+                        'purchase_price' => $quotation_detail['purchase_price'],
+                        'description' => $quotation_detail['description'],
+                        'quantity' => $quotation_detail['quantity'],
+                        'margin' => $quotation_detail['margin'],
+                        'sell_price' => $quotation_detail['sell_price'],
+                        'remark' => $quotation_detail['remark'],
+                    ]);
                 }
+            }
             return response()->json(['msg' => 'successfully added']);
         }
         // return response()->json($quotation);
@@ -423,13 +437,13 @@ class QuotationController extends Controller
         // new validation logic for po_number
 
         $unique_po_no = Quotation::where('po_number', $request->po_number)->first();
-        if(isset($unique_po_no)){
-            return response()->json(['msg'=>'P.O.Number is exsits']);
+        if (isset($unique_po_no)) {
+            return response()->json(['msg' => 'P.O.Number is exsits']);
         }
 
         $data = $request->all();
         $data['sales_order_number'] = $this->getSalesOrderNumber();
-        $quotation = Quotation::where("id",$id)->firstOrFail();
+        $quotation = Quotation::where("id", $id)->firstOrFail();
         $quotation->update([
             'status' => $data['status'],
             'sales_order_number' => $data['sales_order_number'],
@@ -447,7 +461,7 @@ class QuotationController extends Controller
      */
     public function destroy($id)
     {
-        $quotation = Quotation::where('id',$id)->first();
+        $quotation = Quotation::where('id', $id)->first();
 
         $res = $quotation->delete();
         if ($res) {
@@ -457,7 +471,7 @@ class QuotationController extends Controller
 
     public function invoice_list()
     {
-        $quotations = Quotation::where('status','=','po')->orderBy('created_at', 'DESC')->get();
+        $quotations = Quotation::where('status', '=', 'po')->orderBy('created_at', 'DESC')->get();
         $quotations_data = [
             $quotations->map(
                 function ($quotation) {
@@ -502,11 +516,11 @@ class QuotationController extends Controller
     {
         $quotations = Quotation::whereExists(function ($query) {
             $query->select(DB::raw(1))
-            ->from('invoices')
-            ->whereRaw('invoices.quotation_id = quotations.id');
+                ->from('invoices')
+                ->whereRaw('invoices.quotation_id = quotations.id');
         })->orderBy('created_at', 'DESC')
-        //->where('status', '=', 'po')
-        ->get();
+            //->where('status', '=', 'po')
+            ->get();
 
         return response()->json($quotations);
     }
