@@ -209,26 +209,26 @@ class QuotationController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        // $data = $request->all();
         // return $request;
 
         try {
             $datas = [
-                'party_id' => $data['party_id'],
-                // 'rfq_id' => $data['rfq_id'],
+                'party_id' => $request['party_id'],
+                // 'rfq_id' => $request['rfq_id'],
                 'status' => 'New',
-                'total_value' => $data['total_value'],
-                'net_amount' => $data['net_amount'],
-                'vat_in_value' => $data['vat_in_value'],
-                'discount_in_p' => $data['discount_in_p'],
-                'validity' => $data['validity'],
-                'payment_terms' => $data['payment_terms'],
-                'warranty' => $data['warranty'],
-                'delivery_time' => $data['delivery_time'],
-                'inco_terms' => $data['inco_terms'],
-                'contact_id' => $data['contact_id'],
-                'transaction_type' => $data['transaction_type'],
-                'ps_date' => $data['ps_date'],
+                'total_value' => $request['total_value'],
+                'net_amount' => $request['net_amount'],
+                'vat_in_value' => $request['vat_in_value'],
+                'discount_in_p' => $request['discount_in_p'],
+                'validity' => $request['validity'],
+                'payment_terms' => $request['payment_terms'],
+                'warranty' => $request['warranty'],
+                'delivery_time' => $request['delivery_time'],
+                'inco_terms' => $request['inco_terms'],
+                'contact_id' => $request['contact_id'],
+                'transaction_type' => $request['transaction_type'],
+                'ps_date' => $request['ps_date'],
             ];
 
             if ($request->transaction_type === 'sale') {
@@ -245,7 +245,7 @@ class QuotationController extends Controller
         global $quotation_id;
         $quotation_id = $quotation->id;
             // dd($request->quotation_details);
-        foreach($data['quotation_details'] as $key => $quotation_detail){
+        foreach($request['quotation_details'] as $key => $quotation_detail){
 
             // $temp = (object) $quotation_detail;
             $index = 0;
