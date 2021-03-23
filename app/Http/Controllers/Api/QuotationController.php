@@ -245,7 +245,7 @@ class QuotationController extends Controller
         global $quotation_id;
         $quotation_id = $quotation->id;
             // dd($request->quotation_details);
-        // foreach($data['quotation_details'] as $key => $quotation_detail){
+        foreach($data['quotation_details'] as $key => $quotation_detail){
 
             // $temp = (object) $quotation_detail;
             $index = 0;
@@ -273,7 +273,7 @@ class QuotationController extends Controller
         }
         return response()->json(['msg' => 'successfully added']);
         }
-
+    }
         catch(Exception $e){
             return response()->json($e, 201);
         }
@@ -298,7 +298,7 @@ class QuotationController extends Controller
             "discount_in_p" => $quotation->discount_in_p ,
             "vat_in_value" => $quotation->vat_in_value ,
             "net_amount" => $quotation->net_amount ,
-            "created_at" => $quotation->net_amount,
+            "created_at" => $quotation->created_at,
             "updated_at" => $quotation->updated_at,
             "validity" => $quotation->validity,
             "payment_terms" => $quotation->payment_terms,
