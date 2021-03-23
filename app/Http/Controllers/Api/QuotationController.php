@@ -245,7 +245,7 @@ class QuotationController extends Controller
         global $quotation_id;
         $quotation_id = $quotation->id;
             // dd($request->quotation_details);
-        foreach($request['quotation_details'] as $key => $quotation_detail){
+        // foreach($request['quotation_details'] as $key => $quotation_detail){
 
             // $temp = (object) $quotation_detail;
             $index = 0;
@@ -271,7 +271,7 @@ class QuotationController extends Controller
             ]);
             $index++;
         }
-    }
+    // }
     return response()->json(['msg' => 'successfully added']);
     }
         catch(Exception $e){
