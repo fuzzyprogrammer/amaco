@@ -33,7 +33,7 @@ class AdvancePaymentStatementController extends Controller
     {
         $paymentAccount = PaymentAccount::where('id', intval($request['payment_account_id']))->first();
         if (!$paymentAccount) {
-            return response('No paymentAccount exists by this id', 400);
+            return response('No paymentAccount exists by this id', 500);
         }
 
         // -----------------------------------
