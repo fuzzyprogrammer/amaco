@@ -29,7 +29,7 @@ class AdvancePaymentStatementController extends Controller
             return $temp;
     }
 
-    public function accountStatement(Request $request)
+    public function statement(Request $request)
     {
         $paymentAccount = PaymentAccount::where('id', intval($request['payment_account_id']))->first();
         if (!$paymentAccount) {
