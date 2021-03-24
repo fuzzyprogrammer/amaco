@@ -17,7 +17,7 @@ class AdvancePaymentStatementController extends Controller
 
         $temp = new Collection();
         $temp = Expense::where('payment_account_id', $payment_account_id)
-            ->whereBetween('created_at', [$from_date . ' ' . '00:00:00', $to_date . ' ' . '23:59:59'])->get();
+            ->whereBetween('paid_date', [$from_date . ' ' . '00:00:00', $to_date . ' ' . '23:59:59'])->get();
         return $temp;
     }
 
@@ -25,7 +25,7 @@ class AdvancePaymentStatementController extends Controller
     {
         $temp = new Collection();
         $temp = AdvancePayment::where('payment_account_id', $payment_account_id)
-            ->whereBetween('created_at', [$from_date . ' ' . '00:00:00', $to_date . ' ' . '23:59:59'])->get();
+            ->whereBetween('received_date', [$from_date . ' ' . '00:00:00', $to_date . ' ' . '23:59:59'])->get();
             return $temp;
     }
 
@@ -50,11 +50,11 @@ class AdvancePaymentStatementController extends Controller
 
         foreach ($oldData as $key => $item) {
             if ($item->has('company_name')) {
-                $paymentAccountOpeningBalance += floatVal($item['amount']);
+                $paymentAccountOpeningBalance -= floatVal($item['amount']);
             }
 
             if ($item->has('narration')) {
-                $paymentAccountOpeningBalance -= floatVal($item['amount']);
+                $paymentAccountOpeningBalance += floatVal($item['amount']);
             }
         }
         // ------------------------------------
