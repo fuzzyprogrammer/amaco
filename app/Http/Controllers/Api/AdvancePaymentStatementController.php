@@ -32,7 +32,7 @@ class AdvancePaymentStatementController extends Controller
     public function statement(Request $request)
     {
         $paymentAccount = PaymentAccount::where('id', intval($request['payment_account_id']))->first();
-        
+
         if (!$paymentAccount) {
             return response('No paymentAccount exists by this id', 500);
         }
@@ -49,11 +49,11 @@ class AdvancePaymentStatementController extends Controller
         $oldData = $oldData->sortBy('created_at');
 
         foreach ($oldData as $key => $item) {
-            if ($item->has('narration')) {
+            if ($item->has('company_name')) {
                 $paymentAccountOpeningBalance += floatVal($item['amount']);
             }
 
-            if ($item->has('company_name')) {
+            if ($item->has('narration')) {
                 $paymentAccountOpeningBalance -= floatVal($item['amount']);
             }
         }
@@ -71,8 +71,8 @@ class AdvancePaymentStatementController extends Controller
                 $item['date'] = $item->created_at;
                 $item['code_no'] = $item->transaction_id;
                 $item['description'] = $item->description;
-                $item['debit'] = $item->amount;
-                $item['credit'] = null;
+                $item['debit'] = null;
+                $item['credit'] = $item->amount;
                 return [$item];
             }
 
@@ -80,8 +80,8 @@ class AdvancePaymentStatementController extends Controller
                 $item['date'] = $item->created_at;
                 $item['code_no'] = null;
                 $item['description'] = $item->narration;
-                $item['credit'] = $item->amount;
-                $item['debit'] = null;
+                $item['credit'] = null;
+                $item['debit'] = $item->amount;
                 return [$item];
             }
         }));
