@@ -49,11 +49,11 @@ class AdvancePaymentStatementController extends Controller
         $oldData = $oldData->sortBy('created_at');
 
         foreach ($oldData as $key => $item) {
-            if ($key->has('paid_date')) {
+            if ($item['paid_date']) {
                 $paymentAccountOpeningBalance -= floatVal($item['amount']);
             }
 
-            if ($key->has('narration')) {
+            if ($item['narration']) {
                 $paymentAccountOpeningBalance += floatVal($item['amount']);
             }
         }
