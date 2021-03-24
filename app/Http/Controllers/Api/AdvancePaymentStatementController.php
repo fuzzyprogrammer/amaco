@@ -67,7 +67,7 @@ class AdvancePaymentStatementController extends Controller
         $data = $data->sortBy('created_at');
 
         $data && ($datas['data'] = $data->map(function ($item) {
-            if ($item->company_name) {
+            if ($item->paid_date) {
                 $item['date'] = $item->created_at;
                 $item['code_no'] = $item->transaction_id;
                 $item['description'] = $item->description;
