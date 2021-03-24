@@ -31,7 +31,8 @@ class AdvancePaymentStatementController extends Controller
 
     public function statement(Request $request)
     {
-        $paymentAccount = PaymentAccount::where('id', intval($request['payment_account_id']))->get();
+        // $paymentAccount = PaymentAccount::where('id', intval($request['payment_account_id']))->first();
+        $paymentAccount = PaymentAccount::find(intval($request['payment_account_id']));
         return $paymentAccount;
         if (!$paymentAccount) {
             return response('No paymentAccount exists by this id', 500);
