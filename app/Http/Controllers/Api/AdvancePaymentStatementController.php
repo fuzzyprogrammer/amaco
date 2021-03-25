@@ -114,7 +114,7 @@ class AdvancePaymentStatementController extends Controller
 
         $data = $expenseCollection->merge($advancePaymentCollection);
         $data = $data->sortBy('created_at');
-        
+
         $data && ($datas['data'] = $data->map(function ($item) {
             if ($item->paid_date) {
                 $item['date'] = $item->created_at;
@@ -134,6 +134,8 @@ class AdvancePaymentStatementController extends Controller
                 return [$item];
             }
         }));
+        $datas['opening_balance'] = 0;
+
         return response()->json([$datas]);
     }
 }
