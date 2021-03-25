@@ -72,13 +72,16 @@ class ExpenseController extends Controller
         foreach ((array)$tempArray as $column_data ) {
             // return response($column_data);
             $column_type = $column_data['type'];
-            if($column_type == 'file'){
-                $obj_column_data =(object) $column_data;
-                $column_path = $obj_column_data->file('file')->move(public_path('expences/'.$expense->id));
-                $column_data_value = $column_path;
-            }else{
+            if($column_type != 'file'){
                 $column_data_value = $column_data[$column_type];
             }
+
+            foreach ($request as $key => $item) {
+                if($item == 'file'.$column_data['column_id']){
+                    $column_data_value = $request->file($item)->move('expense/files/');
+                }
+            }
+
             ColumnData::create([
                 "expense_id" => $expense->id,
                 "column_id" => $column_data['column_id'],
