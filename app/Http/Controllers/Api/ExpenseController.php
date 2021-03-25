@@ -49,7 +49,6 @@ class ExpenseController extends Controller
             $dig = count($temp)-1;
             $new_path = $temp[$dig];
         }
-        $tempArray = json_decode($request->data, true);
         $expense = Expense::create([
             'created_by'=>$request->created_by,
             'paid_date'=>$request->paid_date,
@@ -69,22 +68,22 @@ class ExpenseController extends Controller
             "company_name" => $request->company_name ? $request->company_name : null,
         ]);
 
+        $tempArray = json_decode($request->data, true);
         foreach ((array)$tempArray as $column_data ) {
-            // return response($column_data);
             $column_type = $column_data['type'];
             if($column_type != 'file'){
                 $column_data_value = $column_data[$column_type];
             }
 
-            foreach ($request as $key => $item) {
-                if($item == 'file'.$column_data['column_id']){
-                    $column_data_value = $request->file($item)->move('expense/files/');
+            foreach ($request as  $item) {
+                if($item == 'file'.$column_data['id']){
+                    $column_data_value = $request->file($item)->move('expenses/files/');
                 }
             }
 
             ColumnData::create([
                 "expense_id" => $expense->id,
-                "column_id" => $column_data['column_id'],
+                "column_id" => $column_data['id'],
                 "value" => $column_data_value,
             ]);
         }
