@@ -135,8 +135,9 @@ class AccountStatementController extends Controller
             }
         }));
         $datas['opening_balance'] = 0;
-        $request['from_date'] && $datas['from_date'] = $request['from_date'];
-        $request['to_date'] && $datas['to_date'] = $request['to_date'];
+        $datas['name'] = "All";
+        $datas['from_date'] = $request['from_date'] || "2021-01-01";
+        $datas['to_date'] = $request['to_date'] || now();
 
         return response()->json([$datas]);
     }
