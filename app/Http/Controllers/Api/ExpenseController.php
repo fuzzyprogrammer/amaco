@@ -51,7 +51,7 @@ class ExpenseController extends Controller
         }
 
         if($request->file('file_path')){
-            $filPath = $request->file('file_path')->move("/expenses/filePath");
+            $filePath = $request->file('file_path')->move("expenses/filePath");
         }
 
 
