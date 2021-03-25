@@ -128,6 +128,8 @@ Route::get('quotations-rejected-list', [QuotationController::class, 'rejectedLis
 Route::put('update-quotation/{id}', [QuotationController::class, 'updateQuotation'])->name('quotations.status.update');
 Route::post('old-password', [UserController::class, 'oldPassword']);
 Route::post('account-statement', [AccountStatementController::class, 'accountStatement']);
+Route::post('all-account-statement', [AccountStatementController::class, 'allAccountStatement']);
 Route::post('advance-payment-statement',[AdvancePaymentStatementController::class,'statement']);
+Route::post('all-advance-payment-statement',[AdvancePaymentStatementController::class, 'allAdvancePaymentStatement']);
 
 

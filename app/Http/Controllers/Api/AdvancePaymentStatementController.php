@@ -95,4 +95,25 @@ class AdvancePaymentStatementController extends Controller
 
         return response()->json([$datas]);
     }
+
+    public function allAdvancePaymentStatement(Request $request)
+    {
+        $expenseCollection = new Collection();
+        if ($request->from_date) {
+            $expenseCollection = Expense::whereBetween('created_at', [$request->from_date . ' ' . '00:00:00', $request->to_date ? $request->to_date . ' ' . '23:59:59' : now()])->get();
+        } else {
+            $expenseCollection = Expense::all();
+        }
+
+        $advancePaymentCollection = new Collection();
+        if ($request->from_date) {
+            $advancePaymentCollection = AdvancePayment::whereBetween('created_at', [$request->from_date . ' ' . '00:00:00', $request->to_date ? $request->to_date . ' ' . '23:59:59' : now()])->get();
+        } else {
+            $advancePaymentCollection = AdvancePayment::all();
+        }
+
+        $data = $expenseCollection->merge($advancePaymentCollection);
+
+        return response()->json($data);
+    }
 }
