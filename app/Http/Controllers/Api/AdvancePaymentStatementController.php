@@ -113,7 +113,25 @@ class AdvancePaymentStatementController extends Controller
         }
 
         $data = $expenseCollection->merge($advancePaymentCollection);
+        $data && ($datas['data'] = $data->map(function ($item) {
+            if ($item->paid_date) {
+                $item['date'] = $item->created_at;
+                $item['code_no'] = $item->transaction_id;
+                $item['description'] = $item->description;
+                $item['debit'] = null;
+                $item['credit'] = $item->amount;
+                return [$item];
+            }
 
+            if ($item->received_date) {
+                $item['date'] = $item->created_at;
+                $item['code_no'] = null;
+                $item['description'] = $item->narration;
+                $item['credit'] = null;
+                $item['debit'] = $item->amount;
+                return [$item];
+            }
+        }));
         return response()->json($data);
     }
 }

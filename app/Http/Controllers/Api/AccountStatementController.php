@@ -113,7 +113,25 @@ class AccountStatementController extends Controller
         }
 
         $data = $invoiceCollection->merge($receiptCollection);
+        $data && ($datas['data'] = $data->map(function ($item) {
+            if ($item->total_value) {
+                $item['date'] = $item->created_at;
+                $item['code_no'] = $item->invoice_no;
+                $item['description'] = "Sale";
+                $item['debit'] = $item->total_value;
+                $item['credit'] = null;
+                return [$item];
+            }
 
+            if ($item->paid_amount) {
+                $item['date'] = $item->created_at;
+                $item['code_no'] = $item->receipt_no;
+                $item['description'] = "Received";
+                $item['credit'] = $item->paid_amount;
+                $item['debit'] = null;
+                return [$item];
+            }
+        }));
         return response()->json($data);
     }
 }
