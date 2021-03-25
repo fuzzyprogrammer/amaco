@@ -51,7 +51,7 @@ class ExpenseController extends Controller
         }
 
         if($request->file('file_path')){
-            $filPath = $request->file('file_path')->move("/expenses/file_path");
+            $filPath = $request->file('file_path')->move("/expenses/filePath");
         }
 
 
@@ -72,7 +72,7 @@ class ExpenseController extends Controller
             'bank_slip'=> $request->file('bank_slip') ? '/expenses/bankSlip/'.$new_path :"No file uploaded",
             "account_category_id" => $request->account_category_id,
             "company_name" => $request->company_name ? $request->company_name : null,
-            "file_path" => $filPath,
+            "file_path" => $filePath,
         ]);
 
         $tempArray = json_decode($request->data, true);
