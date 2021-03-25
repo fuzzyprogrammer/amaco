@@ -136,8 +136,8 @@ class AdvancePaymentStatementController extends Controller
         }));
         $datas['opening_balance'] = 0;
         $datas['name'] = "All";
-        $datas['from_date'] = $request['from_date'] || "2021-01-01";
-        $datas['to_date'] = $request['to_date'] || now();
+        $datas['from_date'] = $request['from_date'] ? $request['from_date'] : "2021-01-01";
+        $datas['to_date'] = $request['to_date'] ? $request['to_date'] : now();
 
         return response()->json([$datas]);
     }
