@@ -49,6 +49,12 @@ class ExpenseController extends Controller
             $dig = count($temp)-1;
             $new_path = $temp[$dig];
         }
+
+        if($request->file('file_path')){
+            $filPath = $request->file('file_path')->move("/expenses/file_path");
+        }
+
+
         $expense = Expense::create([
             'created_by'=>$request->created_by,
             'paid_date'=>$request->paid_date,
@@ -66,6 +72,7 @@ class ExpenseController extends Controller
             'bank_slip'=> $request->file('bank_slip') ? '/expenses/bankSlip/'.$new_path :"No file uploaded",
             "account_category_id" => $request->account_category_id,
             "company_name" => $request->company_name ? $request->company_name : null,
+            "file_path" => $filPath,
         ]);
 
         $tempArray = json_decode($request->data, true);
