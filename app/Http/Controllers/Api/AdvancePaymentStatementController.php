@@ -132,6 +132,6 @@ class AdvancePaymentStatementController extends Controller
                 return [$item];
             }
         }));
-        return response()->json([$data]);
+        return response()->json([$datas]);
     }
 }
