@@ -20,7 +20,7 @@ class ExpenseController extends Controller
     public function index()
     {
         $expenses = Expense::where("status", "new")->orderBy('created_at', 'DESC')->get();
-        $expenses->map(function($expense){
+        $expenses->map(function ($expense) {
             return $expense->payment_account;
         });
         return response()->json($expenses);
@@ -44,52 +44,52 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->file('bank_slip')){
+        if ($request->file('bank_slip')) {
             $path = $request->file('bank_slip')->move(public_path("/expenses/bankSlip"));
-            $temp = explode('/',$path);
-            $dig = count($temp)-1;
+            $temp = explode('/', $path);
+            $dig = count($temp) - 1;
             $new_path = $temp[$dig];
         }
 
-        if($request->file('file_path')){
+        if ($request->file('file_path')) {
             $filePath = $request->file('file_path')->move("expenses/filePath");
         }
 
 
         $expense = Expense::create([
-            'created_by'=>$request->created_by,
-            'paid_date'=>$request->paid_date,
-            'paid_to'=>$request->paid_to,
-            'amount'=>$request->amount,
-            'payment_type'=>$request->payment_type,
-            'check_no'=>$request->check_no,
-            'transaction_id'=>$request->transaction_id,
-            'payment_account_id'=>$request->payment_account_id,
-            'description'=>$request->description,
-            'referrence_bill_no'=>$request->referrence_bill_no,
-            'tax'=>$request->tax,
-            'status'=>$request->status,
-            'paid_by'=>$request->payment_account_id,
-            'bank_ref_no'=>$request->bank_ref_no,
-            'bank_slip'=> $request->file('bank_slip') ? '/expenses/bankSlip/'.$new_path :"No file uploaded",
+            'created_by' => $request->created_by,
+            'paid_date' => $request->paid_date,
+            'paid_to' => $request->paid_to,
+            'amount' => $request->amount,
+            'payment_type' => $request->payment_type,
+            'check_no' => $request->check_no,
+            'transaction_id' => $request->transaction_id,
+            'payment_account_id' => $request->payment_account_id,
+            'description' => $request->description,
+            'referrence_bill_no' => $request->referrence_bill_no,
+            'tax' => $request->tax,
+            'status' => $request->status,
+            'paid_by' => $request->payment_account_id,
+            'bank_ref_no' => $request->bank_ref_no,
+            'bank_slip' => $request->file('bank_slip') ? '/expenses/bankSlip/' . $new_path : "No file uploaded",
             "account_category_id" => $request->account_category_id,
             "company_name" => $request->company_name ? $request->company_name : null,
             "file_path" => $filePath,
 
         ]);
 
-        $tempArray = $request->data;
-        foreach ((array)$tempArray as $column_data_ ) {
-            $column_data =(array) json_decode($column_data_ , true);
+        $tempArray = (array) json_decode($request->data, true);
+        foreach ($tempArray as $column_data_) {
+            $column_data = $column_data_;
             return $column_data;
             $column_type = $column_data && $column_data['type'];
-            if($column_type != 'file'){
+            if ($column_type != 'file') {
                 return response('its inside test form');
                 $column_data_value = $column_data[$column_type];
             }
 
-            $tempFile = 'file'.(string)$column_data['id'];
-            if($request['$tempFile']){
+            $tempFile = 'file' . (string)$column_data['id'];
+            if ($request['$tempFile']) {
                 $column_data_value = $request->file($tempFile)->move('expenses/files');
             }
             // if($request->file('file45')){
@@ -103,7 +103,6 @@ class ExpenseController extends Controller
             ]);
         }
         return response()->json(['msg' => "successfully added."]);
-
     }
 
     /**
@@ -117,11 +116,11 @@ class ExpenseController extends Controller
         return response()->json([
             $expense,
             $expense->payment_account,
-            $expense->column_data->map(function($item){
+            $expense->column_data->map(function ($item) {
                 return $item->column;
             }),
-            'img'=>$expense->img(),
-            ]);
+            'img' => $expense->img(),
+        ]);
     }
 
     /**
@@ -147,8 +146,6 @@ class ExpenseController extends Controller
     public function destroy(Expense $expense)
     {
         $expense->delete();
-        return response()->json(['msg' => 'Expense '.$expense.' has been deleted.']);
+        return response()->json(['msg' => 'Expense ' . $expense . ' has been deleted.']);
     }
-
-
 }
