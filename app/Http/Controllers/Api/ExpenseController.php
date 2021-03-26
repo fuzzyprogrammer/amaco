@@ -68,7 +68,7 @@ class ExpenseController extends Controller
             'referrence_bill_no'=>$request->referrence_bill_no,
             'tax'=>$request->tax,
             'status'=>$request->status,
-            'paid_by'=>$request->paid_by,
+            'paid_by'=>$request['paid_by'],
             'bank_ref_no'=>$request->bank_ref_no,
             'bank_slip'=> $request->file('bank_slip') ? '/expenses/bankSlip/'.$new_path :"No file uploaded",
             "account_category_id" => $request->account_category_id,
