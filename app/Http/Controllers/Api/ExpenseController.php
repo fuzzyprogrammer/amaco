@@ -78,7 +78,7 @@ class ExpenseController extends Controller
         ]);
 
         $tempArray = $request->data;
-        foreach ((array)$tempArray as $column_data ) {
+        foreach ($tempArray as $column_data ) {
             $column_type = $column_data['type'];
             if($column_type != 'file'){
                 return response('its inside test form');
