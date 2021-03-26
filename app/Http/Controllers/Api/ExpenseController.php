@@ -90,8 +90,9 @@ class ExpenseController extends Controller
             //     }
             // }
 
-            elseif($request->file('file' . $column_data['id'])){
-                $column_data_value = $request->file('file'. $column_data['id'])->move('expenses/files');
+            $tempFile = 'file' . $column_data['id'];
+            if($request->file($tempFile)){
+                $column_data_value = $request->file($tempFile)->move('expenses/files');
             }
 
             ColumnData::create([
