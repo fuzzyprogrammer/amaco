@@ -87,7 +87,7 @@ class ExpenseController extends Controller
                 $column_data_value = $column_data[$column_type];
             }
 
-            $tempFile = 'file' . (string)$column_data['id'];
+            $tempFile = "file".$column_data['id'];
             if ($request->file('$tempFile')) {
                 $column_data_value = $request->file($tempFile)->move('expenses/files');
             }
