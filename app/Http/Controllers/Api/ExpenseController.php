@@ -82,7 +82,7 @@ class ExpenseController extends Controller
         foreach ($tempArray as $column_data_) {
             $column_data = $column_data_;
 
-            $column_type = $column_data && $column_data['type'];
+            $column_type = $column_data['type'];
             if ($column_type != 'file') {
                 $column_data_value = $column_data[$column_type];
             }
