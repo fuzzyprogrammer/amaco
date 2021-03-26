@@ -84,11 +84,11 @@ class ExpenseController extends Controller
                 $column_data_value = $column_data[$column_type];
             }
 
-            foreach ($request as  $item) {
-                if($item == 'file'.$column_data['id']){
-                    $column_data_value = $request->file($item)->move('expenses/files/');
-                }
-            }
+            // foreach ($request as  $item) {
+            //     if($item == 'file'.$column_data['id']){
+            //         $column_data_value = $request->file($item)->move('expenses/files/');
+            //     }
+            // }
 
             ColumnData::create([
                 "expense_id" => $expense->id,
