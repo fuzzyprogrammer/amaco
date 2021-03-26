@@ -81,7 +81,7 @@ class ExpenseController extends Controller
         $tempArray = $request->data;
         foreach ((array)$tempArray as $column_data ) {
             // $column_data = json_decode($column_data_, true);
-            $column_type = $column_data['type'] && $column_data['type'];
+            $column_type = $column_data && $column_data['type'];
             if($column_type != 'file'){
                 return response('its inside test form');
                 $column_data_value = $column_data[$column_type];
