@@ -85,13 +85,15 @@ class ExpenseController extends Controller
             $column_type = $column_data['type'];
             if ($column_type != 'file') {
                 $column_data_value = $column_data[$column_type];
+            }else{
+                $tempFile = "file" . $column_data['id'];
+                return $tempFile;
+                if ($request->file('$tempFile')) {
+                    $column_data_value = $request->file($tempFile)->move('expenses/files');
+                }
             }
 
-            $tempFile = "file".$column_data['id'];
-            // return $tempFile;
-            if ($request->file('$tempFile')) {
-                $column_data_value = $request->file($tempFile)->move('expenses/files');
-            }
+
 
 
             ColumnData::create([
