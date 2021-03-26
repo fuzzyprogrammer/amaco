@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ColumnData;
 use App\Models\Expense;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -78,7 +79,7 @@ class ExpenseController extends Controller
         ]);
 
         $tempArray = $request->data;
-        foreach ($tempArray as $column_data ) {
+        foreach ((array)$tempArray as $column_data ) {
             $column_data = json_decode($column_data, true);
             $column_type = $column_data['type'];
             if($column_type != 'file'){
