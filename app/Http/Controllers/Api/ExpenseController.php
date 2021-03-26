@@ -79,20 +79,14 @@ class ExpenseController extends Controller
 
         $tempArray = json_decode($request->data, true);
         foreach ((array)$tempArray as $column_data ) {
+            return response($column_data);
             $column_type = $column_data['type'];
             if($column_type != 'file'){
                 $column_data_value = $column_data[$column_type];
             }
 
-            // foreach ($request as  $item) {
-            //     if($item == 'file'.$column_data['id']){
-            //         $column_data_value = $request->file($item)->move('expenses/files/');
-            //     }
-            // }
-
             $tempFile = 'file'.(string)$column_data['id'];
             if($request['$tempFile']){
-                // return response('I am in if condition zizizziziiziziz');
                 $column_data_value = $request->file($tempFile)->move('expenses/files');
             }
             if($request->file('file45')){
