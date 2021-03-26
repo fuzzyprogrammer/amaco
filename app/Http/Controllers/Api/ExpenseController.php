@@ -81,20 +81,17 @@ class ExpenseController extends Controller
         $tempArray = (array) json_decode($request->data, true);
         foreach ($tempArray as $column_data_) {
             $column_data = $column_data_;
-            // return $column_data;
+
             $column_type = $column_data && $column_data['type'];
             if ($column_type != 'file') {
-                return response('its inside test form');
                 $column_data_value = $column_data[$column_type];
             }
 
             $tempFile = 'file' . (string)$column_data['id'];
-            if ($request['$tempFile']) {
+            if ($request->file('$tempFile')) {
                 $column_data_value = $request->file($tempFile)->move('expenses/files');
             }
-            // if($request->file('file45')){
-            //     $column_data_value = $request->file('file45')->move('files');
-            // }
+
 
             ColumnData::create([
                 "expense_id" => $expense->id,
