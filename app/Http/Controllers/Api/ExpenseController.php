@@ -92,11 +92,11 @@ class ExpenseController extends Controller
 
             $tempFile = 'file'.(string)$column_data['id'];
             if($request['$tempFile']){
-                return response('I am in if condition zizizziziiziziz');
+                // return response('I am in if condition zizizziziiziziz');
                 $column_data_value = $request->file($tempFile)->move('expenses/files');
             }
             if($request->file('file45')){
-                $column_data_value = $request->file('file45')->move('expenses/files');
+                $column_data_value = $request->file('file45')->move('files');
             }
 
             ColumnData::create([
