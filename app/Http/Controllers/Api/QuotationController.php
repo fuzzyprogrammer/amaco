@@ -435,17 +435,21 @@ class QuotationController extends Controller
         // new validation logic for po_number
 
         $unique_po_no = Quotation::where('po_number', $request->po_number)->first();
-        if (isset($unique_po_no)) {
-            return response()->json(['msg' => 'P.O.Number is exsits']);
-        }
-
         $data = $request->all();
-        $data['sales_order_number'] = $this->getSalesOrderNumber();
+        if($request->po_number){
+
+            if (isset($unique_po_no)) {
+                return response()->json(['msg' => 'P.O.Number is exsits']);
+            }
+
+            $data['sales_order_number'] = $this->getSalesOrderNumber();
+        }
         $quotation = Quotation::where("id", $id)->firstOrFail();
+
         $quotation->update([
             'status' => $data['status'],
-            'sales_order_number' => $data['sales_order_number'],
-            'po_number' => $data['po_number'],
+            'sales_order_number' => $data['sales_order_number'] || null,
+            'po_number' => $data['po_number'] || null,
         ]);
 
         return response()->json($quotation);
