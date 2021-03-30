@@ -230,7 +230,7 @@ class RFQController extends Controller
         //     echo $error;
         // }
         $data = $request->json()->all();
-        return $data;
+        return $request;
 
         try {
             $rfq->update([
