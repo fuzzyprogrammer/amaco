@@ -231,7 +231,7 @@ class RFQController extends Controller
         // }
         $data = $request->json()->all();
         $temp = json_decode($request, true);
-        return $temp;
+        return $data;
 
         try {
             $rfq->update([
