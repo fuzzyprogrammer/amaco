@@ -210,13 +210,14 @@ class QuotationController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = $request->all();
+        $data = $request->all();
         // return $request;
 
         try {
             $datas = [
                 'party_id' => $request['party_id'],
-                'rfq_id' => $request['rfq_id'] == null ? null : $request['rfq_id'] ,
+                'rfq_id' => $data['rfq_id'],
+                // 'rfq_id' => $request['rfq_id'] == null ? null : $request['rfq_id'] ,
                 'status' => 'New',
                 'total_value' => $request['total_value'],
                 'net_amount' => $request['net_amount'],
