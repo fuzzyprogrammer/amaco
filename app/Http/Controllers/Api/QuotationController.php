@@ -214,7 +214,7 @@ class QuotationController extends Controller
         if($id){
             return $id;
         }
-        return null;
+        return 'null';
     }
 
     public function store(Request $request)
