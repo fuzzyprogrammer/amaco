@@ -215,7 +215,7 @@ class QuotationController extends Controller
         try {
             $datas = [
                 'party_id' => $request['party_id'],
-                // 'rfq_id' => $request['rfq_id'],
+                'rfq_id' => $request['rfq_id'] || null,
                 'status' => 'New',
                 'total_value' => $request['total_value'],
                 'net_amount' => $request['net_amount'],
@@ -304,7 +304,7 @@ class QuotationController extends Controller
             "id" => $quotation->id,
             'quotation_no' => $quotation->quotation_no,
             "party_id" => $quotation->party_id,
-            "rfq_id" => $quotation->rfq_id,
+            "rfq_id" => $quotation->rfq_id || null,
             "status" => $quotation->status,
             "total_value" => $quotation->total_value,
             "discount_in_p" => $quotation->discount_in_p,

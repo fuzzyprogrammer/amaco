@@ -30,7 +30,7 @@ class RFQController extends Controller
                 ->whereRaw('quotations.rfq_id = r_f_q_s.id');
         })->orderBy('created_at', 'DESC')
         ->get();
-        //
+        
         // $rfqs = RFQ::orderBy('created_at', 'DESC')->get();
         $rfqs_data =[
             $rfqs->map(
