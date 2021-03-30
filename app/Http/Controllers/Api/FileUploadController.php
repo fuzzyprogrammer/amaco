@@ -97,7 +97,10 @@ class FileUploadController extends Controller
 
             dd('File does not exists.');
         }
-        return $fileUpload;
+
+        $fileUpload->delete();
+
+        return response()->json(['msg'=>"Successfully File Deleted"]);
 
     }
 }
