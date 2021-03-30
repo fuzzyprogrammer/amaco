@@ -208,7 +208,6 @@ class QuotationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      *
-     *
      */
     public function rfqId($id)
     {
@@ -220,7 +219,7 @@ class QuotationController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->all();
+        // $data = $request->all();
         // return $request;
 
         try {
