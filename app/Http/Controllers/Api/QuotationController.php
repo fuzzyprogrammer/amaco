@@ -375,10 +375,11 @@ class QuotationController extends Controller
      */
     public function update(Request $request, $id)
     {
+        return $request;
         $quotation = Quotation::where("id", $id)->firstOrFail();
         $data = $request->all();
         $quotation->update([
-            // 'po_number' => $data['po_number'],
+            'po_number' => $data['po_number'],
             // 'status' => $data['status'],
             'total_value' => $data['total_value'],
             'party_id' => $data['party_id'],
