@@ -17,7 +17,7 @@ class FileUploadController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**
@@ -87,6 +87,7 @@ class FileUploadController extends Controller
      */
     public function destroy(FileUpload $fileUpload)
     {
-        //
+        return $fileUpload;
+
     }
 }

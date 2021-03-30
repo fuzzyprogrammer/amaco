@@ -30,7 +30,7 @@ class RFQController extends Controller
                 ->whereRaw('quotations.rfq_id = r_f_q_s.id');
         })->orderBy('created_at', 'DESC')
         ->get();
-        
+
         // $rfqs = RFQ::orderBy('created_at', 'DESC')->get();
         $rfqs_data =[
             $rfqs->map(
@@ -240,6 +240,18 @@ class RFQController extends Controller
                 'party_id' => $data['party_id'],
             ]);
 
+            $index = 0;
+            while ($request['myFile' . $index] != null) {
+                if ($request->file('myFile' . $index)) {
+                    $name = $request['myFile' . $index]->getClientOriginalName();
+                    $path = $request->file('myFile' . $index)->move('rfq/' . $rfq->id, $name);
+                    FileUpload::create([
+                        'rfq_id' => $rfq->id,
+                        'file_name' => $path
+                    ]);
+                }
+                $index++;
+            }
 
             global $_rfq_id;
             $_rfq_id = $rfq['id'];
