@@ -216,7 +216,7 @@ class QuotationController extends Controller
         try {
             $datas = [
                 'party_id' => $request['party_id'],
-                'rfq_id' => $request['rfq_id'] == null ? $request['rfq_id'] : null,
+                'rfq_id' => $request['rfq_id'] == null ? null : $request['rfq_id']  ,
                 'status' => 'New',
                 'total_value' => $request['total_value'],
                 'net_amount' => $request['net_amount'],
