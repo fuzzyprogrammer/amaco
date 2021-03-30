@@ -12,7 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Exception;
-
+use Illuminate\Support\Facades\File;
 
 class QuotationController extends Controller
 {
@@ -378,7 +378,7 @@ class QuotationController extends Controller
         $quotation = Quotation::where("id", $id)->firstOrFail();
         $data = $request->all();
         $quotation->update([
-            'po_number' => $data['po_number'],
+            // 'po_number' => $data['po_number'],
             // 'status' => $data['status'],
             'total_value' => $data['total_value'],
             'party_id' => $data['party_id'],
@@ -402,6 +402,10 @@ class QuotationController extends Controller
                 'rfq_id' => $id
                 ])->first();
             if (isset($quotationDetail)) {
+                if (File::exists(public_path($quotationDetail->file_img_url))) {
+
+                    File::delete(public_path($quotationDetail->file_img_url));
+                }
                 if ($quotation_detail)
                     $quotationDetail->update([
                         'total_amount' => $quotation_detail['total_amount'],
