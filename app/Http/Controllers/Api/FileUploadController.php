@@ -7,6 +7,9 @@ use App\Models\FileUpload;
 use Illuminate\Http\Request;
 use App\Models\RFQ;
 use App\Http\Controllers\Api\RFQDetails;
+use Illuminate\Support\Facades\File;
+
+
 
 class FileUploadController extends Controller
 {
