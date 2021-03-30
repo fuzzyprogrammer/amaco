@@ -85,9 +85,8 @@ class FileUploadController extends Controller
      * @param  \App\Models\FileUpload  $fileUpload
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(FileUpload $fileUpload)
     {
-        $fileUpload = FileUpload::where('id', $id)->first();
         return $fileUpload;
 
     }
