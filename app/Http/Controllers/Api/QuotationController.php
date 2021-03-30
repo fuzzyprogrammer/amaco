@@ -436,6 +436,7 @@ class QuotationController extends Controller
 
         $unique_po_no = Quotation::where('po_number', $request->po_number)->first();
         $data = $request->all();
+        $quotation = Quotation::where("id", $id)->firstOrFail();
         if($request->po_number){
 
             if (isset($unique_po_no)) {
@@ -443,14 +444,18 @@ class QuotationController extends Controller
             }
 
             $data['sales_order_number'] = $this->getSalesOrderNumber();
+            $quotation->update([
+                'status' => $data['status'],
+                'sales_order_number' => $data['sales_order_number'],
+                'po_number' => $data['po_number'],
+            ]);
+        }else{
+            $quotation->update([
+                'status'=>$data['status'],
+            ]);
         }
-        $quotation = Quotation::where("id", $id)->firstOrFail();
 
-        $quotation->update([
-            'status' => $data['status'],
-            'sales_order_number' => $data['sales_order_number'] || null,
-            'po_number' => $data['po_number'] || null,
-        ]);
+
 
         return response()->json($quotation);
     }
