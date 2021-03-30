@@ -234,10 +234,10 @@ class RFQController extends Controller
 
         try {
             $rfq->update([
-                'requested_date' => $request->requested_date,
-                'require_date' => $request->require_date,
-                'contact_id' => $request->contact_id,
-                'party_id' => $request->party_id,
+                'requested_date' => $data['requested_date'],
+                'require_date' => $data['require_date'],
+                'contact_id' => $data['contact_id'],
+                'party_id' => $data['party_id'],
             ]);
 
             $index = 0;
