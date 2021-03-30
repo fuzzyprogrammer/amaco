@@ -214,6 +214,7 @@ class QuotationController extends Controller
     {
         // $data = $request->all();
         // return $request;
+        $rfqId = null;
         $rfqId = $request->rfq_id ? $request->rfq_id : null;
 
         try {
