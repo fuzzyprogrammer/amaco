@@ -8,6 +8,7 @@ use App\Models\QuotationDetail;
 use Illuminate\Http\Request;
 use App\Models\DeliveryNote;
 use App\Models\DeliveryNoteDetail;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Exception;
@@ -228,7 +229,7 @@ class QuotationController extends Controller
                 'inco_terms' => $request['inco_terms'],
                 'contact_id' => $request['contact_id'],
                 'transaction_type' => $request['transaction_type'],
-                'ps_date' => $request['ps_date'] || now(),
+                'ps_date' => $request['ps_date'] || Carbon::now(),
             ];
 
             if ($request->transaction_type === 'sale') {
