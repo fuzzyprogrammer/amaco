@@ -228,7 +228,7 @@ class QuotationController extends Controller
                 'inco_terms' => $request['inco_terms'],
                 'contact_id' => $request['contact_id'],
                 'transaction_type' => $request['transaction_type'],
-                'ps_date' => $request['ps_date'],
+                'ps_date' => $request['ps_date'] || now(),
             ];
 
             if ($request->transaction_type === 'sale') {
