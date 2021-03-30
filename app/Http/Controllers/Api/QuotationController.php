@@ -216,7 +216,7 @@ class QuotationController extends Controller
         try {
             $datas = [
                 'party_id' => $request['party_id'],
-                'rfq_id' => $request['rfq_id'],
+                'rfq_id' => $request['rfq_id'] ? $request['rfq_id'] : null,
                 'status' => 'New',
                 'total_value' => $request['total_value'],
                 'net_amount' => $request['net_amount'],
@@ -229,7 +229,7 @@ class QuotationController extends Controller
                 'inco_terms' => $request['inco_terms'],
                 'contact_id' => $request['contact_id'],
                 'transaction_type' => $request['transaction_type'],
-                'ps_date' => $request['ps_date'] || Carbon::now(),
+                'ps_date' => $request['ps_date'] ? $request['ps_date'] : Carbon::now(),
             ];
 
             if ($request->transaction_type === 'sale') {
