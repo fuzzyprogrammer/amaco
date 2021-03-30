@@ -207,7 +207,17 @@ class QuotationController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     *
+     *
      */
+    public function rfqId($id)
+    {
+        if($id){
+            return $id;
+        }
+        return null;
+    }
+
     public function store(Request $request)
     {
         $data = $request->all();
@@ -216,8 +226,7 @@ class QuotationController extends Controller
         try {
             $datas = [
                 'party_id' => $request['party_id'],
-                'rfq_id' => $data['rfq_id'],
-                // 'rfq_id' => $request['rfq_id'] == null ? null : $request['rfq_id'] ,
+                'rfq_id' => $this->rfqId($request['rfq_id']) ,
                 'status' => 'New',
                 'total_value' => $request['total_value'],
                 'net_amount' => $request['net_amount'],
