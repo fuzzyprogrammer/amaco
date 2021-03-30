@@ -87,14 +87,14 @@ class FileUploadController extends Controller
      */
     public function destroy(FileUpload $fileUpload)
     {
-        $res = if (File::exists(public_path($fileUpload->file_name))) {
+        if (File::exists(public_path($fileUpload->file_name))) {
 
             File::delete(public_path($fileUpload->file_name));
         } else {
 
-            ('File does not exists.');
+            dd('File does not exists.');
         }
-        return $res ;
+        return $fileUpload;
 
     }
 }
