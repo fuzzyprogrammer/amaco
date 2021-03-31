@@ -72,7 +72,7 @@ class ExpenseController extends Controller
             'status' => $request->status,
             'paid_by' => $request->payment_account_id,
             'bank_ref_no' => $request->bank_ref_no,
-            'bank_slip' => $request->file('bank_slip') ? '/expenses/bankSlip/' . $new_path : "No file uploaded",
+            'bank_slip' => $request->file('bank_slip') ? '/expenses/bankSlip/' . $new_path : null,
             "account_category_id" => $request->account_category_id,
             "company_name" => $request->company_name ? $request->company_name : null,
             "file_path" => $filePath,
@@ -123,6 +123,7 @@ class ExpenseController extends Controller
                 return $item->column;
             }),
             'img' => $expense->img(),
+            'referrenceImgUrl' => $expense->referrenceImg(),
         ]);
     }
 
