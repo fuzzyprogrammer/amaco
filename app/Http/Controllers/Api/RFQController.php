@@ -264,7 +264,7 @@ class RFQController extends Controller
                 $rfq_update_data = RFQDetails::findOrFail($rfq_detail['id']);
                 $_rfq_detail = $rfq_update_data->update([
                     'product_id' => $rfq_detail['id'],
-                    'description' => $rfq_detail['descriptionss'],
+                    'description' => $rfq_detail['description'],
                     'quantity' => $rfq_detail['quantity'],
                     'rfq_id' => $_rfq_id,
                 ]);
