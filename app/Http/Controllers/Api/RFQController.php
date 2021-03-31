@@ -242,7 +242,6 @@ class RFQController extends Controller
                 'requested_date' => $request->requested_date,
                 'require_date' => $request->require_date,
                 // 'contact_id' => $request->contact_id,
-                'party_id' => $request->party_id,
             ]);
 
             $index = 0;
