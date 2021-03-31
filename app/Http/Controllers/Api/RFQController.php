@@ -234,7 +234,7 @@ class RFQController extends Controller
         // return $request;
         try {
             $rfq->update([
-                'requested_date' => $request && $request->requested_date,
+                'requested_date' => $request->requested_date,
                 'require_date' => $request->require_date,
                 // 'contact_id' => $request->contact_id,
                 'party_id' => $request->party_id,
