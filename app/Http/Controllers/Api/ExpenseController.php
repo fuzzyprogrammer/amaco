@@ -99,7 +99,7 @@ class ExpenseController extends Controller
             ColumnData::create([
                 "expense_id" => $expense->id,
                 "column_id" => $column_data['id'],
-                "value" => $column_data_value || null,
+                "value" => $column_data_value ? $column_data_value : null  ,
             ]);
         }
         return response()->json(['msg' => "successfully added."]);
