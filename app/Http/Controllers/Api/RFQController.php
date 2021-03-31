@@ -210,7 +210,7 @@ class RFQController extends Controller
      * @param  \App\Models\RFQ  $rfq
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RFQ $rfq)
+    public function update(Request $request) //, RFQ $rfq
     {
         // $rules = [
         //     'requested_date' => 'required',
@@ -230,6 +230,11 @@ class RFQController extends Controller
         //     echo $error;
         // }
         // $data = $request->json()->all();
+        $rfq = RFQ::where('id', $request->rfq_id)->first();
+        if(!$rfq){
+            return response()->json(['There is no RFQ with id'.$request->rfq_id]);
+        }
+
         $data = json_decode($request['rfq_details'], true);
         return $request;
         try {
