@@ -229,8 +229,8 @@ class RFQController extends Controller
         // foreach ($errors as $error) {
         //     echo $error;
         // }
-        $data = $request->json()->all();
-        $temp = json_decode($request['rfq_details'], true);
+        // $data = $request->json()->all();
+        $data = json_decode($request['rfq_details'], true);
         // return $request;
         try {
             $rfq->update([
