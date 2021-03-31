@@ -15,8 +15,8 @@ class CreateRFQSTable extends Migration
     {
         Schema::create('r_f_q_s', function (Blueprint $table) {
             $table->id();
-            $table->date('requested_date')->nullable();
-            $table->date('require_date')->nullable();
+            $table->string('requested_date')->nullable();
+            $table->string('require_date')->nullable();
             $table->unsignedBigInteger('party_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('contact_id')->nullable();
