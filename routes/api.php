@@ -133,5 +133,6 @@ Route::post('advance-payment-statement',[AdvancePaymentStatementController::clas
 Route::post('all-advance-payment-statement',[AdvancePaymentStatementController::class, 'allAdvancePaymentStatement']);
 Route::post('rfq-update',[RFQController::class, 'update']);
 Route::post('sale-quotation-update',[QuotationController::class, 'update']);
+Route::delete('delete-quotation-detail/{quotation_detail}', [QuotationController::class, 'deleteFile']);
 
 

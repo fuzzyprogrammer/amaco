@@ -746,4 +746,14 @@ class QuotationController extends Controller
         ];
         return response()->json($quotations_data[0], 200);
     }
+
+    public function deleteFile(QuotationDetail $quotation_detail)
+    {
+        if (File::exists(public_path($quotation_detail->file_img_url))) {
+
+            File::delete(public_path($quotation_detail->file_img_url));
+            return response()->json(['msg' => "Successfully file is deleted"]);
+        }
+        return response()->json(['msg' => "There is no file in quotation detail"]);
+    }
 }
