@@ -263,7 +263,7 @@ class RFQController extends Controller
             foreach ((array) $temp as $rfq_detail) {
                 $rfq_update_data = RFQDetails::findOrFail($rfq_detail['id']);
                 $_rfq_detail = $rfq_update_data->update([
-                    'product_id' => $rfq_detail['id'],
+                    'product_id' => $rfq_detail['product_id'],
                     'description' => $rfq_detail['description'],
                     'quantity' => $rfq_detail['quantity'],
                     'rfq_id' => $_rfq_id,
