@@ -400,7 +400,7 @@ class QuotationController extends Controller
             }
             $quotationDetail = QuotationDetail::where([
                 'id' => $quotation_detail['id'] ,
-                'quotation_id' => $request->id
+                // 'quotation_id' => $request->id
                 ])->first();
             if (isset($quotationDetail)) {
                 if (File::exists(public_path($quotationDetail->file_img_url))) {
