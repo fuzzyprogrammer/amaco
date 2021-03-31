@@ -373,22 +373,22 @@ class QuotationController extends Controller
      * @param  \App\Models\Quotation  $quotation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         // return $request;
-        $quotation = Quotation::where("id", $id)->firstOrFail();
+        $quotation = Quotation::where("id", $request->id)->firstOrFail();
         $data = $request->all();
         $quotation->update([
-            'po_number' => $data['po_number'],
-            // 'status' => $data['status'],
-            'total_value' => $data['total_value'],
-            'party_id' => $data['party_id'],
-            'contact_id' => $data['contact_id'],
-            'vat_in_value' => $data['vat_in_value'],
-            'net_amount' => $data['net_amount'],
-            'transaction_type' => $data['transaction_type'],
-            'discount_in_p' => $data['discount_in_p'],
-            'ps_date' => $data['ps_date'],
+            'po_number' => $request->po_number,
+            // 'status' => $request->status,
+            'total_value' => $request->total_value,
+            'party_id' => $request->party_id,
+            'contact_id' => $request->contact_id,
+            'vat_in_value' => $request->vat_in_value,
+            'net_amount' => $request->net_amount,
+            'transaction_type' => $request->transaction_type,
+            'discount_in_p' => $request->discount_in_p,
+            'ps_date' => $request->ps_date,
             // 'sales_order_number' => $data['sales_order_number'],
         ]);
         $index = 0;
