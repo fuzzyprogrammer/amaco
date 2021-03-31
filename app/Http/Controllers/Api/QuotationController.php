@@ -399,7 +399,7 @@ class QuotationController extends Controller
                 $filePath = $request->file('file' . $index)->move('quotation/quotation_detail/' . $request->id);
             }
             $quotationDetail = QuotationDetail::where([
-                'id' => $index ,
+                'id' => $quotation_detail['id'] ,
                 'quotation_id' => $request->id
                 ])->first();
             if (isset($quotationDetail)) {
