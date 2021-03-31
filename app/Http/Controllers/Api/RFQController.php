@@ -210,7 +210,7 @@ class RFQController extends Controller
      * @param  \App\Models\RFQ  $rfq
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RFQ $rfq)
+    public function update( RFQ $rfq)
     {
         // $rules = [
         //     'requested_date' => 'required',
