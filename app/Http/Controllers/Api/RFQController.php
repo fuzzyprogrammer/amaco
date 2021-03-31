@@ -231,7 +231,7 @@ class RFQController extends Controller
         // }
         $data = $request->json()->all();
         $temp = json_decode($request['rfq_details'], true);
-        return $request;
+        // return $request;
         try {
             $rfq->update([
                 'requested_date' => $data['requested_date'],

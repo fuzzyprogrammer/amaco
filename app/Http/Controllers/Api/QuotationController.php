@@ -375,7 +375,7 @@ class QuotationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $request;
+        // return $request;
         $quotation = Quotation::where("id", $id)->firstOrFail();
         $data = $request->all();
         $quotation->update([
