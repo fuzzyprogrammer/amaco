@@ -38,7 +38,7 @@ class Expense extends Model
         if (File::exists(public_path($this->bank_slip))) {
             return url($path);
         }
-        return "No file Uploaded"
+        return "No file Uploaded";
 
     }
 
@@ -48,7 +48,7 @@ class Expense extends Model
         if (File::exists(public_path($this->file_path))) {
             return url($path);
         }
-        return "No file Uploaded"
+        return "No file Uploaded";
 
     }
 }
