@@ -259,8 +259,8 @@ class RFQController extends Controller
 
             global $_rfq_id;
             $_rfq_id = $rfq['id'];
-
-            foreach ($request['rfq_details'] as $rfq_detail) {
+            $temp = json_decode($request['rfq_details'], true);
+            foreach ((array) $temp as $rfq_detail) {
                 $rfq_update_data = RFQDetails::findOrFail($rfq_detail['id']);
                 $_rfq_detail = $rfq_update_data->update([
                     'product_id' => $rfq_detail['id'],
