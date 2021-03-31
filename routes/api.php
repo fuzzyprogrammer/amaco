@@ -131,5 +131,6 @@ Route::post('account-statement', [AccountStatementController::class, 'accountSta
 Route::post('all-account-statement', [AccountStatementController::class, 'allAccountStatement']);
 Route::post('advance-payment-statement',[AdvancePaymentStatementController::class,'statement']);
 Route::post('all-advance-payment-statement',[AdvancePaymentStatementController::class, 'allAdvancePaymentStatement']);
+Route::post('rfq-update/{rfq}',[RFQController::class, 'update']);
 
 
