@@ -331,7 +331,7 @@ class QuotationController extends Controller
             "rfq" => $quotation->rfq,
             "quotation_details" => $quotation->quotationDetail->map(function ($quotation_detail) {
                 $filePath = $quotation_detail->file_img_url ? $quotation_detail->file_img_url : '';
-                $urlPath = url($filePath);
+                $urlPath = $filePath ? url($filePath) : null;
                 return [
                     "id" => $quotation_detail->id,
                     "total_amount" => $quotation_detail->total_amount,
