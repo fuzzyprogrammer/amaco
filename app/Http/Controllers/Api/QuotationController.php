@@ -396,11 +396,11 @@ class QuotationController extends Controller
             $quotation_detail = (array) json_decode($request['quotation_detail' . $index], true);
             $filePath = null;
             if ($request->file('file' . $index)) {
-                $filePath = $request->file('file' . $index)->move('quotation/quotation_detail/' . $id);
+                $filePath = $request->file('file' . $index)->move('quotation/quotation_detail/' . $request->id);
             }
             $quotationDetail = QuotationDetail::where([
                 'id' => $index ,
-                'rfq_id' => $id
+                'rfq_id' => $request->id
                 ])->first();
             if (isset($quotationDetail)) {
                 if (File::exists(public_path($quotationDetail->file_img_url))) {
