@@ -215,7 +215,7 @@ class QuotationController extends Controller
         // $data = $request->all();
         // return $request;
         $rfqId = null;
-        $rfqId = $request->rfq_id && $request->rfq_id ;
+        $rfqId = $request->rfq_id && $request->rfq_id;
 
         try {
             $datas = [
@@ -399,28 +399,27 @@ class QuotationController extends Controller
                 $filePath = $request->file('file' . $index)->move('quotation/quotation_detail/' . $request->id);
             }
             $quotationDetail = QuotationDetail::where([
-                'id' => $quotation_detail['id'] ,
+                'id' => $quotation_detail['id'],
                 // 'quotation_id' => $request->id
-                ])->first();
-            if (isset($quotationDetail)) {
+            ])->first();
+            if ($quotationDetail) {
                 if (File::exists(public_path($quotationDetail->file_img_url))) {
 
                     File::delete(public_path($quotationDetail->file_img_url));
                 }
-                if ($quotation_detail)
-                    $quotationDetail->update([
-                        'total_amount' => $quotation_detail['total_amount'],
-                        'analyse_id' => $quotation_detail['analyse_id'],
-                        'product_id' => $quotation_detail['product_id'],
-                        'purchase_price' => $quotation_detail['purchase_price'],
-                        'description' => $quotation_detail['description'],
-                        'quantity' => $quotation_detail['quantity'],
-                        'margin' => $quotation_detail['margin'],
-                        'sell_price' => $quotation_detail['sell_price'],
-                        'remark' => $quotation_detail['remark'],
-                        'file_img_url' => $filePath,
+                $quotationDetail->update([
+                    'total_amount' => $quotation_detail['total_amount'],
+                    'analyse_id' => $quotation_detail['analyse_id'],
+                    'product_id' => $quotation_detail['product_id'],
+                    'purchase_price' => $quotation_detail['purchase_price'],
+                    'description' => $quotation_detail['description'],
+                    'quantity' => $quotation_detail['quantity'],
+                    'margin' => $quotation_detail['margin'],
+                    'sell_price' => $quotation_detail['sell_price'],
+                    'remark' => $quotation_detail['remark'],
+                    'file_img_url' => $filePath,
 
-                    ]);
+                ]);
             } else {
                 QuotationDetail::create([
                     'quotation_id' => $quotation->id,
@@ -469,8 +468,8 @@ class QuotationController extends Controller
         //                 'remark' => $quotation_detail['remark'],
         //             ]);
         //         }
-            // }
-            return response()->json(['msg' => 'successfully added']);
+        // }
+        return response()->json(['msg' => 'successfully added']);
         // }
         // return response()->json($quotation);
     }
@@ -492,7 +491,7 @@ class QuotationController extends Controller
         $unique_po_no = Quotation::where('po_number', $request->po_number)->first();
         $data = $request->all();
         $quotation = Quotation::where("id", $id)->firstOrFail();
-        if($request->po_number){
+        if ($request->po_number) {
 
             if (isset($unique_po_no)) {
                 return response()->json(['msg' => 'P.O.Number is exsits']);
@@ -504,9 +503,9 @@ class QuotationController extends Controller
                 'sales_order_number' => $data['sales_order_number'],
                 'po_number' => $data['po_number'],
             ]);
-        }else{
+        } else {
             $quotation->update([
-                'status'=>$data['status'],
+                'status' => $data['status'],
             ]);
         }
 
