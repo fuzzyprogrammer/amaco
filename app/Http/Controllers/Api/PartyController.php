@@ -36,7 +36,7 @@ class PartyController extends Controller
 
     public function store(Request $request)
     {
-
+        return $request;
 
         $party = Party::create([
             'firm_name' => $request->firm_name,
