@@ -46,6 +46,7 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         if ($request->file('bank_slip')) {
+            $path = null;
             $path = $request->file('bank_slip')->move("/expenses/bankSlip",(string) $request->file('bank_slip')->getClientOriginalName());
 
         }
@@ -70,7 +71,7 @@ class ExpenseController extends Controller
             'status' => $request->status,
             'paid_by' => $request->payment_account_id,
             'bank_ref_no' => $request->bank_ref_no,
-            'bank_slip' => $request->file('bank_slip') ? '/expenses/bankSlip/' . $path : null,
+            'bank_slip' => $path ,
             "account_category_id" => $request->account_category_id,
             "company_name" => $request->company_name ? $request->company_name : null,
             "file_path" => $filePath,
