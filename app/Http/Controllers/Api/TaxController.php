@@ -12,11 +12,10 @@ class TaxController extends Controller
 {
     public function saleTax(Request $request)
     {
-        return response()->json(now());
         if ($request->from_date) {
             $invoiceCollection = Invoice::whereBetween('created_at', [$request->from_date . ' ' . '00:00:00', $request->to_date ? $request->to_date . ' ' . '23:59:59' : now()])->get();
         } else {
-            $invoiceCollection = Invoice::where('created_at', )->get();
+            $invoiceCollection = Invoice::where('created_at', date("Y-m") . '-01' )->get();
         }
 
         return response()->json($invoiceCollection);
@@ -24,12 +23,11 @@ class TaxController extends Controller
 
     public function purchaseTax(Request $request)
     {
-        return response()->json(date("Y-m"));
 
         if ($request->from_date) {
             $expenseCollection = Expense::whereBetween('created_at', [$request->from_date . ' ' . '00:00:00', $request->to_date ? $request->to_date . ' ' . '23:59:59' : now()])->get();
         } else {
-            $expenseCollection = Expense::where('created_at', )->get();
+            $expenseCollection = Expense::where('created_at', date("Y-m").'-01')->get();
         }
 
         return response()->json($expenseCollection);
