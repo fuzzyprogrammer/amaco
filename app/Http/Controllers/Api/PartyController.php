@@ -98,7 +98,7 @@ class PartyController extends Controller
         $data =
             [
                 'firm_name' => $party->firm_name,
-                // 'firm_name_in_ar' => $party->firm_name_in_ar,
+                'firm_name_in_ar' => $party->firm_name_in_ar,
                 'registration_no' => $party->registration_no,
                 // 'registration_no_in_ar' => $party->registration_no_in_ar,
                 'vat_no' => $party->vat_no,
