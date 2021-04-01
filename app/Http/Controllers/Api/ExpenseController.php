@@ -46,14 +46,14 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         if ($request->file('bank_slip')) {
-            $path = $request->file('bank_slip')->move(public_path("/expenses/bankSlip/", $request->file('bank_slip')->getClientOriginalName()));
+            $path = $request->file('bank_slip')->move(public_path("/expenses/bankSlip", $request->file('bank_slip')->getClientOriginalName()));
             $temp = explode('/', $path);
             $dig = count($temp) - 1;
             $new_path = $temp[$dig];
         }
 
         if ($request->file('file_path')) {
-            $filePath = $request->file('file_path')->move("expenses/filePath/", $request->file('file_path')->getClientOriginalName());
+            $filePath = $request->file('file_path')->move("expenses/filePath", $request->file('file_path')->getClientOriginalName());
         }
 
 
