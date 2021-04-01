@@ -36,6 +36,7 @@ use App\Http\Controllers\Api\DeliveryNoteController;
 use App\Http\Controllers\Api\DeliveryNoteDetailController;
 use App\Http\Controllers\Api\ReceiptController;
 use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\TaxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -134,5 +135,7 @@ Route::post('all-advance-payment-statement',[AdvancePaymentStatementController::
 Route::post('rfq-update',[RFQController::class, 'update']);
 Route::post('sale-quotation-update',[QuotationController::class, 'update']);
 Route::delete('delete-quotation-detail/{quotation_detail}', [QuotationController::class, 'deleteFile']);
+Route::post('sale-tax', [TaxController::class, 'saleTax']);
+Route::post('purchase-tax', [TaxController::class, 'purchaseTax']);
 
 

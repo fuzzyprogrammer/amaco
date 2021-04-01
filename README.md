@@ -30,8 +30,6 @@ DB_PASSWORD=password
 Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`] 
 
 ```
--------+-----------+----------------------------------------------------+--------------------------------+
-| Method    | URI                                                | Name                           |
 +-----------+----------------------------------------------------+--------------------------------+
 | GET|HEAD  | /                                                  |                                |
 | POST      | api/account-categories                             | account-categories.store       |
@@ -126,24 +124,24 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | GET|HEAD  | api/invoice/{invoice}                              | invoice.show                   |
 | POST      | api/manufacturer                                   | manufacturer.store             |
 | GET|HEAD  | api/manufacturer                                   | manufacturer.index             |
-| DELETE    | api/manufacturer/{manufacturer}                    | manufacturer.destroy           |
 | PUT|PATCH | api/manufacturer/{manufacturer}                    | manufacturer.update            |
+| DELETE    | api/manufacturer/{manufacturer}                    | manufacturer.destroy           |
 | GET|HEAD  | api/manufacturer/{manufacturer}                    | manufacturer.show              |
 | POST      | api/old-password                                   |                                |
-| POST      | api/parties                                        | parties.store                  |
 | GET|HEAD  | api/parties                                        | parties.index                  |
+| POST      | api/parties                                        | parties.store                  |
 | GET|HEAD  | api/parties-except/{product}                       | except.vendor                  |
 | GET|HEAD  | api/parties-vendor                                 | parties.vendor                 |
 | PUT|PATCH | api/parties/{party}                                | parties.update                 |
-| GET|HEAD  | api/parties/{party}                                | parties.show                   |
 | DELETE    | api/parties/{party}                                | parties.destroy                |
-| POST      | api/payment-account                                | payment-account.store          |
+| GET|HEAD  | api/parties/{party}                                | parties.show                   |
 | GET|HEAD  | api/payment-account                                | payment-account.index          |
+| POST      | api/payment-account                                | payment-account.store          |
 | PUT|PATCH | api/payment-account/{payment_account}              | payment-account.update         |
-| DELETE    | api/payment-account/{payment_account}              | payment-account.destroy        |
 | GET|HEAD  | api/payment-account/{payment_account}              | payment-account.show           |
-| GET|HEAD  | api/product-price                                  | product-price.index            |
+| DELETE    | api/payment-account/{payment_account}              | payment-account.destroy        |
 | POST      | api/product-price                                  | product-price.store            |
+| GET|HEAD  | api/product-price                                  | product-price.index            |
 | DELETE    | api/product-price/{product_price}                  | product-price.destroy          |
 | GET|HEAD  | api/product-price/{product_price}                  | product-price.show             |
 | PUT|PATCH | api/product-price/{product_price}                  | product-price.update           |
@@ -151,41 +149,42 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | GET|HEAD  | api/products                                       | products.index                 |
 | POST      | api/products                                       | products.store                 |
 | GET|HEAD  | api/products-in-category                           | products.in.category           |
-| DELETE    | api/products/{product}                             | products.destroy               |
 | GET|HEAD  | api/products/{product}                             | products.show                  |
+| DELETE    | api/products/{product}                             | products.destroy               |
 | PUT|PATCH | api/products/{product}                             | products.update                |
-| GET|HEAD  | api/purchase-invoice                               | purchase-invoice.index         |
 | POST      | api/purchase-invoice                               | purchase-invoice.store         |
+| GET|HEAD  | api/purchase-invoice                               | purchase-invoice.index         |
 | GET|HEAD  | api/purchase-invoice-list                          | purchase.invoice.list          |
-| PUT|PATCH | api/purchase-invoice/{purchase_invoice}            | purchase-invoice.update        |
 | DELETE    | api/purchase-invoice/{purchase_invoice}            | purchase-invoice.destroy       |
+| PUT|PATCH | api/purchase-invoice/{purchase_invoice}            | purchase-invoice.update        |
 | GET|HEAD  | api/purchase-invoice/{purchase_invoice}            | purchase-invoice.show          |
-| POST      | api/purchase-quotation                             | purchase-quotation.store       |
 | GET|HEAD  | api/purchase-quotation                             | purchase-quotation.index       |
+| POST      | api/purchase-quotation                             | purchase-quotation.store       |
 | DELETE    | api/purchase-quotation/{purchase_quotation}        | purchase-quotation.destroy     |
 | PUT|PATCH | api/purchase-quotation/{purchase_quotation}        | purchase-quotation.update      |
 | GET|HEAD  | api/purchase-quotation/{purchase_quotation}        | purchase-quotation.show        |
+| POST      | api/purchase-tax                                   |                                |
 | POST      | api/quotation-detail                               | quotation-detail.store         |
 | GET|HEAD  | api/quotation-detail                               | quotation-detail.index         |
-| DELETE    | api/quotation-detail/{quotation_detail}            | quotation-detail.destroy       |
 | GET|HEAD  | api/quotation-detail/{quotation_detail}            | quotation-detail.show          |
 | PUT|PATCH | api/quotation-detail/{quotation_detail}            | quotation-detail.update        |
+| DELETE    | api/quotation-detail/{quotation_detail}            | quotation-detail.destroy       |
 | POST      | api/quotation-history                              | quotation.history              |
 | GET|HEAD  | api/quotation-po                                   | invoice.list                   |
 | GET|HEAD  | api/quotations-accepted-list                       | quotaions.accepted.list        |
 | GET|HEAD  | api/quotations-rejected-list                       | quotaions.rejected.list        |
-| POST      | api/receipts                                       | receipts.store                 |
 | GET|HEAD  | api/receipts                                       | receipts.index                 |
-| DELETE    | api/receipts/{receipt}                             | receipts.destroy               |
+| POST      | api/receipts                                       | receipts.store                 |
 | GET|HEAD  | api/receipts/{receipt}                             | receipts.show                  |
 | PUT|PATCH | api/receipts/{receipt}                             | receipts.update                |
-| POST      | api/rfq                                            | rfq.store                      |
+| DELETE    | api/receipts/{receipt}                             | receipts.destroy               |
 | GET|HEAD  | api/rfq                                            | rfq.index                      |
-| GET|HEAD  | api/rfq-details                                    | rfq-details.index              |
+| POST      | api/rfq                                            | rfq.store                      |
 | POST      | api/rfq-details                                    | rfq-details.store              |
+| GET|HEAD  | api/rfq-details                                    | rfq-details.index              |
+| GET|HEAD  | api/rfq-details/{rfq_detail}                       | rfq-details.show               |
 | DELETE    | api/rfq-details/{rfq_detail}                       | rfq-details.destroy            |
 | PUT|PATCH | api/rfq-details/{rfq_detail}                       | rfq-details.update             |
-| GET|HEAD  | api/rfq-details/{rfq_detail}                       | rfq-details.show               |
 | POST      | api/rfq-history                                    | rfq.history                    |
 | POST      | api/rfq-update                                     |                                |
 | DELETE    | api/rfq/{rfq}                                      | rfq.destroy                    |
@@ -193,25 +192,26 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | GET|HEAD  | api/rfq/{rfq}                                      | rfq.show                       |
 | POST      | api/roles                                          | roles.store                    |
 | GET|HEAD  | api/roles                                          | roles.index                    |
-| PUT|PATCH | api/roles/{role}                                   | roles.update                   |
-| GET|HEAD  | api/roles/{role}                                   | roles.show                     |
 | DELETE    | api/roles/{role}                                   | roles.destroy                  |
+| GET|HEAD  | api/roles/{role}                                   | roles.show                     |
+| PUT|PATCH | api/roles/{role}                                   | roles.update                   |
 | GET|HEAD  | api/sale                                           | sale.index                     |
 | POST      | api/sale                                           | sale.store                     |
-| POST      | api/sale-detail                                    | sale-detail.store              |
 | GET|HEAD  | api/sale-detail                                    | sale-detail.index              |
+| POST      | api/sale-detail                                    | sale-detail.store              |
+| GET|HEAD  | api/sale-detail/{sale_detail}                      | sale-detail.show               |
 | DELETE    | api/sale-detail/{sale_detail}                      | sale-detail.destroy            |
 | PUT|PATCH | api/sale-detail/{sale_detail}                      | sale-detail.update             |
-| GET|HEAD  | api/sale-detail/{sale_detail}                      | sale-detail.show               |
 | GET|HEAD  | api/sale-quotation                                 | sale-quotation.index           |
 | POST      | api/sale-quotation                                 | sale-quotation.store           |
 | POST      | api/sale-quotation-update                          |                                |
-| DELETE    | api/sale-quotation/{sale_quotation}                | sale-quotation.destroy         |
-| PUT|PATCH | api/sale-quotation/{sale_quotation}                | sale-quotation.update          |
 | GET|HEAD  | api/sale-quotation/{sale_quotation}                | sale-quotation.show            |
-| GET|HEAD  | api/sale/{sale}                                    | sale.show                      |
-| PUT|PATCH | api/sale/{sale}                                    | sale.update                    |
+| PUT|PATCH | api/sale-quotation/{sale_quotation}                | sale-quotation.update          |
+| DELETE    | api/sale-quotation/{sale_quotation}                | sale-quotation.destroy         |
+| POST      | api/sale-tax                                       |                                |
 | DELETE    | api/sale/{sale}                                    | sale.destroy                   |
+| PUT|PATCH | api/sale/{sale}                                    | sale.update                    |
+| GET|HEAD  | api/sale/{sale}                                    | sale.show                      |
 | GET|HEAD  | api/sales-list                                     | sales.list                     |
 | GET|HEAD  | api/sub-category/{id}                              | subCategory                    |
 | PUT       | api/update-quotation/{id}                          | quotations.status.update       |
@@ -221,7 +221,7 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | GET|HEAD  | api/users                                          | users.index                    |
 | POST      | api/users                                          | users.store                    |
 | DELETE    | api/users/{user}                                   | users.destroy                  |
-| GET|HEAD  | api/users/{user}                                   | users.show                     |
 | PUT|PATCH | api/users/{user}                                   | users.update                   |
+| GET|HEAD  | api/users/{user}                                   | users.show                     |
 +-----------+----------------------------------------------------+--------------------------------+
 ```
