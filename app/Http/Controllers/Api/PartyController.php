@@ -40,7 +40,7 @@ class PartyController extends Controller
 
         $party = Party::create([
             'firm_name' => $request->firm_name,
-            'firm_name_in_ar'=> $request->company_name_ar,
+            'firm_name_in_ar'=>(string) $request->company_name_ar,
             'registration_no' => $request->registration_no,
             // 'registration_no_in_ar'=> $request->registration_no == null ? null : GoogleTranslate::trans(
             //     $request->registration_no,'ar'),
