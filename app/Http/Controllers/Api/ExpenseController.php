@@ -45,8 +45,9 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
+        $bank_slip_path = null;
         if ($request->file('bank_slip')) {
-            $path = $request->file('bank_slip')->move("expenses/bankSlip", $request->file('bank_slip')->getClientOriginalName());
+            $bank_slip_path = $request->file('bank_slip')->move("expenses/bankSlip", $request->file('bank_slip')->getClientOriginalName());
         }
 
         if ($request->file('file_path')) {
@@ -69,8 +70,8 @@ class ExpenseController extends Controller
             'status' => $request->status,
             'paid_by' => $request->payment_account_id,
             'bank_ref_no' => $request->bank_ref_no,
-            // 'bank_slip' => $request->file('bank_slip') ? $path : null,
-            'bank_slip' =>  $path ,
+            'bank_slip' => $request->file('bank_slip') ? $bank_slip_path : null,
+            // 'bank_slip' =>  $path ,
             "account_category_id" => $request->account_category_id,
             "company_name" => $request->company_name ? $request->company_name : null,
             "file_path" => $filePath,
