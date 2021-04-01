@@ -36,11 +36,11 @@ class PartyController extends Controller
 
     public function store(Request $request)
     {
-        return $request;
+        // return $request;
 
         $party = Party::create([
             'firm_name' => $request->firm_name,
-            // 'firm_name_in_ar'=>GoogleTranslate::trans($request->firm_name,'ar'),
+            'firm_name_in_ar'=> $request->company_name_ar,
             'registration_no' => $request->registration_no,
             // 'registration_no_in_ar'=> $request->registration_no == null ? null : GoogleTranslate::trans(
             //     $request->registration_no,'ar'),
