@@ -46,10 +46,8 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         if ($request->file('bank_slip')) {
-            $path = $request->file('bank_slip')->move(public_path("/expenses/bankSlip",(string) $request->file('bank_slip')->getClientOriginalName()));
-            $temp = explode('/', $path);
-            $dig = count($temp) - 1;
-            $new_path = $temp[$dig];
+            $path = $request->file('bank_slip')->move("/expenses/bankSlip",(string) $request->file('bank_slip')->getClientOriginalName());
+
         }
 
         if ($request->file('file_path')) {
@@ -72,7 +70,7 @@ class ExpenseController extends Controller
             'status' => $request->status,
             'paid_by' => $request->payment_account_id,
             'bank_ref_no' => $request->bank_ref_no,
-            'bank_slip' => $request->file('bank_slip') ? '/expenses/bankSlip/' . $new_path : null,
+            'bank_slip' => $request->file('bank_slip') ? '/expenses/bankSlip/' . $path : null,
             "account_category_id" => $request->account_category_id,
             "company_name" => $request->company_name ? $request->company_name : null,
             "file_path" => $filePath,
@@ -90,7 +88,7 @@ class ExpenseController extends Controller
             $tempFile = "file" . $column_data['id'];
             // return $tempFile;
             if ($request->file($tempFile)) {
-                $column_data_value = $request->file($tempFile)->move('expenses/files/', (string)$request->file($tempFile)->getClientOriginalName());
+                $column_data_value = $request->file($tempFile)->move('expenses/files', (string)$request->file($tempFile)->getClientOriginalName());
             }
 
 
