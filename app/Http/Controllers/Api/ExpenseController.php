@@ -46,12 +46,12 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         if ($request->file('bank_slip')) {
-            $path = $request->file('bank_slip')->move("expenses/bankSlip",(string) $request->file('bank_slip')->getClientOriginalName());
+            $path = $request->file('bank_slip')->move("expenses/bankSlip", $request->file('bank_slip')->getClientOriginalName());
 
         }
 
         if ($request->file('file_path')) {
-            $filePath = $request->file('file_path')->move("expenses/filePath", (string) $request->file('file_path')->getClientOriginalName());
+            $filePath = $request->file('file_path')->move("expenses/filePath",  $request->file('file_path')->getClientOriginalName());
         }
 
 
@@ -86,9 +86,8 @@ class ExpenseController extends Controller
                 $column_data_value = $column_data[$column_type];
             }
             $tempFile = "file" . $column_data['id'];
-            // return $tempFile;
             if ($request->file($tempFile)) {
-                $column_data_value = $request->file($tempFile)->move('expenses/files', (string)$request->file($tempFile)->getClientOriginalName());
+                $column_data_value = $request->file($tempFile)->move('expenses/files', $request->file($tempFile)->getClientOriginalName());
             }
 
 
