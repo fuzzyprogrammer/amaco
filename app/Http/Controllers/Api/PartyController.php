@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Party;
 use App\Models\Product;
 use App\Models\Contact;
+use App\Models\PartyBank;
 use App\Models\ProductPrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -60,13 +61,18 @@ class PartyController extends Controller
             'opening_balance' => $request->opening_balance,
             'credit_days' => $request->credit_days,
             'credit_limit' => $request->credit_limit,
+            'party_code' => $request->party_code,
+            'vendor_id' => $request->vendor_id,
+        ]);
+
+        PartyBank::create([
             'account_no' => $request->account_no,
             'iban_no' => $request->iban_no,
             'bank_name' => $request->bank_name,
             'bank_address' => $request->bank_address,
-            'party_code' => $request->party_code,
-            'vendor_id' => $request->vendor_id,
+            'party_id' => $party->id,
         ]);
+
         $contact = Contact::create([
             'prefix' => $request->prefix,
             'party_id' => $party->id,
@@ -116,12 +122,11 @@ class PartyController extends Controller
                 'opening_balance' => $party->opening_balance,
                 'credit_days' => $party->credit_days,
                 'credit_limit' => $party->credit_limit,
-                'account_no' => $party->account_no,
-                'iban_no' => $party->iban_no,
-                'bank_name' => $party->bank_name,
-                'bank_address' => $party->bank_address,
                 'party_code' => $party->party_code,
                 'vendor_id' => $party->vendor_id,
+                "bank" => $party->bank->map(function($bankDetail){
+                    return $bankDetail;
+                }),
                 'contacts' => $contacts->map(function ($contact) {
                     return $contact;
                 }),

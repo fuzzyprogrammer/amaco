@@ -37,6 +37,7 @@ use App\Http\Controllers\Api\DeliveryNoteDetailController;
 use App\Http\Controllers\Api\ReceiptController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\TaxController;
+use App\Http\Controllers\PartyBankController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,6 +104,7 @@ Route::apiResource('receipts', ReceiptController::class);
 Route::apiResource('advance-payments', AdvancePaymentController::class);
 Route::apiResource('roles', RoleController::class);
 Route::apiResource('users', UserController::class);
+Route::apiResource('party-bank', PartyBankController::class);
 
 // restful api links
 Route::post('rfq-history', [RFQController::class, 'history'])->name('rfq.history');

@@ -42,4 +42,9 @@ class Party extends Model
     {
         return $this->belongsTo(Receipt::class);
     }
+
+    public function bank()
+    {
+        return $this->hasMany(PartyBank::class,'party_id','id');
+    }
 }
