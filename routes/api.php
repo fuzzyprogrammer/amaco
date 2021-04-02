@@ -37,7 +37,7 @@ use App\Http\Controllers\Api\DeliveryNoteDetailController;
 use App\Http\Controllers\Api\ReceiptController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\TaxController;
-use App\Http\Controllers\PartyBankController;
+use App\Http\Controllers\Api\PartyBankController;
 
 /*
 |--------------------------------------------------------------------------
