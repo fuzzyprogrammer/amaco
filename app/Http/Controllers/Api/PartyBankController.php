@@ -45,7 +45,7 @@ class PartyBankController extends Controller
      */
     public function show(PartyBank $partyBank)
     {
-        //
+        return response()->json($partyBank);
     }
 
     /**
