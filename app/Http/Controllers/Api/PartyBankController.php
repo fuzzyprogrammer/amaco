@@ -70,6 +70,8 @@ class PartyBankController extends Controller
      */
     public function destroy(PartyBank $partyBank)
     {
-        //
+        $partyBank->delete();
+
+        return response()->json(['msg'=>"Successfully Deleted"]);
     }
 }
