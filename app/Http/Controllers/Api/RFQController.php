@@ -180,7 +180,7 @@ class RFQController extends Controller
                     "description"=> $rfq_detail->description,
                     "product_name" => $rfq_detail->product->name,
                     "product" => array($rfq_detail->product),
-                    "prices" => $rfq_detail->product->productPrice->map(function($item){
+                    "prices" => $rfq_detail->product->productPrice->map(function($item, $rfq) {
                         if($item->party->party_id == $rfq->party->party_id){
                             return $item;
                         }
