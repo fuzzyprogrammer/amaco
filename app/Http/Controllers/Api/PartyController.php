@@ -41,7 +41,7 @@ class PartyController extends Controller
 
         $party = Party::create([
             'firm_name' => $request->firm_name,
-            'firm_name_in_ar'=>(string) $request->company_name_ar,
+            'firm_name_in_ar' => (string) $request->company_name_ar,
             'registration_no' => $request->registration_no,
             // 'registration_no_in_ar'=> $request->registration_no == null ? null : GoogleTranslate::trans(
             //     $request->registration_no,'ar'),
@@ -124,7 +124,7 @@ class PartyController extends Controller
                 'credit_limit' => $party->credit_limit,
                 'party_code' => $party->party_code,
                 'vendor_id' => $party->vendor_id,
-                "bank" => $party->bank->map(function($bankDetail){
+                "bank" => $party->bank->map(function ($bankDetail) {
                     return $bankDetail;
                 }),
                 'contacts' => $contacts->map(function ($contact) {
@@ -174,7 +174,7 @@ class PartyController extends Controller
 
         $party->update([
             'firm_name' => $request->firm_name == null ? $party->firm_name : $request->firm_name,
-            // 'firm_name_in_ar'=> $request->firm_name == null ? $party->firm_name_in_ar : GoogleTranslate::trans($request->firm_name,'ar'),
+            'firm_name_in_ar' =>$request->company_name_ar == null ? $party->firm_name_in_ar : $request->company_name_ar,
             'registration_no' => $request->registration_no == null ? $party->registration_no : $request->registration_no,
             // 'registration_no_in_ar'=> $request->registration_no == null ? $party->registration_no_in_ar : GoogleTranslate::trans($request->registration_no,'ar'),
             'vat_no' => $request->vat_no == null ? $party->vat_no : $request->vat_no,
