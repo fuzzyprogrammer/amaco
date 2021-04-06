@@ -182,7 +182,7 @@ class RFQController extends Controller
                     "description"=> $rfq_detail->description,
                     "product_name" => $rfq_detail->product->name,
                     "product" => array($rfq_detail->product),
-                    "prices" => $rfq_detail->rfq->Price,
+                    "prices" => $rfq_detail->rfq->price,
                     "party" => $rfq_detail->product->productPrice->map(function ($price){
                         return($price->party);
                     }),
