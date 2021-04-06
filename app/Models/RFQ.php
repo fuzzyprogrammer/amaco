@@ -39,4 +39,9 @@ class RFQ extends Model
     {
         return $this->hasOne(Contact::class,'id', 'contact_id');
     }
+
+    public function price()
+    {
+        return $this->hasOne(ProductPrice::class, 'rfq_id', 'id');
+    }
 }
