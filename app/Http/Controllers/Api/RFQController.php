@@ -181,9 +181,9 @@ class RFQController extends Controller
                     "product_name" => $rfq_detail->product->name,
                     "product" => array($rfq_detail->product),
                     "prices" => $rfq_detail->product->productPrice->map(function($item, $rfq) {
-                        if($item['party_id'] == $rfq->party_id){
-                            return $item;
-                        }
+                        // if($item['party_id'] == $rfq->party_id){
+                            return $rfq;
+                        // }
                     }),
                     "party" => $rfq_detail->product->productPrice->map(function ($price){
                         return($price->party);
