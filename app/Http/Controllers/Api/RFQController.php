@@ -150,6 +150,8 @@ class RFQController extends Controller
      */
     public function show(RFQ $rfq)
     {
+        /
+
 
         if($rfq->file){
             foreach ($rfq->file as $img) {
@@ -180,11 +182,7 @@ class RFQController extends Controller
                     "description"=> $rfq_detail->description,
                     "product_name" => $rfq_detail->product->name,
                     "product" => array($rfq_detail->product),
-                    "prices" => $rfq_detail->product->productPrice->map(function($item, $rfq) {
-                        // if($item['party_id'] == $rfq->party_id){
-                            return $rfq;
-                        // }
-                    }),
+                    "prices" => $rfq_detail->product->productPrice,
                     "party" => $rfq_detail->product->productPrice->map(function ($price){
                         return($price->party);
                     }),
