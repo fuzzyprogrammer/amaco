@@ -20,9 +20,4 @@ class ProductPrice extends Model
     {
         return $this->hasOne(Party::class, 'id', 'party_id');
     }
-
-    public function rfq()
-    {
-        return $this->belongsTo(RFQ::class);
-    }
 }

@@ -150,7 +150,14 @@ class RFQController extends Controller
      */
     public function show(RFQ $rfq)
     {
-        
+        // $_rfq = RFQ::findOrFail($rfq);
+
+        // $rfq_details = DB::table('r_f_q_s')
+        // ->leftJoin('r_f_q_details', 'r_f_q_s.id','=', 'r_f_q_details.rfq_id')
+        // ->where('r_f_q_s.id',$rfq)
+        // ->get();
+
+        // return $_rfq->rfq_details;
 
 
         if($rfq->file){
@@ -182,7 +189,7 @@ class RFQController extends Controller
                     "description"=> $rfq_detail->description,
                     "product_name" => $rfq_detail->product->name,
                     "product" => array($rfq_detail->product),
-                    "prices" => $rfq_detail->rfq->price,
+                    "prices" => $rfq_detail->product->productPrice,
                     "party" => $rfq_detail->product->productPrice->map(function ($price){
                         return($price->party);
                     }),
