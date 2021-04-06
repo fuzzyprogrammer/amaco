@@ -150,7 +150,7 @@ class RFQController extends Controller
      */
     public function show(RFQ $rfq)
     {
-        /
+        
 
 
         if($rfq->file){
