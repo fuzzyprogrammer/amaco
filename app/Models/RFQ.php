@@ -42,6 +42,6 @@ class RFQ extends Model
 
     public function price()
     {
-        return $this->hasOne(ProductPrice::class, 'rfq_id', 'id');
+        return $this->hasOne(ProductPrice::class, 'party_id', 'party_id');
     }
 }
