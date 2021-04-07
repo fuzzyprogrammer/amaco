@@ -33,6 +33,8 @@ class CreateQuotationsTable extends Migration
             $table->string('transaction_type')->nullable();
             $table->string('ps_date')->nullable();
             $table->string('sales_order_number')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->boolean('is_revised')->default(0)->nullable();
             $table->timestamps();
         });
     }

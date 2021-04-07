@@ -109,7 +109,16 @@ class QuotationController extends Controller
         }
     }
 
-
+    public function revisedQuotationNo($quotationNo)
+    {
+        if(strlen($quotationNo) > 14){
+            $revisedQuotation =  substr($quotationNo, 0,14)."-".sprintf("%2d",((int)substr($quotationNo, 14))+1);
+            return $revisedQuotation;
+        }else{
+            $revisedQuotation =  $quotationNo. "-" . sprintf("%2d", 1);
+            return $revisedQuotation;
+        }
+    }
 
 
     public function getPONo()
@@ -216,12 +225,20 @@ class QuotationController extends Controller
         // return $request;
         $rfqId = null;
         $rfqId = $request->rfq_id && $request->rfq_id;
+        $parentId = null;
+        if($request['parent_id']){
+            $parentId = $request['parent_id'];
+
+        }
+
+
 
         try {
             $datas = [
                 'party_id' => $request['party_id'],
                 'rfq_id' => $rfqId,
                 'status' => 'New',
+                'parent_id' => $parentId,
                 'total_value' => $request['total_value'],
                 'net_amount' => $request['net_amount'],
                 'vat_in_value' => $request['vat_in_value'],
@@ -237,7 +254,11 @@ class QuotationController extends Controller
             ];
 
             if ($request->transaction_type === 'sale') {
-                $datas['quotation_no'] = $this->getQuotationNo();
+                if ($request['parent_id']) {
+                    $datas['quotation_no'] = $this->revisedQuotationNo($request['quotation_no']);
+                }else{
+                    $datas['quotation_no'] = $this->getQuotationNo();
+                }
             } elseif ($request->transaction_type === 'purchase') {
                 $datas['po_number'] = $this->getPONo();
             } else {
@@ -246,6 +267,7 @@ class QuotationController extends Controller
             }
 
             $quotation = Quotation::create($datas);
+
 
             global $quotation_id;
             $quotation_id = $quotation->id;
@@ -287,6 +309,13 @@ class QuotationController extends Controller
                         'file_img_url' => $filePath,
                     ]);
                     $index++;
+                }
+            }
+
+            if ($request['parent_id']) {
+                $tempQuotaion = Quotation::where('id', $request['parent_id'])->first();
+                if ($tempQuotaion) {
+                    $tempQuotaion->update(['is_revised' => 1]);
                 }
             }
 
@@ -756,7 +785,7 @@ class QuotationController extends Controller
             $quotation_detail->update([
                 'file_img_url' => null
             ]);
-            
+
             return response()->json(['msg' => "Successfully file is deleted"]);
 
 
