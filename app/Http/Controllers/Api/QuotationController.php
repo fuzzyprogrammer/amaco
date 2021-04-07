@@ -112,10 +112,10 @@ class QuotationController extends Controller
     public function revisedQuotationNo($quotationNo)
     {
         if(strlen($quotationNo) > 14){
-            $revisedQuotation =  substr($quotationNo, 0,14)."-".sprintf("%2d",((int)substr($quotationNo, 14))+1);
+            $revisedQuotation =  substr($quotationNo, 0,14)."-REV-".sprintf("%2d",((int)substr($quotationNo, 18))+1);
             return $revisedQuotation;
         }else{
-            $revisedQuotation =  $quotationNo. "-" . sprintf("%2d", 1);
+            $revisedQuotation =  $quotationNo. "-REV-" . sprintf("%02d", 1);
             return $revisedQuotation;
         }
     }
