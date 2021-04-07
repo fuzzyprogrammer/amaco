@@ -48,10 +48,10 @@ class DeliveryNoteController extends Controller
 
     public function index()
     {
-        $deliveryNotes = DeliveryNote::orderBy('created_at','DESC')->get();
+        $deliveryNotes = DeliveryNote::orderBy('created_at', 'DESC')->get();
 
-        $data = $deliveryNotes->map(function($deliveryNote){
-            return[
+        $data = $deliveryNotes->map(function ($deliveryNote) {
+            return [
                 $deliveryNote,
                 $deliveryNote->deliveryNoteDetail,
             ];
@@ -69,7 +69,7 @@ class DeliveryNoteController extends Controller
      */
     public function store(Request $request)
     {
-        $quotation = Quotation::where('id',$request->quotation_id)->first();
+        $quotation = Quotation::where('id', $request->quotation_id)->first();
         $data = [
             'quotation_id' => $request->quotation_id,
             'delivery_number' => $this->getDeliveryNo(),
@@ -79,13 +79,17 @@ class DeliveryNoteController extends Controller
 
         $deliveryNote = DeliveryNote::create($data);
 
-        foreach($request->delivery_note_details as $deliveryNoteDetail){
-            $deliveryNoteDetailData = [
-                'delivery_note_id' => $deliveryNote->id,
-                'product_id' => $deliveryNoteDetail['product_id'],
-                'delivered_quantity' => $deliveryNoteDetail['delivering_quantity'],
-            ];
-            $deliveryNoteDetails = DeliveryNoteDetail::create($deliveryNoteDetailData);
+        foreach ($request->delivery_note_details as $deliveryNoteDetail) {
+            if ($deliveryNoteDetail['delivering_quantity']) {
+
+                $deliveryNoteDetailData = [
+
+                    'delivery_note_id' => $deliveryNote->id,
+                    'product_id' => $deliveryNoteDetail['product_id'],
+                    'delivered_quantity' => $deliveryNoteDetail['delivering_quantity'],
+                ];
+                $deliveryNoteDetails = DeliveryNoteDetail::create($deliveryNoteDetailData);
+            }
         };
 
         // return response->json(['msg'=>"successfully added"]);
@@ -101,7 +105,7 @@ class DeliveryNoteController extends Controller
     public function show(DeliveryNote $deliveryNote)
     {
         $data = [
-            $deliveryNote->deliveryNoteDetail->map(function ($deliveryNoteDetailItem){
+            $deliveryNote->deliveryNoteDetail->map(function ($deliveryNoteDetailItem) {
                 return $deliveryNoteDetailItem->showDeliveredNoteDetail($deliveryNoteDetailItem->id);
             }),
             $deliveryNote,
@@ -139,6 +143,6 @@ class DeliveryNoteController extends Controller
     {
         $deliveryNote->delete();
 
-        return response()->json(['msg'=>"Delivery Note with id: ".$deliveryNote->id." has successfully Deleted"]);
+        return response()->json(['msg' => "Delivery Note with id: " . $deliveryNote->id . " has successfully Deleted"]);
     }
 }
