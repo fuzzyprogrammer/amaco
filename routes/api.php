@@ -139,6 +139,6 @@ Route::post('sale-quotation-update',[QuotationController::class, 'update']);
 Route::delete('delete-quotation-detail/{quotation_detail}', [QuotationController::class, 'deleteFile']);
 Route::post('sale-tax', [TaxController::class, 'saleTax']);
 Route::post('purchase-tax', [TaxController::class, 'purchaseTax']);
-Route::post('all-categories',[CategoryController::class, 'categories']);
+Route::get('all-categories',[CategoryController::class, 'categories']);
 
 

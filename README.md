@@ -51,7 +51,7 @@ Domain: [`http://dataqueuesystems.com/amaco/amaco/public/`]
 | PUT|PATCH | api/advance-payments/{advance_payment}             | advance-payments.update        |
 | POST      | api/all-account-statement                          |                                |
 | POST      | api/all-advance-payment-statement                  |                                |
-| POST      | api/all-categories                                 |                                |
+| GET       | api/all-categories                                 |                                |
 | POST      | api/analyse                                        | analyse.store                  |
 | GET|HEAD  | api/analyse                                        | analyse.index                  |
 | DELETE    | api/analyse/{analyse}                              | analyse.destroy                |
