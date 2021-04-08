@@ -85,7 +85,6 @@ class DeliveryNoteController extends Controller
 
         $lastDeliveryNote = DeliveryNote::where([
             'quotation_id' => $request->quotation_id,
-            'po_number' => $quotation->po_number
         ])->latest('created_at')->first();
 
         $deliveryNo = null;
