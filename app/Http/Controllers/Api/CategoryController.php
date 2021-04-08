@@ -17,9 +17,50 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function checkSubcategories($id)
+    {
+        $groupedCategories = Category::all()->groupBy('parent_id');
+        // dd($groupedCategories[0]);
+        if ($groupedCategories->has($id)) {
+            $temp = $groupedCategories[$id];
+            $data = [
+                $temp->map(
+                    function ($category) {
+                        return  [
+                            'category' => $category,
+                            'sub_categories' => $this->checkSubcategories($category->id)
+                        ];
+                    }
+                ),
+            ];
+            return $data[0];
+        }
+        return $this->subCategory($id);
+    }
+
+    public function categories()
+    {
+        $categories = Category::where('parent_id', '=', null)->get();
+        $data = [
+            // $categories,
+            $categories->map(function ($category) {
+                return [
+                    'category' => $category,
+                    'sub_categories' => $this->checkSubcategories($category->id),
+                    // 'sub_categories' => $this->subCategory($category->id),
+                ];
+            }),
+        ];
+
+        return response()->json($data[0]);
+    }
+
+
+
     public function index()
     {
-        $categories = Category::where('parent_id','=', null)->get();
+        $categories = Category::where('parent_id', '=', null)->get();
         return response()->json($categories, 200);
     }
 
@@ -109,22 +150,24 @@ class CategoryController extends Controller
     {
         $res = $category->delete();
         if ($res) {
-            return (['msg' => 'category'.' ' . $category->id . ' is successfully deleted']);
+            return (['msg' => 'category' . ' ' . $category->id . ' is successfully deleted']);
         }
     }
 
     public function products_in_category()
     {
         $cat = DB::table('categories')
-        ->leftJoin('products', 'categories.id',
-            '=',
-            'products.category_id'
-        )
-        ->select(['categories.*','products.category_id'])
-        ->get();
+            ->leftJoin(
+                'products',
+                'categories.id',
+                '=',
+                'products.category_id'
+            )
+            ->select(['categories.*', 'products.category_id'])
+            ->get();
         $grouped = $cat->groupBy('category_id');
-        $data =array();
-        foreach($grouped as $group){
+        $data = array();
+        foreach ($grouped as $group) {
             // dd($group);
             // array_push($data,[
             //     'id' => $group[0]->id,
@@ -133,16 +176,16 @@ class CategoryController extends Controller
             //     'products' =>count($group),
             //     ]
             // );
-            if($group[0]->category_id == null){
-                foreach($group as $item){
-                    array_push($data,[
+            if ($group[0]->category_id == null) {
+                foreach ($group as $item) {
+                    array_push($data, [
                         'id' => $item->id,
                         'name' => $item->name,
                         'description' => $item->description,
-                        'products' =>0,
+                        'products' => 0,
                     ]);
                 }
-            }else{
+            } else {
                 array_push($data, [
                     'id' => $group[0]->id,
                     'name' => $group[0]->name,
@@ -157,15 +200,15 @@ class CategoryController extends Controller
 
     public function categorized_products($id)
     {
-        $products = Product::where('category_id','=',$id)->get();
-        $data = $products->map(function ($product){
+        $products = Product::where('category_id', '=', $id)->get();
+        $data = $products->map(function ($product) {
 
-                $product_data = DB::table('products')
-                    ->leftJoin('categories', 'categories.id', '=', 'products.category_id')
-                    ->leftJoin('divisions', 'divisions.id', '=', 'products.division_id')
-                    ->select('products.*', 'categories.name as category_name', 'divisions.name as division_name')
-                    ->where('products.id','=',$product->id)
-                    ->first();
+            $product_data = DB::table('products')
+                ->leftJoin('categories', 'categories.id', '=', 'products.category_id')
+                ->leftJoin('divisions', 'divisions.id', '=', 'products.division_id')
+                ->select('products.*', 'categories.name as category_name', 'divisions.name as division_name')
+                ->where('products.id', '=', $product->id)
+                ->first();
             return ($product_data);
         });
 
@@ -174,7 +217,8 @@ class CategoryController extends Controller
 
     public function subCategory($id)
     {
-        $sub_categories = Category::where('parent_id','=',$id)->get();
+
+        $sub_categories = Category::where('parent_id', '=', $id)->get();
         return response()->json($sub_categories);
     }
 
@@ -183,8 +227,8 @@ class CategoryController extends Controller
         $name = strtolower($name);
         // $category = Category::whereLike('name', $name)->get();
         $category = Category::query()
-        ->where('name', 'LIKE', "%{$name}%")
-        ->get();
+            ->where('name', 'LIKE', "%{$name}%")
+            ->get();
         return response()->json($category);
     }
 }
