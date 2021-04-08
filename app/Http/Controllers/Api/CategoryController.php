@@ -28,8 +28,9 @@ class CategoryController extends Controller
                 $temp->map(
                     function ($category) {
                         return  [
-                            'category' => $category,
-                            'sub_categories' => $this->checkSubcategories($category->id)
+                            $category,
+                            // 'category' => $category,
+                            // 'sub_categories' => $this->checkSubcategories($category->id)
                         ];
                     }
                 ),
