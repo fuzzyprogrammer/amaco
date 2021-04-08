@@ -82,9 +82,25 @@ class DeliveryNoteController extends Controller
     public function store(Request $request)
     {
         $quotation = Quotation::where('id', $request->quotation_id)->first();
+
+        $lastDeliveryNote = DeliveryNote::where([
+            'quotation_id' => $request->quotation_id,
+            'po_number' => $quotation->po_number
+        ])->latest('created_at')->first();
+
+        $deliveryNo = null;
+        if($request->is_partial){
+            if($lastDeliveryNote){
+                $deliveryNo = $this->getDeliveryNo($lastDeliveryNote->delivery_number);
+            }
+            $deliveryNo = $this->getDeliveryNo($this->getDeliveryNo());
+        }else{
+            $deliveryNo = $this->getDeliveryNo();
+        }
+
         $data = [
             'quotation_id' => $request->quotation_id,
-            'delivery_number' => $request->is_partial ? $this->getDeliveryNo($this->getDeliveryNo()) : $this->getDeliveryNo(),
+            'delivery_number' => $deliveryNo ,
             'po_number' => $quotation->po_number,
             'delivery_date' => $request->delivery_date,
         ];
