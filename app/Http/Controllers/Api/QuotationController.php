@@ -381,7 +381,7 @@ class QuotationController extends Controller
                     "quantity" => $quotation_detail->quantity,
                     // "delivered_quantity"=> $quotation_detail->quantity,
                     "delivered_quantity" => $quotation_detail->getDeliveredQuantity($quotation_detail),
-                    "balance_quantity" => (int)$quotation_detail->quantity - (int)$quotation_detail->getDeliveredQuantity($quotation_detail),
+                    "balance" => (int)$quotation_detail->quantity - (int)$quotation_detail->getDeliveredQuantity($quotation_detail),
                     "margin" => $quotation_detail->margin,
                     "sell_price" => $quotation_detail->sell_price,
                     "remark" => $quotation_detail->remark,
