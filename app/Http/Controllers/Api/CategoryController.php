@@ -24,18 +24,14 @@ class CategoryController extends Controller
         // dd($groupedCategories[0]);
         if ($groupedCategories->has($id)) {
             $temp = $groupedCategories[$id];
-            $data = [
                 $temp->map(
                     function ($category) {
-                        return  [
-                            $category,
+                        return $category;
                             // 'category' => $category,
                             // 'sub_categories' => $this->checkSubcategories($category->id)
-                        ];
                     }
-                ),
-            ];
-            return $data[0];
+                );
+            return $temp;
         }
         return $this->subCategory($id);
     }
