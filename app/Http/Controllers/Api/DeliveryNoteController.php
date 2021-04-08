@@ -32,8 +32,11 @@ class DeliveryNoteController extends Controller
         }
     }
 
-    public function getDeliveryNo($deliveryNo = null)
+    public function getDeliveryNo($deliveryNo = null, $isCompleted = false)
     {
+        if($isCompleted){
+            return substr($deliveryNo, 0 ,15);
+        }
 
         $latest_delivery_no = $this->getLastDeliveryNo();
         $last_year = substr($latest_delivery_no, 8, 2);
@@ -95,7 +98,7 @@ class DeliveryNoteController extends Controller
                 $deliveryNo = $this->getDeliveryNo($this->getDeliveryNo());
             }
         }else{
-            $deliveryNo = $this->getDeliveryNo();
+            $deliveryNo = $this->getDeliveryNo($lastDeliveryNote->delivery_number, isCompleted!=$request->is_partial);
         }
 
         $data = [
