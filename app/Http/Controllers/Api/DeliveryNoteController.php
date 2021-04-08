@@ -98,7 +98,12 @@ class DeliveryNoteController extends Controller
                 $deliveryNo = $this->getDeliveryNo($this->getDeliveryNo());
             }
         }else{
-            $deliveryNo = $this->getDeliveryNo($lastDeliveryNote->delivery_number, isCompleted!=$request->is_partial);
+            if (!$lastDeliveryNote) {
+                $deliveryNo = $this->getDeliveryNo();
+            }else{
+                $deliveryNo = $this->getDeliveryNo($lastDeliveryNote->delivery_number, $request->is_completed);
+            }
+
         }
 
         $data = [
