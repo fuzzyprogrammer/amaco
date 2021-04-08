@@ -25,21 +25,20 @@ class DeliveryNoteController extends Controller
     {
         $deliverynote = DeliveryNote::latest('created_at')->first();
         if ($deliverynote) {
-            $latest_delivery_no = $deliverynote->delivery_no ? $deliverynote->delivery_no : 0;
+            $latest_delivery_no = $deliverynote->delivery_number ? $deliverynote->delivery_number : 0;
             return ($latest_delivery_no);
         } else {
             return ('AMC-DLV-' . $this->getCurrentDeliveryYear() . '-' . sprintf("%04d", 0));
         }
     }
 
-    public function getDeliveryNo($deliveryNo=null)
+    public function getDeliveryNo($deliveryNo = null)
     {
 
         $latest_delivery_no = $this->getLastDeliveryNo();
         $last_year = substr($latest_delivery_no, 8, 2);
         $current_year = $this->getCurrentDeliveryYear();
-        if($deliveryNo){
-            // $no = substr($deliveryNo, 19);
+        if ($deliveryNo) {
             if (strlen($deliveryNo) > 15) {
                 $partialDelivery =  substr($deliveryNo, 0, 15) . "-PD-" . sprintf("%02d", ((int)substr($deliveryNo, 19)) + 1);
                 return $partialDelivery;
@@ -61,10 +60,10 @@ class DeliveryNoteController extends Controller
 
     public function index()
     {
-        $deliveryNotes = DeliveryNote::orderBy('created_at','DESC')->get();
+        $deliveryNotes = DeliveryNote::orderBy('created_at', 'DESC')->get();
 
-        $data = $deliveryNotes->map(function($deliveryNote){
-            return[
+        $data = $deliveryNotes->map(function ($deliveryNote) {
+            return [
                 $deliveryNote,
                 $deliveryNote->deliveryNoteDetail,
             ];
@@ -82,7 +81,7 @@ class DeliveryNoteController extends Controller
      */
     public function store(Request $request)
     {
-        $quotation = Quotation::where('id',$request->quotation_id)->first();
+        $quotation = Quotation::where('id', $request->quotation_id)->first();
         $data = [
             'quotation_id' => $request->quotation_id,
             'delivery_number' => $request->is_partial ? $this->getDeliveryNo($this->getDeliveryNo()) : $this->getDeliveryNo(),
@@ -92,8 +91,8 @@ class DeliveryNoteController extends Controller
 
         $deliveryNote = DeliveryNote::create($data);
 
-        foreach($request->delivery_note_details as $deliveryNoteDetail){
-            if(isset($deliveryNoteDetail['delivering_quantity'])){
+        foreach ($request->delivery_note_details as $deliveryNoteDetail) {
+            if (isset($deliveryNoteDetail['delivering_quantity'])) {
                 $deliveryNoteDetailData = [
                     'delivery_note_id' => $deliveryNote->id,
                     'product_id' => $deliveryNoteDetail['product_id'],
@@ -116,7 +115,7 @@ class DeliveryNoteController extends Controller
     public function show(DeliveryNote $deliveryNote)
     {
         $data = [
-            $deliveryNote->deliveryNoteDetail->map(function ($deliveryNoteDetailItem){
+            $deliveryNote->deliveryNoteDetail->map(function ($deliveryNoteDetailItem) {
                 return $deliveryNoteDetailItem->showDeliveredNoteDetail($deliveryNoteDetailItem->id);
             }),
             $deliveryNote,
@@ -154,6 +153,6 @@ class DeliveryNoteController extends Controller
     {
         $deliveryNote->delete();
 
-        return response()->json(['msg'=>"Delivery Note with id: ".$deliveryNote->id." has successfully Deleted"]);
+        return response()->json(['msg' => "Delivery Note with id: " . $deliveryNote->id . " has successfully Deleted"]);
     }
 }
