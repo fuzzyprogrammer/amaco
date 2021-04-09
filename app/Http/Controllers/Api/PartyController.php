@@ -64,14 +64,14 @@ class PartyController extends Controller
             'party_code' => $request->party_code,
             'vendor_id' => $request->vendor_id,
         ]);
-
-        PartyBank::create([
-            'account_no' => $request->account_no,
-            'iban_no' => $request->iban_no,
-            'bank_name' => $request->bank_name,
-            'bank_address' => $request->bank_address,
-            'party_id' => $party->id,
-        ]);
+        $request->account_no &&
+            PartyBank::create([
+                'account_no' => $request->account_no,
+                'iban_no' => $request->iban_no,
+                'bank_name' => $request->bank_name,
+                'bank_address' => $request->bank_address,
+                'party_id' => $party->id,
+            ]);
 
         $contact = Contact::create([
             'prefix' => $request->prefix,
@@ -174,7 +174,7 @@ class PartyController extends Controller
 
         $party->update([
             'firm_name' => $request->firm_name == null ? $party->firm_name : $request->firm_name,
-            'firm_name_in_ar' =>$request->company_name_ar == null ? $party->firm_name_in_ar : $request->company_name_ar,
+            'firm_name_in_ar' => $request->company_name_ar == null ? $party->firm_name_in_ar : $request->company_name_ar,
             'registration_no' => $request->registration_no == null ? $party->registration_no : $request->registration_no,
             // 'registration_no_in_ar'=> $request->registration_no == null ? $party->registration_no_in_ar : GoogleTranslate::trans($request->registration_no,'ar'),
             'vat_no' => $request->vat_no == null ? $party->vat_no : $request->vat_no,
