@@ -29,12 +29,12 @@ class RFQController extends Controller
                 ->from('quotations')
                 ->whereRaw('quotations.rfq_id = r_f_q_s.id');
         })->orderBy('created_at', 'DESC')
-        ->get();
+            ->get();
 
         // $rfqs = RFQ::orderBy('created_at', 'DESC')->get();
-        $rfqs_data =[
+        $rfqs_data = [
             $rfqs->map(
-                function($rfq){
+                function ($rfq) {
                     return [
                         'id' => $rfq->id,
                         'requested_date' => $rfq->requested_date,
@@ -75,7 +75,7 @@ class RFQController extends Controller
         // return response()->json($request, 201);
         // dd($request->file('files'));
 
-        try{
+        try {
             $rfq = RFQ::create([
                 'requested_date' => $request->has('requested_date') ? $request['requested_date'] : date('Y-m-d'),
                 'require_date' => $request->has('require_date') ? $request['require_date'] : date('Y-m-d'),
@@ -83,63 +83,59 @@ class RFQController extends Controller
                 // 'requested_date' => $data['requested_date'],
                 'contact_id' => $request['contact_id'],
                 'party_id' => $request['party_id'],
-                ]);
+            ]);
 
-                //-------------------------------------------
-                $index = 0;
-                while ($request['myFile' . $index] != null) {
-                    if ($request->file('myFile' . $index)) {
-                        $name = $request['myFile'.$index]->getClientOriginalName();
-                        $path = $request->file('myFile' . $index)->move('rfq/' . $rfq->id , $name);
-                        FileUpload::create([
-                            'rfq_id' => $rfq->id,
-                            'file_name' => $path
-                        ]);
-                    }
-                    $index++;
-                }
-
-                global $_rfq_id;
-                $_rfq_id = $rfq['id'];
-
-                $rfq_details = json_decode($request['rfq_details'], true);
-
-                foreach($rfq_details as $rfq_detail) {
-                    RFQDetails::create([
-                        'product_id' => $rfq_detail['id'],
-                        'description' => $rfq_detail['descriptionss'],
-                        'quantity' => $rfq_detail['quantity'],
-                        'rfq_id' => $_rfq_id,
+            //-------------------------------------------
+            $index = 0;
+            while ($request['myFile' . $index] != null) {
+                if ($request->file('myFile' . $index)) {
+                    $name = $request['myFile' . $index]->getClientOriginalName();
+                    $path = $request->file('myFile' . $index)->move('rfq/' . $rfq->id, $name);
+                    FileUpload::create([
+                        'rfq_id' => $rfq->id,
+                        'file_name' => $path
                     ]);
                 }
+                $index++;
+            }
+
+            global $_rfq_id;
+            $_rfq_id = $rfq['id'];
+
+            $rfq_details = json_decode($request['rfq_details'], true);
+
+            foreach ($rfq_details as $rfq_detail) {
+                RFQDetails::create([
+                    'product_id' => $rfq_detail['id'],
+                    'description' => $rfq_detail['descriptionss'],
+                    'quantity' => $rfq_detail['quantity'],
+                    'rfq_id' => $_rfq_id,
+                ]);
+            }
 
 
 
             // if($request->hasFile('files')){
             //     foreach($request->files as $file){
-                //         print_r($name);
-                //     }
-                // }else{
-                    //     return 'No files has been added.';
-                    // }
+            //         print_r($name);
+            //     }
+            // }else{
+            //     return 'No files has been added.';
+            // }
 
-                    // $name = $request->file('files')->getClientOriginalName();
-                    // $res = $request->file('files')->storeAs('rfqDocs/' . $_rfq_id , $name);
-                    // $fileUpload = FileUpload::create([
-                    //     'rfq_id' => $_rfq_id,
-                    //     'file_name' => $res,
-                    // ]);
+            // $name = $request->file('files')->getClientOriginalName();
+            // $res = $request->file('files')->storeAs('rfqDocs/' . $_rfq_id , $name);
+            // $fileUpload = FileUpload::create([
+            //     'rfq_id' => $_rfq_id,
+            //     'file_name' => $res,
+            // ]);
             return response()->json(['msg' => 'successfully added']);
             // return ([
             //     'data' => $request->all(),
             // ]);
-            }
-
-        catch(Exception $e){
+        } catch (Exception $e) {
             return response()->json($e, 400);
         }
-
-
     }
 
     /**
@@ -160,7 +156,7 @@ class RFQController extends Controller
         // return $_rfq->rfq_details;
 
 
-        if($rfq->file){
+        if ($rfq->file) {
             foreach ($rfq->file as $img) {
                 $img['img_url'] = url($img->file_name);
             }
@@ -176,22 +172,22 @@ class RFQController extends Controller
             'created_at' => $rfq->created_at,
             'updated_at' => $rfq->updated_at,
             'files' => $rfq->file ? $rfq->file : null,
-            "party" => $rfq->party ,
+            "party" => $rfq->party,
             "contact" => $rfq->contact,
-            'rfq_details' => $rfq->rfq_details->map(function($rfq_detail){
-                $rfq_detail = RFQDetails::where('id','=',$rfq_detail->id)->first();
+            'rfq_details' => $rfq->rfq_details->map(function ($rfq_detail) {
+                $rfq_detail = RFQDetails::where('id', '=', $rfq_detail->id)->first();
                 return [
                     "id" => $rfq_detail['id'],
-                    "created_at"=> $rfq_detail->created_at,
-                    "updated_at"=> $rfq_detail->updated_at,
-                    "product_id"=> $rfq_detail->product_id,
+                    "created_at" => $rfq_detail->created_at,
+                    "updated_at" => $rfq_detail->updated_at,
+                    "product_id" => $rfq_detail->product_id,
                     "quantity" => $rfq_detail->quantity,
-                    "description"=> $rfq_detail->description,
+                    "description" => $rfq_detail->description,
                     "product_name" => $rfq_detail->product->name,
                     "product" => array($rfq_detail->product),
                     "prices" => $rfq_detail->product->productPrice,
-                    "party" => $rfq_detail->product->productPrice->map(function ($price){
-                        return($price->party);
+                    "party" => $rfq_detail->product->productPrice->map(function ($price) {
+                        return ($price->party);
                     }),
                 ];
             }),
@@ -231,8 +227,8 @@ class RFQController extends Controller
         // }
         // $data = $request->json()->all();
         $rfq = RFQ::where('id', $request->rfq_id)->first();
-        if(!$rfq){
-            return response()->json(['There is no RFQ with id'.$request->rfq_id]);
+        if (!$rfq) {
+            return response()->json(['There is no RFQ with id' . $request->rfq_id]);
         }
 
         $data = json_decode($request['rfq_details'], true);
@@ -262,12 +258,21 @@ class RFQController extends Controller
             $temp = json_decode($request['rfq_details'], true);
             foreach ((array) $temp as $rfq_detail) {
                 $rfq_update_data = RFQDetails::findOrFail($rfq_detail['id']);
-                $_rfq_detail = $rfq_update_data->update([
-                    'product_id' => $rfq_detail['product_id'],
-                    'description' => $rfq_detail['description'],
-                    'quantity' => $rfq_detail['quantity'],
-                    // 'rfq_id' => $_rfq_id,
-                ]);
+                if ($rfq_update_data) {
+                    $_rfq_detail = $rfq_update_data->update([
+                        'product_id' => $rfq_detail['product_id'],
+                        'description' => $rfq_detail['description'],
+                        'quantity' => $rfq_detail['quantity'],
+                        // 'rfq_id' => $_rfq_id,
+                    ]);
+                }else{
+                    RFQDetails::create([
+                        'product_id' => $rfq_detail['product_id'],
+                        'description' => $rfq_detail['description'],
+                        'quantity' => $rfq_detail['quantity'],
+                        'rfq_id' => $_rfq_id
+                    ]);
+                }
             }
 
             return response()->json(['msg' => 'successfully updated']);
@@ -301,7 +306,7 @@ class RFQController extends Controller
                 ->from('quotations')
                 ->whereRaw('quotations.rfq_id = r_f_q_s.id');
         })->orderBy('created_at', 'DESC')
-        ->get();
+            ->get();
         return response()->json($rfqs);
     }
 }
