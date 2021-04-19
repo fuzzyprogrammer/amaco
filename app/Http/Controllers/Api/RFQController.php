@@ -257,7 +257,7 @@ class RFQController extends Controller
             $_rfq_id = $rfq['id'];
             $temp = json_decode($request['rfq_details'], true);
             foreach ((array) $temp as $rfq_detail) {
-                $rfq_update_data = RFQDetails::findOrFail($rfq_detail['id']);
+                $rfq_update_data = RFQDetails::where('id',$rfq_detail['id'])->first();
                 if ($rfq_update_data) {
                     $_rfq_detail = $rfq_update_data->update([
                         'product_id' => $rfq_detail['product_id'],
