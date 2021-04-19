@@ -813,7 +813,7 @@ class QuotationController extends Controller
                         'party_id' => $quotation->party_id,
                         "contact_id" => $quotation->contact_id,
                         "contact" => $quotation->contact,
-                        "party" => $quotation->party,
+                        "party" => [$quotation->party],
                         "vat_in_value" => $quotation->vat_in_value,
                         "net_amount" => $quotation->net_amount,
                         "transaction_type" => $quotation->transaction_type,
