@@ -794,4 +794,55 @@ class QuotationController extends Controller
         }
         return response()->json(['msg' => "There is no file in quotation detail"]);
     }
+
+    public function saleReport(Request $request)
+    {
+        $reports = Quotation::whereBetween('created_at', [$request->from_date . ' ' . '00:00:00', $request->to_date ? $request->to_date . ' ' . '23:59:59' : now()])->get();
+
+        if($reports){
+            $reports->map(
+                function ($quotation) {
+                    $data = [
+                        'id' => $quotation->id,
+                        'po_number' => $quotation->po_number,
+                        'created_at' => $quotation->created_at,
+                        'updated_at' => $quotation->updated_at,
+                        'status' => $quotation->status,
+                        'total_value' => $quotation->total_value,
+                        'party_id' => $quotation->party_id,
+                        "contact_id" => $quotation->contact_id,
+                        "contact" => $quotation->contact,
+                        "party" => $quotation->party,
+                        "vat_in_value" => $quotation->vat_in_value,
+                        "net_amount" => $quotation->net_amount,
+                        "transaction_type" => $quotation->transaction_type,
+                        'discount_in_p' => $quotation->discount_in_p,
+                        'ps_date' => $quotation->ps_date,
+                        'quotation_details' => $quotation->quotationDetail->map(function ($quotation_detail) {
+                            $quotation_detail = QuotationDetail::where('id', '=', $quotation_detail->id)->first();
+                            return [
+                                "id" => $quotation_detail['id'],
+                                "created_at" => $quotation_detail->created_at,
+                                "updated_at" => $quotation_detail->updated_at,
+                                "product_id" => $quotation_detail->product_id,
+                                "product" => array($quotation_detail->product),
+                                "description" => $quotation_detail->description,
+                                "quantity" => $quotation_detail->quantity,
+                                "total_amount" => $quotation_detail->total_amount,
+                                "analyse_id" => $quotation_detail->analyse_id,
+                                "purchase_price" => $quotation_detail->purchase_price,
+                                "margin" => $quotation_detail->margin,
+                                "sell_price" => $quotation_detail->sell_price,
+                                "remark" => $quotation_detail->remark,
+                            ];
+                        }),
+                    ];
+                    return $data;
+                }
+            );
+
+            return response()->json($reports);
+        }
+        return response()->json(['msg'=>"There is no report between the given date"],500);
+    }
 }

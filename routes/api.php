@@ -140,5 +140,6 @@ Route::delete('delete-quotation-detail/{quotation_detail}', [QuotationController
 Route::post('sale-tax', [TaxController::class, 'saleTax']);
 Route::post('purchase-tax', [TaxController::class, 'purchaseTax']);
 Route::get('all-categories',[CategoryController::class, 'categories']);
+Route::post('sale-report',[QuotationController::class, 'saleReport']);
 
 
