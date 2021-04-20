@@ -32,6 +32,8 @@ use App\Http\Controllers\Api\PaymentAccountController;
 use App\Http\Controllers\Api\ProductPriceController;
 use App\Http\Controllers\Api\PurchaseInvoiceController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CompanyBankController;
+use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\DeliveryNoteController;
 use App\Http\Controllers\Api\DeliveryNoteDetailController;
 use App\Http\Controllers\Api\ReceiptController;
@@ -105,6 +107,8 @@ Route::apiResource('advance-payments', AdvancePaymentController::class);
 Route::apiResource('roles', RoleController::class);
 Route::apiResource('users', UserController::class);
 Route::apiResource('party-bank', PartyBankController::class);
+Route::apiResource('company', CompanyController::class);
+Route::apiResource('company-bank', CompanyBankController::class);
 
 // restful api links
 Route::post('rfq-history', [RFQController::class, 'history'])->name('rfq.history');
