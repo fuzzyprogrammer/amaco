@@ -59,6 +59,7 @@ class UserController extends Controller
             "role_id"=> $request->role_id,
             'remember_token' => Str::random(10),
             'designation' => $request->designation,
+            'prefix' => $request->prefix,
         ]);
 
         if($user){
