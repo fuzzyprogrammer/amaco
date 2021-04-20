@@ -226,6 +226,9 @@ class RFQController extends Controller
         //     echo $error;
         // }
         // $data = $request->json()->all();
+
+        
+
         $rfq = RFQ::where('id', $request->rfq_id)->first();
         if (!$rfq) {
             return response()->json(['There is no RFQ with id' . $request->rfq_id]);

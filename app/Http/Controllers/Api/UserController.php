@@ -58,6 +58,7 @@ class UserController extends Controller
             "password"=> bcrypt($request->password),
             "role_id"=> $request->role_id,
             'remember_token' => Str::random(10),
+            'designation' => $request->designation,
         ]);
 
         if($user){
