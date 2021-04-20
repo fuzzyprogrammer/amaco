@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt("superadmin@123"),
             'role_id' => 1,
             'designation'=> 'Business Development Manager',
+            'prefix'=>"Mr."
             ]);
         \App\Models\User::factory()->create([
             'fname' => 'admin',
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt("admin@123"),
             'role_id' => 2,
             'designation'=> 'Business Development Manager',
+            'prefix'=>"Mr."
             ]);
         \App\Models\User::factory()->create([
             'fname' => 'editor',
@@ -33,6 +35,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt("editor@123"),
             'role_id' => 3,
             'designation'=> 'Business Development Manager',
+            'prefix'=>"Mr."
             ]);
         \App\Models\User::factory()->create([
             'fname' => 'guest',
@@ -40,8 +43,9 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt("guest@123"),
             'role_id' => 4,
             'designation'=> 'Business Development Manager',
+            'prefix'=>"Mr."
             ]);
-            
+
         \App\Models\Roles::create([
             'name' => 'SA',
         ]);

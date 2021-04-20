@@ -30,17 +30,17 @@ class CompanyController extends Controller
     {
         $data = $request->all();
         if ($request->file('img1')) {
-            $img1_name = $request['img1']->getClientOriginalName();
+            $img1_name = $request->img1->getClientOriginalName();
             $img1_path = $request->file('img1')->move('company/', $img1_name);
             $data['img1'] = $img1_path;
         }
         if ($request->file('img2')) {
-            $img2_name = $request['img2']->getClientOriginalName();
+            $img2_name = $request->img2->getClientOriginalName();
             $img2_path = $request->file('img2')->move('company/', $img2_name);
             $data['img2'] = $img2_path;
         }
         if ($request->file('img3')) {
-            $img3_name = $request['img3']->getClientOriginalName();
+            $img3_name = $request->img3->getClientOriginalName();
             $img3_path = $request->file('img3')->move('company/', $img3_name);
             $data['img3'] = $img3_path;
         }
@@ -61,6 +61,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
+        $company = (array)$company;
         return response()->json($company);
     }
 
