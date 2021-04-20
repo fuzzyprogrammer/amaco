@@ -64,7 +64,7 @@ class CompanyController extends Controller
         $company->img1 && $company['img1'] = url($company->img1);
         $company->img2 && $company['img2'] = url($company->img2);
         $company->img3 && $company['img3'] = url($company->img3);
-        $company = (array)$company;
+        // $company = (array)$company;
         return response()->json($company);
     }
 
