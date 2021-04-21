@@ -187,6 +187,7 @@ class CompanyController extends Controller
                 $img3_path = $request->file('img3')->move('company/', $img3_name);
                 $request->img3 = $img3_path;
             }
+            unset($request['company_id']);
 
             $company->update($request->all());
 
