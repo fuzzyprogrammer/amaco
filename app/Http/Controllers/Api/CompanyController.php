@@ -122,7 +122,7 @@ class CompanyController extends Controller
             $request->img3 = $img3_path;
         }
 
-        $company->update($request->all());
+        $company->update(['name'=>$request->name]);
 
         return response()->json($company);
     }
