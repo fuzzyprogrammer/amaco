@@ -143,6 +143,9 @@ class CompanyController extends Controller
 
     public function updateCompany(Request $request)
     {
+        try {
+            //code...
+
         $company = Company::where('id',$request->id)->first();
 
         if($company){
@@ -192,6 +195,9 @@ class CompanyController extends Controller
 
             return response()->json($company);
         }
-        return response()->json(['msg'=>"Error"],500);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(['msg'=>$th],500);
+        }
     }
 }
