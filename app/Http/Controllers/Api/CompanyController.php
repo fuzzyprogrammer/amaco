@@ -80,7 +80,7 @@ class CompanyController extends Controller
 
 
 
-        $data =(array)$request->all();
+        // $data = $request->json()->all();
 
         if ($request->file('img1')) {
             if (File::exists(public_path($company->img1))) {
@@ -93,7 +93,7 @@ class CompanyController extends Controller
             }
             $img1_name = $request['img1']->getClientOriginalName();
             $img1_path = $request->file('img1')->move('company/', $img1_name);
-            $data['img1'] = $img1_path;
+            $request['img1'] = $img1_path;
         }
         if ($request->file('img2')) {
             if (File::exists(public_path($company->img2))) {
@@ -106,7 +106,7 @@ class CompanyController extends Controller
             }
             $img2_name = $request['img2']->getClientOriginalName();
             $img2_path = $request->file('img2')->move('company/', $img2_name);
-            $data['img2'] = $img2_path;
+            $request['img2'] = $img2_path;
         }
         if ($request->file('img3')) {
             if (File::exists(public_path($company->img3))) {
@@ -119,23 +119,10 @@ class CompanyController extends Controller
             }
             $img3_name = $request['img3']->getClientOriginalName();
             $img3_path = $request->file('img3')->move('company/', $img3_name);
-            $data['img3'] = $img3_path;
+            $request['img3'] = $img3_path;
         }
 
-        $company->update([
-            "name"=> $data['name'],
-            "email"=> $data['email'],
-            "cr_no"=> $data['cr_no'],
-            "contact"=> $data['contact'],
-            "fax"=> $data['fax'],
-            "website"=> $data['website'],
-            "po_box"=> $data['po_box'],
-            "address"=> $data['address'],
-            "vat_no"=> $data['vat_no'],
-            "img1"=> $data['img1'],
-            "img2"=> $data['img2'],
-            "img3"=> $data['img3'],
-        ]);
+        $company->update($request->all());
 
         return response()->json($company);
     }
