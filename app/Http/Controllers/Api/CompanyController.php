@@ -32,17 +32,17 @@ class CompanyController extends Controller
     {
         $data = $request->all();
         if ($request->file('img1')) {
-            $img1_name = $request->img1->getClientOriginalName();
+            $img1_name = $request['img1']->getClientOriginalName();
             $img1_path = $request->file('img1')->move('company/', $img1_name);
             $data['img1'] = $img1_path;
         }
         if ($request->file('img2')) {
-            $img2_name = $request->img2->getClientOriginalName();
+            $img2_name = $request['img2']->getClientOriginalName();
             $img2_path = $request->file('img2')->move('company/', $img2_name);
             $data['img2'] = $img2_path;
         }
         if ($request->file('img3')) {
-            $img3_name = $request->img3->getClientOriginalName();
+            $img3_name = $request['img3']->getClientOriginalName();
             $img3_path = $request->file('img3')->move('company/', $img3_name);
             $data['img3'] = $img3_path;
         }
@@ -76,7 +76,7 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, Company $company)
+    public function update(Request $request, Company $company)
     {
 
 
@@ -144,60 +144,56 @@ class CompanyController extends Controller
     public function updateCompany(Request $request)
     {
         try {
-            //code...
+            $company = Company::where('id', $request->id)->first();
 
-        $company = Company::where('id',$request->id)->first();
+            if ($company) {
 
-        if($company){
-            // return response($request);
+                if ($request->file('img1')) {
+                    if (File::exists(public_path($company->img1))) {
 
-            if ($request->file('img1')) {
-                if (File::exists(public_path($company->img1))) {
+                        File::delete(public_path($company->img1));
 
-                    File::delete(public_path($company->img1));
-
-                    $company->update([
-                        'img1' => null
-                    ]);
+                        $company->update([
+                            'img1' => null
+                        ]);
+                    }
+                    $img1_name = $request['img1']->getClientOriginalName();
+                    $img1_path = $request->file('img1')->move('company/', $img1_name);
+                    $request->img1 = $img1_path;
                 }
-                $img1_name = $request['img1']->getClientOriginalName();
-                $img1_path = $request->file('img1')->move('company/', $img1_name);
-                $request->img1 = $img1_path;
-            }
-            if ($request->file('img2')) {
-                if (File::exists(public_path($company->img2))) {
+                if ($request->file('img2')) {
+                    if (File::exists(public_path($company->img2))) {
 
-                    File::delete(public_path($company->img2));
+                        File::delete(public_path($company->img2));
 
-                    $company->update([
-                        'img2' => null
-                    ]);
+                        $company->update([
+                            'img2' => null
+                        ]);
+                    }
+                    $img2_name = $request['img2']->getClientOriginalName();
+                    $img2_path = $request->file('img2')->move('company/', $img2_name);
+                    $request->img2 = $img2_path;
                 }
-                $img2_name = $request['img2']->getClientOriginalName();
-                $img2_path = $request->file('img2')->move('company/', $img2_name);
-                $request->img2 = $img2_path;
-            }
-            if ($request->file('img3')) {
-                if (File::exists(public_path($company->img3))) {
+                if ($request->file('img3')) {
+                    if (File::exists(public_path($company->img3))) {
 
-                    File::delete(public_path($company->img3));
+                        File::delete(public_path($company->img3));
 
-                    $company->update([
-                        'img3' => null
-                    ]);
+                        $company->update([
+                            'img3' => null
+                        ]);
+                    }
+                    $img3_name = $request['img3']->getClientOriginalName();
+                    $img3_path = $request->file('img3')->move('company/', $img3_name);
+                    $request->img3 = $img3_path;
                 }
-                $img3_name = $request['img3']->getClientOriginalName();
-                $img3_path = $request->file('img3')->move('company/', $img3_name);
-                $request->img3 = $img3_path;
+
+                $company->update($request->all());
+
+                return response()->json($company);
             }
-
-            $company->update($request->all());
-
-            return response()->json($company);
-        }
         } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json(['msg'=>$th],500);
+            return response()->json(['msg' => $th], 500);
         }
     }
 }
