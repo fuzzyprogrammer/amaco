@@ -80,7 +80,7 @@ class CompanyController extends Controller
 
 
 
-        // $data = $request->json()->all();
+        $data = $request->json()->all();
 
         if ($request->file('img1')) {
             if (File::exists(public_path($company->img1))) {
@@ -93,7 +93,7 @@ class CompanyController extends Controller
             }
             $img1_name = $request['img1']->getClientOriginalName();
             $img1_path = $request->file('img1')->move('company/', $img1_name);
-            $request['img1'] = $img1_path;
+            $data['img1'] = $img1_path;
         }
         if ($request->file('img2')) {
             if (File::exists(public_path($company->img2))) {
@@ -106,7 +106,7 @@ class CompanyController extends Controller
             }
             $img2_name = $request['img2']->getClientOriginalName();
             $img2_path = $request->file('img2')->move('company/', $img2_name);
-            $request['img2'] = $img2_path;
+            $data['img2'] = $img2_path;
         }
         if ($request->file('img3')) {
             if (File::exists(public_path($company->img3))) {
@@ -119,22 +119,22 @@ class CompanyController extends Controller
             }
             $img3_name = $request['img3']->getClientOriginalName();
             $img3_path = $request->file('img3')->move('company/', $img3_name);
-            $request['img3'] = $img3_path;
+            $data['img3'] = $img3_path;
         }
 
         $company->update([
-            "name"=> $request['name'],
-            "email"=> $request['email'],
-            "cr_no"=> $request['cr_no'],
-            "contact"=> $request['contact'],
-            "fax"=> $request['fax'],
-            "website"=> $request['website'],
-            "po_box"=> $request['po_box'],
-            "address"=> $request['address'],
-            "vat_no"=> $request['vat_no'],
-            "img1"=> $request['img1'],
-            "img2"=> $request['img2'],
-            "img3"=> $request['img3'],
+            "name"=> $data['name'],
+            "email"=> $data['email'],
+            "cr_no"=> $data['cr_no'],
+            "contact"=> $data['contact'],
+            "fax"=> $data['fax'],
+            "website"=> $data['website'],
+            "po_box"=> $data['po_box'],
+            "address"=> $data['address'],
+            "vat_no"=> $data['vat_no'],
+            "img1"=> $data['img1'],
+            "img2"=> $data['img2'],
+            "img3"=> $data['img3'],
         ]);
 
         return response()->json($company);
