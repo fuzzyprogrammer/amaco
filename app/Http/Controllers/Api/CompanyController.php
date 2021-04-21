@@ -75,12 +75,12 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Company $company)
+    public function update(Company $company)
     {
 
 
 
-return response($request);
+        return response($request);
 
         if ($request->file('img1')) {
             if (File::exists(public_path($company->img1))) {
@@ -122,7 +122,7 @@ return response($request);
             $request->img3 = $img3_path;
         }
 
-        $company->update(['name'=>$request['name']]);
+        $company->update(['name' => $request['name']]);
 
         return response()->json($company);
     }
