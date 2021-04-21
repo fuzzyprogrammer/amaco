@@ -107,7 +107,7 @@ Route::apiResource('advance-payments', AdvancePaymentController::class);
 Route::apiResource('roles', RoleController::class);
 Route::apiResource('users', UserController::class);
 Route::apiResource('party-bank', PartyBankController::class);
-Route::apiResource('company', CompanyController::class);
+// Route::apiResource('company', CompanyController::class);
 Route::apiResource('company-bank', CompanyBankController::class);
 
 // restful api links
