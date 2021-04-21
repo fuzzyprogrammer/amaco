@@ -147,7 +147,6 @@ class CompanyController extends Controller
             $company = Company::where('id', $request->id)->first();
 
             if ($company) {
-
                 if ($request->file('img1')) {
                     if (File::exists(public_path($company->img1))) {
 
@@ -160,6 +159,8 @@ class CompanyController extends Controller
                     $img1_name = $request['img1']->getClientOriginalName();
                     $img1_path = $request->file('img1')->move('company/', $img1_name);
                     $request->img1 = $img1_path;
+                } else {
+                    $request->img1 = $company->img1;
                 }
                 if ($request->file('img2')) {
                     if (File::exists(public_path($company->img2))) {
@@ -173,6 +174,8 @@ class CompanyController extends Controller
                     $img2_name = $request['img2']->getClientOriginalName();
                     $img2_path = $request->file('img2')->move('company/', $img2_name);
                     $request->img2 = $img2_path;
+                } else {
+                    $request->img2 = $company->img2;
                 }
                 if ($request->file('img3')) {
                     if (File::exists(public_path($company->img3))) {
@@ -186,6 +189,8 @@ class CompanyController extends Controller
                     $img3_name = $request['img3']->getClientOriginalName();
                     $img3_path = $request->file('img3')->move('company/', $img3_name);
                     $request->img3 = $img3_path;
+                } else {
+                    $request->img3 = $company->img3;
                 }
 
                 $company->update($request->all());
