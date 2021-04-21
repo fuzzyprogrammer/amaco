@@ -145,5 +145,6 @@ Route::post('sale-tax', [TaxController::class, 'saleTax']);
 Route::post('purchase-tax', [TaxController::class, 'purchaseTax']);
 Route::get('all-categories',[CategoryController::class, 'categories']);
 Route::post('sale-report',[QuotationController::class, 'saleReport']);
+Route::post('update-company',[CompanyController::class, 'updateCompany']);
 
 
