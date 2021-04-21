@@ -80,7 +80,7 @@ class CompanyController extends Controller
 
 
 
-        // $data = $request->json()->all();
+        $request = json_decode($request);
 
         if ($request->file('img1')) {
             if (File::exists(public_path($company->img1))) {
