@@ -123,18 +123,18 @@ class CompanyController extends Controller
         }
 
         $company->update([
-            "name"=> $request->name,
-            "email"=> $request->email,
-            "cr_no"=> $request->cr_no,
-            "contact"=> $request->contact,
-            "fax"=> $request->fax,
-            "website"=> $request->website,
-            "po_box"=> $request->po_box,
-            "address"=> $request->address,
-            "vat_no"=> $request->vat_no,
-            "img1"=> $request->img1,
-            "img2"=> $request->img2,
-            "img3"=> $request->img3,
+            "name"=> $request['name'],
+            "email"=> $request['email'],
+            "cr_no"=> $request['cr_no'],
+            "contact"=> $request['contact'],
+            "fax"=> $request['fax'],
+            "website"=> $request['website'],
+            "po_box"=> $request['po_box'],
+            "address"=> $request['address'],
+            "vat_no"=> $request['vat_no'],
+            "img1"=> $request['img1'],
+            "img2"=> $request['img2'],
+            "img3"=> $request['img3'],
         ]);
 
         return response()->json($company);
