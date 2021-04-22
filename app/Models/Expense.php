@@ -32,6 +32,11 @@ class Expense extends Model
         return $this->hasMany(ColumnData::class, 'expense_id','id');
     }
 
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id',"paid_by");
+    }
+
     public function img()
     {
         $path = $this->bank_slip;
