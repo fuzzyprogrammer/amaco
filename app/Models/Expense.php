@@ -24,7 +24,7 @@ class Expense extends Model
 
     public function payment_account()
     {
-        return $this->hasMany(PaymentAccount::class,'id','payment_account_id');
+        return $this->hasOne(PaymentAccount::class,'id','payment_account_id');
     }
 
     public function column_data()
