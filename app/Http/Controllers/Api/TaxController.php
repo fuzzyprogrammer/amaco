@@ -32,7 +32,7 @@ class TaxController extends Controller
                 ->whereBetween('created_at', [date("Y-m") . '-01' . ' ' . '00:00:00', $request->to_date ? $request->to_date . ' ' . '23:59:59' : now()])->get();
         }
         $expenseCollection->map(function($expense){
-            return $expense['paid_by'] = $expense->payment_account;
+            return $expense['paid_by'] = $expense->payment_account->name;
         });
         return response()->json($expenseCollection);
     }
