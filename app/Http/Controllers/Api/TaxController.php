@@ -16,7 +16,7 @@ class TaxController extends Controller
         } else {
             $invoiceCollection = Invoice::whereBetween('created_at', [date("Y-m") . '-01' . ' ' . '00:00:00', $request->to_date ? $request->to_date . ' ' . '23:59:59' : now()])->get();
         }
-        $invoiceCollection->quotation->party;
+        // $invoiceCollection->quotation->party;
         return response()->json($invoiceCollection);
     }
 
